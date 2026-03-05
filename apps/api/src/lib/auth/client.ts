@@ -6,15 +6,18 @@ import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { anonymous } from "better-auth/plugins";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { v7 } from "uuid";
+import schema from "../db/schema";
 
 export const getAuth = (db: PostgresJsDatabase, redis: Redis) =>
   betterAuth({
+    basePath: "/auth",
     advanced: {
       database: {
         generateId: () => v7(),
       },
     },
     database: drizzleAdapter(db, {
+      schema,
       provider: "pg",
       usePlural: true,
     }),

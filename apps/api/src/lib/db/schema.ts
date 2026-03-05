@@ -68,3 +68,8 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
     references: [users.id],
   }),
 }));
+
+export default {
+  users,
+  accounts,
+};
