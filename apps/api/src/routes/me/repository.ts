@@ -1,50 +1,32 @@
-import { and, eq } from "drizzle-orm/pg-core/expressions";
+import { eq } from "drizzle-orm/pg-core/expressions";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { HTTPException } from "hono/http-exception";
-import { objects, users } from "../../lib/db/schema";
-import type { Object as ObjectType } from "../../schemas/object";
+import { users } from "../../lib/db/schema";
 import type { User } from "../../schemas/user";
 
-export interface UserRepositoryInterface {
-  findByAuthId(authId: string): Promise<User | undefined>;
-  findAvailableUserObjectByObjectId(
-    objectId: string
-  ): Promise<ObjectType | undefined>;
-  upsert(value: {
-    authId: string;
-    name: string;
-    objectId: string;
-  }): Promise<User | undefined>;
-  delete(authId: string): Promise<User | undefined>;
+export interface MeRepositoryInterface {
+  findById(id: string): Promise<User | undefined>;
+  update(id: string, value: { name: string }): Promise<User | undefined>;
+  delete(id: string): Promise<User | undefined>;
 }
 
-export class UserRepository implements UserRepositoryInterface {
+export class MeRepository implements MeRepositoryInterface {
   db: PostgresJsDatabase;
   constructor(db: PostgresJsDatabase) {
     this.db = db;
   }
 
-  async findByAuthId(authId: string): Promise<User | undefined> {
+  async findById(id: string): Promise<User | undefined> {
     try {
       const rows = await this.db
         .select({
           id: users.id,
           name: users.name,
-          objectId: users.objectId,
           createdAt: users.createdAt,
           updatedAt: users.updatedAt,
-          object: objects,
         })
         .from(users)
-        .leftJoin(
-          objects,
-          and(
-            eq(users.objectId, objects.id),
-            eq(objects.type, "user"),
-            eq(objects.status, "available")
-          )
-        )
-        .where(eq(users.authId, authId))
+        .where(eq(users.id, id))
         .limit(1);
       return rows[0];
     } catch (cause) {
@@ -52,52 +34,15 @@ export class UserRepository implements UserRepositoryInterface {
     }
   }
 
-  async findAvailableUserObjectByObjectId(
-    objectId: string
-  ): Promise<ObjectType | undefined> {
+  async update(id: string, value: { name: string }): Promise<User | undefined> {
     try {
       const rows = await this.db
-        .select({
-          id: objects.id,
-          key: objects.key,
-          type: objects.type,
-          status: objects.status,
-          contentType: objects.contentType,
-          createdAt: objects.createdAt,
-          updatedAt: objects.updatedAt,
-        })
-        .from(objects)
-        .where(
-          and(
-            eq(objects.id, objectId),
-            eq(objects.type, "user"),
-            eq(objects.status, "available")
-          )
-        )
-        .limit(1);
-      return rows[0];
-    } catch (cause) {
-      throw new HTTPException(500, { message: "Internal server error", cause });
-    }
-  }
-
-  async upsert(value: {
-    authId: string;
-    name: string;
-    objectId: string;
-  }): Promise<User | undefined> {
-    try {
-      const rows = await this.db
-        .insert(users)
-        .values({ ...value })
-        .onConflictDoUpdate({
-          target: [users.authId],
-          set: { ...value, updatedAt: new Date() },
-        })
+        .update(users)
+        .set({ name: value.name, updatedAt: new Date() })
+        .where(eq(users.id, id))
         .returning({
           id: users.id,
           name: users.name,
-          objectId: users.objectId,
           createdAt: users.createdAt,
           updatedAt: users.updatedAt,
         });
@@ -107,15 +52,14 @@ export class UserRepository implements UserRepositoryInterface {
     }
   }
 
-  async delete(authId: string): Promise<User | undefined> {
+  async delete(id: string): Promise<User | undefined> {
     try {
       const rows = await this.db
         .delete(users)
-        .where(eq(users.authId, authId))
+        .where(eq(users.id, id))
         .returning({
           id: users.id,
           name: users.name,
-          objectId: users.objectId,
           createdAt: users.createdAt,
           updatedAt: users.updatedAt,
         });

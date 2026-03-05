@@ -24,12 +24,6 @@ export class UsersService {
         user: {
           id: user.id,
           name: user.name,
-          object: user.object
-            ? {
-                id: user.object.id,
-                key: user.object.key,
-              }
-            : null,
         },
       },
     };
@@ -42,12 +36,6 @@ export class UsersService {
         users: users.map((user) => ({
           id: user.id,
           name: user.name,
-          object: user.object
-            ? {
-                id: user.object.id,
-                key: user.object.key,
-              }
-            : null,
         })),
       },
       meta: {

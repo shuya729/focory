@@ -1,7 +1,7 @@
 import { and, asc, eq, gt, like } from "drizzle-orm/pg-core/expressions";
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { HTTPException } from "hono/http-exception";
-import { objects, users } from "../../lib/db/schema";
+import { users } from "../../lib/db/schema";
 import type { User } from "../../schemas/user";
 
 export interface UserRepositoryInterface {
@@ -29,20 +29,10 @@ export class UserRepository implements UserRepositoryInterface {
         .select({
           id: users.id,
           name: users.name,
-          objectId: users.objectId,
           createdAt: users.createdAt,
           updatedAt: users.updatedAt,
-          object: objects,
         })
         .from(users)
-        .leftJoin(
-          objects,
-          and(
-            eq(users.objectId, objects.id),
-            eq(objects.type, "user"),
-            eq(objects.status, "available")
-          )
-        )
         .where(eq(users.id, id))
         .limit(1);
       return rows[0];
@@ -64,20 +54,10 @@ export class UserRepository implements UserRepositoryInterface {
       .select({
         id: users.id,
         name: users.name,
-        objectId: users.objectId,
         createdAt: users.createdAt,
         updatedAt: users.updatedAt,
-        object: objects,
       })
-      .from(users)
-      .leftJoin(
-        objects,
-        and(
-          eq(users.objectId, objects.id),
-          eq(objects.type, "user"),
-          eq(objects.status, "available")
-        )
-      );
+      .from(users);
 
     if (q && cursor) {
       query.where(and(like(users.name, `${q}%`), gt(users.id, cursor)));

@@ -6,8 +6,8 @@ import requireAuth, {
 import { errorResponseSchema } from "../../schemas/error";
 import {
   getMeResponseSchema,
-  putMeJsonSchema,
-  putMeResponseSchema,
+  patchMeJsonSchema,
+  patchMeResponseSchema,
 } from "./schemas";
 import { MeService } from "./service";
 
@@ -59,14 +59,14 @@ app.get(
   requireAuth,
   async (c) => {
     const dc = c.get("dc");
-    const authId = c.get("authId");
+    const userId = c.get("userId");
     const service = new MeService(dc);
-    const result = await service.getMe(authId);
+    const result = await service.getMe(userId);
     return c.json(result);
   }
 );
 
-app.put(
+app.patch(
   "/",
   describeRoute({
     tags: ["Me"],
@@ -77,7 +77,7 @@ app.put(
         description: "更新されたユーザー情報",
         content: {
           "application/json": {
-            schema: resolver(putMeResponseSchema),
+            schema: resolver(patchMeResponseSchema),
           },
         },
       },
@@ -98,7 +98,7 @@ app.put(
         },
       },
       404: {
-        description: "ユーザーまたはオブジェクトが見つからない",
+        description: "ユーザーまたはが見つからない",
         content: {
           "application/json": {
             schema: resolver(errorResponseSchema),
@@ -116,13 +116,13 @@ app.put(
     },
   }),
   requireAuth,
-  validator("json", putMeJsonSchema),
+  validator("json", patchMeJsonSchema),
   async (c) => {
     const dc = c.get("dc");
-    const authId = c.get("authId");
+    const userId = c.get("userId");
     const json = c.req.valid("json");
     const service = new MeService(dc);
-    const result = await service.putMe(authId, json);
+    const result = await service.patchMe(userId, json);
     return c.json(result);
   }
 );
@@ -166,9 +166,9 @@ app.delete(
   requireAuth,
   async (c) => {
     const dc = c.get("dc");
-    const authId = c.get("authId");
+    const userId = c.get("userId");
     const service = new MeService(dc);
-    await service.deleteMe(authId);
+    await service.deleteMe(userId);
     return c.body(null, 204);
   }
 );

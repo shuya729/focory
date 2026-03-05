@@ -1,5 +1,4 @@
 import z from "zod";
-import { objectSchema } from "../../schemas/object";
 import { userSchema } from "../../schemas/user";
 
 export const getUsersQuerySchema = z.object({
@@ -16,17 +15,9 @@ export const getUserParamSchema = z.object({
 
 export type GetUserParamSchema = z.infer<typeof getUserParamSchema>;
 
-export const userObjectSchema = objectSchema.pick({
-  id: true,
-  key: true,
-});
-
-export type UserObject = z.infer<typeof userObjectSchema>;
-
 export const userResponseSchema = z.object({
   id: userSchema.shape.id,
   name: userSchema.shape.name,
-  object: userObjectSchema.nullable(),
 });
 
 export type UserResponse = z.infer<typeof userResponseSchema>;

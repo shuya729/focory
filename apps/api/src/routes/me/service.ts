@@ -1,16 +1,20 @@
 import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { HTTPException } from "hono/http-exception";
-import { UserRepository } from "./repository";
-import type { GetMeResponse, PutMeJsonSchema, PutMeResponse } from "./schemas";
+import { MeRepository } from "./repository";
+import type {
+  GetMeResponse,
+  PatchMeJsonSchema,
+  PatchMeResponse,
+} from "./schemas";
 
 export class MeService {
-  repository: UserRepository;
+  repository: MeRepository;
   constructor(db: PostgresJsDatabase) {
-    this.repository = new UserRepository(db);
+    this.repository = new MeRepository(db);
   }
 
-  async getMe(authId: string): Promise<GetMeResponse> {
-    const user = await this.repository.findByAuthId(authId);
+  async getMe(id: string): Promise<GetMeResponse> {
+    const user = await this.repository.findById(id);
     if (!user) {
       throw new HTTPException(404, { message: "User not found" });
     }
@@ -19,50 +23,28 @@ export class MeService {
         me: {
           id: user.id,
           name: user.name,
-          object: user.object
-            ? {
-                id: user.object.id,
-                key: user.object.key,
-              }
-            : null,
         },
       },
     };
   }
 
-  async putMe(authId: string, json: PutMeJsonSchema): Promise<PutMeResponse> {
-    const object = await this.repository.findAvailableUserObjectByObjectId(
-      json.objectId
-    );
-    if (!object) {
-      throw new HTTPException(404, { message: "Object not found" });
-    }
-    const user = await this.repository.upsert({
-      authId,
-      name: json.name,
-      objectId: object.id,
-    });
+  async patchMe(id: string, json: PatchMeJsonSchema): Promise<PatchMeResponse> {
+    const user = await this.repository.update(id, json);
     if (!user) {
-      throw new HTTPException(500, { message: "Internal server error" });
+      throw new HTTPException(404, { message: "User not found" });
     }
     return {
       data: {
         me: {
           id: user.id,
           name: user.name,
-          object: user.object
-            ? {
-                id: user.object.id,
-                key: user.object.key,
-              }
-            : null,
         },
       },
     };
   }
 
-  async deleteMe(authId: string): Promise<void> {
-    const user = await this.repository.delete(authId);
+  async deleteMe(id: string): Promise<void> {
+    const user = await this.repository.delete(id);
     if (!user) {
       throw new HTTPException(404, { message: "User not found" });
     }
