@@ -1,14 +1,17 @@
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { logger } from "hono/logger";
-import withClients from "../middleware/with-clients";
+import withClients, { type ClientsVariables } from "../middleware/with-clients";
 import me from "./me/route";
 import users from "./users/route";
 
-const app = new Hono();
+const app = new Hono<{
+  Variables: ClientsVariables;
+}>();
 
 app.use(logger());
 app.use(withClients);
+app.on(["POST", "GET"], "/auth/*", (c) => c.get("ac").handler(c.req.raw));
 app.route("/users", users);
 app.route("/me", me);
 

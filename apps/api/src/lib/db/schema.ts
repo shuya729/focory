@@ -1,15 +1,19 @@
-import { sql } from "drizzle-orm";
+import { relations, sql } from "drizzle-orm";
 import {
-  pgEnum,
+  boolean,
+  index,
   pgTable,
   text,
   timestamp,
   uuid,
-  varchar,
 } from "drizzle-orm/pg-core";
 
-const _base = {
+export const users = pgTable("users", {
   id: uuid("id").primaryKey().default(sql`uuidv7()`),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: boolean("email_verified").default(false).notNull(),
+  image: text("image"),
   createdAt: timestamp("created_at", { withTimezone: true })
     .defaultNow()
     .notNull(),
@@ -17,39 +21,50 @@ const _base = {
     .defaultNow()
     .$onUpdate(() => new Date())
     .notNull(),
-};
-
-export const users = pgTable("users", {
-  ..._base,
-  authId: text("auth_id").notNull().unique(),
-  name: varchar("name", { length: 250 }).notNull(),
-  objectId: uuid("object_id").references(() => objects.id, {
-    onDelete: "set null",
-    onUpdate: "cascade",
-  }),
+  isAnonymous: boolean("is_anonymous").default(false).notNull(),
 });
 
-export const objectTypes = ["user"] as const;
-export const ObjectTypes = pgEnum("object_type", objectTypes);
-
-export const objectStatuses = [
-  "pending",
-  "available",
-  "rejected",
-  "deleted",
-] as const;
-export const ObjectStatus = pgEnum("object_status", objectStatuses);
-
-export const objectContentTypes = ["image/png", "image/jpeg"] as const;
-export const ObjectContentTypes = pgEnum(
-  "object_content_type",
-  objectContentTypes
+export const accounts = pgTable(
+  "accounts",
+  {
+    id: uuid("id").primaryKey().default(sql`uuidv7()`),
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    idToken: text("id_token"),
+    accessTokenExpiresAt: timestamp("access_token_expires_at", {
+      withTimezone: true,
+    }),
+    refreshTokenExpiresAt: timestamp("refresh_token_expires_at", {
+      withTimezone: true,
+    }),
+    scope: text("scope"),
+    password: text("password"),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [index("accounts_userId_idx").on(table.userId)]
 );
 
-export const objects = pgTable("objects", {
-  ..._base,
-  key: text("key").notNull().unique(),
-  type: ObjectTypes("type").notNull(),
-  status: ObjectStatus("status").notNull().default("pending"),
-  contentType: ObjectContentTypes("content_type").notNull(),
-});
+export const usersRelations = relations(users, ({ many }) => ({
+  accounts: many(accounts),
+}));
+
+export const accountsRelations = relations(accounts, ({ one }) => ({
+  users: one(users, {
+    fields: [accounts.userId],
+    references: [users.id],
+  }),
+}));

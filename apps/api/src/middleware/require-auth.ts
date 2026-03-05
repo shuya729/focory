@@ -3,17 +3,19 @@ import { HTTPException } from "hono/http-exception";
 import type { ClientsVariables } from "./with-clients";
 
 export interface RequireAuthVariables extends ClientsVariables {
-  authId: string;
+  userId: string;
 }
 
 const requireAuth = createMiddleware<{
   Variables: RequireAuthVariables;
 }>(async (c, next) => {
-  const state = await c.get("ac").authenticateRequest(c.req.raw);
-  if (!state.isAuthenticated) {
+  const session = await c.get("ac").api.getSession({
+    headers: c.req.raw.headers,
+  });
+  if (!session) {
     throw new HTTPException(401, { message: "Unauthorized" });
   }
-  c.set("authId", state.toAuth().userId);
+  c.set("userId", session.user.id);
   await next();
 });
 

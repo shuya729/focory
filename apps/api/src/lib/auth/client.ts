@@ -1,7 +1,30 @@
-import { createClerkClient } from "@clerk/backend";
+import type { Redis } from "@upstash/redis/cloudflare";
+import { betterAuth } from "better-auth";
+import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { anonymous } from "better-auth/plugins";
+import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
+import { v7 } from "uuid";
 
-export const getAuth = (env: CloudflareBindings) =>
-  createClerkClient({
-    secretKey: env.CLERK_SECRET_KEY,
-    publishableKey: env.CLERK_PUBLISHABLE_KEY,
+export const getAuth = (db: PostgresJsDatabase, redis: Redis) =>
+  betterAuth({
+    advanced: {
+      database: {
+        generateId: () => v7(),
+      },
+    },
+    database: drizzleAdapter(db, {
+      provider: "pg",
+      usePlural: true,
+    }),
+    plugins: [anonymous()],
+    secondaryStorage: {
+      get: async (key) => await redis.get(key),
+      set: async (key, value, ttl) =>
+        ttl
+          ? await redis.set(key, value, { ex: ttl })
+          : await redis.set(key, value),
+      delete: async (key) => {
+        await redis.del(key);
+      },
+    },
   });
