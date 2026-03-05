@@ -1,3 +1,5 @@
+import { env } from "node:process";
+import { expo } from "@better-auth/expo";
 import type { Redis } from "@upstash/redis/cloudflare";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
@@ -16,7 +18,7 @@ export const getAuth = (db: PostgresJsDatabase, redis: Redis) =>
       provider: "pg",
       usePlural: true,
     }),
-    plugins: [anonymous()],
+    plugins: [expo(), anonymous()],
     secondaryStorage: {
       get: async (key) => await redis.get(key),
       set: async (key, value, ttl) =>
@@ -27,4 +29,5 @@ export const getAuth = (db: PostgresJsDatabase, redis: Redis) =>
         await redis.del(key);
       },
     },
+    trustedOrigins: [env.TRUSTED_ORIGIN],
   });
