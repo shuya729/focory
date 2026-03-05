@@ -18,9 +18,7 @@
     "/users": {
       "get": {
         "operationId": "getUsers",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "ユーザー一覧を取得",
         "responses": {
           "200": {
@@ -48,16 +46,11 @@
                                 "maxLength": 250
                               }
                             },
-                            "required": [
-                              "id",
-                              "name"
-                            ]
+                            "required": ["id", "name"]
                           }
                         }
                       },
-                      "required": [
-                        "users"
-                      ]
+                      "required": ["users"]
                     },
                     "meta": {
                       "type": "object",
@@ -83,17 +76,10 @@
                           ]
                         }
                       },
-                      "required": [
-                        "limit",
-                        "total",
-                        "nextCursor"
-                      ]
+                      "required": ["limit", "total", "nextCursor"]
                     }
                   },
-                  "required": [
-                    "data",
-                    "meta"
-                  ]
+                  "required": ["data", "meta"]
                 }
               }
             }
@@ -109,9 +95,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -127,9 +111,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -168,9 +150,7 @@
     "/users/{id}": {
       "get": {
         "operationId": "getUsersById",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "summary": "ユーザー詳細を取得",
         "responses": {
           "200": {
@@ -196,20 +176,13 @@
                               "maxLength": 250
                             }
                           },
-                          "required": [
-                            "id",
-                            "name"
-                          ]
+                          "required": ["id", "name"]
                         }
                       },
-                      "required": [
-                        "user"
-                      ]
+                      "required": ["user"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             }
@@ -225,9 +198,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -243,9 +214,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -261,9 +230,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -286,9 +253,7 @@
     "/me": {
       "get": {
         "operationId": "getMe",
-        "tags": [
-          "Me"
-        ],
+        "tags": ["Me"],
         "summary": "ユーザー情報を取得",
         "security": [
           {
@@ -319,20 +284,13 @@
                               "maxLength": 250
                             }
                           },
-                          "required": [
-                            "id",
-                            "name"
-                          ]
+                          "required": ["id", "name"]
                         }
                       },
-                      "required": [
-                        "me"
-                      ]
+                      "required": ["me"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             }
@@ -348,9 +306,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -366,9 +322,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -384,9 +338,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -395,9 +347,7 @@
       },
       "patch": {
         "operationId": "patchMe",
-        "tags": [
-          "Me"
-        ],
+        "tags": ["Me"],
         "summary": "ユーザー情報を更新",
         "security": [
           {
@@ -428,20 +378,13 @@
                               "maxLength": 250
                             }
                           },
-                          "required": [
-                            "id",
-                            "name"
-                          ]
+                          "required": ["id", "name"]
                         }
                       },
-                      "required": [
-                        "me"
-                      ]
+                      "required": ["me"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             }
@@ -457,9 +400,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -475,9 +416,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -493,9 +432,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -511,9 +448,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -532,9 +467,7 @@
                     "maxLength": 250
                   }
                 },
-                "required": [
-                  "name"
-                ]
+                "required": ["name"]
               }
             }
           }
@@ -542,9 +475,7 @@
       },
       "delete": {
         "operationId": "deleteMe",
-        "tags": [
-          "Me"
-        ],
+        "tags": ["Me"],
         "summary": "ユーザー情報を削除",
         "security": [
           {
@@ -566,9 +497,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -584,9 +513,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -602,9 +529,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
