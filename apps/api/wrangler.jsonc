@@ -1,0 +1,14 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "api",
+  "main": "src/routes/route.ts",
+  "compatibility_flags": ["nodejs_compat"],
+  "compatibility_date": "2025-12-17",
+  "hyperdrive": [
+    {
+      "binding": "HYPERDRIVE",
+      "id": "<your-hyperdrive-id-here>",
+      "localConnectionString": "postgres://user:password@localhost:5432/db"
+    }
+  ]
+}
