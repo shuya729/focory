@@ -1,5 +1,5 @@
-import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { HTTPException } from "hono/http-exception";
+import type { DbClient } from "../../lib/db/client";
 import type { User } from "../../schemas/user";
 import { UserRepository } from "./repository";
 import type {
@@ -10,7 +10,7 @@ import type {
 
 export class UsersService {
   repository: UserRepository;
-  constructor(db: PostgresJsDatabase) {
+  constructor(db: DbClient) {
     this.repository = new UserRepository(db);
   }
 

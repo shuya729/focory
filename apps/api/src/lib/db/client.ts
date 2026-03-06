@@ -8,3 +8,5 @@ export const getDb = (env: CloudflareBindings) => {
   });
   return drizzle(sql);
 };
+
+export type DbClient = ReturnType<typeof getDb>;

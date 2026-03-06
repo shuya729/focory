@@ -1,14 +1,14 @@
 import { env } from "node:process";
 import { expo } from "@better-auth/expo";
-import type { Redis } from "@upstash/redis/cloudflare";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { anonymous } from "better-auth/plugins";
-import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { v7 } from "uuid";
+import type { DbClient } from "../db/client";
 import schema from "../db/schema";
+import type { RedisClient } from "../redis/client";
 
-export const getAuth = (db: PostgresJsDatabase, redis: Redis) =>
+export const getAuth = (db: DbClient, redis: RedisClient) =>
   betterAuth({
     basePath: "/auth",
     advanced: {
@@ -34,3 +34,5 @@ export const getAuth = (db: PostgresJsDatabase, redis: Redis) =>
     },
     trustedOrigins: [env.TRUSTED_ORIGIN],
   });
+
+export type AuthClient = ReturnType<typeof getAuth>;

@@ -1,12 +1,12 @@
 import { createMiddleware } from "hono/factory";
-import { getAuth } from "../lib/auth/client";
-import { getDb } from "../lib/db/client";
-import { getRedis } from "../lib/redis/client";
+import { type AuthClient, getAuth } from "../lib/auth/client";
+import { type DbClient, getDb } from "../lib/db/client";
+import { getRedis, type RedisClient } from "../lib/redis/client";
 
 export interface ClientsVariables {
-  ac: ReturnType<typeof getAuth>;
-  dc: ReturnType<typeof getDb>;
-  rc: ReturnType<typeof getRedis>;
+  ac: AuthClient;
+  dc: DbClient;
+  rc: RedisClient;
 }
 
 const withClients = createMiddleware<{

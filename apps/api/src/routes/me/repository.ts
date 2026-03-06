@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm/pg-core/expressions";
-import type { PostgresJsDatabase } from "drizzle-orm/postgres-js";
 import { HTTPException } from "hono/http-exception";
+import type { DbClient } from "../../lib/db/client";
 import { users } from "../../lib/db/schema";
 import type { User } from "../../schemas/user";
 
@@ -11,8 +11,8 @@ export interface MeRepositoryInterface {
 }
 
 export class MeRepository implements MeRepositoryInterface {
-  db: PostgresJsDatabase;
-  constructor(db: PostgresJsDatabase) {
+  db: DbClient;
+  constructor(db: DbClient) {
     this.db = db;
   }
 

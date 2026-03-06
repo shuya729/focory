@@ -5,3 +5,5 @@ export const getRedis = (env: CloudflareBindings) =>
     UPSTASH_REDIS_REST_URL: env.REDIS_URL,
     UPSTASH_REDIS_REST_TOKEN: env.REDIS_TOKEN,
   });
+
+export type RedisClient = ReturnType<typeof getRedis>;
