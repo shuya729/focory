@@ -22,7 +22,7 @@
       "clip": true,
       "width": 402,
       "height": 874,
-      "fill": "#FFFFFF",
+      "fill": "#F5F0EA",
       "layout": "vertical",
       "children": [
         {
@@ -42,7 +42,7 @@
               "type": "text",
               "id": "6MKbx",
               "name": "timeLabel",
-              "fill": "#1A1A1A",
+              "fill": "#2C2C2C",
               "content": "9:41",
               "fontFamily": "Inter",
               "fontSize": 16,
@@ -102,169 +102,152 @@
           "children": [
             {
               "type": "frame",
-              "id": "NNrv0",
-              "name": "Timer Section",
-              "width": "fill_container",
+              "id": "dn12s",
+              "name": "Timer Box",
+              "width": 340,
+              "height": 270,
+              "fill": "#E8E4DE",
+              "cornerRadius": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 0,
+                "fill": "none"
+              },
+              "effect": {
+                "type": "shadow",
+                "shadowType": "outer",
+                "enabled": false,
+                "color": "#000000"
+              },
               "layout": "vertical",
-              "gap": 16,
+              "gap": 40,
+              "padding": [
+                24,
+                0,
+                18,
+                0
+              ],
+              "justifyContent": "space_around",
               "alignItems": "center",
               "children": [
                 {
-                  "type": "frame",
-                  "id": "DTZgj",
-                  "name": "Spacer Top",
-                  "width": 1,
-                  "height": 60
+                  "type": "text",
+                  "id": "A4gp0",
+                  "name": "timerText",
+                  "fill": "#2C2C2C",
+                  "content": "25:00",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 76,
+                  "fontWeight": "800"
                 },
                 {
                   "type": "frame",
-                  "id": "dn12s",
-                  "name": "Timer Box",
-                  "width": 340,
-                  "height": 230,
-                  "fill": "#ADEFD1",
-                  "cornerRadius": 28,
-                  "stroke": {
-                    "align": "inside",
-                    "thickness": 3,
-                    "fill": "#5BBFA0"
-                  },
-                  "effect": {
-                    "type": "shadow",
-                    "shadowType": "outer",
-                    "enabled": false,
-                    "color": "#00000000"
-                  },
-                  "layout": "vertical",
-                  "padding": [
-                    24,
-                    0,
-                    18,
-                    0
-                  ],
-                  "justifyContent": "space_around",
+                  "id": "EPARi",
+                  "name": "Button Row",
+                  "gap": 24,
+                  "justifyContent": "center",
                   "alignItems": "center",
                   "children": [
                     {
-                      "type": "text",
-                      "id": "A4gp0",
-                      "name": "timerText",
-                      "fill": "#1A3A2E",
-                      "content": "25:00",
-                      "fontFamily": "JetBrains Mono",
-                      "fontSize": 76,
-                      "fontWeight": "800"
-                    },
-                    {
                       "type": "frame",
-                      "id": "EPARi",
-                      "name": "Button Row",
-                      "gap": 24,
+                      "id": "GLxjt",
+                      "name": "Edit Button",
+                      "width": 52,
+                      "height": 52,
+                      "fill": "#F5F0EA",
+                      "cornerRadius": 22,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 0,
+                        "fill": "none"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "enabled": false,
+                        "color": "#000000"
+                      },
                       "justifyContent": "center",
                       "alignItems": "center",
                       "children": [
                         {
-                          "type": "frame",
-                          "id": "GLxjt",
-                          "name": "Edit Button",
-                          "width": 52,
-                          "height": 52,
-                          "fill": "#FFFFFF66",
-                          "cornerRadius": 26,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1.5,
-                            "fill": "#5BBFA0"
-                          },
-                          "effect": {
-                            "type": "shadow",
-                            "shadowType": "outer",
-                            "enabled": false,
-                            "color": "#00000000"
-                          },
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon_font",
-                              "id": "HNs1C",
-                              "name": "editIcon",
-                              "width": 22,
-                              "height": 22,
-                              "iconFontName": "pencil",
-                              "iconFontFamily": "lucide",
-                              "fill": "#2D7A5E"
-                            }
-                          ]
-                        },
+                          "type": "icon_font",
+                          "id": "HNs1C",
+                          "name": "editIcon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "pencil",
+                          "iconFontFamily": "lucide",
+                          "fill": "#5B9E8F"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "uMlrl",
+                      "name": "Start Button",
+                      "width": 56,
+                      "height": 56,
+                      "fill": "#5B9E8F",
+                      "cornerRadius": 28,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 0,
+                        "fill": "none"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "enabled": false,
+                        "color": "#000000"
+                      },
+                      "gap": 8,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
                         {
-                          "type": "frame",
-                          "id": "uMlrl",
-                          "name": "Start Button",
-                          "width": 56,
-                          "height": 56,
-                          "fill": "#2D7A5E",
-                          "cornerRadius": 28,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 0,
-                            "fill": "none"
-                          },
-                          "effect": {
-                            "type": "shadow",
-                            "shadowType": "outer",
-                            "enabled": false,
-                            "color": "#00000000"
-                          },
-                          "gap": 8,
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon_font",
-                              "id": "8GgJo",
-                              "name": "playIcon",
-                              "width": 26,
-                              "height": 26,
-                              "iconFontName": "play",
-                              "iconFontFamily": "lucide",
-                              "fill": "#FFFFFF"
-                            }
-                          ]
-                        },
+                          "type": "icon_font",
+                          "id": "8GgJo",
+                          "name": "playIcon",
+                          "width": 26,
+                          "height": 26,
+                          "iconFontName": "play",
+                          "iconFontFamily": "lucide",
+                          "fill": "#F5F0EA"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "eeuk6",
+                      "name": "Reset Button",
+                      "width": 52,
+                      "height": 52,
+                      "fill": "#F5F0EA",
+                      "cornerRadius": 22,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 0,
+                        "fill": "none"
+                      },
+                      "effect": {
+                        "type": "shadow",
+                        "shadowType": "outer",
+                        "enabled": false,
+                        "color": "#000000"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
                         {
-                          "type": "frame",
-                          "id": "eeuk6",
-                          "name": "Reset Button",
-                          "width": 52,
-                          "height": 52,
-                          "fill": "#FFFFFF66",
-                          "cornerRadius": 26,
-                          "stroke": {
-                            "align": "inside",
-                            "thickness": 1.5,
-                            "fill": "#5BBFA0"
-                          },
-                          "effect": {
-                            "type": "shadow",
-                            "shadowType": "outer",
-                            "enabled": false,
-                            "color": "#00000000"
-                          },
-                          "justifyContent": "center",
-                          "alignItems": "center",
-                          "children": [
-                            {
-                              "type": "icon_font",
-                              "id": "bULxQ",
-                              "name": "resetIcon",
-                              "width": 22,
-                              "height": 22,
-                              "iconFontName": "rotate-ccw",
-                              "iconFontFamily": "lucide",
-                              "fill": "#2D7A5E"
-                            }
-                          ]
+                          "type": "icon_font",
+                          "id": "bULxQ",
+                          "name": "resetIcon",
+                          "width": 22,
+                          "height": 22,
+                          "iconFontName": "rotate-ccw",
+                          "iconFontFamily": "lucide",
+                          "fill": "#5B9E8F"
                         }
                       ]
                     }
@@ -286,12 +269,12 @@
                   "name": "AI Avatar",
                   "width": 48,
                   "height": 48,
-                  "fill": "#ADEFD1",
+                  "fill": "#E8E4DE",
                   "cornerRadius": 24,
                   "stroke": {
                     "align": "inside",
-                    "thickness": 2.5,
-                    "fill": "#00203F"
+                    "thickness": 0,
+                    "fill": "none"
                   },
                   "layout": "vertical",
                   "justifyContent": "center",
@@ -305,7 +288,7 @@
                       "height": 24,
                       "iconFontName": "bot",
                       "iconFontFamily": "lucide",
-                      "fill": "#2D7A5E"
+                      "fill": "#5B9E8F"
                     }
                   ]
                 },
@@ -321,7 +304,7 @@
                       "id": "7ajUD",
                       "name": "Speech Bubble",
                       "width": "fill_container",
-                      "fill": "#E8FAF0",
+                      "fill": "#EDE8E2",
                       "cornerRadius": [
                         20,
                         20,
@@ -344,10 +327,10 @@
                           "type": "text",
                           "id": "ywYE7",
                           "name": "bubbleText",
-                          "fill": "#2D4A3E",
+                          "fill": "#4A4A4A",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！💪",
+                          "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
                           "lineHeight": 1.6,
                           "fontFamily": "DM Sans",
                           "fontSize": 15
@@ -389,7 +372,7 @@
                   "type": "ellipse",
                   "id": "JN9st",
                   "name": "Dot Active",
-                  "fill": "#ADEFD1",
+                  "fill": "#5B9E8F",
                   "width": 10,
                   "height": 10,
                   "stroke": {
@@ -402,7 +385,7 @@
                   "type": "ellipse",
                   "id": "58gwi",
                   "name": "Dot Inactive",
-                  "fill": "#D1D5DB",
+                  "fill": "#C0BAB2",
                   "width": 8,
                   "height": 8
                 },
@@ -410,7 +393,7 @@
                   "type": "ellipse",
                   "id": "MZuka",
                   "name": "Dot Inactive",
-                  "fill": "#D1D5DB",
+                  "fill": "#C0BAB2",
                   "width": 8,
                   "height": 8
                 },
@@ -418,7 +401,7 @@
                   "type": "ellipse",
                   "id": "eMvSe",
                   "name": "Dot Inactive",
-                  "fill": "#D1D5DB",
+                  "fill": "#C0BAB2",
                   "width": 8,
                   "height": 8
                 }
@@ -430,7 +413,7 @@
               "name": "Home Indicator",
               "width": 134,
               "height": 5,
-              "fill": "#1A1A1A",
+              "fill": "#2C2C2C",
               "cornerRadius": 3
             }
           ]
@@ -446,7 +429,7 @@
       "clip": true,
       "width": 402,
       "height": 874,
-      "fill": "#FFFFFF",
+      "fill": "#F5F0EA",
       "layout": "vertical",
       "children": [
         {
@@ -466,7 +449,7 @@
               "type": "text",
               "id": "kikP2",
               "name": "timeLabel",
-              "fill": "#1A1A1A",
+              "fill": "#2C2C2C",
               "content": "9:41",
               "fontFamily": "Inter",
               "fontSize": 16,
@@ -520,7 +503,7 @@
           "width": "fill_container",
           "height": "fill_container",
           "layout": "vertical",
-          "gap": 28,
+          "gap": 36,
           "padding": [
             16,
             20,
@@ -548,19 +531,19 @@
                       "type": "frame",
                       "id": "xXP1Y",
                       "name": "c0",
-                      "width": 12,
-                      "height": 12,
-                      "fill": "#E8FAF0",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#EDE8E2",
                       "cornerRadius": 3
                     },
                     {
                       "type": "text",
                       "id": "RJeUf",
                       "name": "t0",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "content": "~0h",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 10,
+                      "fontSize": 11,
                       "fontWeight": "500"
                     }
                   ]
@@ -576,19 +559,19 @@
                       "type": "frame",
                       "id": "zG3ab",
                       "name": "c1",
-                      "width": 12,
-                      "height": 12,
-                      "fill": "#ADEFD1",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#D4E6DF",
                       "cornerRadius": 3
                     },
                     {
                       "type": "text",
                       "id": "WR1OD",
                       "name": "t1",
-                      "fill": "#5BBFA0",
+                      "fill": "#5B9E8F",
                       "content": "~1h",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 10,
+                      "fontSize": 11,
                       "fontWeight": "500"
                     }
                   ]
@@ -604,19 +587,19 @@
                       "type": "frame",
                       "id": "U44zb",
                       "name": "c2",
-                      "width": 12,
-                      "height": 12,
-                      "fill": "#5BBFA0",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#7DBCAE",
                       "cornerRadius": 3
                     },
                     {
                       "type": "text",
                       "id": "NdsV3",
                       "name": "t2",
-                      "fill": "#2D7A5E",
+                      "fill": "#5B9E8F",
                       "content": "~2h",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 10,
+                      "fontSize": 11,
                       "fontWeight": "500"
                     }
                   ]
@@ -632,19 +615,19 @@
                       "type": "frame",
                       "id": "rpnYD",
                       "name": "c3",
-                      "width": 12,
-                      "height": 12,
-                      "fill": "#2D7A5E",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#5B9E8F",
                       "cornerRadius": 3
                     },
                     {
                       "type": "text",
                       "id": "FbrLj",
                       "name": "t3",
-                      "fill": "#2D7A5E",
+                      "fill": "#5B9E8F",
                       "content": "~4h",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 10,
+                      "fontSize": 11,
                       "fontWeight": "500"
                     }
                   ]
@@ -660,19 +643,19 @@
                       "type": "frame",
                       "id": "vMMis",
                       "name": "c4",
-                      "width": 12,
-                      "height": 12,
-                      "fill": "#1A3A2E",
+                      "width": 14,
+                      "height": 14,
+                      "fill": "#3D7A6C",
                       "cornerRadius": 3
                     },
                     {
                       "type": "text",
                       "id": "eDMiS",
                       "name": "t4",
-                      "fill": "#1A3A2E",
+                      "fill": "#3D7A6C",
                       "content": "6h+",
                       "fontFamily": "JetBrains Mono",
-                      "fontSize": 10,
+                      "fontSize": 11,
                       "fontWeight": "500"
                     }
                   ]
@@ -699,7 +682,7 @@
                       "type": "text",
                       "id": "FQLYd",
                       "name": "marTitle",
-                      "fill": "#1A3A2E",
+                      "fill": "#2c2c2c",
                       "content": "2026年 3月",
                       "fontFamily": "DM Sans",
                       "fontSize": 18,
@@ -709,7 +692,7 @@
                       "type": "text",
                       "id": "cTHln",
                       "name": "marHours",
-                      "fill": "#5BBFA0",
+                      "fill": "#5B9E8F",
                       "content": "12h 30m",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 14,
@@ -728,7 +711,7 @@
                       "type": "text",
                       "id": "nZDCO",
                       "name": "dSun",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "日",
@@ -741,7 +724,7 @@
                       "type": "text",
                       "id": "TCjw0",
                       "name": "dMon",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "月",
@@ -754,7 +737,7 @@
                       "type": "text",
                       "id": "5sADH",
                       "name": "dTue",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "火",
@@ -767,7 +750,7 @@
                       "type": "text",
                       "id": "6Fa0a",
                       "name": "dWed",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "水",
@@ -780,7 +763,7 @@
                       "type": "text",
                       "id": "gkYXj",
                       "name": "dThu",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "木",
@@ -793,7 +776,7 @@
                       "type": "text",
                       "id": "yGjLv",
                       "name": "dFri",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "金",
@@ -806,7 +789,7 @@
                       "type": "text",
                       "id": "MY7hA",
                       "name": "dSat",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "土",
@@ -839,7 +822,7 @@
                           "name": "d1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -848,7 +831,7 @@
                           "name": "d2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -857,7 +840,7 @@
                           "name": "d3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -866,7 +849,7 @@
                           "name": "d4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -875,7 +858,7 @@
                           "name": "d5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -884,7 +867,7 @@
                           "name": "d6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -893,7 +876,7 @@
                           "name": "d7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         }
                       ]
@@ -912,7 +895,7 @@
                           "name": "a1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -921,7 +904,7 @@
                           "name": "a2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -930,7 +913,7 @@
                           "name": "a3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -939,7 +922,7 @@
                           "name": "a4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -948,7 +931,7 @@
                           "name": "a5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -957,7 +940,7 @@
                           "name": "a6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -966,7 +949,7 @@
                           "name": "a7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         }
                       ]
@@ -985,7 +968,7 @@
                           "name": "b1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -994,7 +977,7 @@
                           "name": "b2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1003,7 +986,7 @@
                           "name": "b3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         },
                         {
@@ -1012,7 +995,7 @@
                           "name": "b4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1021,7 +1004,7 @@
                           "name": "b5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1030,7 +1013,7 @@
                           "name": "b6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1039,7 +1022,7 @@
                           "name": "b7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         }
                       ]
@@ -1058,7 +1041,7 @@
                           "name": "c1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1067,7 +1050,7 @@
                           "name": "c2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1076,7 +1059,7 @@
                           "name": "c3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1085,7 +1068,7 @@
                           "name": "c4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1094,7 +1077,7 @@
                           "name": "c5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1103,7 +1086,7 @@
                           "name": "c6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         },
                         {
@@ -1112,7 +1095,7 @@
                           "name": "c7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         }
                       ]
@@ -1131,7 +1114,7 @@
                           "name": "e1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1140,7 +1123,7 @@
                           "name": "e2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1149,7 +1132,7 @@
                           "name": "e3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1214,7 +1197,7 @@
                       "type": "text",
                       "id": "JcVbA",
                       "name": "febTitle",
-                      "fill": "#1A3A2E",
+                      "fill": "#2c2c2c",
                       "content": "2026年 2月",
                       "fontFamily": "DM Sans",
                       "fontSize": 18,
@@ -1224,7 +1207,7 @@
                       "type": "text",
                       "id": "kNIOm",
                       "name": "febHours",
-                      "fill": "#5BBFA0",
+                      "fill": "#5B9E8F",
                       "content": "18h 45m",
                       "fontFamily": "JetBrains Mono",
                       "fontSize": 14,
@@ -1243,7 +1226,7 @@
                       "type": "text",
                       "id": "2zbPK",
                       "name": "fs",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "日",
@@ -1256,7 +1239,7 @@
                       "type": "text",
                       "id": "vNWAM",
                       "name": "fm",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "月",
@@ -1269,7 +1252,7 @@
                       "type": "text",
                       "id": "4ddr1",
                       "name": "ft",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "火",
@@ -1282,7 +1265,7 @@
                       "type": "text",
                       "id": "0lfp0",
                       "name": "fw",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "水",
@@ -1295,7 +1278,7 @@
                       "type": "text",
                       "id": "mL1Uo",
                       "name": "fth",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "木",
@@ -1308,7 +1291,7 @@
                       "type": "text",
                       "id": "3b6m4",
                       "name": "ff",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "金",
@@ -1321,7 +1304,7 @@
                       "type": "text",
                       "id": "9QAjt",
                       "name": "fsa",
-                      "fill": "#9CA3AF",
+                      "fill": "#ABABAB",
                       "textGrowth": "fixed-width",
                       "width": 40,
                       "content": "土",
@@ -1354,7 +1337,7 @@
                           "name": "f1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1363,7 +1346,7 @@
                           "name": "f2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         },
                         {
@@ -1372,7 +1355,7 @@
                           "name": "f3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1381,7 +1364,7 @@
                           "name": "f4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1390,7 +1373,7 @@
                           "name": "f5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1399,7 +1382,7 @@
                           "name": "f6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1408,7 +1391,7 @@
                           "name": "f7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         }
                       ]
@@ -1427,7 +1410,7 @@
                           "name": "g1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1436,7 +1419,7 @@
                           "name": "g2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1445,7 +1428,7 @@
                           "name": "g3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1454,7 +1437,7 @@
                           "name": "g4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         },
                         {
@@ -1463,7 +1446,7 @@
                           "name": "g5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1472,7 +1455,7 @@
                           "name": "g6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1481,7 +1464,7 @@
                           "name": "g7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         }
                       ]
@@ -1500,7 +1483,7 @@
                           "name": "h1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1509,7 +1492,7 @@
                           "name": "h2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1518,7 +1501,7 @@
                           "name": "h3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1527,7 +1510,7 @@
                           "name": "h4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1536,7 +1519,7 @@
                           "name": "h5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1545,7 +1528,7 @@
                           "name": "h6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         },
                         {
@@ -1554,7 +1537,7 @@
                           "name": "h7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         }
                       ]
@@ -1573,7 +1556,7 @@
                           "name": "i1",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1582,7 +1565,7 @@
                           "name": "i2",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1591,7 +1574,7 @@
                           "name": "i3",
                           "width": 40,
                           "height": 40,
-                          "fill": "#5BBFA0",
+                          "fill": "#7DBCAE",
                           "cornerRadius": 6
                         },
                         {
@@ -1600,7 +1583,7 @@
                           "name": "i4",
                           "width": 40,
                           "height": 40,
-                          "fill": "#E8FAF0",
+                          "fill": "#EDE8E2",
                           "cornerRadius": 6
                         },
                         {
@@ -1609,7 +1592,7 @@
                           "name": "i5",
                           "width": 40,
                           "height": 40,
-                          "fill": "#ADEFD1",
+                          "fill": "#D4E6DF",
                           "cornerRadius": 6
                         },
                         {
@@ -1618,7 +1601,7 @@
                           "name": "i6",
                           "width": 40,
                           "height": 40,
-                          "fill": "#2D7A5E",
+                          "fill": "#5B9E8F",
                           "cornerRadius": 6
                         },
                         {
@@ -1627,7 +1610,7 @@
                           "name": "i7",
                           "width": 40,
                           "height": 40,
-                          "fill": "#1A3A2E",
+                          "fill": "#3D7A6C",
                           "cornerRadius": 6
                         }
                       ]
@@ -1667,7 +1650,7 @@
                   "type": "ellipse",
                   "id": "paqYy",
                   "name": "dotI",
-                  "fill": "#D1D5DB",
+                  "fill": "#C0BAB2",
                   "width": 8,
                   "height": 8
                 },
@@ -1675,7 +1658,7 @@
                   "type": "ellipse",
                   "id": "kQ9X0",
                   "name": "dotA",
-                  "fill": "#ADEFD1",
+                  "fill": "#5B9E8F",
                   "width": 10,
                   "height": 10
                 },
@@ -1683,7 +1666,7 @@
                   "type": "ellipse",
                   "id": "AgYLI",
                   "name": "dotI2",
-                  "fill": "#D1D5DB",
+                  "fill": "#C0BAB2",
                   "width": 8,
                   "height": 8
                 },
@@ -1691,7 +1674,7 @@
                   "type": "ellipse",
                   "id": "6DYHi",
                   "name": "dotI3",
-                  "fill": "#D1D5DB",
+                  "fill": "#C0BAB2",
                   "width": 8,
                   "height": 8
                 }
@@ -1703,7 +1686,7 @@
               "name": "Home Indicator",
               "width": 134,
               "height": 5,
-              "fill": "#1A1A1A",
+              "fill": "#2C2C2C",
               "cornerRadius": 3
             }
           ]
@@ -1714,39 +1697,102 @@
   "variables": {
     "accent": {
       "type": "color",
-      "value": "#ADEFD1"
+      "value": [
+        {
+          "value": "#ADEFD1"
+        },
+        {
+          "value": "#5B9E8F"
+        }
+      ]
     },
     "accent-dark": {
       "type": "color",
-      "value": "#7DDBB5"
+      "value": [
+        {
+          "value": "#7DDBB5"
+        },
+        {
+          "value": "#4A8577"
+        }
+      ]
     },
     "bg-card": {
       "type": "color",
-      "value": "#F6F7F8"
+      "value": [
+        {
+          "value": "#F6F7F8"
+        },
+        {
+          "value": "#F5F0EA"
+        }
+      ]
     },
     "bg-primary": {
       "type": "color",
-      "value": "#FFFFFF"
+      "value": [
+        {
+          "value": "#FFFFFF"
+        },
+        {
+          "value": "#F5F0EA"
+        }
+      ]
     },
     "border-default": {
       "type": "color",
-      "value": "#E5E7EB"
+      "value": [
+        {
+          "value": "#E5E7EB"
+        },
+        {
+          "value": "#DDD8D1"
+        }
+      ]
     },
     "border-subtle": {
       "type": "color",
-      "value": "#F3F4F6"
+      "value": [
+        {
+          "value": "#F3F4F6"
+        },
+        {
+          "value": "#EDE8E2"
+        }
+      ]
     },
     "text-primary": {
       "type": "color",
-      "value": "#1A1A1A"
+      "value": [
+        {
+          "value": "#1A1A1A"
+        },
+        {
+          "value": "#2C2C2C"
+        }
+      ]
     },
     "text-secondary": {
       "type": "color",
-      "value": "#6B7280"
+      "value": [
+        {
+          "value": "#6B7280"
+        },
+        {
+          "value": "#8A8A8A"
+        }
+      ]
     },
     "text-tertiary": {
       "type": "color",
-      "value": "#9CA3AF"
+      "value": [
+        {
+          "value": "#9CA3AF"
+        },
+        {
+          "value": "#ABABAB"
+        }
+      ]
     }
   }
 }

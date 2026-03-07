@@ -10,7 +10,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -19,12 +19,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -33,12 +33,12 @@
           "x": 290,
           "y": 235,
           "name": "Left Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 90,
           "height": 120,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -47,12 +47,12 @@
           "x": 420,
           "y": 235,
           "name": "Right Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 90,
           "height": 120,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -61,7 +61,7 @@
           "x": 318,
           "y": 277.5,
           "name": "Left Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 36,
           "height": 50
         },
@@ -71,7 +71,7 @@
           "x": 448,
           "y": 277.5,
           "name": "Right Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 36,
           "height": 50
         }
@@ -86,7 +86,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -95,12 +95,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -115,7 +115,7 @@
           "stroke": {
             "thickness": 10,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -130,7 +130,7 @@
           "stroke": {
             "thickness": 10,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         }
       ]
@@ -144,7 +144,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -153,12 +153,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -167,12 +167,12 @@
           "x": 290,
           "y": 235,
           "name": "Left Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 90,
           "height": 120,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -181,12 +181,12 @@
           "x": 420,
           "y": 235,
           "name": "Right Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 90,
           "height": 120,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -195,7 +195,7 @@
           "x": 322,
           "y": 252,
           "name": "Left Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 34,
           "height": 46
         },
@@ -205,7 +205,7 @@
           "x": 456,
           "y": 250,
           "name": "Right Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 34,
           "height": 46
         },
@@ -221,7 +221,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -236,7 +236,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         }
       ]
@@ -250,7 +250,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -259,12 +259,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -279,7 +279,7 @@
           "stroke": {
             "thickness": 10,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -294,7 +294,7 @@
           "stroke": {
             "thickness": 10,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         }
       ]
@@ -308,7 +308,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -317,12 +317,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -331,12 +331,12 @@
           "x": 295,
           "y": 250,
           "name": "Left Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 80,
           "height": 100,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -345,12 +345,12 @@
           "x": 425,
           "y": 250,
           "name": "Right Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 80,
           "height": 100,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -359,7 +359,7 @@
           "x": 318,
           "y": 275,
           "name": "Left Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 34,
           "height": 45
         },
@@ -369,7 +369,7 @@
           "x": 448,
           "y": 275,
           "name": "Right Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 34,
           "height": 45
         },
@@ -385,7 +385,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -400,7 +400,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         }
       ]
@@ -414,7 +414,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -423,12 +423,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -437,12 +437,12 @@
           "x": 290,
           "y": 235,
           "name": "Left Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 90,
           "height": 120,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -451,12 +451,12 @@
           "x": 420,
           "y": 235,
           "name": "Right Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 90,
           "height": 120,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -465,7 +465,7 @@
           "x": 318,
           "y": 282,
           "name": "Left Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 36,
           "height": 50
         },
@@ -475,7 +475,7 @@
           "x": 448,
           "y": 282,
           "name": "Right Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 36,
           "height": 50
         },
@@ -491,7 +491,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -506,7 +506,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -516,7 +516,7 @@
           "y": 344,
           "name": "Tear",
           "geometry": "M13 0c7 14 13 28 0 40-13-12-7-26 0-40z",
-          "fill": "#5BC0EB",
+          "fill": "#7DBBA7",
           "width": 39,
           "height": 60
         }
@@ -531,7 +531,7 @@
       "clip": true,
       "width": 800,
       "height": 600,
-      "fill": "#FFFFFF",
+      "fill": "#F5EFE6",
       "layout": "none",
       "children": [
         {
@@ -540,12 +540,12 @@
           "x": 220,
           "y": 120,
           "name": "Character Head",
-          "fill": "#ADEFD1",
+          "fill": "#9DD4C0",
           "width": 360,
           "height": 360,
           "stroke": {
             "thickness": 12,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -554,12 +554,12 @@
           "x": 275,
           "y": 215,
           "name": "Left Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 110,
           "height": 140,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -568,12 +568,12 @@
           "x": 415,
           "y": 215,
           "name": "Right Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 110,
           "height": 140,
           "stroke": {
             "thickness": 10,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -582,7 +582,7 @@
           "x": 326,
           "y": 278,
           "name": "Left Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 24,
           "height": 32
         },
@@ -592,7 +592,7 @@
           "x": 460,
           "y": 278,
           "name": "Right Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 24,
           "height": 32
         },
@@ -608,7 +608,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -623,7 +623,7 @@
           "stroke": {
             "thickness": 8,
             "cap": "round",
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         }
       ]
@@ -636,7 +636,7 @@
       "name": "Focory Logo Animation",
       "width": 850,
       "height": 350,
-      "fill": "#ADEFD1",
+      "fill": "#9DD4C0",
       "layout": "none",
       "children": [
         {
@@ -645,7 +645,7 @@
           "x": 60,
           "y": 75,
           "name": "Letter F",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "content": "F",
           "fontFamily": "Inter",
           "fontSize": 180,
@@ -657,7 +657,7 @@
           "x": 300,
           "y": 75,
           "name": "Letter c",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "content": "c",
           "fontFamily": "Inter",
           "fontSize": 180,
@@ -669,7 +669,7 @@
           "x": 553,
           "y": 75,
           "name": "Letter r",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "content": "r",
           "fontFamily": "Inter",
           "fontSize": 180,
@@ -681,7 +681,7 @@
           "x": 642,
           "y": 75,
           "name": "Letter y",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "content": "y",
           "fontFamily": "Inter",
           "fontSize": 180,
@@ -693,12 +693,12 @@
           "x": 172,
           "y": 105,
           "name": "Left O Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 118,
           "height": 144,
           "stroke": {
             "thickness": 11,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -707,7 +707,7 @@
           "x": 207,
           "y": 146,
           "name": "Left O Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 48,
           "height": 65
         },
@@ -717,12 +717,12 @@
           "x": 425,
           "y": 105,
           "name": "Right O Eye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 118,
           "height": 144,
           "stroke": {
             "thickness": 11,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -731,7 +731,7 @@
           "x": 460,
           "y": 146,
           "name": "Right O Pupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 48,
           "height": 65
         }
@@ -745,7 +745,7 @@
       "name": "Focory App Icon - o x2",
       "width": 350,
       "height": 350,
-      "fill": "#ADEFD1",
+      "fill": "#9DD4C0",
       "layout": "none",
       "children": [
         {
@@ -754,12 +754,12 @@
           "x": 54,
           "y": 114,
           "name": "leftEye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 100,
           "height": 122,
           "stroke": {
             "thickness": 9,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -768,7 +768,7 @@
           "x": 84,
           "y": 149,
           "name": "leftPupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 40,
           "height": 54
         },
@@ -778,12 +778,12 @@
           "x": 196,
           "y": 114,
           "name": "rightEye",
-          "fill": "#FFFFFF",
+          "fill": "#FFFDF8",
           "width": 100,
           "height": 122,
           "stroke": {
             "thickness": 9,
-            "fill": "#00203F"
+            "fill": "#2C5A4E"
           }
         },
         {
@@ -792,7 +792,7 @@
           "x": 226,
           "y": 149,
           "name": "rightPupil",
-          "fill": "#00203F",
+          "fill": "#2C5A4E",
           "width": 40,
           "height": 54
         }
