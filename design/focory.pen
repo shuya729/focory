@@ -5,8 +5,8 @@
       "type": "frame",
       "id": "bi8Au",
       "x": 0,
-      "y": 0,
-      "name": "Frame",
+      "y": 1,
+      "name": "Base",
       "clip": true,
       "width": 800,
       "height": 600,
@@ -301,94 +301,6 @@
     },
     {
       "type": "frame",
-      "id": "p4MgZ",
-      "x": 2550,
-      "y": 700,
-      "name": "Laughing 😆",
-      "clip": true,
-      "width": 800,
-      "height": 600,
-      "fill": "#FFFFFF",
-      "layout": "none",
-      "children": [
-        {
-          "type": "ellipse",
-          "id": "ndRb1",
-          "x": 220,
-          "y": 120,
-          "name": "Character Head",
-          "fill": "#ADEFD1",
-          "width": 360,
-          "height": 360,
-          "stroke": {
-            "thickness": 12,
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "gs3hm",
-          "x": 290,
-          "y": 270,
-          "name": "Left Laugh Eye Upper",
-          "geometry": "M0 30q37-30 75 0",
-          "width": 75,
-          "height": 30,
-          "stroke": {
-            "thickness": 10,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "d9KH1",
-          "x": 290,
-          "y": 270,
-          "name": "Left Laugh Eye Lower",
-          "geometry": "M0 0q37 30 75 0",
-          "width": 75,
-          "height": 30,
-          "stroke": {
-            "thickness": 10,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "kv4Y4",
-          "x": 435,
-          "y": 270,
-          "name": "Right Laugh Eye Upper",
-          "geometry": "M0 30q37-30 75 0",
-          "width": 75,
-          "height": 30,
-          "stroke": {
-            "thickness": 10,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "MTikZ",
-          "x": 435,
-          "y": 270,
-          "name": "Right Laugh Eye Lower",
-          "geometry": "M0 0q37 30 75 0",
-          "width": 75,
-          "height": 30,
-          "stroke": {
-            "thickness": 10,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "cT2q1",
       "x": 0,
       "y": 1400,
@@ -495,96 +407,8 @@
     },
     {
       "type": "frame",
-      "id": "Ki5Pi",
-      "x": 850,
-      "y": 1400,
-      "name": "Disappointed 😞",
-      "clip": true,
-      "width": 800,
-      "height": 600,
-      "fill": "#FFFFFF",
-      "layout": "none",
-      "children": [
-        {
-          "type": "ellipse",
-          "id": "wj5cl",
-          "x": 220,
-          "y": 120,
-          "name": "Character Head",
-          "fill": "#ADEFD1",
-          "width": 360,
-          "height": 360,
-          "stroke": {
-            "thickness": 12,
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "yshtH",
-          "x": 290,
-          "y": 290,
-          "name": "Left Disappointed Eye",
-          "geometry": "M0 5q45 20 90-5",
-          "width": 90,
-          "height": 25,
-          "stroke": {
-            "thickness": 10,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "5uIGW",
-          "x": 420,
-          "y": 290,
-          "name": "Right Disappointed Eye",
-          "geometry": "M0 0q45 25 90 5",
-          "width": 90,
-          "height": 25,
-          "stroke": {
-            "thickness": 10,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "Kvnat",
-          "x": 295,
-          "y": 255,
-          "name": "Left Eyebrow",
-          "geometry": "M0 0q40 5 80 18",
-          "width": 80,
-          "height": 18,
-          "stroke": {
-            "thickness": 8,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        },
-        {
-          "type": "path",
-          "id": "HlTeG",
-          "x": 425,
-          "y": 255,
-          "name": "Right Eyebrow",
-          "geometry": "M80 0q-40 5-80 18",
-          "width": 80,
-          "height": 18,
-          "stroke": {
-            "thickness": 8,
-            "cap": "round",
-            "fill": "#00203F"
-          }
-        }
-      ]
-    },
-    {
-      "type": "frame",
       "id": "OYii7",
-      "x": 1700,
+      "x": 850,
       "y": 1400,
       "name": "Sad 😢",
       "clip": true,
@@ -688,20 +512,20 @@
         {
           "type": "path",
           "id": "tWLaE",
-          "x": 340,
-          "y": 348,
+          "x": 275,
+          "y": 344,
           "name": "Tear",
           "geometry": "M13 0c7 14 13 28 0 40-13-12-7-26 0-40z",
           "fill": "#5BC0EB",
-          "width": 26,
-          "height": 40
+          "width": 39,
+          "height": 60
         }
       ]
     },
     {
       "type": "frame",
       "id": "Bkkql",
-      "x": 2550,
+      "x": 1700,
       "y": 1400,
       "name": "Fear 😮",
       "clip": true,
@@ -801,6 +625,176 @@
             "cap": "round",
             "fill": "#00203F"
           }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ps0qw",
+      "x": 0,
+      "y": 2100,
+      "name": "Focory Logo Animation",
+      "width": 850,
+      "height": 350,
+      "fill": "#ADEFD1",
+      "layout": "none",
+      "children": [
+        {
+          "type": "text",
+          "id": "9oSzL",
+          "x": 60,
+          "y": 75,
+          "name": "Letter F",
+          "fill": "#00203F",
+          "content": "F",
+          "fontFamily": "Inter",
+          "fontSize": 180,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "SbGpC",
+          "x": 300,
+          "y": 75,
+          "name": "Letter c",
+          "fill": "#00203F",
+          "content": "c",
+          "fontFamily": "Inter",
+          "fontSize": 180,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "nhY0y",
+          "x": 553,
+          "y": 75,
+          "name": "Letter r",
+          "fill": "#00203F",
+          "content": "r",
+          "fontFamily": "Inter",
+          "fontSize": 180,
+          "fontWeight": "700"
+        },
+        {
+          "type": "text",
+          "id": "SZpUc",
+          "x": 642,
+          "y": 75,
+          "name": "Letter y",
+          "fill": "#00203F",
+          "content": "y",
+          "fontFamily": "Inter",
+          "fontSize": 180,
+          "fontWeight": "700"
+        },
+        {
+          "type": "ellipse",
+          "id": "9d4DM",
+          "x": 172,
+          "y": 105,
+          "name": "Left O Eye",
+          "fill": "#FFFFFF",
+          "width": 118,
+          "height": 144,
+          "stroke": {
+            "thickness": 11,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "EV4y2",
+          "x": 207,
+          "y": 146,
+          "name": "Left O Pupil",
+          "fill": "#00203F",
+          "width": 48,
+          "height": 65
+        },
+        {
+          "type": "ellipse",
+          "id": "oHnzt",
+          "x": 425,
+          "y": 105,
+          "name": "Right O Eye",
+          "fill": "#FFFFFF",
+          "width": 118,
+          "height": 144,
+          "stroke": {
+            "thickness": 11,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "nrJks",
+          "x": 460,
+          "y": 146,
+          "name": "Right O Pupil",
+          "fill": "#00203F",
+          "width": 48,
+          "height": 65
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Sdb9t",
+      "x": 1280,
+      "y": 2100,
+      "name": "Focory App Icon - o x2",
+      "width": 350,
+      "height": 350,
+      "fill": "#ADEFD1",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "PWOEw",
+          "x": 54,
+          "y": 114,
+          "name": "leftEye",
+          "fill": "#FFFFFF",
+          "width": 100,
+          "height": 122,
+          "stroke": {
+            "thickness": 9,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "sBDuT",
+          "x": 84,
+          "y": 149,
+          "name": "leftPupil",
+          "fill": "#00203F",
+          "width": 40,
+          "height": 54
+        },
+        {
+          "type": "ellipse",
+          "id": "2dZ1x",
+          "x": 196,
+          "y": 114,
+          "name": "rightEye",
+          "fill": "#FFFFFF",
+          "width": 100,
+          "height": 122,
+          "stroke": {
+            "thickness": 9,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "IPTPy",
+          "x": 226,
+          "y": 149,
+          "name": "rightPupil",
+          "fill": "#00203F",
+          "width": 40,
+          "height": 54
         }
       ]
     }
