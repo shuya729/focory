@@ -7,7 +7,8 @@
     "scheme": "focory",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": false
+      "supportsTablet": false,
+      "bundleIdentifier": "com.focory.app"
     },
     "android": {
       "adaptiveIcon": {
@@ -30,11 +31,30 @@
             "backgroundColor": "#000000"
           }
         }
+      ],
+      [
+        "expo-notifications",
+        {
+          "enableBackgroundRemoteNotifications": true
+        }
+      ],
+      [
+        "expo-sqlite",
+        {
+          "enableFTS": true
+        }
       ]
     ],
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "be792485-8930-4131-8806-efb8debad686"
+      }
+    },
+    "owner": "limeseeds464"
   }
 }
