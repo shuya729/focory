@@ -76,6 +76,733 @@
           "height": 50
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "FiC13",
+      "x": 0,
+      "y": 700,
+      "name": "Sleeping 😴",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "7CEwo",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "uS3M6",
+          "x": 290,
+          "y": 285,
+          "name": "Left Closed Eye",
+          "geometry": "M0 0q45 30 90 0",
+          "width": 90,
+          "height": 30,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "KLVFM",
+          "x": 420,
+          "y": 285,
+          "name": "Right Closed Eye",
+          "geometry": "M0 0q45 30 90 0",
+          "width": 90,
+          "height": 30,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "t6ADh",
+      "x": 850,
+      "y": 700,
+      "name": "Thinking 🤔",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "E3Oje",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "WXYC9",
+          "x": 290,
+          "y": 235,
+          "name": "Left Eye",
+          "fill": "#FFFFFF",
+          "width": 90,
+          "height": 120,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "t1anO",
+          "x": 420,
+          "y": 235,
+          "name": "Right Eye",
+          "fill": "#FFFFFF",
+          "width": 90,
+          "height": 120,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "IolSK",
+          "x": 322,
+          "y": 252,
+          "name": "Left Pupil",
+          "fill": "#00203F",
+          "width": 34,
+          "height": 46
+        },
+        {
+          "type": "ellipse",
+          "id": "EANR2",
+          "x": 456,
+          "y": 250,
+          "name": "Right Pupil",
+          "fill": "#00203F",
+          "width": 34,
+          "height": 46
+        },
+        {
+          "type": "path",
+          "id": "LsHFr",
+          "x": 295,
+          "y": 220,
+          "name": "Left Eyebrow",
+          "geometry": "M0 12q40-12 80-4",
+          "width": 80,
+          "height": 12,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "Aj3eQ",
+          "x": 425,
+          "y": 205,
+          "name": "Right Eyebrow",
+          "geometry": "M0 20q40-20 80-12",
+          "width": 80,
+          "height": 20,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "DnlTS",
+      "x": 1700,
+      "y": 700,
+      "name": "Joy 😁",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "Zjgft",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "0oYUy",
+          "x": 290,
+          "y": 270,
+          "name": "Left Smiling Eye",
+          "geometry": "M0 40q45-40 90 0",
+          "width": 90,
+          "height": 40,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "A19PP",
+          "x": 420,
+          "y": 270,
+          "name": "Right Smiling Eye",
+          "geometry": "M0 40q45-40 90 0",
+          "width": 90,
+          "height": 40,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "p4MgZ",
+      "x": 2550,
+      "y": 700,
+      "name": "Laughing 😆",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "ndRb1",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "gs3hm",
+          "x": 290,
+          "y": 270,
+          "name": "Left Laugh Eye Upper",
+          "geometry": "M0 30q37-30 75 0",
+          "width": 75,
+          "height": 30,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "d9KH1",
+          "x": 290,
+          "y": 270,
+          "name": "Left Laugh Eye Lower",
+          "geometry": "M0 0q37 30 75 0",
+          "width": 75,
+          "height": 30,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "kv4Y4",
+          "x": 435,
+          "y": 270,
+          "name": "Right Laugh Eye Upper",
+          "geometry": "M0 30q37-30 75 0",
+          "width": 75,
+          "height": 30,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "MTikZ",
+          "x": 435,
+          "y": 270,
+          "name": "Right Laugh Eye Lower",
+          "geometry": "M0 0q37 30 75 0",
+          "width": 75,
+          "height": 30,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "cT2q1",
+      "x": 0,
+      "y": 1400,
+      "name": "Angry 😠",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "Z3NW8",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "vnuXp",
+          "x": 295,
+          "y": 250,
+          "name": "Left Eye",
+          "fill": "#FFFFFF",
+          "width": 80,
+          "height": 100,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "9AjIu",
+          "x": 425,
+          "y": 250,
+          "name": "Right Eye",
+          "fill": "#FFFFFF",
+          "width": 80,
+          "height": 100,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "NTyMP",
+          "x": 318,
+          "y": 275,
+          "name": "Left Pupil",
+          "fill": "#00203F",
+          "width": 34,
+          "height": 45
+        },
+        {
+          "type": "ellipse",
+          "id": "jFe79",
+          "x": 448,
+          "y": 275,
+          "name": "Right Pupil",
+          "fill": "#00203F",
+          "width": 34,
+          "height": 45
+        },
+        {
+          "type": "path",
+          "id": "qIMzf",
+          "x": 290,
+          "y": 228,
+          "name": "Left Angry Eyebrow",
+          "geometry": "M0 0q42 25 85 20",
+          "width": 85,
+          "height": 20,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "GE39s",
+          "x": 425,
+          "y": 228,
+          "name": "Right Angry Eyebrow",
+          "geometry": "M85 0q-43 25-85 20",
+          "width": 85,
+          "height": 20,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Ki5Pi",
+      "x": 850,
+      "y": 1400,
+      "name": "Disappointed 😞",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "wj5cl",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "yshtH",
+          "x": 290,
+          "y": 290,
+          "name": "Left Disappointed Eye",
+          "geometry": "M0 5q45 20 90-5",
+          "width": 90,
+          "height": 25,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "5uIGW",
+          "x": 420,
+          "y": 290,
+          "name": "Right Disappointed Eye",
+          "geometry": "M0 0q45 25 90 5",
+          "width": 90,
+          "height": 25,
+          "stroke": {
+            "thickness": 10,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "Kvnat",
+          "x": 295,
+          "y": 255,
+          "name": "Left Eyebrow",
+          "geometry": "M0 0q40 5 80 18",
+          "width": 80,
+          "height": 18,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "HlTeG",
+          "x": 425,
+          "y": 255,
+          "name": "Right Eyebrow",
+          "geometry": "M80 0q-40 5-80 18",
+          "width": 80,
+          "height": 18,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "OYii7",
+      "x": 1700,
+      "y": 1400,
+      "name": "Sad 😢",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "AdEvS",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "uMoN2",
+          "x": 290,
+          "y": 235,
+          "name": "Left Eye",
+          "fill": "#FFFFFF",
+          "width": 90,
+          "height": 120,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "gnH3t",
+          "x": 420,
+          "y": 235,
+          "name": "Right Eye",
+          "fill": "#FFFFFF",
+          "width": 90,
+          "height": 120,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "3W5lC",
+          "x": 318,
+          "y": 282,
+          "name": "Left Pupil",
+          "fill": "#00203F",
+          "width": 36,
+          "height": 50
+        },
+        {
+          "type": "ellipse",
+          "id": "oqJKi",
+          "x": 448,
+          "y": 282,
+          "name": "Right Pupil",
+          "fill": "#00203F",
+          "width": 36,
+          "height": 50
+        },
+        {
+          "type": "path",
+          "id": "TVSvJ",
+          "x": 295,
+          "y": 215,
+          "name": "Left Sad Eyebrow",
+          "geometry": "M0 18q40-13 80-18",
+          "width": 80,
+          "height": 18,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "vDRfH",
+          "x": 425,
+          "y": 215,
+          "name": "Right Sad Eyebrow",
+          "geometry": "M80 18q-40-13-80-18",
+          "width": 80,
+          "height": 18,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "tWLaE",
+          "x": 340,
+          "y": 348,
+          "name": "Tear",
+          "geometry": "M13 0c7 14 13 28 0 40-13-12-7-26 0-40z",
+          "fill": "#5BC0EB",
+          "width": 26,
+          "height": 40
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Bkkql",
+      "x": 2550,
+      "y": 1400,
+      "name": "Fear 😮",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "5OgWn",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "SJlbo",
+          "x": 275,
+          "y": 215,
+          "name": "Left Eye",
+          "fill": "#FFFFFF",
+          "width": 110,
+          "height": 140,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "aIed7",
+          "x": 415,
+          "y": 215,
+          "name": "Right Eye",
+          "fill": "#FFFFFF",
+          "width": 110,
+          "height": 140,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "wwBYc",
+          "x": 326,
+          "y": 278,
+          "name": "Left Pupil",
+          "fill": "#00203F",
+          "width": 24,
+          "height": 32
+        },
+        {
+          "type": "ellipse",
+          "id": "gfNJA",
+          "x": 460,
+          "y": 278,
+          "name": "Right Pupil",
+          "fill": "#00203F",
+          "width": 24,
+          "height": 32
+        },
+        {
+          "type": "path",
+          "id": "xi6da",
+          "x": 285,
+          "y": 195,
+          "name": "Left Fear Eyebrow",
+          "geometry": "M0 20q45-20 90-15",
+          "width": 90,
+          "height": 20,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "path",
+          "id": "rZPZv",
+          "x": 425,
+          "y": 195,
+          "name": "Right Fear Eyebrow",
+          "geometry": "M90 20q-45-20-90-15",
+          "width": 90,
+          "height": 20,
+          "stroke": {
+            "thickness": 8,
+            "cap": "round",
+            "fill": "#00203F"
+          }
+        }
+      ]
     }
   ]
 }
