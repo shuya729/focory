@@ -1,0 +1,81 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "bi8Au",
+      "x": 0,
+      "y": 0,
+      "name": "Frame",
+      "clip": true,
+      "width": 800,
+      "height": 600,
+      "fill": "#FFFFFF",
+      "layout": "none",
+      "children": [
+        {
+          "type": "ellipse",
+          "id": "GmU0r",
+          "x": 220,
+          "y": 120,
+          "name": "Character Head",
+          "fill": "#ADEFD1",
+          "width": 360,
+          "height": 360,
+          "stroke": {
+            "thickness": 12,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "djwAC",
+          "x": 290,
+          "y": 235,
+          "name": "Left Eye",
+          "fill": "#FFFFFF",
+          "width": 90,
+          "height": 120,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "XsmIM",
+          "x": 420,
+          "y": 235,
+          "name": "Right Eye",
+          "fill": "#FFFFFF",
+          "width": 90,
+          "height": 120,
+          "stroke": {
+            "thickness": 10,
+            "fill": "#00203F"
+          }
+        },
+        {
+          "type": "ellipse",
+          "id": "q2jMf",
+          "x": 318,
+          "y": 277.5,
+          "name": "Left Pupil",
+          "fill": "#00203F",
+          "width": 36,
+          "height": 50
+        },
+        {
+          "type": "ellipse",
+          "id": "pQhE1",
+          "x": 448,
+          "y": 277.5,
+          "name": "Right Pupil",
+          "fill": "#00203F",
+          "width": 36,
+          "height": 50
+        }
+      ]
+    }
+  ]
+}
