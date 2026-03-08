@@ -2,3 +2,26 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: 245 240 234;
+    --color-surface: 255 255 255;
+    --color-surface-muted: 232 228 222;
+    --color-surface-subtle: 237 232 226;
+
+    --color-accent: 91 158 143;
+    --color-accent-strong: 61 122 108;
+    --color-accent-muted: 125 188 174;
+    --color-accent-soft: 212 230 223;
+
+    --color-text-primary: 44 44 44;
+    --color-text-secondary: 74 74 74;
+    --color-text-muted: 171 171 171;
+    --color-icon: 91 91 91;
+
+    --color-border: 221 216 209;
+    --color-border-subtle: 237 232 226;
+    --color-neutral-soft: 192 186 178;
+  }
+}
