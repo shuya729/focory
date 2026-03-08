@@ -4,7 +4,7 @@ import PagerView, {
 } from "react-native-pager-view";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PageIndicatorDots } from "@/components/page-indicator-dots";
-import { InitialPageIndex, Pages } from "@/constants/pages";
+import { InitialPageIndex, PAGES } from "@/constants/pages";
 import ArchivePage from "./_components/archive-page";
 import SettingsPage from "./_components/settings-page";
 import TimerPage from "./_components/timer-page";
@@ -31,17 +31,17 @@ export default function Index() {
       >
         <SettingsPage
           handleChangePage={handleChangePage}
-          key={Pages.settings.key}
+          key={PAGES.settings.key}
         />
-        <TimerPage handleChangePage={handleChangePage} key={Pages.timer.key} />
+        <TimerPage handleChangePage={handleChangePage} key={PAGES.timer.key} />
         <ArchivePage
           handleChangePage={handleChangePage}
-          key={Pages.archive.key}
+          key={PAGES.archive.key}
         />
       </PagerView>
       <PageIndicatorDots
         currentPage={currentPage}
-        pagesLength={Object.keys(Pages).length}
+        pagesLength={Object.keys(PAGES).length}
       />
     </SafeAreaView>
   );

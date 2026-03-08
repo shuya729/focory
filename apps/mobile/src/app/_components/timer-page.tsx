@@ -17,7 +17,7 @@ import {
   View,
   type ViewProps,
 } from "react-native";
-import { Pages } from "@/constants/pages";
+import { PAGES } from "@/constants/pages";
 import { cn } from "@/utils/cn";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
@@ -125,13 +125,13 @@ function TimerPage({
         <View className="flex-row items-center justify-between pt-2 pb-4">
           <HeaderIconButton
             accessibilityLabel="設定画面に移動"
-            onPress={() => handleChangePage(Pages.settings.page)}
+            onPress={() => handleChangePage(PAGES.settings.page)}
           >
             <Settings color="rgb(91 91 91)" size={22} />
           </HeaderIconButton>
           <HeaderIconButton
             accessibilityLabel="アーカイブ画面に移動"
-            onPress={() => handleChangePage(Pages.archive.page)}
+            onPress={() => handleChangePage(PAGES.archive.page)}
           >
             <CalendarDays color="rgb(91 91 91)" size={22} />
           </HeaderIconButton>
