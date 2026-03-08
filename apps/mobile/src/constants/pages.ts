@@ -1,14 +1,10 @@
-export const SETTINGS_PAGE = "settings-page" as const;
-export const TIMER_PAGE = "timer-page" as const;
-export const ARCHIVE_PAGE = "archive-page" as const;
-export type PageKey =
-  | typeof SETTINGS_PAGE
-  | typeof TIMER_PAGE
-  | typeof ARCHIVE_PAGE;
+export const Pages = {
+  settings: { key: "settings-page", page: 0 },
+  timer: { key: "timer-page", page: 1 },
+  archive: { key: "archive-page", page: 2 },
+} as const;
+export type PageKey = (typeof Pages)[keyof typeof Pages]["key"];
+export type PageIndex = (typeof Pages)[keyof typeof Pages]["page"];
 
-export const PAGES: PageKey[] = [
-  SETTINGS_PAGE,
-  TIMER_PAGE,
-  ARCHIVE_PAGE,
-] as const;
-export const INITIAL_PAGE_INDEX = 1 as const;
+export const InitialPageKey = Pages.timer.key;
+export const InitialPageIndex = Pages.timer.page;

@@ -45,7 +45,6 @@ apps/mobile
    └─ lib/
       ├─ api/
       ├─ auth/
-      ├─ storage/
       ├─ notifications/
       └─ analytics/
 ```
