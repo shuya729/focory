@@ -1,0 +1,5 @@
+{
+  "permissions": {
+    "allow": ["Bash(pnpm dlx ultracite fix)", "Bash(pnpm dlx ultracite check)"]
+  }
+}
