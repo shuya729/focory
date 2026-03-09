@@ -9,10 +9,8 @@ import {
 } from "lucide-react-native";
 import { useEffect, useState } from "react";
 import {
-  Platform,
   Pressable,
   type PressableProps,
-  StyleSheet,
   Text,
   View,
   type ViewProps,
@@ -28,12 +26,6 @@ const TIMER_PRESETS_IN_SECONDS = [15 * 60, 25 * 60, 50 * 60] as const;
 const DEFAULT_TIMER_PRESET_INDEX = 1;
 const COACH_MESSAGE =
   "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！";
-
-const TIMER_FONT_FAMILY = Platform.select({
-  android: "monospace",
-  default: "monospace",
-  ios: "Menlo",
-});
 
 function formatRemainingTime(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60)
@@ -138,12 +130,11 @@ function TimerPage({
         </View>
 
         <View className="flex-1 items-center justify-between">
-          <View className="justify-between gap-10 self-center rounded-3xl bg-app-surface-muted px-16 pt-14 pb-12">
+          <View className="justify-between gap-10 self-center rounded-3xl bg-app-surface-muted px-16 pt-16 pb-12">
             <Text
               adjustsFontSizeToFit
-              className="font-extrabold text-8xl text-app-text-primary"
+              className="font-jetbrains-mono-extrabold text-8xl text-app-text-primary tracking-tight"
               numberOfLines={1}
-              style={styles.timerText}
             >
               {formattedRemainingTime}
             </Text>
@@ -245,12 +236,5 @@ function TimerActionButton({
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  timerText: {
-    fontFamily: TIMER_FONT_FAMILY,
-    letterSpacing: -3,
-  },
-});
 
 export default TimerPage;
