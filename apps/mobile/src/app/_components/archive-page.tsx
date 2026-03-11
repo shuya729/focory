@@ -1,21 +1,17 @@
 import { ChevronLeft } from "lucide-react-native";
-import {
-  Pressable,
-  type PressableProps,
-  ScrollView,
-  Text,
-  View,
-  type ViewProps,
-} from "react-native";
+import { ScrollView, View, type ViewProps } from "react-native";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
 import { PAGES } from "@/constants/pages";
-import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
+import PageHeaderIconButton from "./page-header-icon-button";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
 
-const ICON_COLOR = THEME.light.ring;
 const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
 
 const LEGEND_ITEMS = [
@@ -153,15 +149,13 @@ function ArchivePage({
     >
       <View className="flex-1 gap-4">
         <View className="flex-row items-center justify-between pt-2">
-          <HeaderIconButton
+          <PageHeaderIconButton
             accessibilityLabel="タイマー画面に移動"
             onPress={() => handleChangePage(PAGES.timer.page)}
           >
-            <ChevronLeft color={ICON_COLOR} size={20} />
-          </HeaderIconButton>
-          <Text className="font-semibold text-foreground text-lg">
-            過去の記録
-          </Text>
+            <Icon as={ChevronLeft} className="size-5 text-ring" />
+          </PageHeaderIconButton>
+          <Text className="font-semibold text-lg">過去の記録</Text>
           <View className="h-11 w-11" />
         </View>
 
@@ -176,30 +170,6 @@ function ArchivePage({
         </ScrollView>
       </View>
     </View>
-  );
-}
-
-interface HeaderIconButtonProps extends PressableProps {}
-
-function HeaderIconButton({
-  accessibilityRole = "button",
-  children,
-  className,
-  hitSlop = 8,
-  ...props
-}: HeaderIconButtonProps) {
-  return (
-    <Pressable
-      accessibilityRole={accessibilityRole}
-      className={cn(
-        "h-11 w-11 items-center justify-center rounded-full",
-        className
-      )}
-      hitSlop={hitSlop}
-      {...props}
-    >
-      {children}
-    </Pressable>
   );
 }
 
@@ -224,12 +194,15 @@ interface LegendItemProps {
 
 function LegendItem({ colorClassName, label }: LegendItemProps) {
   return (
-    <View className="min-w-0 flex-1 flex-row items-center justify-center gap-1.5">
+    <Badge
+      className="min-w-0 flex-1 justify-center gap-1.5 rounded-none border-0 bg-transparent px-0 py-0"
+      variant="outline"
+    >
       <View className={cn("h-3.5 w-3.5 rounded-[3px]", colorClassName)} />
       <Text className="font-jetbrains-mono-medium text-[11px] text-muted-foreground">
         {label}
       </Text>
-    </View>
+    </Badge>
   );
 }
 
@@ -239,11 +212,9 @@ interface MonthSectionProps {
 
 function MonthSection({ monthRecord }: MonthSectionProps) {
   return (
-    <View className="w-full max-w-96 gap-3">
+    <Card className="w-full max-w-96 gap-3 border-0 bg-transparent py-0 shadow-none">
       <View className="flex-row items-center justify-between">
-        <Text className="font-bold text-foreground text-lg">
-          {monthRecord.title}
-        </Text>
+        <Text className="font-bold text-lg">{monthRecord.title}</Text>
         <Text className="font-jetbrains-mono-semibold text-primary text-sm">
           {monthRecord.totalTime}
         </Text>
@@ -275,7 +246,7 @@ function MonthSection({ monthRecord }: MonthSectionProps) {
           </View>
         ))}
       </View>
-    </View>
+    </Card>
   );
 }
 

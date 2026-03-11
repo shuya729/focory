@@ -8,16 +8,15 @@ import {
   Settings,
 } from "lucide-react-native";
 import { useEffect, useState } from "react";
-import {
-  Pressable,
-  type PressableProps,
-  Text,
-  View,
-  type ViewProps,
-} from "react-native";
+import { View, type ViewProps } from "react-native";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Button, type ButtonProps } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
+import { Text } from "@/components/ui/text";
 import { PAGES } from "@/constants/pages";
-import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
+import PageHeaderIconButton from "./page-header-icon-button";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
@@ -27,9 +26,6 @@ const TIMER_PRESETS_IN_SECONDS = [15 * 60, 25 * 60, 50 * 60] as const;
 const DEFAULT_TIMER_PRESET_INDEX = 1;
 const COACH_MESSAGE =
   "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！";
-const ACCENT_ICON_COLOR = THEME.light.primary;
-const ICON_COLOR = THEME.light.ring;
-const PRIMARY_ACTION_ICON_COLOR = THEME.light.primaryForeground;
 
 function formatRemainingTime(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60)
@@ -119,25 +115,25 @@ function TimerPage({
     >
       <View className="flex-1 gap-2">
         <View className="flex-row items-center justify-between pt-2 pb-4">
-          <HeaderIconButton
+          <PageHeaderIconButton
             accessibilityLabel="設定画面に移動"
             onPress={() => handleChangePage(PAGES.settings.page)}
           >
-            <Settings color={ICON_COLOR} size={22} />
-          </HeaderIconButton>
-          <HeaderIconButton
+            <Icon as={Settings} className="size-[22px] text-ring" />
+          </PageHeaderIconButton>
+          <PageHeaderIconButton
             accessibilityLabel="アーカイブ画面に移動"
             onPress={() => handleChangePage(PAGES.archive.page)}
           >
-            <CalendarDays color={ICON_COLOR} size={22} />
-          </HeaderIconButton>
+            <Icon as={CalendarDays} className="size-[22px] text-ring" />
+          </PageHeaderIconButton>
         </View>
 
         <View className="flex-1 items-center justify-between">
-          <View className="justify-between gap-10 self-center rounded-3xl bg-secondary px-16 pt-16 pb-12">
+          <Card className="gap-10 self-center rounded-3xl border-0 bg-secondary px-16 pt-16 pb-12 shadow-none">
             <Text
               adjustsFontSizeToFit
-              className="font-jetbrains-mono-extrabold text-8xl text-foreground tracking-tight"
+              className="text-center font-jetbrains-mono-extrabold text-8xl tracking-tight"
               numberOfLines={1}
             >
               {formattedRemainingTime}
@@ -149,7 +145,7 @@ function TimerPage({
                 onPress={handleCyclePreset}
                 variant="secondary"
               >
-                <Pencil color={ACCENT_ICON_COLOR} size={22} />
+                <Icon as={Pencil} className="size-[22px] text-primary" />
               </TimerActionButton>
               <TimerActionButton
                 accessibilityLabel={
@@ -159,9 +155,15 @@ function TimerPage({
                 variant="primary"
               >
                 {isRunning ? (
-                  <Pause color={PRIMARY_ACTION_ICON_COLOR} size={26} />
+                  <Icon
+                    as={Pause}
+                    className="size-[26px] text-primary-foreground"
+                  />
                 ) : (
-                  <Play color={PRIMARY_ACTION_ICON_COLOR} size={26} />
+                  <Icon
+                    as={Play}
+                    className="size-[26px] text-primary-foreground"
+                  />
                 )}
               </TimerActionButton>
               <TimerActionButton
@@ -169,20 +171,22 @@ function TimerPage({
                 onPress={handleResetTimer}
                 variant="secondary"
               >
-                <RotateCcw color={ACCENT_ICON_COLOR} size={22} />
+                <Icon as={RotateCcw} className="size-[22px] text-primary" />
               </TimerActionButton>
             </View>
-          </View>
+          </Card>
 
           <View className="w-full flex-row items-end gap-3">
-            <View className="items-center justify-center rounded-full bg-secondary p-3">
-              <Bot color={ACCENT_ICON_COLOR} size={24} />
-            </View>
-            <View className="flex-1 rounded-t-3xl rounded-br-3xl rounded-bl-2xl bg-muted p-4">
+            <Avatar alt="Bot" className="size-12">
+              <AvatarFallback className="bg-secondary">
+                <Icon as={Bot} className="size-6 text-primary" />
+              </AvatarFallback>
+            </Avatar>
+            <Card className="flex-1 gap-0 rounded-t-3xl rounded-br-3xl rounded-bl-2xl border-0 bg-muted p-4 shadow-none">
               <Text className="text-base text-popover-foreground">
                 {COACH_MESSAGE}
               </Text>
-            </View>
+            </Card>
           </View>
         </View>
       </View>
@@ -190,54 +194,32 @@ function TimerPage({
   );
 }
 
-interface HeaderIconButtonProps extends PressableProps {}
-
-function HeaderIconButton({
-  accessibilityRole = "button",
-  hitSlop = 8,
-  children,
-  className,
-  ...props
-}: HeaderIconButtonProps) {
-  return (
-    <Pressable
-      accessibilityRole={accessibilityRole}
-      className={cn("items-center justify-center rounded-full", className)}
-      hitSlop={hitSlop}
-      {...props}
-    >
-      {children}
-    </Pressable>
-  );
-}
-
-interface TimerActionButtonProps extends PressableProps {
+interface TimerActionButtonProps extends Omit<ButtonProps, "variant"> {
   variant: "primary" | "secondary";
 }
 
 function TimerActionButton({
   variant,
-  accessibilityRole = "button",
-  hitSlop = 8,
-  children,
   className,
+  hitSlop = 8,
   ...props
 }: TimerActionButtonProps) {
-  const isPrimary = variant === "primary";
+  const buttonVariant = variant === "primary" ? "default" : "outline";
 
   return (
-    <Pressable
-      accessibilityRole={accessibilityRole}
+    <Button
       className={cn(
-        "items-center justify-center rounded-full p-4",
-        isPrimary ? "bg-primary" : "bg-background",
+        "rounded-full",
+        variant === "primary"
+          ? "h-16 w-16"
+          : "h-14 w-14 border-0 bg-background shadow-none",
         className
       )}
       hitSlop={hitSlop}
+      size="icon"
+      variant={buttonVariant}
       {...props}
-    >
-      {children}
-    </Pressable>
+    />
   );
 }
 

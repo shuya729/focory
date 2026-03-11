@@ -1,27 +1,27 @@
 import { ChevronRight } from "lucide-react-native";
-import { useState } from "react";
+import { Fragment, type ReactNode, useState } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
-  Pressable,
-  type PressableProps,
   ScrollView,
-  Text,
-  TextInput,
-  type TextInputProps,
   View,
   type ViewProps,
 } from "react-native";
+import { Button, type ButtonProps } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
+import { Icon } from "@/components/ui/icon";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Separator } from "@/components/ui/separator";
+import { Text } from "@/components/ui/text";
+import { Textarea } from "@/components/ui/textarea";
 import { PAGES } from "@/constants/pages";
-import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
+import PageHeaderIconButton from "./page-header-icon-button";
 
 export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
-
-const PLACEHOLDER_TEXT_COLOR = THEME.light.mutedForeground;
-const ICON_COLOR = THEME.light.ring;
 
 const BEHAVIOR_OPTIONS = [
   "やさしい",
@@ -63,13 +63,13 @@ function SettingsPage({
         <View className="flex-1 gap-3">
           <View className="flex-row items-center justify-between pt-2">
             <View className="h-11 w-11" />
-            <Text className="font-semibold text-foreground text-lg">設定</Text>
-            <HeaderIconButton
+            <Text className="font-semibold text-lg">設定</Text>
+            <PageHeaderIconButton
               accessibilityLabel="タイマー画面に移動"
               onPress={() => handleChangePage(PAGES.timer.page)}
             >
-              <ChevronRight color={ICON_COLOR} size={20} />
-            </HeaderIconButton>
+              <Icon as={ChevronRight} className="size-5 text-ring" />
+            </PageHeaderIconButton>
           </View>
 
           <ScrollView
@@ -79,17 +79,21 @@ function SettingsPage({
           >
             <View className="gap-7 py-3">
               <FormSection label="目的">
-                <InputField
+                <Input
+                  className="h-12 rounded-xl border-border bg-card px-4 text-sm shadow-none"
                   onChangeText={setPurpose}
                   placeholder="集中したいことを入力"
+                  underlineColorAndroid="transparent"
                   value={purpose}
                 />
               </FormSection>
 
               <FormSection label="なぜ">
-                <MultilineField
+                <Textarea
+                  className="min-h-[92px] rounded-xl border-border bg-card px-4 py-3 text-sm leading-6 shadow-none"
                   onChangeText={setReason}
                   placeholder="なぜそれをやりたいのか、理由を書いてみよう"
+                  underlineColorAndroid="transparent"
                   value={reason}
                 />
               </FormSection>
@@ -120,19 +124,14 @@ function SettingsPage({
               </FormSection>
 
               <FormSection label="リンク">
-                <View className="overflow-hidden rounded-xl bg-secondary">
-                  {LINK_LABELS.map((linkLabel, index) => {
-                    const isLastItem = index === LINK_LABELS.length - 1;
-
-                    return (
-                      <LinkRow
-                        isLastItem={isLastItem}
-                        key={linkLabel}
-                        label={linkLabel}
-                      />
-                    );
-                  })}
-                </View>
+                <Card className="gap-0 overflow-hidden rounded-xl border-0 bg-secondary py-0 shadow-none">
+                  {LINK_LABELS.map((linkLabel, index) => (
+                    <Fragment key={linkLabel}>
+                      {index > 0 ? <Separator /> : null}
+                      <LinkRow label={linkLabel} />
+                    </Fragment>
+                  ))}
+                </Card>
               </FormSection>
             </View>
           </ScrollView>
@@ -143,78 +142,20 @@ function SettingsPage({
 }
 
 interface FormSectionProps {
-  children: React.ReactNode;
+  children: ReactNode;
   label: string;
 }
 
 function FormSection({ children, label }: FormSectionProps) {
   return (
     <View className="gap-2">
-      <Text className="font-semibold text-foreground text-sm">{label}</Text>
+      <Label className="font-semibold text-foreground text-sm">{label}</Label>
       {children}
     </View>
   );
 }
 
-interface HeaderIconButtonProps extends PressableProps {}
-
-function HeaderIconButton({
-  accessibilityRole = "button",
-  children,
-  className,
-  hitSlop = 8,
-  ...props
-}: HeaderIconButtonProps) {
-  return (
-    <Pressable
-      accessibilityRole={accessibilityRole}
-      className={cn(
-        "h-11 w-11 items-center justify-center rounded-full",
-        className
-      )}
-      hitSlop={hitSlop}
-      {...props}
-    >
-      {children}
-    </Pressable>
-  );
-}
-
-interface InputFieldProps extends TextInputProps {}
-
-function InputField({ className, ...props }: InputFieldProps) {
-  return (
-    <View className="rounded-xl border border-border bg-card px-4">
-      <TextInput
-        className={cn("h-12 text-foreground text-sm", className)}
-        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
-        underlineColorAndroid="transparent"
-        {...props}
-      />
-    </View>
-  );
-}
-
-function MultilineField({ className, ...props }: InputFieldProps) {
-  return (
-    <View className="rounded-xl border border-border bg-card px-4 py-3">
-      <TextInput
-        className={cn(
-          "min-h-[92px] text-foreground text-sm leading-6",
-          className
-        )}
-        multiline
-        numberOfLines={4}
-        placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
-        textAlignVertical="top"
-        underlineColorAndroid="transparent"
-        {...props}
-      />
-    </View>
-  );
-}
-
-interface BehaviorChipButtonProps extends PressableProps {
+interface BehaviorChipButtonProps extends Omit<ButtonProps, "variant"> {
   isSelected: boolean;
   label: string;
 }
@@ -222,48 +163,30 @@ interface BehaviorChipButtonProps extends PressableProps {
 function BehaviorChipButton({
   isSelected,
   label,
-  accessibilityRole = "button",
   className,
   ...props
 }: BehaviorChipButtonProps) {
   return (
-    <Pressable
-      accessibilityRole={accessibilityRole}
+    <Button
       accessibilityState={{ selected: isSelected }}
-      className={cn(
-        "h-10 flex-1 items-center justify-center rounded-full px-4",
-        isSelected ? "bg-primary" : "bg-secondary",
-        className
-      )}
+      className={cn("h-10 flex-1 rounded-full shadow-none", className)}
+      variant={isSelected ? "default" : "secondary"}
       {...props}
     >
-      <Text
-        className={cn(
-          "text-center font-medium text-[13px]",
-          isSelected ? "text-primary-foreground" : "text-foreground"
-        )}
-      >
-        {label}
-      </Text>
-    </Pressable>
+      <Text className="text-center font-medium text-[13px]">{label}</Text>
+    </Button>
   );
 }
 
 interface LinkRowProps {
-  isLastItem: boolean;
   label: string;
 }
 
-function LinkRow({ isLastItem, label }: LinkRowProps) {
+function LinkRow({ label }: LinkRowProps) {
   return (
-    <View
-      className={cn(
-        "h-12 flex-row items-center justify-between px-4",
-        !isLastItem && "border-border border-b"
-      )}
-    >
-      <Text className="text-foreground text-sm">{label}</Text>
-      <ChevronRight color={PLACEHOLDER_TEXT_COLOR} size={18} />
+    <View className="h-12 flex-row items-center justify-between px-4">
+      <Text className="text-sm">{label}</Text>
+      <Icon as={ChevronRight} className="size-[18px] text-muted-foreground" />
     </View>
   );
 }
