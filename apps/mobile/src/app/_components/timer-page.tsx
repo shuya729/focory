@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import {
   Bot,
   CalendarDays,
@@ -15,6 +16,7 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { PAGES } from "@/constants/pages";
+import { useTimerDuration } from "@/hooks/use-timer-duration";
 import { cn } from "@/utils/cn";
 import PageHeaderIconButton from "./page-header-icon-button";
 
@@ -22,8 +24,6 @@ export interface TimerPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
 
-const TIMER_PRESETS_IN_SECONDS = [15 * 60, 25 * 60, 50 * 60] as const;
-const DEFAULT_TIMER_PRESET_INDEX = 1;
 const COACH_MESSAGE =
   "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！";
 
@@ -42,17 +42,11 @@ function TimerPage({
   handleChangePage,
   ...props
 }: TimerPageProps) {
-  const [selectedPresetIndex, setSelectedPresetIndex] = useState<number>(
-    DEFAULT_TIMER_PRESET_INDEX
-  );
-  const [remainingSeconds, setRemainingSeconds] = useState<number>(
-    TIMER_PRESETS_IN_SECONDS[DEFAULT_TIMER_PRESET_INDEX]
-  );
+  const router = useRouter();
+  const { timerDurationSeconds } = useTimerDuration();
+  const [remainingSeconds, setRemainingSeconds] =
+    useState<number>(timerDurationSeconds);
   const [isRunning, setIsRunning] = useState<boolean>(false);
-
-  const selectedPresetSeconds =
-    TIMER_PRESETS_IN_SECONDS[selectedPresetIndex] ??
-    TIMER_PRESETS_IN_SECONDS[DEFAULT_TIMER_PRESET_INDEX];
 
   useEffect(() => {
     if (!isRunning) {
@@ -75,21 +69,18 @@ function TimerPage({
     };
   }, [isRunning]);
 
-  const handleCyclePreset = () => {
-    const nextPresetIndex =
-      (selectedPresetIndex + 1) % TIMER_PRESETS_IN_SECONDS.length;
-    const nextPresetSeconds =
-      TIMER_PRESETS_IN_SECONDS[nextPresetIndex] ??
-      TIMER_PRESETS_IN_SECONDS[DEFAULT_TIMER_PRESET_INDEX];
-
-    setSelectedPresetIndex(nextPresetIndex);
-    setRemainingSeconds(nextPresetSeconds);
+  useEffect(() => {
     setIsRunning(false);
+    setRemainingSeconds(timerDurationSeconds);
+  }, [timerDurationSeconds]);
+
+  const handleOpenTimerPicker = () => {
+    router.push("./timer-picker-modal");
   };
 
   const handleResetTimer = () => {
     setIsRunning(false);
-    setRemainingSeconds(selectedPresetSeconds);
+    setRemainingSeconds(timerDurationSeconds);
   };
 
   const handleToggleTimer = () => {
@@ -99,7 +90,7 @@ function TimerPage({
     }
 
     if (remainingSeconds === 0) {
-      setRemainingSeconds(selectedPresetSeconds);
+      setRemainingSeconds(timerDurationSeconds);
     }
 
     setIsRunning(true);
@@ -141,8 +132,8 @@ function TimerPage({
 
             <View className="flex-row items-center justify-center gap-6">
               <TimerActionButton
-                accessibilityLabel="タイマー時間を切り替える"
-                onPress={handleCyclePreset}
+                accessibilityLabel="タイマー時間を編集"
+                onPress={handleOpenTimerPicker}
                 variant="secondary"
               >
                 <Icon as={Pencil} className="size-[22px] text-primary" />

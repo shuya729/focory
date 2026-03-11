@@ -5,9 +5,14 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { hide, preventAutoHideAsync } from "expo-splash-screen";
 import { useEffect } from "react";
+import { TimerDurationProvider } from "@/hooks/use-timer-duration";
 import { NAV_THEME } from "@/theme";
 
 preventAutoHideAsync();
+
+export const unstable_settings = {
+  anchor: "index",
+};
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -32,11 +37,20 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={NAV_THEME}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-      </Stack>
-      <PortalHost />
-    </ThemeProvider>
+    <TimerDurationProvider>
+      <ThemeProvider value={NAV_THEME}>
+        <Stack screenOptions={{ headerShown: false }}>
+          <Stack.Screen name="index" />
+          <Stack.Screen
+            name="timer-picker-modal"
+            options={{
+              animation: "fade",
+              presentation: "transparentModal",
+            }}
+          />
+        </Stack>
+        <PortalHost />
+      </ThemeProvider>
+    </TimerDurationProvider>
   );
 }
