@@ -3,7 +3,7 @@ import PagerView, {
   type PagerViewOnPageSelectedEvent,
 } from "react-native-pager-view";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { PageIndicatorDots } from "@/components/page-indicator-dots";
+import { PageIndicatorDots } from "@/components/elements/page-indicator-dots";
 import { InitialPageIndex, PAGES } from "@/constants/pages";
 import ArchivePage from "./_components/archive-page";
 import SettingsPage from "./_components/settings-page";
