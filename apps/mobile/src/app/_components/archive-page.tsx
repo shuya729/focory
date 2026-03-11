@@ -8,29 +8,30 @@ import {
   type ViewProps,
 } from "react-native";
 import { PAGES } from "@/constants/pages";
+import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
 
-const ICON_COLOR = "rgb(91 91 91)";
+const ICON_COLOR = THEME.light.ring;
 const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
 
 const LEGEND_ITEMS = [
-  { colorClassName: "bg-app-surface-subtle", label: "0h" },
-  { colorClassName: "bg-app-accent-soft", label: "~1h" },
-  { colorClassName: "bg-app-accent-muted", label: "~2h" },
-  { colorClassName: "bg-app-accent", label: "~4h" },
-  { colorClassName: "bg-app-accent-strong", label: "~6h" },
+  { colorClassName: "bg-muted", label: "0h" },
+  { colorClassName: "bg-popover", label: "~1h" },
+  { colorClassName: "bg-accent", label: "~2h" },
+  { colorClassName: "bg-primary", label: "~4h" },
+  { colorClassName: "bg-destructive", label: "~6h" },
 ] as const;
 
 const CALENDAR_CELL_CLASS_NAMES = {
-  accent: "bg-app-accent",
-  "accent-muted": "bg-app-accent-muted",
-  "accent-soft": "bg-app-accent-soft",
-  "accent-strong": "bg-app-accent-strong",
-  "surface-subtle": "bg-app-surface-subtle",
+  accent: "bg-primary",
+  "accent-muted": "bg-accent",
+  "accent-soft": "bg-popover",
+  "accent-strong": "bg-destructive",
+  "surface-subtle": "bg-muted",
   transparent: "bg-transparent",
 } as const;
 
@@ -158,7 +159,7 @@ function ArchivePage({
           >
             <ChevronLeft color={ICON_COLOR} size={20} />
           </HeaderIconButton>
-          <Text className="font-semibold text-app-text-primary text-lg">
+          <Text className="font-semibold text-foreground text-lg">
             過去の記録
           </Text>
           <View className="h-11 w-11" />
@@ -225,7 +226,7 @@ function LegendItem({ colorClassName, label }: LegendItemProps) {
   return (
     <View className="min-w-0 flex-1 flex-row items-center justify-center gap-1.5">
       <View className={cn("h-3.5 w-3.5 rounded-[3px]", colorClassName)} />
-      <Text className="font-jetbrains-mono-medium text-[11px] text-app-text-muted">
+      <Text className="font-jetbrains-mono-medium text-[11px] text-muted-foreground">
         {label}
       </Text>
     </View>
@@ -240,10 +241,10 @@ function MonthSection({ monthRecord }: MonthSectionProps) {
   return (
     <View className="w-full max-w-96 gap-3">
       <View className="flex-row items-center justify-between">
-        <Text className="font-bold text-app-text-primary text-lg">
+        <Text className="font-bold text-foreground text-lg">
           {monthRecord.title}
         </Text>
-        <Text className="font-jetbrains-mono-semibold text-app-accent text-sm">
+        <Text className="font-jetbrains-mono-semibold text-primary text-sm">
           {monthRecord.totalTime}
         </Text>
       </View>
@@ -251,7 +252,7 @@ function MonthSection({ monthRecord }: MonthSectionProps) {
       <View className="flex-row items-center justify-between">
         {DAY_LABELS.map((dayLabel) => (
           <Text
-            className="w-10 text-center text-[11px] text-app-text-muted"
+            className="w-10 text-center text-[11px] text-muted-foreground"
             key={dayLabel}
           >
             {dayLabel}

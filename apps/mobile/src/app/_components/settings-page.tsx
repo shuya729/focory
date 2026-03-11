@@ -13,14 +13,15 @@ import {
   type ViewProps,
 } from "react-native";
 import { PAGES } from "@/constants/pages";
+import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
 
 export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
 
-const PLACEHOLDER_TEXT_COLOR = "rgb(171 171 171)";
-const ICON_COLOR = "rgb(91 91 91)";
+const PLACEHOLDER_TEXT_COLOR = THEME.light.mutedForeground;
+const ICON_COLOR = THEME.light.ring;
 
 const BEHAVIOR_OPTIONS = [
   "やさしい",
@@ -62,9 +63,7 @@ function SettingsPage({
         <View className="flex-1 gap-3">
           <View className="flex-row items-center justify-between pt-2">
             <View className="h-11 w-11" />
-            <Text className="font-semibold text-app-text-primary text-lg">
-              設定
-            </Text>
+            <Text className="font-semibold text-foreground text-lg">設定</Text>
             <HeaderIconButton
               accessibilityLabel="タイマー画面に移動"
               onPress={() => handleChangePage(PAGES.timer.page)}
@@ -121,7 +120,7 @@ function SettingsPage({
               </FormSection>
 
               <FormSection label="リンク">
-                <View className="overflow-hidden rounded-xl bg-app-surface-muted">
+                <View className="overflow-hidden rounded-xl bg-secondary">
                   {LINK_LABELS.map((linkLabel, index) => {
                     const isLastItem = index === LINK_LABELS.length - 1;
 
@@ -151,9 +150,7 @@ interface FormSectionProps {
 function FormSection({ children, label }: FormSectionProps) {
   return (
     <View className="gap-2">
-      <Text className="font-semibold text-app-text-primary text-sm">
-        {label}
-      </Text>
+      <Text className="font-semibold text-foreground text-sm">{label}</Text>
       {children}
     </View>
   );
@@ -187,9 +184,9 @@ interface InputFieldProps extends TextInputProps {}
 
 function InputField({ className, ...props }: InputFieldProps) {
   return (
-    <View className="rounded-xl border border-app-border bg-app-surface px-4">
+    <View className="rounded-xl border border-border bg-card px-4">
       <TextInput
-        className={cn("h-12 text-app-text-primary text-sm", className)}
+        className={cn("h-12 text-foreground text-sm", className)}
         placeholderTextColor={PLACEHOLDER_TEXT_COLOR}
         underlineColorAndroid="transparent"
         {...props}
@@ -200,10 +197,10 @@ function InputField({ className, ...props }: InputFieldProps) {
 
 function MultilineField({ className, ...props }: InputFieldProps) {
   return (
-    <View className="rounded-xl border border-app-border bg-app-surface px-4 py-3">
+    <View className="rounded-xl border border-border bg-card px-4 py-3">
       <TextInput
         className={cn(
-          "min-h-[92px] text-app-text-primary text-sm leading-6",
+          "min-h-[92px] text-foreground text-sm leading-6",
           className
         )}
         multiline
@@ -235,7 +232,7 @@ function BehaviorChipButton({
       accessibilityState={{ selected: isSelected }}
       className={cn(
         "h-10 flex-1 items-center justify-center rounded-full px-4",
-        isSelected ? "bg-app-accent" : "bg-app-surface-muted",
+        isSelected ? "bg-primary" : "bg-secondary",
         className
       )}
       {...props}
@@ -243,7 +240,7 @@ function BehaviorChipButton({
       <Text
         className={cn(
           "text-center font-medium text-[13px]",
-          isSelected ? "text-app-background" : "text-app-text-primary"
+          isSelected ? "text-primary-foreground" : "text-foreground"
         )}
       >
         {label}
@@ -262,10 +259,10 @@ function LinkRow({ isLastItem, label }: LinkRowProps) {
     <View
       className={cn(
         "h-12 flex-row items-center justify-between px-4",
-        !isLastItem && "border-app-border border-b"
+        !isLastItem && "border-border border-b"
       )}
     >
-      <Text className="text-app-text-primary text-sm">{label}</Text>
+      <Text className="text-foreground text-sm">{label}</Text>
       <ChevronRight color={PLACEHOLDER_TEXT_COLOR} size={18} />
     </View>
   );

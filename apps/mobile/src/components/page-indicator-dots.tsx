@@ -18,8 +18,8 @@ export function PageIndicatorDots({
           <View
             className={
               isActivePage
-                ? "h-2.5 w-2.5 rounded-full bg-app-accent"
-                : "h-2 w-2 rounded-full bg-app-neutral-soft"
+                ? "h-2.5 w-2.5 rounded-full bg-primary"
+                : "h-2 w-2 rounded-full bg-input"
             }
             key={`page-dot-${index.toString()}`}
           />

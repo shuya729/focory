@@ -5,23 +5,29 @@
 
 @layer base {
   :root {
-    --color-background: 245 240 234;
-    --color-surface: 255 255 255;
-    --color-surface-muted: 232 228 222;
-    --color-surface-subtle: 237 232 226;
-
-    --color-accent: 91 158 143;
-    --color-accent-strong: 61 122 108;
-    --color-accent-muted: 125 188 174;
-    --color-accent-soft: 212 230 223;
-
-    --color-text-primary: 44 44 44;
-    --color-text-secondary: 74 74 74;
-    --color-text-muted: 171 171 171;
-    --color-icon: 91 91 91;
-
-    --color-border: 221 216 209;
-    --color-border-subtle: 237 232 226;
-    --color-neutral-soft: 192 186 178;
+    --background: 32.7 35.5% 93.9%;
+    --foreground: 0 0% 17.3%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 17.3%;
+    --popover: 156.7 26.5% 86.7%;
+    --popover-foreground: 0 0% 29%;
+    --primary: 166.6 26.9% 48.8%;
+    --primary-foreground: 32.7 35.5% 93.9%;
+    --secondary: 36 17.9% 89%;
+    --secondary-foreground: 0 0% 17.3%;
+    --muted: 32.7 23.4% 90.8%;
+    --muted-foreground: 0 0% 67.1%;
+    --accent: 166.7 32% 61.4%;
+    --accent-foreground: 0 0% 17.3%;
+    --destructive: 166.2 33.3% 35.9%;
+    --border: 35 15% 84.3%;
+    --input: 34.3 10% 72.5%;
+    --ring: 0 0% 35.7%;
+    --radius: 0.625rem;
+    --chart-1: 156.7 26.5% 86.7%;
+    --chart-2: 166.7 32% 61.4%;
+    --chart-3: 166.6 26.9% 48.8%;
+    --chart-4: 166.2 33.3% 35.9%;
+    --chart-5: 34.3 10% 72.5%;
   }
 }

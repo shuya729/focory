@@ -16,6 +16,7 @@ import {
   type ViewProps,
 } from "react-native";
 import { PAGES } from "@/constants/pages";
+import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
@@ -26,6 +27,9 @@ const TIMER_PRESETS_IN_SECONDS = [15 * 60, 25 * 60, 50 * 60] as const;
 const DEFAULT_TIMER_PRESET_INDEX = 1;
 const COACH_MESSAGE =
   "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！";
+const ACCENT_ICON_COLOR = THEME.light.primary;
+const ICON_COLOR = THEME.light.ring;
+const PRIMARY_ACTION_ICON_COLOR = THEME.light.primaryForeground;
 
 function formatRemainingTime(totalSeconds: number) {
   const minutes = Math.floor(totalSeconds / 60)
@@ -119,21 +123,21 @@ function TimerPage({
             accessibilityLabel="設定画面に移動"
             onPress={() => handleChangePage(PAGES.settings.page)}
           >
-            <Settings color="rgb(91 91 91)" size={22} />
+            <Settings color={ICON_COLOR} size={22} />
           </HeaderIconButton>
           <HeaderIconButton
             accessibilityLabel="アーカイブ画面に移動"
             onPress={() => handleChangePage(PAGES.archive.page)}
           >
-            <CalendarDays color="rgb(91 91 91)" size={22} />
+            <CalendarDays color={ICON_COLOR} size={22} />
           </HeaderIconButton>
         </View>
 
         <View className="flex-1 items-center justify-between">
-          <View className="justify-between gap-10 self-center rounded-3xl bg-app-surface-muted px-16 pt-16 pb-12">
+          <View className="justify-between gap-10 self-center rounded-3xl bg-secondary px-16 pt-16 pb-12">
             <Text
               adjustsFontSizeToFit
-              className="font-jetbrains-mono-extrabold text-8xl text-app-text-primary tracking-tight"
+              className="font-jetbrains-mono-extrabold text-8xl text-foreground tracking-tight"
               numberOfLines={1}
             >
               {formattedRemainingTime}
@@ -145,7 +149,7 @@ function TimerPage({
                 onPress={handleCyclePreset}
                 variant="secondary"
               >
-                <Pencil color="rgb(91 158 143)" size={22} />
+                <Pencil color={ACCENT_ICON_COLOR} size={22} />
               </TimerActionButton>
               <TimerActionButton
                 accessibilityLabel={
@@ -155,9 +159,9 @@ function TimerPage({
                 variant="primary"
               >
                 {isRunning ? (
-                  <Pause color="rgb(245 240 234)" size={26} />
+                  <Pause color={PRIMARY_ACTION_ICON_COLOR} size={26} />
                 ) : (
-                  <Play color="rgb(245 240 234)" size={26} />
+                  <Play color={PRIMARY_ACTION_ICON_COLOR} size={26} />
                 )}
               </TimerActionButton>
               <TimerActionButton
@@ -165,17 +169,17 @@ function TimerPage({
                 onPress={handleResetTimer}
                 variant="secondary"
               >
-                <RotateCcw color="rgb(91 158 143)" size={22} />
+                <RotateCcw color={ACCENT_ICON_COLOR} size={22} />
               </TimerActionButton>
             </View>
           </View>
 
           <View className="w-full flex-row items-end gap-3">
-            <View className="items-center justify-center rounded-full bg-app-surface-muted p-3">
-              <Bot color="rgb(91 158 143)" size={24} />
+            <View className="items-center justify-center rounded-full bg-secondary p-3">
+              <Bot color={ACCENT_ICON_COLOR} size={24} />
             </View>
-            <View className="flex-1 rounded-t-3xl rounded-br-3xl rounded-bl-2xl bg-app-surface-subtle p-4">
-              <Text className="text-app-text-secondary text-base">
+            <View className="flex-1 rounded-t-3xl rounded-br-3xl rounded-bl-2xl bg-muted p-4">
+              <Text className="text-base text-popover-foreground">
                 {COACH_MESSAGE}
               </Text>
             </View>
@@ -226,7 +230,7 @@ function TimerActionButton({
       accessibilityRole={accessibilityRole}
       className={cn(
         "items-center justify-center rounded-full p-4",
-        isPrimary ? "bg-app-accent" : "bg-app-background",
+        isPrimary ? "bg-primary" : "bg-background",
         className
       )}
       hitSlop={hitSlop}

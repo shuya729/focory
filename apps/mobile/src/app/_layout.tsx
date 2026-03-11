@@ -1,8 +1,11 @@
+import { ThemeProvider } from "@react-navigation/native";
 import "../global.css";
+import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { hide, preventAutoHideAsync } from "expo-splash-screen";
 import { useEffect } from "react";
+import { NAV_THEME } from "@/theme";
 
 preventAutoHideAsync();
 
@@ -29,8 +32,11 @@ export default function RootLayout() {
   }
 
   return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-    </Stack>
+    <ThemeProvider value={NAV_THEME}>
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="index" />
+      </Stack>
+      <PortalHost />
+    </ThemeProvider>
   );
 }

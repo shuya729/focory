@@ -22,7 +22,7 @@ export default function Index() {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-app-background">
+    <SafeAreaView className="flex-1 bg-background">
       <PagerView
         initialPage={InitialPageIndex}
         onPageSelected={handlePageSelected}
