@@ -2634,6 +2634,543 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "AEfiH",
+      "x": 1864,
+      "y": 0,
+      "name": "Main Timer Screen (Running)",
+      "clip": true,
+      "width": 402,
+      "height": 874,
+      "fill": "#F5F0EA",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "WnFiC",
+          "type": "ref",
+          "ref": "ZvRHB",
+          "width": "fill_container",
+          "name": "sb1",
+          "height": 62,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "frame",
+          "id": "h7JwO",
+          "name": "Content",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            6,
+            24
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "CPSOV",
+              "name": "Top Bar",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "eCvhR",
+                  "type": "ref",
+                  "ref": "GuJrR",
+                  "width": 44,
+                  "height": 44,
+                  "name": "btn1"
+                },
+                {
+                  "id": "89T4h",
+                  "type": "ref",
+                  "ref": "GuJrR",
+                  "width": 44,
+                  "height": 44,
+                  "name": "btn2",
+                  "descendants": {
+                    "sF2YV": {
+                      "iconFontName": "calendar-days",
+                      "height": 22,
+                      "width": 22
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wO1tr",
+              "name": "Main Group",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                12,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eyzEA",
+                  "name": "Timer Box",
+                  "width": 340,
+                  "height": 270,
+                  "fill": "#D9EDE8",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 0,
+                    "fill": "none"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#5B9E8F30",
+                    "offset": {
+                      "x": 0,
+                      "y": 4
+                    },
+                    "blur": 20
+                  },
+                  "layout": "vertical",
+                  "gap": 40,
+                  "padding": [
+                    24,
+                    0,
+                    18,
+                    0
+                  ],
+                  "justifyContent": "space_around",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "QxwTT",
+                      "name": "timerText",
+                      "fill": "#2C2C2C",
+                      "content": "24:13",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 76,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "HJbqH",
+                      "name": "Button Row",
+                      "gap": 24,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "pVqaD",
+                          "type": "ref",
+                          "ref": "IIS8S",
+                          "name": "pauseBtn",
+                          "width": 56,
+                          "height": 56,
+                          "children": [
+                            {
+                              "id": "BXsRM",
+                              "type": "ref",
+                              "ref": "BXsRM",
+                              "iconFontName": "pause"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "N7V20",
+                  "name": "AI Bubble Wrapper",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "iyD5G",
+                      "name": "AI Avatar",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#E8E4DE",
+                      "cornerRadius": 24,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 0,
+                        "fill": "none"
+                      },
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "Ei2H4",
+                          "name": "avatarIcon",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "bot",
+                          "iconFontFamily": "lucide",
+                          "fill": "#5B9E8F"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Nx3jx",
+                      "name": "Bubble With Tail",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "cV3qb",
+                          "name": "Speech Bubble",
+                          "width": "fill_container",
+                          "fill": "#EDE8E2",
+                          "cornerRadius": [
+                            20,
+                            20,
+                            20,
+                            6
+                          ],
+                          "stroke": {
+                            "align": "outside",
+                            "thickness": 0,
+                            "fill": "none"
+                          },
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": [
+                            16,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "t0Qj0",
+                              "name": "bubbleText",
+                              "fill": "#4A4A4A",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
+                              "lineHeight": 1.6,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "4rVSV",
+              "type": "ref",
+              "ref": "FzJdq",
+              "width": "fill_container",
+              "height": 34,
+              "name": "sib1",
+              "descendants": {
+                "1acgJ": {
+                  "fill": "#C0BAB2",
+                  "width": 8,
+                  "height": 8
+                },
+                "ZipAy": {
+                  "fill": "#5B9E8F",
+                  "width": 10,
+                  "height": 10
+                }
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "D9dRK",
+      "x": 2326,
+      "y": 0,
+      "name": "Main Timer Screen (Finished)",
+      "clip": true,
+      "width": 402,
+      "height": 874,
+      "fill": "#F5F0EA",
+      "layout": "vertical",
+      "children": [
+        {
+          "id": "LtjHJ",
+          "type": "ref",
+          "ref": "ZvRHB",
+          "width": "fill_container",
+          "name": "sb1",
+          "height": 62,
+          "x": 0,
+          "y": 0
+        },
+        {
+          "type": "frame",
+          "id": "wcBAL",
+          "name": "Content",
+          "width": "fill_container",
+          "height": "fill_container",
+          "layout": "vertical",
+          "padding": [
+            6,
+            24
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "aW2ek",
+              "name": "Top Bar",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "id": "HRrPW",
+                  "type": "ref",
+                  "ref": "GuJrR",
+                  "width": 44,
+                  "height": 44,
+                  "name": "btn1"
+                },
+                {
+                  "id": "IaB8d",
+                  "type": "ref",
+                  "ref": "GuJrR",
+                  "width": 44,
+                  "height": 44,
+                  "name": "btn2",
+                  "descendants": {
+                    "sF2YV": {
+                      "iconFontName": "calendar-days",
+                      "height": 22,
+                      "width": 22
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "HCpOL",
+              "name": "Main Group",
+              "width": "fill_container",
+              "height": "fill_container",
+              "layout": "vertical",
+              "gap": 16,
+              "padding": [
+                12,
+                0
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "L4mJx",
+                  "name": "Timer Box",
+                  "width": 340,
+                  "height": 270,
+                  "fill": "#5B9E8F",
+                  "cornerRadius": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 0,
+                    "fill": "none"
+                  },
+                  "effect": {
+                    "type": "shadow",
+                    "shadowType": "outer",
+                    "color": "#5B9E8F50",
+                    "offset": {
+                      "x": 0,
+                      "y": 6
+                    },
+                    "blur": 24
+                  },
+                  "layout": "vertical",
+                  "gap": 20,
+                  "padding": [
+                    24,
+                    0,
+                    18,
+                    0
+                  ],
+                  "justifyContent": "space_around",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lvwJ3",
+                      "name": "timerText",
+                      "fill": "#FFFFFF",
+                      "content": "00:00",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 76,
+                      "fontWeight": "800"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "SFf2y",
+                      "name": "Button Row",
+                      "gap": 24,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "id": "8JjFr",
+                          "type": "ref",
+                          "ref": "I1v9v",
+                          "name": "resetBtn",
+                          "width": 52,
+                          "height": 52,
+                          "fill": "#FFFFFF",
+                          "descendants": {
+                            "kV12D": {
+                              "iconFontName": "rotate-ccw",
+                              "fill": "#5B9E8F"
+                            }
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "pgUWQ",
+                  "name": "AI Bubble Wrapper",
+                  "width": "fill_container",
+                  "gap": 12,
+                  "alignItems": "end",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "i2IVe",
+                      "name": "AI Avatar",
+                      "width": 48,
+                      "height": 48,
+                      "fill": "#E8E4DE",
+                      "cornerRadius": 24,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 0,
+                        "fill": "none"
+                      },
+                      "layout": "vertical",
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "lz3T2",
+                          "name": "avatarIcon",
+                          "width": 24,
+                          "height": 24,
+                          "iconFontName": "bot",
+                          "iconFontFamily": "lucide",
+                          "fill": "#5B9E8F"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "95pEG",
+                      "name": "Bubble With Tail",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "HVeYF",
+                          "name": "Speech Bubble",
+                          "width": "fill_container",
+                          "fill": "#EDE8E2",
+                          "cornerRadius": [
+                            20,
+                            20,
+                            20,
+                            6
+                          ],
+                          "stroke": {
+                            "align": "outside",
+                            "thickness": 0,
+                            "fill": "none"
+                          },
+                          "layout": "vertical",
+                          "gap": 8,
+                          "padding": [
+                            16,
+                            18
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "F64He",
+                              "name": "bubbleText",
+                              "fill": "#4A4A4A",
+                              "textGrowth": "fixed-width",
+                              "width": "fill_container",
+                              "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
+                              "lineHeight": 1.6,
+                              "fontFamily": "DM Sans",
+                              "fontSize": 15,
+                              "fontWeight": "normal"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "sGu52",
+              "type": "ref",
+              "ref": "FzJdq",
+              "width": "fill_container",
+              "height": 34,
+              "name": "sib1",
+              "descendants": {
+                "1acgJ": {
+                  "fill": "#C0BAB2",
+                  "width": 8,
+                  "height": 8
+                },
+                "ZipAy": {
+                  "fill": "#5B9E8F",
+                  "width": 10,
+                  "height": 10
+                }
+              }
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
