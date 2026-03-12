@@ -8,7 +8,7 @@ import {
   RotateCcw,
   Settings,
 } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { type ReactNode, useEffect, useState } from "react";
 import { View, type ViewProps } from "react-native";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button, type ButtonProps } from "@/components/ui/button";
@@ -17,6 +17,7 @@ import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { PAGES } from "@/constants/pages";
 import { useTimerDuration } from "@/hooks/use-timer-duration";
+import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
 import PageHeaderIconButton from "./page-header-icon-button";
 
@@ -47,6 +48,7 @@ function TimerPage({
   const [remainingSeconds, setRemainingSeconds] =
     useState<number>(timerDurationSeconds);
   const [isRunning, setIsRunning] = useState<boolean>(false);
+  const isFinished = !isRunning && remainingSeconds === 0;
 
   useEffect(() => {
     if (!isRunning) {
@@ -97,6 +99,96 @@ function TimerPage({
   };
 
   const formattedRemainingTime = formatRemainingTime(remainingSeconds);
+  let timerCardBackgroundClassName = "bg-secondary";
+  let timerCardStyle:
+    | {
+        elevation: number;
+        shadowColor: string;
+        shadowOffset: { width: number; height: number };
+        shadowOpacity: number;
+        shadowRadius: number;
+      }
+    | undefined;
+
+  if (isRunning) {
+    timerCardBackgroundClassName = "bg-popover";
+    timerCardStyle = {
+      elevation: 6,
+      shadowColor: THEME.light.primary,
+      shadowOffset: { width: 0, height: 4 },
+      shadowOpacity: 0.18,
+      shadowRadius: 20,
+    };
+  }
+
+  if (isFinished) {
+    timerCardBackgroundClassName = "bg-primary";
+    timerCardStyle = {
+      elevation: 8,
+      shadowColor: THEME.light.primary,
+      shadowOffset: { width: 0, height: 6 },
+      shadowOpacity: 0.3,
+      shadowRadius: 24,
+    };
+  }
+
+  const timerCardClassName = cn(
+    "h-[270px] w-[340px] justify-around self-center rounded-3xl border-0 px-7 pt-6 pb-[18px] shadow-none",
+    timerCardBackgroundClassName
+  );
+  const timerTextClassName = cn(
+    "text-center font-jetbrains-mono-extrabold text-[76px] leading-[92px] tracking-tight",
+    isFinished ? "text-primary-foreground" : "text-foreground"
+  );
+  let timerActionButtons: ReactNode;
+
+  if (isFinished) {
+    timerActionButtons = (
+      <TimerActionButton
+        accessibilityLabel="タイマーをリセット"
+        onPress={handleResetTimer}
+        variant="secondary"
+      >
+        <Icon as={RotateCcw} className="size-[22px] text-primary" />
+      </TimerActionButton>
+    );
+  } else if (isRunning) {
+    timerActionButtons = (
+      <TimerActionButton
+        accessibilityLabel="タイマーを一時停止"
+        onPress={handleToggleTimer}
+        variant="primary"
+      >
+        <Icon as={Pause} className="size-[26px] text-primary-foreground" />
+      </TimerActionButton>
+    );
+  } else {
+    timerActionButtons = (
+      <>
+        <TimerActionButton
+          accessibilityLabel="タイマー時間を編集"
+          onPress={handleOpenTimerPicker}
+          variant="secondary"
+        >
+          <Icon as={Pencil} className="size-[22px] text-primary" />
+        </TimerActionButton>
+        <TimerActionButton
+          accessibilityLabel="タイマーを開始"
+          onPress={handleToggleTimer}
+          variant="primary"
+        >
+          <Icon as={Play} className="size-[26px] text-primary-foreground" />
+        </TimerActionButton>
+        <TimerActionButton
+          accessibilityLabel="タイマーをリセット"
+          onPress={handleResetTimer}
+          variant="secondary"
+        >
+          <Icon as={RotateCcw} className="size-[22px] text-primary" />
+        </TimerActionButton>
+      </>
+    );
+  }
 
   return (
     <View
@@ -121,49 +213,17 @@ function TimerPage({
         </View>
 
         <View className="flex-1 items-center justify-between">
-          <Card className="gap-10 self-center rounded-3xl border-0 bg-secondary px-16 pt-16 pb-12 shadow-none">
+          <Card className={timerCardClassName} style={timerCardStyle}>
             <Text
               adjustsFontSizeToFit
-              className="text-center font-jetbrains-mono-extrabold text-8xl tracking-tight"
+              className={timerTextClassName}
               numberOfLines={1}
             >
               {formattedRemainingTime}
             </Text>
 
             <View className="flex-row items-center justify-center gap-6">
-              <TimerActionButton
-                accessibilityLabel="タイマー時間を編集"
-                onPress={handleOpenTimerPicker}
-                variant="secondary"
-              >
-                <Icon as={Pencil} className="size-[22px] text-primary" />
-              </TimerActionButton>
-              <TimerActionButton
-                accessibilityLabel={
-                  isRunning ? "タイマーを一時停止" : "タイマーを開始"
-                }
-                onPress={handleToggleTimer}
-                variant="primary"
-              >
-                {isRunning ? (
-                  <Icon
-                    as={Pause}
-                    className="size-[26px] text-primary-foreground"
-                  />
-                ) : (
-                  <Icon
-                    as={Play}
-                    className="size-[26px] text-primary-foreground"
-                  />
-                )}
-              </TimerActionButton>
-              <TimerActionButton
-                accessibilityLabel="タイマーをリセット"
-                onPress={handleResetTimer}
-                variant="secondary"
-              >
-                <Icon as={RotateCcw} className="size-[22px] text-primary" />
-              </TimerActionButton>
+              {timerActionButtons}
             </View>
           </Card>
 
@@ -202,8 +262,8 @@ function TimerActionButton({
       className={cn(
         "rounded-full",
         variant === "primary"
-          ? "h-16 w-16"
-          : "h-14 w-14 border-0 bg-background shadow-none",
+          ? "h-14 w-14"
+          : "h-[52px] w-[52px] border-0 bg-background shadow-none",
         className
       )}
       hitSlop={hitSlop}
