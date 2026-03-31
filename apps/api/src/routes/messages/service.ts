@@ -152,24 +152,21 @@ export class MessagesService {
     let data: LlmResponse;
 
     try {
-      response = await fetch(
-        `${this.llmBaseUrl}?key=${this.gcpApiKey}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            model: this.llmModel,
-            messages: [
-              {
-                role: "user",
-                content: MessagesService.buildPrompt(input),
-              },
-            ],
-          }),
-        }
-      );
+      response = await fetch(`${this.llmBaseUrl}?key=${this.gcpApiKey}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          model: this.llmModel,
+          messages: [
+            {
+              role: "user",
+              content: MessagesService.buildPrompt(input),
+            },
+          ],
+        }),
+      });
 
       data = (await response.json()) as LlmResponse;
     } catch (cause) {

@@ -57,23 +57,17 @@
       "indexes": {
         "archives_timer_id_idx": {
           "name": "archives_timer_id_idx",
-          "columns": [
-            "timer_id"
-          ],
+          "columns": ["timer_id"],
           "isUnique": false
         },
         "archives_start_at_idx": {
           "name": "archives_start_at_idx",
-          "columns": [
-            "start_at"
-          ],
+          "columns": ["start_at"],
           "isUnique": false
         },
         "archives_end_at_idx": {
           "name": "archives_end_at_idx",
-          "columns": [
-            "end_at"
-          ],
+          "columns": ["end_at"],
           "isUnique": false
         }
       },
@@ -82,12 +76,8 @@
           "name": "archives_timer_id_timers_id_fk",
           "tableFrom": "archives",
           "tableTo": "timers",
-          "columnsFrom": [
-            "timer_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["timer_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "cascade"
         }

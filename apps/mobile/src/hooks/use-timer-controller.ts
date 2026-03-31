@@ -13,8 +13,6 @@ import {
   startTimerSession,
 } from "@/services/timer-service";
 
-export const DEFAULT_COACH_MESSAGE =
-  "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！";
 const MESSAGE_LOADING_FRAMES = [".", "..", "..."] as const;
 
 export const formatRemainingTime = (totalSeconds: number) => {
