@@ -1,5 +1,6 @@
 import type { Dispatch, MutableRefObject, SetStateAction } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AppState, type AppStateStatus } from "react-native";
 import { useArchiveRefresh } from "@/contexts/archive-refresh-context";
 import {
   DEFAULT_TIMER_EVENT_MESSAGES,
@@ -82,6 +83,7 @@ export function useTimerController({
   timerDurationSeconds,
 }: UseTimerControllerOptions) {
   const { notifyArchiveChanged } = useArchiveRefresh();
+  const appStateRef = useRef(AppState.currentState);
   const [coachMessage, setCoachMessage] = useState("");
   const [currentArchiveId, setCurrentArchiveId] = useState<string | null>(null);
   const [currentTimerId, setCurrentTimerId] = useState<string | null>(null);
@@ -192,6 +194,70 @@ export function useTimerController({
     setRemainingSeconds(timerDurationSeconds);
   }, [timerDurationSeconds]);
 
+  const pauseCurrentTimer = useCallback(async () => {
+    if (isTransitioning || !isRunning || !currentTimerId || !currentArchiveId) {
+      return;
+    }
+
+    setIsRunning(false);
+    setIsTransitioning(true);
+
+    try {
+      await pauseTimerSession({
+        archiveId: currentArchiveId,
+        elapsedSec: elapsedSeconds,
+        timerId: currentTimerId,
+      });
+      setCurrentArchiveId(null);
+      notifyArchiveChanged();
+      queueCoachMessageUpdate({
+        durationSec: timerDurationSeconds,
+        elapsedSeconds,
+        latestMessageSequenceRef,
+        setCoachMessage,
+        setHasCoachMessage,
+        setIsGeneratingMessage,
+        timerId: currentTimerId,
+        type: "stop",
+      });
+    } catch {
+      setIsRunning(true);
+    } finally {
+      setIsTransitioning(false);
+    }
+  }, [
+    currentArchiveId,
+    currentTimerId,
+    elapsedSeconds,
+    isRunning,
+    isTransitioning,
+    notifyArchiveChanged,
+    timerDurationSeconds,
+  ]);
+
+  useEffect(() => {
+    const handleAppStateChange = (nextAppState: AppStateStatus) => {
+      const previousAppState = appStateRef.current;
+
+      appStateRef.current = nextAppState;
+
+      if (!(previousAppState === "active" && nextAppState !== "active")) {
+        return;
+      }
+
+      pauseCurrentTimer().catch(() => undefined);
+    };
+
+    const subscription = AppState.addEventListener(
+      "change",
+      handleAppStateChange
+    );
+
+    return () => {
+      subscription.remove();
+    };
+  }, [pauseCurrentTimer]);
+
   const handleStartOrResumeTimer = async () => {
     if (isTransitioning) {
       return;
@@ -244,36 +310,7 @@ export function useTimerController({
   };
 
   const handlePauseTimer = async () => {
-    if (isTransitioning || !isRunning || !currentTimerId || !currentArchiveId) {
-      return;
-    }
-
-    setIsRunning(false);
-    setIsTransitioning(true);
-
-    try {
-      await pauseTimerSession({
-        archiveId: currentArchiveId,
-        elapsedSec: elapsedSeconds,
-        timerId: currentTimerId,
-      });
-      setCurrentArchiveId(null);
-      notifyArchiveChanged();
-      queueCoachMessageUpdate({
-        durationSec: timerDurationSeconds,
-        elapsedSeconds,
-        latestMessageSequenceRef,
-        setCoachMessage,
-        setHasCoachMessage,
-        setIsGeneratingMessage,
-        timerId: currentTimerId,
-        type: "stop",
-      });
-    } catch {
-      setIsRunning(true);
-    } finally {
-      setIsTransitioning(false);
-    }
+    await pauseCurrentTimer();
   };
 
   const handleResetTimer = () => {
