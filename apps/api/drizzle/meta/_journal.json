@@ -8,6 +8,13 @@
       "when": 1772722888215,
       "tag": "0000_wise_lady_mastermind",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1774943561286,
+      "tag": "0001_productive_garia",
+      "breakpoints": true
     }
   ]
 }

@@ -2,6 +2,8 @@ import { relations, sql } from "drizzle-orm";
 import {
   boolean,
   index,
+  integer,
+  pgEnum,
   pgTable,
   text,
   timestamp,
@@ -55,7 +57,7 @@ export const accounts = pgTable(
       .$onUpdate(() => new Date())
       .notNull(),
   },
-  (table) => [index("accounts_user_id_idx").on(table.userId)]
+  (table) => [index("accounts_userId_idx").on(table.userId)]
 );
 
 export const pushTokens = pgTable(
@@ -80,8 +82,48 @@ export const pushTokens = pgTable(
   (table) => [index("push_tokens_user_id_idx").on(table.userId)]
 );
 
+export const messageTypeEnum = pgEnum("message_type", [
+  "start",
+  "stop",
+  "restart",
+  "finish",
+]);
+
+export const messages = pgTable(
+  "messages",
+  {
+    id: uuid("id").primaryKey().default(sql`uuidv7()`),
+    userId: uuid("user_id")
+      .notNull()
+      .references(() => users.id, {
+        onDelete: "cascade",
+        onUpdate: "cascade",
+      }),
+    timerId: uuid("timer_id").notNull(),
+    type: messageTypeEnum("type").notNull(),
+    content: text("content").notNull(),
+    objective: text("objective"),
+    purpose: text("purpose"),
+    behavior: text("behavior"),
+    durationSec: integer("duration_sec").notNull(),
+    elapsedSec: integer("remaining_sec").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .defaultNow()
+      .notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true })
+      .defaultNow()
+      .$onUpdate(() => new Date())
+      .notNull(),
+  },
+  (table) => [
+    index("messages_user_id_idx").on(table.userId),
+    index("messages_timer_id_idx").on(table.timerId),
+  ]
+);
+
 export const usersRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  messages: many(messages),
   pushTokens: many(pushTokens),
 }));
 
@@ -95,6 +137,13 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
 export const pushTokensRelations = relations(pushTokens, ({ one }) => ({
   user: one(users, {
     fields: [pushTokens.userId],
+    references: [users.id],
+  }),
+}));
+
+export const messagesRelations = relations(messages, ({ one }) => ({
+  user: one(users, {
+    fields: [messages.userId],
     references: [users.id],
   }),
 }));
