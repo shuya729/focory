@@ -3,6 +3,8 @@ import { HTTPException } from "hono/http-exception";
 import { logger } from "hono/logger";
 import withClients, { type ClientsVariables } from "../middleware/with-clients";
 import me from "./me/route";
+import messages from "./messages/route";
+import pushTokens from "./push-tokens/route";
 import users from "./users/route";
 
 const app = new Hono<{
@@ -12,6 +14,8 @@ const app = new Hono<{
 app.use(logger());
 app.use(withClients);
 app.on(["POST", "GET"], "/auth/*", (c) => c.get("ac").handler(c.req.raw));
+app.route("/push-tokens", pushTokens);
+app.route("/messages", messages);
 app.route("/users", users);
 app.route("/me", me);
 
