@@ -9,10 +9,10 @@ export const INITIAL_ARCHIVE_MONTHS_COUNT = 3;
 
 export const LEGEND_ITEMS = [
   { colorClassName: "bg-muted", label: "0h" },
-  { colorClassName: "bg-popover", label: "~1h" },
-  { colorClassName: "bg-accent", label: "~2h" },
-  { colorClassName: "bg-primary", label: "~4h" },
-  { colorClassName: "bg-destructive", label: "~6h" },
+  { colorClassName: "bg-popover", label: "~2h" },
+  { colorClassName: "bg-accent", label: "~4h" },
+  { colorClassName: "bg-primary", label: "~6h" },
+  { colorClassName: "bg-destructive", label: "6h~" },
 ] as const;
 
 export const CALENDAR_CELL_CLASS_NAMES = {
@@ -62,15 +62,15 @@ const toCalendarTone = (totalSeconds: number): CalendarCellTone => {
     return "surface-subtle";
   }
 
-  if (totalSeconds <= HOUR_IN_SECONDS) {
+  if (totalSeconds <= HOUR_IN_SECONDS * 2) {
     return "accent-soft";
   }
 
-  if (totalSeconds <= HOUR_IN_SECONDS * 2) {
+  if (totalSeconds <= HOUR_IN_SECONDS * 4) {
     return "accent-muted";
   }
 
-  if (totalSeconds <= HOUR_IN_SECONDS * 4) {
+  if (totalSeconds <= HOUR_IN_SECONDS * 6) {
     return "accent";
   }
 
