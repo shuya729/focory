@@ -24,7 +24,6 @@ interface MessagePromptInput {
 interface MessagesServiceOptions {
   expoPushReceiptsUrl: string;
   expoPushSendUrl: string;
-  fetcher?: typeof fetch;
   gcpApiKey: string;
   llmBaseUrl: string;
   llmModel: string;
@@ -93,7 +92,6 @@ interface LlmResponse {
 export class MessagesService {
   expoPushReceiptsUrl: string;
   expoPushSendUrl: string;
-  fetcher: typeof fetch;
   gcpApiKey: string;
   llmBaseUrl: string;
   llmModel: string;
@@ -105,7 +103,6 @@ export class MessagesService {
     this.pushTokensRepository = new PushTokensRepository(db);
     this.expoPushSendUrl = options.expoPushSendUrl;
     this.expoPushReceiptsUrl = options.expoPushReceiptsUrl;
-    this.fetcher = options.fetcher ?? fetch;
     this.gcpApiKey = options.gcpApiKey;
     this.llmBaseUrl = options.llmBaseUrl;
     this.llmModel = options.llmModel;
@@ -155,7 +152,7 @@ export class MessagesService {
     let data: LlmResponse;
 
     try {
-      response = await this.fetcher(
+      response = await fetch(
         `${this.llmBaseUrl}?key=${this.gcpApiKey}`,
         {
           method: "POST",
@@ -231,7 +228,7 @@ export class MessagesService {
     }
 
     try {
-      const response = await this.fetcher(this.expoPushSendUrl, {
+      const response = await fetch(this.expoPushSendUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -292,7 +289,7 @@ export class MessagesService {
     try {
       // Expo recommends delayed receipt polling; we still inspect any receipt
       // that is already available so invalid tokens can be pruned early.
-      const response = await this.fetcher(this.expoPushReceiptsUrl, {
+      const response = await fetch(this.expoPushReceiptsUrl, {
         method: "POST",
         headers: {
           Accept: "application/json",

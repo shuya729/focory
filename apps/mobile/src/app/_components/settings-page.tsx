@@ -1,5 +1,5 @@
 import { ChevronRight } from "lucide-react-native";
-import { Fragment, type ReactNode, useState } from "react";
+import { Fragment, type ReactNode } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
@@ -16,21 +16,13 @@ import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { Textarea } from "@/components/ui/textarea";
 import { PAGES } from "@/constants/pages";
+import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/utils/cn";
 import PageHeaderIconButton from "./page-header-icon-button";
 
 export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
-
-const BEHAVIOR_OPTIONS = [
-  "やさしい",
-  "厳しい",
-  "明るい",
-  "落ち着き",
-  "おもしろい",
-  "クール",
-] as const;
 
 const LINK_LABELS = [
   "利用規約",
@@ -44,11 +36,15 @@ function SettingsPage({
   handleChangePage,
   ...props
 }: SettingsPageProps) {
-  const [purpose, setPurpose] = useState<string>("");
-  const [reason, setReason] = useState<string>("");
-  const [selectedBehavior, setSelectedBehavior] = useState<string>(
-    BEHAVIOR_OPTIONS[0]
-  );
+  const {
+    behaviorOptions,
+    handleChangeBehavior,
+    handleChangeObjective,
+    handleChangePurpose,
+    objective,
+    purpose,
+    selectedBehavior,
+  } = useSettings();
 
   return (
     <View
@@ -81,42 +77,42 @@ function SettingsPage({
               <FormSection label="目的">
                 <Input
                   className="h-12 rounded-xl border-border bg-card px-4 text-sm shadow-none"
-                  onChangeText={setPurpose}
+                  onChangeText={handleChangeObjective}
                   placeholder="集中したいことを入力"
                   underlineColorAndroid="transparent"
-                  value={purpose}
+                  value={objective}
                 />
               </FormSection>
 
               <FormSection label="なぜ">
                 <Textarea
                   className="min-h-[92px] rounded-xl border-border bg-card px-4 py-3 text-sm leading-6 shadow-none"
-                  onChangeText={setReason}
+                  onChangeText={handleChangePurpose}
                   placeholder="なぜそれをやりたいのか、理由を書いてみよう"
                   underlineColorAndroid="transparent"
-                  value={reason}
+                  value={purpose}
                 />
               </FormSection>
 
               <FormSection label="振る舞い">
                 <View className="gap-2.5">
                   <View className="flex-row gap-2.5">
-                    {BEHAVIOR_OPTIONS.slice(0, 3).map((behaviorLabel) => (
+                    {behaviorOptions.slice(0, 3).map((behaviorLabel) => (
                       <BehaviorChipButton
                         isSelected={selectedBehavior === behaviorLabel}
                         key={behaviorLabel}
                         label={behaviorLabel}
-                        onPress={() => setSelectedBehavior(behaviorLabel)}
+                        onPress={() => handleChangeBehavior(behaviorLabel)}
                       />
                     ))}
                   </View>
                   <View className="flex-row gap-2.5">
-                    {BEHAVIOR_OPTIONS.slice(3).map((behaviorLabel) => (
+                    {behaviorOptions.slice(3).map((behaviorLabel) => (
                       <BehaviorChipButton
                         isSelected={selectedBehavior === behaviorLabel}
                         key={behaviorLabel}
                         label={behaviorLabel}
-                        onPress={() => setSelectedBehavior(behaviorLabel)}
+                        onPress={() => handleChangeBehavior(behaviorLabel)}
                       />
                     ))}
                   </View>

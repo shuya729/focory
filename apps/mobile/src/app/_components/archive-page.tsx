@@ -1,10 +1,18 @@
 import { ChevronLeft } from "lucide-react-native";
-import { ScrollView, View, type ViewProps } from "react-native";
+import { FlatList, View, type ViewProps } from "react-native";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { PAGES } from "@/constants/pages";
+import { useArchiveCalendar } from "@/hooks/use-archive-calendar";
+import {
+  type ArchiveMonthSection,
+  CALENDAR_CELL_CLASS_NAMES,
+  type CalendarCellTone,
+  DAY_LABELS,
+  LEGEND_ITEMS,
+} from "@/services/archive-service";
 import { cn } from "@/utils/cn";
 import PageHeaderIconButton from "./page-header-icon-button";
 
@@ -12,135 +20,14 @@ export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
 
-const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"] as const;
-
-const LEGEND_ITEMS = [
-  { colorClassName: "bg-muted", label: "0h" },
-  { colorClassName: "bg-popover", label: "~1h" },
-  { colorClassName: "bg-accent", label: "~2h" },
-  { colorClassName: "bg-primary", label: "~4h" },
-  { colorClassName: "bg-destructive", label: "~6h" },
-] as const;
-
-const CALENDAR_CELL_CLASS_NAMES = {
-  accent: "bg-primary",
-  "accent-muted": "bg-accent",
-  "accent-soft": "bg-popover",
-  "accent-strong": "bg-destructive",
-  "surface-subtle": "bg-muted",
-  transparent: "bg-transparent",
-} as const;
-
-type CalendarCellTone = keyof typeof CALENDAR_CELL_CLASS_NAMES;
-
-interface MonthRecord {
-  title: string;
-  totalTime: string;
-  weeks: CalendarCellTone[][];
-}
-
-const MONTH_RECORDS: MonthRecord[] = [
-  {
-    title: "2026年 3月",
-    totalTime: "12h 30m",
-    weeks: [
-      [
-        "accent-muted",
-        "accent-soft",
-        "accent",
-        "surface-subtle",
-        "accent-soft",
-        "accent-muted",
-        "accent-strong",
-      ],
-      [
-        "surface-subtle",
-        "accent",
-        "accent-soft",
-        "accent-muted",
-        "surface-subtle",
-        "accent-soft",
-        "surface-subtle",
-      ],
-      [
-        "accent-soft",
-        "accent-muted",
-        "accent-strong",
-        "accent-soft",
-        "accent",
-        "surface-subtle",
-        "accent-muted",
-      ],
-      [
-        "accent",
-        "surface-subtle",
-        "accent-soft",
-        "surface-subtle",
-        "accent-muted",
-        "accent-strong",
-        "accent-soft",
-      ],
-      [
-        "surface-subtle",
-        "accent-muted",
-        "accent-soft",
-        "transparent",
-        "transparent",
-        "transparent",
-        "transparent",
-      ],
-    ],
-  },
-  {
-    title: "2026年 2月",
-    totalTime: "12h 30m",
-    weeks: [
-      [
-        "accent-soft",
-        "accent-strong",
-        "accent-muted",
-        "accent",
-        "accent-soft",
-        "surface-subtle",
-        "accent-muted",
-      ],
-      [
-        "accent",
-        "accent-soft",
-        "surface-subtle",
-        "accent-strong",
-        "accent-muted",
-        "accent",
-        "accent-soft",
-      ],
-      [
-        "surface-subtle",
-        "accent-muted",
-        "accent-soft",
-        "accent",
-        "surface-subtle",
-        "accent-strong",
-        "accent-muted",
-      ],
-      [
-        "accent-soft",
-        "accent",
-        "accent-muted",
-        "surface-subtle",
-        "accent-soft",
-        "accent",
-        "accent-strong",
-      ],
-    ],
-  },
-] as const;
-
 function ArchivePage({
   collapsable = false,
   className,
   handleChangePage,
   ...props
 }: ArchivePageProps) {
+  const { loadMoreMonths, monthSections } = useArchiveCalendar();
+
   return (
     <View
       className={cn("flex-1 px-5 pt-2 pb-4", className)}
@@ -161,13 +48,20 @@ function ArchivePage({
 
         <LegendBar />
 
-        <ScrollView className="flex-1" showsVerticalScrollIndicator={false}>
-          <View className="items-center gap-4 pb-2">
-            {MONTH_RECORDS.map((monthRecord) => (
-              <MonthSection key={monthRecord.title} monthRecord={monthRecord} />
-            ))}
-          </View>
-        </ScrollView>
+        <FlatList
+          className="flex-1"
+          contentContainerStyle={{
+            alignItems: "center",
+            gap: 16,
+            paddingBottom: 8,
+          }}
+          data={monthSections}
+          keyExtractor={(monthSection) => monthSection.id}
+          onEndReached={loadMoreMonths}
+          onEndReachedThreshold={0.4}
+          renderItem={({ item }) => <MonthSection monthSection={item} />}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     </View>
   );
@@ -207,16 +101,16 @@ function LegendItem({ colorClassName, label }: LegendItemProps) {
 }
 
 interface MonthSectionProps {
-  monthRecord: MonthRecord;
+  monthSection: ArchiveMonthSection;
 }
 
-function MonthSection({ monthRecord }: MonthSectionProps) {
+function MonthSection({ monthSection }: MonthSectionProps) {
   return (
     <Card className="w-full max-w-96 gap-3 border-0 bg-transparent py-0 shadow-none">
       <View className="flex-row items-center justify-between">
-        <Text className="font-bold text-lg">{monthRecord.title}</Text>
+        <Text className="font-bold text-lg">{monthSection.title}</Text>
         <Text className="font-jetbrains-mono-semibold text-primary text-sm">
-          {monthRecord.totalTime}
+          {monthSection.totalTimeLabel}
         </Text>
       </View>
 
@@ -232,15 +126,16 @@ function MonthSection({ monthRecord }: MonthSectionProps) {
       </View>
 
       <View className="gap-1">
-        {monthRecord.weeks.map((weekTones, weekIndex) => (
+        {monthSection.weeks.map((weekDays, weekIndex) => (
           <View
             className="flex-row items-center justify-between"
-            key={`${monthRecord.title}-week-${weekIndex.toString()}`}
+            key={`${monthSection.id}-week-${weekIndex.toString()}`}
           >
-            {weekTones.map((tone, dayIndex) => (
+            {weekDays.map((weekDay, dayIndex) => (
               <CalendarCell
-                key={`${monthRecord.title}-week-${weekIndex.toString()}-day-${dayIndex.toString()}`}
-                tone={tone}
+                dayOfMonth={weekDay.dayOfMonth}
+                key={`${monthSection.id}-week-${weekIndex.toString()}-day-${dayIndex.toString()}`}
+                tone={weekDay.tone}
               />
             ))}
           </View>
@@ -251,14 +146,29 @@ function MonthSection({ monthRecord }: MonthSectionProps) {
 }
 
 interface CalendarCellProps {
+  dayOfMonth: number | null;
   tone: CalendarCellTone;
 }
 
-function CalendarCell({ tone }: CalendarCellProps) {
+function CalendarCell({ dayOfMonth, tone }: CalendarCellProps) {
   return (
     <View
-      className={cn("h-10 w-10 rounded-md", CALENDAR_CELL_CLASS_NAMES[tone])}
-    />
+      className={cn(
+        "h-10 w-10 items-end rounded-md px-1.5 py-1",
+        CALENDAR_CELL_CLASS_NAMES[tone]
+      )}
+    >
+      {dayOfMonth ? (
+        <Text
+          className={cn(
+            "font-jetbrains-mono-medium text-[10px]",
+            tone === "transparent" ? "text-transparent" : "text-foreground"
+          )}
+        >
+          {dayOfMonth.toString()}
+        </Text>
+      ) : null}
+    </View>
   );
 }
 

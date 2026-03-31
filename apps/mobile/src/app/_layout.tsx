@@ -5,6 +5,9 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { hide, preventAutoHideAsync } from "expo-splash-screen";
 import { useEffect } from "react";
+import { Text, View } from "react-native";
+import { ArchiveRefreshProvider } from "@/contexts/archive-refresh-context";
+import { useAppBootstrap } from "@/hooks/use-app-bootstrap";
 import { TimerDurationProvider } from "@/hooks/use-timer-duration";
 import { NAV_THEME } from "@/theme";
 
@@ -25,32 +28,45 @@ export default function RootLayout() {
     "JetBrainsMono-SemiBold": require("../../assets/fonts/JetBrainsMono-SemiBold.ttf"),
     "JetBrainsMono-Thin": require("../../assets/fonts/JetBrainsMono-Thin.ttf"),
   });
+  const { error, isReady } = useAppBootstrap(loaded);
 
   useEffect(() => {
-    if (loaded) {
+    if (loaded && (isReady || error)) {
       hide();
     }
-  }, [loaded]);
+  }, [error, isReady, loaded]);
 
-  if (!loaded) {
+  if (!(loaded && (isReady || error))) {
     return null;
   }
 
+  if (error) {
+    return (
+      <View className="flex-1 items-center justify-center bg-background px-6">
+        <Text className="text-center font-medium text-base text-foreground">
+          アプリの初期化に失敗しました。再起動してもう一度お試しください。
+        </Text>
+      </View>
+    );
+  }
+
   return (
-    <TimerDurationProvider>
-      <ThemeProvider value={NAV_THEME}>
-        <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
-          <Stack.Screen
-            name="timer-picker-modal"
-            options={{
-              animation: "fade",
-              presentation: "transparentModal",
-            }}
-          />
-        </Stack>
-        <PortalHost />
-      </ThemeProvider>
-    </TimerDurationProvider>
+    <ArchiveRefreshProvider>
+      <TimerDurationProvider>
+        <ThemeProvider value={NAV_THEME}>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen
+              name="timer-picker-modal"
+              options={{
+                animation: "fade",
+                presentation: "transparentModal",
+              }}
+            />
+          </Stack>
+          <PortalHost />
+        </ThemeProvider>
+      </TimerDurationProvider>
+    </ArchiveRefreshProvider>
   );
 }

@@ -8,7 +8,7 @@ import {
   RotateCcw,
   Settings,
 } from "lucide-react-native";
-import { type ReactNode, useEffect, useState } from "react";
+import type { ReactNode } from "react";
 import { View, type ViewProps } from "react-native";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button, type ButtonProps } from "@/components/ui/button";
@@ -16,6 +16,7 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { PAGES } from "@/constants/pages";
+import { useTimerController } from "@/hooks/use-timer-controller";
 import { useTimerDuration } from "@/hooks/use-timer-duration";
 import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
@@ -23,18 +24,6 @@ import PageHeaderIconButton from "./page-header-icon-button";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
-}
-
-const COACH_MESSAGE =
-  "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！";
-
-function formatRemainingTime(totalSeconds: number) {
-  const minutes = Math.floor(totalSeconds / 60)
-    .toString()
-    .padStart(2, "0");
-  const seconds = (totalSeconds % 60).toString().padStart(2, "0");
-
-  return `${minutes}:${seconds}`;
 }
 
 function TimerPage({
@@ -45,60 +34,23 @@ function TimerPage({
 }: TimerPageProps) {
   const router = useRouter();
   const { timerDurationSeconds } = useTimerDuration();
-  const [remainingSeconds, setRemainingSeconds] =
-    useState<number>(timerDurationSeconds);
-  const [isRunning, setIsRunning] = useState<boolean>(false);
-  const isFinished = !isRunning && remainingSeconds === 0;
-
-  useEffect(() => {
-    if (!isRunning) {
-      return;
-    }
-
-    const intervalId = setInterval(() => {
-      setRemainingSeconds((currentRemainingSeconds) => {
-        if (currentRemainingSeconds <= 1) {
-          setIsRunning(false);
-          return 0;
-        }
-
-        return currentRemainingSeconds - 1;
-      });
-    }, 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [isRunning]);
-
-  useEffect(() => {
-    setIsRunning(false);
-    setRemainingSeconds(timerDurationSeconds);
-  }, [timerDurationSeconds]);
+  const {
+    coachMessage,
+    formattedRemainingTime,
+    handlePauseTimer,
+    handleResetTimer,
+    handleStartOrResumeTimer,
+    hasCoachMessage,
+    isFinished,
+    isRunning,
+    isTransitioning,
+  } = useTimerController({
+    timerDurationSeconds,
+  });
 
   const handleOpenTimerPicker = () => {
     router.push("./timer-picker-modal");
   };
-
-  const handleResetTimer = () => {
-    setIsRunning(false);
-    setRemainingSeconds(timerDurationSeconds);
-  };
-
-  const handleToggleTimer = () => {
-    if (isRunning) {
-      setIsRunning(false);
-      return;
-    }
-
-    if (remainingSeconds === 0) {
-      setRemainingSeconds(timerDurationSeconds);
-    }
-
-    setIsRunning(true);
-  };
-
-  const formattedRemainingTime = formatRemainingTime(remainingSeconds);
   let timerCardBackgroundClassName = "bg-secondary";
   let timerCardStyle:
     | {
@@ -146,6 +98,7 @@ function TimerPage({
     timerActionButtons = (
       <TimerActionButton
         accessibilityLabel="タイマーをリセット"
+        disabled={isTransitioning}
         onPress={handleResetTimer}
         variant="secondary"
       >
@@ -156,7 +109,8 @@ function TimerPage({
     timerActionButtons = (
       <TimerActionButton
         accessibilityLabel="タイマーを一時停止"
-        onPress={handleToggleTimer}
+        disabled={isTransitioning}
+        onPress={handlePauseTimer}
         variant="primary"
       >
         <Icon as={Pause} className="size-[26px] text-primary-foreground" />
@@ -167,6 +121,7 @@ function TimerPage({
       <>
         <TimerActionButton
           accessibilityLabel="タイマー時間を編集"
+          disabled={isTransitioning}
           onPress={handleOpenTimerPicker}
           variant="secondary"
         >
@@ -174,13 +129,15 @@ function TimerPage({
         </TimerActionButton>
         <TimerActionButton
           accessibilityLabel="タイマーを開始"
-          onPress={handleToggleTimer}
+          disabled={isTransitioning}
+          onPress={handleStartOrResumeTimer}
           variant="primary"
         >
           <Icon as={Play} className="size-[26px] text-primary-foreground" />
         </TimerActionButton>
         <TimerActionButton
           accessibilityLabel="タイマーをリセット"
+          disabled={isTransitioning}
           onPress={handleResetTimer}
           variant="secondary"
         >
@@ -227,18 +184,20 @@ function TimerPage({
             </View>
           </Card>
 
-          <View className="w-full flex-row items-end gap-3">
-            <Avatar alt="Bot" className="size-12">
-              <AvatarFallback className="bg-secondary">
-                <Icon as={Bot} className="size-6 text-primary" />
-              </AvatarFallback>
-            </Avatar>
-            <Card className="flex-1 gap-0 rounded-t-3xl rounded-br-3xl rounded-bl-2xl border-0 bg-muted p-4 shadow-none">
-              <Text className="text-base text-popover-foreground">
-                {COACH_MESSAGE}
-              </Text>
-            </Card>
-          </View>
+          {hasCoachMessage ? (
+            <View className="w-full flex-row items-end gap-3">
+              <Avatar alt="Bot" className="size-12">
+                <AvatarFallback className="bg-secondary">
+                  <Icon as={Bot} className="size-6 text-primary" />
+                </AvatarFallback>
+              </Avatar>
+              <Card className="flex-1 gap-0 rounded-t-3xl rounded-br-3xl rounded-bl-2xl border-0 bg-muted p-4 shadow-none">
+                <Text className="text-base text-popover-foreground">
+                  {coachMessage}
+                </Text>
+              </Card>
+            </View>
+          ) : null}
         </View>
       </View>
     </View>
