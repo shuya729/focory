@@ -128,12 +128,11 @@ function MonthSection({ monthSection }: MonthSectionProps) {
       <View className="gap-1">
         {monthSection.weeks.map((weekDays, weekIndex) => (
           <View
-            className="flex-row items-center justify-between"
+            className="flex-row items-center justify-between gap-1"
             key={`${monthSection.id}-week-${weekIndex.toString()}`}
           >
             {weekDays.map((weekDay, dayIndex) => (
               <CalendarCell
-                dayOfMonth={weekDay.dayOfMonth}
                 key={`${monthSection.id}-week-${weekIndex.toString()}-day-${dayIndex.toString()}`}
                 tone={weekDay.tone}
               />
@@ -146,29 +145,14 @@ function MonthSection({ monthSection }: MonthSectionProps) {
 }
 
 interface CalendarCellProps {
-  dayOfMonth: number | null;
   tone: CalendarCellTone;
 }
 
-function CalendarCell({ dayOfMonth, tone }: CalendarCellProps) {
+function CalendarCell({ tone }: CalendarCellProps) {
   return (
     <View
-      className={cn(
-        "h-10 w-10 items-end rounded-md px-1.5 py-1",
-        CALENDAR_CELL_CLASS_NAMES[tone]
-      )}
-    >
-      {dayOfMonth ? (
-        <Text
-          className={cn(
-            "font-jetbrains-mono-medium text-[10px]",
-            tone === "transparent" ? "text-transparent" : "text-foreground"
-          )}
-        >
-          {dayOfMonth.toString()}
-        </Text>
-      ) : null}
-    </View>
+      className={cn("h-9 w-9 rounded-md", CALENDAR_CELL_CLASS_NAMES[tone])}
+    />
   );
 }
 

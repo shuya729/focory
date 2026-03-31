@@ -54,6 +54,8 @@ const getMonthCursor = (date: Date, monthOffset: number) =>
 const getStartOfDay = (date: Date) =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
+const getFirstDayOfWeekIndex = (date: Date) => getMonthStart(date).getDay();
+
 const getArchiveDate = (value: Date | number) =>
   value instanceof Date ? value : new Date(value);
 
@@ -130,21 +132,23 @@ const accumulateArchiveSecondsByDay = (archiveRecords: ArchiveRecord[]) => {
   return dailySeconds;
 };
 
+const buildLeadingBlankCells = (firstDayOfWeekIndex: number): CalendarDay[] =>
+  Array.from({ length: firstDayOfWeekIndex }, () => ({
+    dayOfMonth: null,
+    tone: "transparent",
+  }));
+
 const buildMonthWeeks = (
   monthDate: Date,
   dailySeconds: Map<string, number>
 ) => {
-  const firstDay = getMonthStart(monthDate);
   const daysInMonth = new Date(
     monthDate.getFullYear(),
     monthDate.getMonth() + 1,
     0
   ).getDate();
-  const leadingBlankDays = firstDay.getDay();
-  const cells: CalendarDay[] = Array.from({ length: leadingBlankDays }, () => ({
-    dayOfMonth: null,
-    tone: "transparent",
-  }));
+  const firstDayOfWeekIndex = getFirstDayOfWeekIndex(monthDate);
+  const cells: CalendarDay[] = buildLeadingBlankCells(firstDayOfWeekIndex);
 
   for (let dayOfMonth = 1; dayOfMonth <= daysInMonth; dayOfMonth += 1) {
     const currentDate = new Date(
