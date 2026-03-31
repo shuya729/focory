@@ -13,7 +13,7 @@ export const timers = sqliteTable("timers", {
     .primaryKey()
     .$defaultFn(() => v7()),
   durationSec: integer("duration_sec").notNull(),
-  remainingSec: integer("remaining_sec").notNull(),
+  elapsedSec: integer("remaining_sec").notNull(),
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(unixepoch())`),
