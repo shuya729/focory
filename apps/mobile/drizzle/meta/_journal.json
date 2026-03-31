@@ -15,6 +15,13 @@
       "when": 1774941096759,
       "tag": "0001_flippant_shotgun",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1774960959230,
+      "tag": "0002_lowly_molly_hayes",
+      "breakpoints": true
     }
   ]
 }

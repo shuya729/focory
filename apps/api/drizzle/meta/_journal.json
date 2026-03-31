@@ -15,6 +15,13 @@
       "when": 1774943561286,
       "tag": "0001_productive_garia",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1774960975437,
+      "tag": "0002_smart_nitro",
+      "breakpoints": true
     }
   ]
 }

@@ -1,0 +1,1 @@
+ALTER TABLE "messages" RENAME COLUMN "remaining_sec" TO "elapsed_sec";
