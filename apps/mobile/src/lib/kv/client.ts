@@ -4,7 +4,6 @@ export const KV_KEYS = {
   settingsObjective: "focory:settings:objective",
   settingsPurpose: "focory:settings:purpose",
   settingsBehavior: "focory:settings:behavior",
-  timerLastDuration: "focory:timer:lastDuration",
 } as const;
 export type KV_KEY = keyof typeof KV_KEYS;
 
