@@ -1,7 +1,13 @@
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { useEffect, useState } from "react";
+import { DEFAULT_TIMER_DURATION_SECONDS } from "@/hooks/use-timer-duration";
 import { db, migrations } from "@/lib/db/client";
 import { ensureAuthenticatedUser } from "@/services/auth-service";
+import {
+  createDefaultRestoredTimerState,
+  getLatestRestoredTimerState,
+  type RestoredTimerState,
+} from "@/services/timer-service";
 
 const toError = (error: unknown) =>
   error instanceof Error ? error : new Error("Unknown error");
@@ -13,6 +19,10 @@ export function useAppBootstrap(fontsLoaded: boolean) {
   );
   const [authError, setAuthError] = useState<Error | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [restoredTimerState, setRestoredTimerState] =
+    useState<RestoredTimerState>(
+      createDefaultRestoredTimerState(DEFAULT_TIMER_DURATION_SECONDS)
+    );
 
   useEffect(() => {
     if (!(fontsLoaded && isDatabaseReady) || isAuthReady || authError) {
@@ -23,9 +33,13 @@ export function useAppBootstrap(fontsLoaded: boolean) {
 
     const bootstrapAsync = async () => {
       try {
-        await ensureAuthenticatedUser();
+        const [nextRestoredTimerState] = await Promise.all([
+          getLatestRestoredTimerState(DEFAULT_TIMER_DURATION_SECONDS),
+          ensureAuthenticatedUser(),
+        ]);
 
         if (isMounted) {
+          setRestoredTimerState(nextRestoredTimerState);
           setIsAuthReady(true);
         }
       } catch (error) {
@@ -49,5 +63,6 @@ export function useAppBootstrap(fontsLoaded: boolean) {
   return {
     error: migrationError ?? authError,
     isReady: fontsLoaded && isDatabaseReady && isAuthReady,
+    restoredTimerState,
   };
 }

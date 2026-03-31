@@ -4,6 +4,13 @@ import { db } from "@/lib/db/client";
 import { archives, timers } from "@/lib/db/schema";
 
 export type ArchiveRecord = typeof archives.$inferSelect;
+export type TimerRecord = typeof timers.$inferSelect;
+
+export interface RestoredTimerState {
+  currentTimerId: string | null;
+  remainingSeconds: number;
+  timerDurationSeconds: number;
+}
 
 interface PauseTimerSessionInput {
   archiveId: string;
@@ -15,6 +22,60 @@ interface FinishTimerSessionInput {
   archiveId: string;
   durationSec: number;
   timerId: string;
+}
+
+const normalizeDurationSeconds = (
+  durationSeconds: number,
+  fallbackDurationSeconds: number
+) => {
+  if (!Number.isFinite(durationSeconds) || durationSeconds <= 0) {
+    return fallbackDurationSeconds;
+  }
+
+  return Math.trunc(durationSeconds);
+};
+
+export const createDefaultRestoredTimerState = (
+  timerDurationSeconds: number
+): RestoredTimerState => ({
+  currentTimerId: null,
+  remainingSeconds: timerDurationSeconds,
+  timerDurationSeconds,
+});
+
+export async function getLatestRestoredTimerState(
+  fallbackDurationSeconds: number
+) {
+  const latestTimerRecord = (
+    await db
+      .select()
+      .from(timers)
+      .orderBy(desc(timers.updatedAt), desc(timers.createdAt))
+      .limit(1)
+  ).at(0);
+
+  if (!latestTimerRecord) {
+    return createDefaultRestoredTimerState(fallbackDurationSeconds);
+  }
+
+  const timerDurationSeconds = normalizeDurationSeconds(
+    latestTimerRecord.durationSec,
+    fallbackDurationSeconds
+  );
+  const remainingSeconds = Math.max(
+    timerDurationSeconds - latestTimerRecord.elapsedSec,
+    0
+  );
+
+  if (remainingSeconds === 0) {
+    return createDefaultRestoredTimerState(timerDurationSeconds);
+  }
+
+  return {
+    currentTimerId: latestTimerRecord.id,
+    remainingSeconds,
+    timerDurationSeconds,
+  } satisfies RestoredTimerState;
 }
 
 export async function startTimerSession(durationSec: number) {

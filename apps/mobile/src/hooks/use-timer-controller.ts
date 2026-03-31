@@ -2,6 +2,7 @@ import type { Dispatch, MutableRefObject, SetStateAction } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AppState, type AppStateStatus } from "react-native";
 import { useArchiveRefresh } from "@/contexts/archive-refresh-context";
+import { useRestoredTimerState } from "@/contexts/restored-timer-state-context";
 import {
   DEFAULT_TIMER_EVENT_MESSAGES,
   requestTimerMessage,
@@ -83,17 +84,22 @@ export function useTimerController({
   timerDurationSeconds,
 }: UseTimerControllerOptions) {
   const { notifyArchiveChanged } = useArchiveRefresh();
+  const restoredTimerState = useRestoredTimerState();
   const appStateRef = useRef(AppState.currentState);
+  const hasInitializedTimerStateRef = useRef(false);
   const [coachMessage, setCoachMessage] = useState("");
   const [currentArchiveId, setCurrentArchiveId] = useState<string | null>(null);
-  const [currentTimerId, setCurrentTimerId] = useState<string | null>(null);
+  const [currentTimerId, setCurrentTimerId] = useState<string | null>(
+    restoredTimerState.currentTimerId
+  );
   const [hasCoachMessage, setHasCoachMessage] = useState(false);
   const [isGeneratingMessage, setIsGeneratingMessage] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [messageLoadingFrameIndex, setMessageLoadingFrameIndex] = useState(0);
-  const [remainingSeconds, setRemainingSeconds] =
-    useState(timerDurationSeconds);
+  const [remainingSeconds, setRemainingSeconds] = useState(
+    restoredTimerState.remainingSeconds
+  );
   const isFinished = !isRunning && remainingSeconds === 0;
   const elapsedSeconds = Math.max(timerDurationSeconds - remainingSeconds, 0);
   const isFinishingRef = useRef(false);
@@ -184,6 +190,11 @@ export function useTimerController({
   ]);
 
   useEffect(() => {
+    if (!hasInitializedTimerStateRef.current) {
+      hasInitializedTimerStateRef.current = true;
+      return;
+    }
+
     setCoachMessage("");
     setCurrentArchiveId(null);
     setCurrentTimerId(null);

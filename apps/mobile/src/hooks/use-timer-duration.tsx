@@ -13,6 +13,10 @@ interface TimerDurationContextValue {
   timerDurationSeconds: number;
 }
 
+interface TimerDurationProviderProps extends PropsWithChildren {
+  initialTimerDurationSeconds?: number;
+}
+
 const TimerDurationContext = createContext<TimerDurationContextValue | null>(
   null
 );
@@ -34,9 +38,12 @@ function splitTimerDuration(durationSeconds: number) {
   };
 }
 
-function TimerDurationProvider({ children }: PropsWithChildren) {
+function TimerDurationProvider({
+  children,
+  initialTimerDurationSeconds = DEFAULT_TIMER_DURATION_SECONDS,
+}: TimerDurationProviderProps) {
   const [timerDurationSeconds, setTimerDurationSecondsState] = useState<number>(
-    DEFAULT_TIMER_DURATION_SECONDS
+    clampTimerDurationSeconds(initialTimerDurationSeconds)
   );
 
   const setTimerDurationSeconds = (nextDurationSeconds: number) => {
