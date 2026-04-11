@@ -3,17 +3,17 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { AppState, type AppStateStatus } from "react-native";
 import { useArchiveRefresh } from "@/contexts/archive-refresh-context";
 import { useRestoredTimerState } from "@/contexts/restored-timer-state-context";
-import {
-  DEFAULT_TIMER_EVENT_MESSAGES,
-  requestTimerMessage,
-  type TimerMessageType,
-} from "@/services/messages-service";
+import { useRequestTimerMessage } from "@/hooks/use-request-timer-message";
 import {
   finishTimerSession,
   pauseTimerSession,
   restartTimerSession,
   startTimerSession,
 } from "@/services/timer-service";
+import type {
+  RequestTimerMessageInput,
+  TimerMessageType,
+} from "@/types/message";
 
 const MESSAGE_LOADING_FRAMES = [".", "..", "..."] as const;
 
@@ -34,6 +34,7 @@ interface QueueCoachMessageUpdateInput {
   durationSec: number;
   elapsedSeconds: number;
   latestMessageSequenceRef: MutableRefObject<number>;
+  requestTimerMessage: (input: RequestTimerMessageInput) => Promise<string>;
   setCoachMessage: Dispatch<SetStateAction<string>>;
   setHasCoachMessage: Dispatch<SetStateAction<boolean>>;
   setIsGeneratingMessage: Dispatch<SetStateAction<boolean>>;
@@ -45,6 +46,7 @@ const queueCoachMessageUpdate = ({
   durationSec,
   elapsedSeconds,
   latestMessageSequenceRef,
+  requestTimerMessage,
   setCoachMessage,
   setHasCoachMessage,
   setIsGeneratingMessage,
@@ -56,7 +58,7 @@ const queueCoachMessageUpdate = ({
   latestMessageSequenceRef.current = messageSequence;
   setHasCoachMessage(true);
   setIsGeneratingMessage(true);
-  setCoachMessage(DEFAULT_TIMER_EVENT_MESSAGES[type]);
+  setCoachMessage("");
 
   requestTimerMessage({
     durationSec,
@@ -73,9 +75,9 @@ const queueCoachMessageUpdate = ({
     })
     .catch(() => {
       if (latestMessageSequenceRef.current === messageSequence) {
-        setHasCoachMessage(true);
+        setHasCoachMessage(false);
         setIsGeneratingMessage(false);
-        setCoachMessage(DEFAULT_TIMER_EVENT_MESSAGES[type]);
+        setCoachMessage("");
       }
     });
 };
@@ -85,6 +87,7 @@ export function useTimerController({
 }: UseTimerControllerOptions) {
   const { notifyArchiveChanged } = useArchiveRefresh();
   const restoredTimerState = useRestoredTimerState();
+  const { requestTimerMessage } = useRequestTimerMessage();
   const appStateRef = useRef(AppState.currentState);
   const hasInitializedTimerStateRef = useRef(false);
   const [coachMessage, setCoachMessage] = useState("");
@@ -167,6 +170,7 @@ export function useTimerController({
           durationSec: timerDurationSeconds,
           elapsedSeconds: timerDurationSeconds,
           latestMessageSequenceRef,
+          requestTimerMessage,
           setCoachMessage,
           setHasCoachMessage,
           setIsGeneratingMessage,
@@ -186,6 +190,7 @@ export function useTimerController({
     isRunning,
     notifyArchiveChanged,
     remainingSeconds,
+    requestTimerMessage,
     timerDurationSeconds,
   ]);
 
@@ -225,6 +230,7 @@ export function useTimerController({
         durationSec: timerDurationSeconds,
         elapsedSeconds,
         latestMessageSequenceRef,
+        requestTimerMessage,
         setCoachMessage,
         setHasCoachMessage,
         setIsGeneratingMessage,
@@ -243,6 +249,7 @@ export function useTimerController({
     isRunning,
     isTransitioning,
     notifyArchiveChanged,
+    requestTimerMessage,
     timerDurationSeconds,
   ]);
 
@@ -269,7 +276,7 @@ export function useTimerController({
     };
   }, [pauseCurrentTimer]);
 
-  const handleStartOrResumeTimer = async () => {
+  const handleStartOrResumeTimer = useCallback(async () => {
     if (isTransitioning) {
       return;
     }
@@ -287,6 +294,7 @@ export function useTimerController({
           durationSec: timerDurationSeconds,
           elapsedSeconds,
           latestMessageSequenceRef,
+          requestTimerMessage,
           setCoachMessage,
           setHasCoachMessage,
           setIsGeneratingMessage,
@@ -299,7 +307,6 @@ export function useTimerController({
       const { archiveId, timerId } =
         await startTimerSession(timerDurationSeconds);
 
-      setCoachMessage(DEFAULT_TIMER_EVENT_MESSAGES.start);
       setCurrentArchiveId(archiveId);
       setCurrentTimerId(timerId);
       setIsRunning(true);
@@ -309,6 +316,7 @@ export function useTimerController({
         durationSec: timerDurationSeconds,
         elapsedSeconds: 0,
         latestMessageSequenceRef,
+        requestTimerMessage,
         setCoachMessage,
         setHasCoachMessage,
         setIsGeneratingMessage,
@@ -318,7 +326,16 @@ export function useTimerController({
     } finally {
       setIsTransitioning(false);
     }
-  };
+  }, [
+    currentArchiveId,
+    currentTimerId,
+    elapsedSeconds,
+    isTransitioning,
+    notifyArchiveChanged,
+    remainingSeconds,
+    requestTimerMessage,
+    timerDurationSeconds,
+  ]);
 
   const handlePauseTimer = async () => {
     await pauseCurrentTimer();

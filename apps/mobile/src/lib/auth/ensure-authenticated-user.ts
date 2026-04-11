@@ -1,4 +1,4 @@
-import { authClient } from "@/lib/auth/client";
+import { authClient } from "./client";
 
 export async function ensureAuthenticatedUser() {
   const session = await authClient.getSession();

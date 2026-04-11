@@ -1,8 +1,8 @@
 import { useMigrations } from "drizzle-orm/expo-sqlite/migrator";
 import { useEffect, useState } from "react";
 import { DEFAULT_TIMER_DURATION_SECONDS } from "@/hooks/use-timer-duration";
+import { ensureAuthenticatedUser } from "@/lib/auth/ensure-authenticated-user";
 import { db, migrations } from "@/lib/db/client";
-import { ensureAuthenticatedUser } from "@/services/auth-service";
 import {
   createDefaultRestoredTimerState,
   getLatestRestoredTimerState,

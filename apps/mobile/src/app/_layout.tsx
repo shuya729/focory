@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@react-navigation/native";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "../global.css";
 import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
@@ -13,6 +14,8 @@ import { TimerDurationProvider } from "@/hooks/use-timer-duration";
 import { NAV_THEME } from "@/theme";
 
 preventAutoHideAsync();
+
+const queryClient = new QueryClient();
 
 export const unstable_settings = {
   anchor: "index",
@@ -52,26 +55,30 @@ export default function RootLayout() {
   }
 
   return (
-    <ArchiveRefreshProvider>
-      <RestoredTimerStateProvider restoredTimerState={restoredTimerState}>
-        <TimerDurationProvider
-          initialTimerDurationSeconds={restoredTimerState.timerDurationSeconds}
-        >
-          <ThemeProvider value={NAV_THEME}>
-            <Stack screenOptions={{ headerShown: false }}>
-              <Stack.Screen name="index" />
-              <Stack.Screen
-                name="timer-picker-modal"
-                options={{
-                  animation: "fade",
-                  presentation: "transparentModal",
-                }}
-              />
-            </Stack>
-            <PortalHost />
-          </ThemeProvider>
-        </TimerDurationProvider>
-      </RestoredTimerStateProvider>
-    </ArchiveRefreshProvider>
+    <QueryClientProvider client={queryClient}>
+      <ArchiveRefreshProvider>
+        <RestoredTimerStateProvider restoredTimerState={restoredTimerState}>
+          <TimerDurationProvider
+            initialTimerDurationSeconds={
+              restoredTimerState.timerDurationSeconds
+            }
+          >
+            <ThemeProvider value={NAV_THEME}>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="index" />
+                <Stack.Screen
+                  name="timer-picker-modal"
+                  options={{
+                    animation: "fade",
+                    presentation: "transparentModal",
+                  }}
+                />
+              </Stack>
+              <PortalHost />
+            </ThemeProvider>
+          </TimerDurationProvider>
+        </RestoredTimerStateProvider>
+      </ArchiveRefreshProvider>
+    </QueryClientProvider>
   );
 }

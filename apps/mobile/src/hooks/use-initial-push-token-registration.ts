@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
-import { registerCurrentDevicePushToken } from "@/services/push-token-service";
+import { useRegisterCurrentDevicePushToken } from "@/hooks/use-register-current-device-push-token";
 
 export function useInitialPushTokenRegistration() {
   const hasRequestedRef = useRef(false);
+  const { registerCurrentDevicePushToken } =
+    useRegisterCurrentDevicePushToken();
 
   useEffect(() => {
     if (hasRequestedRef.current) {
@@ -11,5 +13,5 @@ export function useInitialPushTokenRegistration() {
 
     hasRequestedRef.current = true;
     registerCurrentDevicePushToken().catch(() => undefined);
-  }, []);
+  }, [registerCurrentDevicePushToken]);
 }

@@ -6,16 +6,16 @@ import {
   requestPermissionsAsync,
   setNotificationChannelAsync,
 } from "expo-notifications";
+import { useCallback } from "react";
 import { Platform } from "react-native";
+import { apiClient } from "@/lib/api/client";
+import { toApiError } from "@/lib/api/error";
 import type { paths } from "@/lib/api/paths";
-import { postAuthenticatedJson } from "./api-service";
 
 const PUSH_NOTIFICATION_CHANNEL_ID = "default";
 
 type PostPushTokenRequestBody =
   paths["/push-tokens"]["post"]["requestBody"]["content"]["application/json"];
-type PostPushTokenResponse =
-  paths["/push-tokens"]["post"]["responses"][200]["content"]["application/json"];
 
 const getExpoProjectId = () => {
   const projectId =
@@ -58,19 +58,28 @@ async function getCurrentDevicePushToken() {
   return expoPushToken.data;
 }
 
-export async function registerCurrentDevicePushToken() {
-  const token = await getCurrentDevicePushToken();
+export function useRegisterCurrentDevicePushToken() {
+  const { mutateAsync } = apiClient.useMutation("post", "/push-tokens");
 
-  if (!token) {
-    return null;
-  }
+  const registerCurrentDevicePushToken = useCallback(async () => {
+    const token = await getCurrentDevicePushToken();
 
-  const response = await postAuthenticatedJson<PostPushTokenResponse>(
-    "/push-tokens",
-    {
-      token,
-    } satisfies PostPushTokenRequestBody
-  );
+    if (!token) {
+      return null;
+    }
 
-  return response.data.pushToken.token;
+    try {
+      const response = await mutateAsync({
+        body: {
+          token,
+        } satisfies PostPushTokenRequestBody,
+      });
+
+      return response.data.pushToken.token;
+    } catch (error) {
+      throw toApiError(error, "プッシュトークンの登録に失敗しました。");
+    }
+  }, [mutateAsync]);
+
+  return { registerCurrentDevicePushToken };
 }
