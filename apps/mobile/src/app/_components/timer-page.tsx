@@ -20,7 +20,7 @@ import { useTimerController } from "@/hooks/use-timer-controller";
 import { useTimerDuration } from "@/hooks/use-timer-duration";
 import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
-import PageHeaderIconButton from "./page-header-icon-button";
+import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;

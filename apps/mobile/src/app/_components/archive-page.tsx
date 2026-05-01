@@ -14,7 +14,7 @@ import {
   LEGEND_ITEMS,
 } from "@/services/archive-service";
 import { cn } from "@/utils/cn";
-import PageHeaderIconButton from "./page-header-icon-button";
+import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;

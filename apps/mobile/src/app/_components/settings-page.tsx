@@ -18,7 +18,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { PAGES } from "@/constants/pages";
 import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/utils/cn";
-import PageHeaderIconButton from "./page-header-icon-button";
+import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
 
 export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
