@@ -4,22 +4,17 @@ import WheelPicker, {
 } from "@quidone/react-native-wheel-picker";
 import { useRouter } from "expo-router";
 import { X } from "lucide-react-native";
-import { useState } from "react";
 import { Pressable, type TextStyle, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { MOCK_TIMER_STATE } from "@/constants/mock-mobile-data";
 import {
   TIMER_MINUTE_PICKER_ITEMS,
   TIMER_SECOND_PICKER_ITEMS,
 } from "@/constants/timer-constants";
+import { useTimerDurationEditor } from "@/hooks/use-timer-duration-editor";
 import { THEME } from "@/theme";
-import {
-  splitTimerDurationSeconds,
-  toTimerDurationSeconds,
-} from "@/utils/date-util";
 
 const pickerItemTextStyle: TextStyle = {
   color: THEME.light.foreground,
@@ -40,32 +35,29 @@ const pickerCommonProps: Partial<WheelPickerProps<PickerItem<number>>> = {
 function TimerPickerModal() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const initialDuration = splitTimerDurationSeconds(
-    MOCK_TIMER_STATE.durationSeconds
-  );
-  const [selectedMinutes, setSelectedMinutes] = useState<number>(
-    initialDuration.minutes
-  );
-  const [selectedSeconds, setSelectedSeconds] = useState<number>(
-    initialDuration.seconds
-  );
-
-  const selectedDurationSeconds = toTimerDurationSeconds(
+  const {
+    isSaveDisabled,
+    saveSelectedDuration,
     selectedMinutes,
-    selectedSeconds
-  );
-  const isSaveDisabled = selectedDurationSeconds === 0;
+    selectedSeconds,
+    setSelectedMinutes,
+    setSelectedSeconds,
+  } = useTimerDurationEditor();
 
   const handleCloseModal = () => {
     router.back();
   };
 
-  const handleSaveDuration = () => {
+  const handleSaveDuration = async () => {
     if (isSaveDisabled) {
       return;
     }
 
-    handleCloseModal();
+    const didSaveDuration = await saveSelectedDuration();
+
+    if (didSaveDuration) {
+      handleCloseModal();
+    }
   };
 
   return (

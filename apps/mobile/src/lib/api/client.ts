@@ -15,7 +15,7 @@ const middleware: Middleware = {
   },
 };
 
-const fetchClient = createFetchClient<paths>({
+export const fetchClient = createFetchClient<paths>({
   baseUrl: process.env.EXPO_PUBLIC_API_URL,
   credentials: "include",
 });

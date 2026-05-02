@@ -6,37 +6,31 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import {
-  type ArchiveMonth,
   DAY_CATEGORIES,
   DAY_LABELS,
   type DayCategory,
 } from "@/constants/archive-constants";
-import { MOCK_ARCHIVE_MONTHS } from "@/constants/mock-mobile-data";
 import { TIMER_PAGE } from "@/constants/pages";
+import { useArchiveCalendar } from "@/hooks/use-archive-calendar";
+import type { ArchiveMonth } from "@/types/archive";
+import { getDayCategoryColorClassName } from "@/utils/archive-utils";
 import { cn } from "@/utils/cn";
-import { formatCompactDuration } from "@/utils/date-util";
-
-const getCalendarCellColorClassName = (category: DayCategory | null) => {
-  if (!category) {
-    return "bg-transparent";
-  }
-
-  return (
-    DAY_CATEGORIES.find((dayCategory) => dayCategory.key === category.key)
-      ?.color ?? "bg-transparent"
-  );
-};
+import { formatCompactDuration } from "@/utils/timer-utils";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
+  refreshKey: number;
 }
 
 function ArchivePage({
   collapsable = false,
   className,
   handleChangePage,
+  refreshKey,
   ...props
 }: ArchivePageProps) {
+  const { archiveMonths, loadMoreMonths } = useArchiveCalendar({ refreshKey });
+
   return (
     <View
       className={cn("flex-1 px-5 pt-2 pb-4", className)}
@@ -64,8 +58,10 @@ function ArchivePage({
             gap: 16,
             paddingBottom: 8,
           }}
-          data={MOCK_ARCHIVE_MONTHS}
+          data={archiveMonths}
           keyExtractor={(month) => month.id}
+          onEndReached={loadMoreMonths}
+          onEndReachedThreshold={0.4}
           renderItem={({ item }) => <MonthSection month={item} />}
           showsVerticalScrollIndicator={false}
         />
@@ -160,7 +156,7 @@ function CalendarCell({ category }: CalendarCellProps) {
     <View
       className={cn(
         "h-9 w-9 rounded-md",
-        getCalendarCellColorClassName(category)
+        getDayCategoryColorClassName(category)
       )}
     />
   );

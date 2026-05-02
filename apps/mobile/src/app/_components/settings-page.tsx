@@ -16,15 +16,13 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { Textarea } from "@/components/ui/textarea";
-import { MOCK_SETTINGS } from "@/constants/mock-mobile-data";
 import { TIMER_PAGE } from "@/constants/pages";
 import {
   BEHAVIOR_OPTIONS,
   SETTINGS_LINKS,
 } from "@/constants/settings-constants";
+import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/utils/cn";
-
-const handleMockSettingsChange = () => undefined;
 
 export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
@@ -36,7 +34,14 @@ function SettingsPage({
   handleChangePage,
   ...props
 }: SettingsPageProps) {
-  const { objective, purpose, selectedBehavior } = MOCK_SETTINGS;
+  const {
+    handleChangeBehavior,
+    handleChangeObjective,
+    handleChangePurpose,
+    objective,
+    purpose,
+    selectedBehavior,
+  } = useSettings();
 
   return (
     <View
@@ -69,7 +74,7 @@ function SettingsPage({
               <FormSection label="目的">
                 <Input
                   className="h-12 rounded-xl border-border bg-card px-4 text-sm shadow-none"
-                  editable={false}
+                  onChangeText={handleChangeObjective}
                   placeholder="集中したいことを入力"
                   underlineColorAndroid="transparent"
                   value={objective}
@@ -79,7 +84,7 @@ function SettingsPage({
               <FormSection label="なぜ">
                 <Textarea
                   className="min-h-[92px] rounded-xl border-border bg-card px-4 py-3 text-sm leading-6 shadow-none"
-                  editable={false}
+                  onChangeText={handleChangePurpose}
                   placeholder="なぜそれをやりたいのか、理由を書いてみよう"
                   underlineColorAndroid="transparent"
                   value={purpose}
@@ -94,7 +99,9 @@ function SettingsPage({
                         isSelected={selectedBehavior === behaviorOption.value}
                         key={behaviorOption.value}
                         label={behaviorOption.label}
-                        onPress={handleMockSettingsChange}
+                        onPress={() => {
+                          handleChangeBehavior(behaviorOption.value);
+                        }}
                       />
                     ))}
                   </View>
@@ -104,7 +111,9 @@ function SettingsPage({
                         isSelected={selectedBehavior === behaviorOption.value}
                         key={behaviorOption.value}
                         label={behaviorOption.label}
-                        onPress={handleMockSettingsChange}
+                        onPress={() => {
+                          handleChangeBehavior(behaviorOption.value);
+                        }}
                       />
                     ))}
                   </View>

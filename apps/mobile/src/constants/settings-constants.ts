@@ -28,7 +28,7 @@ export const COOL_BEHAVIOR_OPTION: BehaviorOption = {
   value: "cool",
 } as const;
 
-export const BEHAVIOR = {
+export const BEHAVIOR_OPTION = {
   KIND: KIND_BEHAVIOR_OPTION,
   INTENSITY: INTENSITY_BEHAVIOR_OPTION,
   BRIGHT: BRIGHT_BEHAVIOR_OPTION,
@@ -45,6 +45,7 @@ export const BEHAVIOR_OPTIONS: BehaviorOption[] = [
   COOL_BEHAVIOR_OPTION,
 ] as const;
 
+export const DEFAULT_BEHAVIOR_OPTION = KIND_BEHAVIOR_OPTION;
 export interface SettingLink {
   label: string;
   url: string;

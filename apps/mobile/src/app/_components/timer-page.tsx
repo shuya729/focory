@@ -16,31 +16,35 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import {
-  MOCK_TIMER_MESSAGE_STATE,
-  MOCK_TIMER_STATE,
-} from "@/constants/mock-mobile-data";
 import { ARCHIVE_PAGE, SETTINGS_PAGE } from "@/constants/pages";
+import { useTimerController } from "@/hooks/use-timer-controller";
 import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
-import { formatTimerClock } from "@/utils/date-util";
-
-const handleMockTimerAction = () => undefined;
+import { formatTimerClock } from "@/utils/timer-utils";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
+  onArchiveChanged: () => void;
 }
 
 function TimerPage({
   collapsable = false,
   className,
   handleChangePage,
+  onArchiveChanged,
   ...props
 }: TimerPageProps) {
   const router = useRouter();
-  const { isFinished, isRunning, isTransitioning, remainingSeconds } =
-    MOCK_TIMER_STATE;
-  const { hasMessage, message } = MOCK_TIMER_MESSAGE_STATE;
+  const {
+    handlePauseTimer,
+    handleResetTimer,
+    handleStartOrResumeTimer,
+    isFinished,
+    timerMessageState,
+    timerState,
+  } = useTimerController({ onArchiveChanged });
+  const { isRunning, isTransitioning, remainingSeconds } = timerState;
+  const { hasMessage, message } = timerMessageState;
   const formattedRemainingTime = formatTimerClock(remainingSeconds);
 
   const handleOpenTimerPicker = () => {
@@ -94,7 +98,7 @@ function TimerPage({
       <TimerActionButton
         accessibilityLabel="タイマーをリセット"
         disabled={isTransitioning}
-        onPress={handleMockTimerAction}
+        onPress={handleResetTimer}
         variant="secondary"
       >
         <Icon as={RotateCcw} className="size-[22px] text-primary" />
@@ -105,7 +109,7 @@ function TimerPage({
       <TimerActionButton
         accessibilityLabel="タイマーを一時停止"
         disabled={isTransitioning}
-        onPress={handleMockTimerAction}
+        onPress={handlePauseTimer}
         variant="primary"
       >
         <Icon as={Pause} className="size-[26px] text-primary-foreground" />
@@ -125,7 +129,7 @@ function TimerPage({
         <TimerActionButton
           accessibilityLabel="タイマーを開始"
           disabled={isTransitioning}
-          onPress={handleMockTimerAction}
+          onPress={handleStartOrResumeTimer}
           variant="primary"
         >
           <Icon as={Play} className="size-[26px] text-primary-foreground" />
@@ -133,7 +137,7 @@ function TimerPage({
         <TimerActionButton
           accessibilityLabel="タイマーをリセット"
           disabled={isTransitioning}
-          onPress={handleMockTimerAction}
+          onPress={handleResetTimer}
           variant="secondary"
         >
           <Icon as={RotateCcw} className="size-[22px] text-primary" />

@@ -1,9 +1,10 @@
 import {
+  MAX_TIMER_DURATION_SECONDS,
   SECONDS_PER_HOUR,
   SECONDS_PER_MINUTE,
 } from "@/constants/timer-constants";
 
-const normalizeDurationSeconds = (durationSeconds: number) => {
+const normalizeNonNegativeSeconds = (durationSeconds: number) => {
   if (!Number.isFinite(durationSeconds)) {
     return 0;
   }
@@ -11,8 +12,31 @@ const normalizeDurationSeconds = (durationSeconds: number) => {
   return Math.max(0, Math.trunc(durationSeconds));
 };
 
+export const clampTimerDurationSeconds = (
+  durationSeconds: number,
+  maxDurationSeconds: number = MAX_TIMER_DURATION_SECONDS
+) => {
+  return Math.min(
+    maxDurationSeconds,
+    normalizeNonNegativeSeconds(durationSeconds)
+  );
+};
+
+export const normalizePositiveTimerDurationSeconds = (
+  durationSeconds: number,
+  fallbackDurationSeconds: number
+) => {
+  const normalizedDurationSeconds = clampTimerDurationSeconds(durationSeconds);
+
+  if (normalizedDurationSeconds === 0) {
+    return clampTimerDurationSeconds(fallbackDurationSeconds);
+  }
+
+  return normalizedDurationSeconds;
+};
+
 export const splitTimerDurationSeconds = (durationSeconds: number) => {
-  const normalizedDurationSeconds = normalizeDurationSeconds(durationSeconds);
+  const normalizedDurationSeconds = clampTimerDurationSeconds(durationSeconds);
 
   return {
     minutes: Math.floor(normalizedDurationSeconds / SECONDS_PER_MINUTE),
@@ -21,7 +45,12 @@ export const splitTimerDurationSeconds = (durationSeconds: number) => {
 };
 
 export const toTimerDurationSeconds = (minutes: number, seconds: number) =>
-  normalizeDurationSeconds(minutes * SECONDS_PER_MINUTE + seconds);
+  clampTimerDurationSeconds(minutes * SECONDS_PER_MINUTE + seconds);
+
+export const calculateElapsedSeconds = (
+  durationSeconds: number,
+  remainingSeconds: number
+) => Math.max(durationSeconds - remainingSeconds, 0);
 
 export const formatTimerClock = (durationSeconds: number) => {
   const { minutes, seconds } = splitTimerDurationSeconds(durationSeconds);
@@ -33,7 +62,8 @@ export const formatTimerClock = (durationSeconds: number) => {
 };
 
 export const formatCompactDuration = (durationSeconds: number) => {
-  const normalizedDurationSeconds = normalizeDurationSeconds(durationSeconds);
+  const normalizedDurationSeconds =
+    normalizeNonNegativeSeconds(durationSeconds);
   const hours = Math.floor(normalizedDurationSeconds / SECONDS_PER_HOUR);
   const minutes = Math.floor(
     (normalizedDurationSeconds % SECONDS_PER_HOUR) / SECONDS_PER_MINUTE
