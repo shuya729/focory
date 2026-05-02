@@ -6,7 +6,6 @@ import PagerView, {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { PageIndicatorDots } from "@/components/elements/page-indicator-dots";
 import { InitialPageIndex, PAGES } from "@/constants/pages";
-import { useInitialPushTokenRegistration } from "@/hooks/use-initial-push-token-registration";
 import ArchivePage from "./_components/archive-page";
 import SettingsPage from "./_components/settings-page";
 import TimerPage from "./_components/timer-page";
@@ -14,7 +13,6 @@ import TimerPage from "./_components/timer-page";
 export default function Index() {
   const pagerRef = useRef<PagerView>(null);
   const [currentPage, setCurrentPage] = useState<number>(InitialPageIndex);
-  useInitialPushTokenRegistration();
 
   const handlePageSelected = (event: PagerViewOnPageSelectedEvent) => {
     setCurrentPage(event.nativeEvent.position);

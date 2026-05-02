@@ -1,20 +1,20 @@
 import { ChevronLeft } from "lucide-react-native";
 import { FlatList, View, type ViewProps } from "react-native";
+import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { PAGES } from "@/constants/pages";
-import { useArchiveCalendar } from "@/hooks/use-archive-calendar";
 import {
   type ArchiveMonthSection,
   CALENDAR_CELL_CLASS_NAMES,
   type CalendarCellTone,
   DAY_LABELS,
   LEGEND_ITEMS,
-} from "@/services/archive-service";
+  MOCK_ARCHIVE_MONTH_SECTIONS,
+} from "@/constants/mock-mobile-data";
+import { PAGES } from "@/constants/pages";
 import { cn } from "@/utils/cn";
-import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
@@ -26,8 +26,6 @@ function ArchivePage({
   handleChangePage,
   ...props
 }: ArchivePageProps) {
-  const { loadMoreMonths, monthSections } = useArchiveCalendar();
-
   return (
     <View
       className={cn("flex-1 px-5 pt-2 pb-4", className)}
@@ -55,10 +53,8 @@ function ArchivePage({
             gap: 16,
             paddingBottom: 8,
           }}
-          data={monthSections}
+          data={MOCK_ARCHIVE_MONTH_SECTIONS}
           keyExtractor={(monthSection) => monthSection.id}
-          onEndReached={loadMoreMonths}
-          onEndReachedThreshold={0.4}
           renderItem={({ item }) => <MonthSection monthSection={item} />}
           showsVerticalScrollIndicator={false}
         />

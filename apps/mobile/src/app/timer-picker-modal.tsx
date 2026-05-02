@@ -4,18 +4,16 @@ import WheelPicker, {
 } from "@quidone/react-native-wheel-picker";
 import { useRouter } from "expo-router";
 import { X } from "lucide-react-native";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Pressable, type TextStyle, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import {
-  MAX_TIMER_DURATION_MINUTES,
-  splitTimerDuration,
-  useTimerDuration,
-} from "@/hooks/use-timer-duration";
+import { MOCK_TIMER } from "@/constants/mock-mobile-data";
 import { THEME } from "@/theme";
+
+const MAX_TIMER_DURATION_MINUTES = 90;
 
 const MINUTE_ITEMS = Array.from(
   { length: MAX_TIMER_DURATION_MINUTES + 1 },
@@ -49,21 +47,12 @@ const pickerCommonProps: Partial<WheelPickerProps<PickerItem<number>>> = {
 function TimerPickerModal() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
-  const { setTimerDurationSeconds, timerDurationSeconds } = useTimerDuration();
-  const initialDuration = splitTimerDuration(timerDurationSeconds);
   const [selectedMinutes, setSelectedMinutes] = useState<number>(
-    initialDuration.minutes
+    MOCK_TIMER.durationMinutes
   );
   const [selectedSeconds, setSelectedSeconds] = useState<number>(
-    initialDuration.seconds
+    MOCK_TIMER.durationSeconds
   );
-
-  useEffect(() => {
-    const nextDuration = splitTimerDuration(timerDurationSeconds);
-
-    setSelectedMinutes(nextDuration.minutes);
-    setSelectedSeconds(nextDuration.seconds);
-  }, [timerDurationSeconds]);
 
   const selectedDurationSeconds = selectedMinutes * 60 + selectedSeconds;
   const isSaveDisabled = selectedDurationSeconds === 0;
@@ -77,7 +66,6 @@ function TimerPickerModal() {
       return;
     }
 
-    setTimerDurationSeconds(selectedDurationSeconds);
     handleCloseModal();
   };
 

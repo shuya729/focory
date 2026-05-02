@@ -7,6 +7,7 @@ import {
   View,
   type ViewProps,
 } from "react-native";
+import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
 import { Button, type ButtonProps } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
@@ -15,10 +16,11 @@ import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { Textarea } from "@/components/ui/textarea";
+import { MOCK_SETTINGS } from "@/constants/mock-mobile-data";
 import { PAGES } from "@/constants/pages";
-import { useSettings } from "@/hooks/use-settings";
 import { cn } from "@/utils/cn";
-import PageHeaderIconButton from "@/components/elements/page-header-icon-button";
+
+const handleMockSettingsChange = () => undefined;
 
 export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
@@ -36,15 +38,8 @@ function SettingsPage({
   handleChangePage,
   ...props
 }: SettingsPageProps) {
-  const {
-    behaviorOptions,
-    handleChangeBehavior,
-    handleChangeObjective,
-    handleChangePurpose,
-    objective,
-    purpose,
-    selectedBehavior,
-  } = useSettings();
+  const { behaviorOptions, objective, purpose, selectedBehavior } =
+    MOCK_SETTINGS;
 
   return (
     <View
@@ -77,7 +72,7 @@ function SettingsPage({
               <FormSection label="目的">
                 <Input
                   className="h-12 rounded-xl border-border bg-card px-4 text-sm shadow-none"
-                  onChangeText={handleChangeObjective}
+                  editable={false}
                   placeholder="集中したいことを入力"
                   underlineColorAndroid="transparent"
                   value={objective}
@@ -87,7 +82,7 @@ function SettingsPage({
               <FormSection label="なぜ">
                 <Textarea
                   className="min-h-[92px] rounded-xl border-border bg-card px-4 py-3 text-sm leading-6 shadow-none"
-                  onChangeText={handleChangePurpose}
+                  editable={false}
                   placeholder="なぜそれをやりたいのか、理由を書いてみよう"
                   underlineColorAndroid="transparent"
                   value={purpose}
@@ -102,7 +97,7 @@ function SettingsPage({
                         isSelected={selectedBehavior === behaviorLabel}
                         key={behaviorLabel}
                         label={behaviorLabel}
-                        onPress={() => handleChangeBehavior(behaviorLabel)}
+                        onPress={handleMockSettingsChange}
                       />
                     ))}
                   </View>
@@ -112,7 +107,7 @@ function SettingsPage({
                         isSelected={selectedBehavior === behaviorLabel}
                         key={behaviorLabel}
                         label={behaviorLabel}
-                        onPress={() => handleChangeBehavior(behaviorLabel)}
+                        onPress={handleMockSettingsChange}
                       />
                     ))}
                   </View>
