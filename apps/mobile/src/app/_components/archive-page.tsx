@@ -6,15 +6,26 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import {
-  type ArchiveMonthSection,
-  CALENDAR_CELL_CLASS_NAMES,
-  type CalendarCellTone,
+  type ArchiveMonth,
+  DAY_CATEGORIES,
   DAY_LABELS,
-  LEGEND_ITEMS,
-  MOCK_ARCHIVE_MONTH_SECTIONS,
-} from "@/constants/mock-mobile-data";
+  type DayCategory,
+} from "@/constants/archive-constants";
+import { MOCK_ARCHIVE_MONTHS } from "@/constants/mock-mobile-data";
 import { TIMER_PAGE } from "@/constants/pages";
 import { cn } from "@/utils/cn";
+import { formatCompactDuration } from "@/utils/date-util";
+
+const getCalendarCellColorClassName = (category: DayCategory | null) => {
+  if (!category) {
+    return "bg-transparent";
+  }
+
+  return (
+    DAY_CATEGORIES.find((dayCategory) => dayCategory.key === category.key)
+      ?.color ?? "bg-transparent"
+  );
+};
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
@@ -53,9 +64,9 @@ function ArchivePage({
             gap: 16,
             paddingBottom: 8,
           }}
-          data={MOCK_ARCHIVE_MONTH_SECTIONS}
-          keyExtractor={(monthSection) => monthSection.id}
-          renderItem={({ item }) => <MonthSection monthSection={item} />}
+          data={MOCK_ARCHIVE_MONTHS}
+          keyExtractor={(month) => month.id}
+          renderItem={({ item }) => <MonthSection month={item} />}
           showsVerticalScrollIndicator={false}
         />
       </View>
@@ -66,11 +77,11 @@ function ArchivePage({
 function LegendBar() {
   return (
     <View className="mx-auto w-full max-w-96 flex-row items-center justify-around gap-2">
-      {LEGEND_ITEMS.map((legendItem) => (
+      {DAY_CATEGORIES.map((dayCategory) => (
         <LegendItem
-          colorClassName={legendItem.colorClassName}
-          key={legendItem.label}
-          label={legendItem.label}
+          colorClassName={dayCategory.color}
+          key={dayCategory.key}
+          label={dayCategory.label}
         />
       ))}
     </View>
@@ -97,16 +108,16 @@ function LegendItem({ colorClassName, label }: LegendItemProps) {
 }
 
 interface MonthSectionProps {
-  monthSection: ArchiveMonthSection;
+  month: ArchiveMonth;
 }
 
-function MonthSection({ monthSection }: MonthSectionProps) {
+function MonthSection({ month }: MonthSectionProps) {
   return (
     <Card className="w-full max-w-96 gap-3 border-0 bg-transparent py-0 shadow-none">
       <View className="flex-row items-center justify-between">
-        <Text className="font-bold text-lg">{monthSection.title}</Text>
+        <Text className="font-bold text-lg">{month.title}</Text>
         <Text className="font-jetbrains-mono-semibold text-primary text-sm">
-          {monthSection.totalTimeLabel}
+          {formatCompactDuration(month.totalSeconds)}
         </Text>
       </View>
 
@@ -122,15 +133,15 @@ function MonthSection({ monthSection }: MonthSectionProps) {
       </View>
 
       <View className="gap-1">
-        {monthSection.weeks.map((weekDays, weekIndex) => (
+        {month.weeks.map((weekDays, weekIndex) => (
           <View
             className="flex-row items-center justify-between gap-1"
-            key={`${monthSection.id}-week-${weekIndex.toString()}`}
+            key={`${month.id}-week-${weekIndex.toString()}`}
           >
             {weekDays.map((weekDay, dayIndex) => (
               <CalendarCell
-                key={`${monthSection.id}-week-${weekIndex.toString()}-day-${dayIndex.toString()}`}
-                tone={weekDay.tone}
+                category={weekDay.category}
+                key={`${month.id}-week-${weekIndex.toString()}-day-${dayIndex.toString()}`}
               />
             ))}
           </View>
@@ -141,13 +152,16 @@ function MonthSection({ monthSection }: MonthSectionProps) {
 }
 
 interface CalendarCellProps {
-  tone: CalendarCellTone;
+  category: DayCategory | null;
 }
 
-function CalendarCell({ tone }: CalendarCellProps) {
+function CalendarCell({ category }: CalendarCellProps) {
   return (
     <View
-      className={cn("h-9 w-9 rounded-md", CALENDAR_CELL_CLASS_NAMES[tone])}
+      className={cn(
+        "h-9 w-9 rounded-md",
+        getCalendarCellColorClassName(category)
+      )}
     />
   );
 }

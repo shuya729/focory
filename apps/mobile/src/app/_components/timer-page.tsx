@@ -16,11 +16,14 @@ import { Button, type ButtonProps } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { MOCK_TIMER } from "@/constants/mock-mobile-data";
-import { SETTINGS_PAGE } from "@/constants/pages";
-import { ARCHIVE_PAGE } from "@/constants/pages";
+import {
+  MOCK_TIMER_MESSAGE_STATE,
+  MOCK_TIMER_STATE,
+} from "@/constants/mock-mobile-data";
+import { ARCHIVE_PAGE, SETTINGS_PAGE } from "@/constants/pages";
 import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
+import { formatTimerClock } from "@/utils/date-util";
 
 const handleMockTimerAction = () => undefined;
 
@@ -35,14 +38,10 @@ function TimerPage({
   ...props
 }: TimerPageProps) {
   const router = useRouter();
-  const {
-    coachMessage,
-    formattedRemainingTime,
-    hasCoachMessage,
-    isFinished,
-    isRunning,
-    isTransitioning,
-  } = MOCK_TIMER;
+  const { isFinished, isRunning, isTransitioning, remainingSeconds } =
+    MOCK_TIMER_STATE;
+  const { hasMessage, message } = MOCK_TIMER_MESSAGE_STATE;
+  const formattedRemainingTime = formatTimerClock(remainingSeconds);
 
   const handleOpenTimerPicker = () => {
     router.push("./timer-picker-modal");
@@ -180,7 +179,7 @@ function TimerPage({
             </View>
           </Card>
 
-          {hasCoachMessage ? (
+          {hasMessage ? (
             <View className="w-full flex-row items-end gap-3">
               <Avatar alt="Bot" className="size-12">
                 <AvatarFallback className="bg-secondary">
@@ -189,7 +188,7 @@ function TimerPage({
               </Avatar>
               <Card className="flex-1 gap-0 rounded-t-3xl rounded-br-3xl rounded-bl-2xl border-0 bg-muted p-4 shadow-none">
                 <Text className="text-base text-popover-foreground">
-                  {coachMessage}
+                  {message}
                 </Text>
               </Card>
             </View>

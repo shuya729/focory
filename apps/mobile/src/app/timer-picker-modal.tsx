@@ -10,23 +10,16 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
-import { MOCK_TIMER } from "@/constants/mock-mobile-data";
+import { MOCK_TIMER_STATE } from "@/constants/mock-mobile-data";
+import {
+  TIMER_MINUTE_PICKER_ITEMS,
+  TIMER_SECOND_PICKER_ITEMS,
+} from "@/constants/timer-constants";
 import { THEME } from "@/theme";
-
-const MAX_TIMER_DURATION_MINUTES = 90;
-
-const MINUTE_ITEMS = Array.from(
-  { length: MAX_TIMER_DURATION_MINUTES + 1 },
-  (_, index) => ({
-    label: index.toString().padStart(2, "0"),
-    value: index,
-  })
-) satisfies readonly PickerItem<number>[];
-
-const SECOND_ITEMS = Array.from({ length: 60 }, (_, index) => ({
-  label: index.toString().padStart(2, "0"),
-  value: index,
-})) satisfies readonly PickerItem<number>[];
+import {
+  splitTimerDurationSeconds,
+  toTimerDurationSeconds,
+} from "@/utils/date-util";
 
 const pickerItemTextStyle: TextStyle = {
   color: THEME.light.foreground,
@@ -47,14 +40,20 @@ const pickerCommonProps: Partial<WheelPickerProps<PickerItem<number>>> = {
 function TimerPickerModal() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const initialDuration = splitTimerDurationSeconds(
+    MOCK_TIMER_STATE.durationSeconds
+  );
   const [selectedMinutes, setSelectedMinutes] = useState<number>(
-    MOCK_TIMER.durationMinutes
+    initialDuration.minutes
   );
   const [selectedSeconds, setSelectedSeconds] = useState<number>(
-    MOCK_TIMER.durationSeconds
+    initialDuration.seconds
   );
 
-  const selectedDurationSeconds = selectedMinutes * 60 + selectedSeconds;
+  const selectedDurationSeconds = toTimerDurationSeconds(
+    selectedMinutes,
+    selectedSeconds
+  );
   const isSaveDisabled = selectedDurationSeconds === 0;
 
   const handleCloseModal = () => {
@@ -112,7 +111,7 @@ function TimerPickerModal() {
             <View className="flex-row items-center justify-center gap-2">
               <WheelPicker
                 {...pickerCommonProps}
-                data={MINUTE_ITEMS}
+                data={TIMER_MINUTE_PICKER_ITEMS}
                 onValueChanged={({ item }) => {
                   setSelectedMinutes(item.value);
                 }}
@@ -125,7 +124,7 @@ function TimerPickerModal() {
 
               <WheelPicker
                 {...pickerCommonProps}
-                data={SECOND_ITEMS}
+                data={TIMER_SECOND_PICKER_ITEMS}
                 onValueChanged={({ item }) => {
                   setSelectedSeconds(item.value);
                 }}

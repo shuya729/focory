@@ -18,6 +18,10 @@ import { Text } from "@/components/ui/text";
 import { Textarea } from "@/components/ui/textarea";
 import { MOCK_SETTINGS } from "@/constants/mock-mobile-data";
 import { TIMER_PAGE } from "@/constants/pages";
+import {
+  BEHAVIOR_OPTIONS,
+  SETTINGS_LINKS,
+} from "@/constants/settings-constants";
 import { cn } from "@/utils/cn";
 
 const handleMockSettingsChange = () => undefined;
@@ -26,20 +30,13 @@ export interface SettingsPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
 }
 
-const LINK_LABELS = [
-  "利用規約",
-  "プライバシーポリシー",
-  "お問い合わせ",
-] as const;
-
 function SettingsPage({
   collapsable = false,
   className,
   handleChangePage,
   ...props
 }: SettingsPageProps) {
-  const { behaviorOptions, objective, purpose, selectedBehavior } =
-    MOCK_SETTINGS;
+  const { objective, purpose, selectedBehavior } = MOCK_SETTINGS;
 
   return (
     <View
@@ -92,21 +89,21 @@ function SettingsPage({
               <FormSection label="振る舞い">
                 <View className="gap-2.5">
                   <View className="flex-row gap-2.5">
-                    {behaviorOptions.slice(0, 3).map((behaviorLabel) => (
+                    {BEHAVIOR_OPTIONS.slice(0, 3).map((behaviorOption) => (
                       <BehaviorChipButton
-                        isSelected={selectedBehavior === behaviorLabel}
-                        key={behaviorLabel}
-                        label={behaviorLabel}
+                        isSelected={selectedBehavior === behaviorOption.value}
+                        key={behaviorOption.value}
+                        label={behaviorOption.label}
                         onPress={handleMockSettingsChange}
                       />
                     ))}
                   </View>
                   <View className="flex-row gap-2.5">
-                    {behaviorOptions.slice(3).map((behaviorLabel) => (
+                    {BEHAVIOR_OPTIONS.slice(3).map((behaviorOption) => (
                       <BehaviorChipButton
-                        isSelected={selectedBehavior === behaviorLabel}
-                        key={behaviorLabel}
-                        label={behaviorLabel}
+                        isSelected={selectedBehavior === behaviorOption.value}
+                        key={behaviorOption.value}
+                        label={behaviorOption.label}
                         onPress={handleMockSettingsChange}
                       />
                     ))}
@@ -116,10 +113,13 @@ function SettingsPage({
 
               <FormSection label="リンク">
                 <Card className="gap-0 overflow-hidden rounded-xl border-0 bg-secondary py-0 shadow-none">
-                  {LINK_LABELS.map((linkLabel, index) => (
-                    <Fragment key={linkLabel}>
+                  {SETTINGS_LINKS.map((settingLink, index) => (
+                    <Fragment key={settingLink.url}>
                       {index > 0 ? <Separator /> : null}
-                      <LinkRow label={linkLabel} />
+                      <LinkRow
+                        label={settingLink.label}
+                        url={settingLink.url}
+                      />
                     </Fragment>
                   ))}
                 </Card>
@@ -171,6 +171,7 @@ function BehaviorChipButton({
 
 interface LinkRowProps {
   label: string;
+  url: string;
 }
 
 function LinkRow({ label }: LinkRowProps) {
