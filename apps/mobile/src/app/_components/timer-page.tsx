@@ -17,7 +17,8 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { MOCK_TIMER } from "@/constants/mock-mobile-data";
-import { PAGES } from "@/constants/pages";
+import { SETTINGS_PAGE } from "@/constants/pages";
+import { ARCHIVE_PAGE } from "@/constants/pages";
 import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
 
@@ -152,13 +153,13 @@ function TimerPage({
         <View className="flex-row items-center justify-between pt-2 pb-4">
           <PageHeaderIconButton
             accessibilityLabel="設定画面に移動"
-            onPress={() => handleChangePage(PAGES.settings.page)}
+            onPress={() => handleChangePage(SETTINGS_PAGE.page)}
           >
             <Icon as={Settings} className="size-[22px] text-ring" />
           </PageHeaderIconButton>
           <PageHeaderIconButton
             accessibilityLabel="アーカイブ画面に移動"
-            onPress={() => handleChangePage(PAGES.archive.page)}
+            onPress={() => handleChangePage(ARCHIVE_PAGE.page)}
           >
             <Icon as={CalendarDays} className="size-[22px] text-ring" />
           </PageHeaderIconButton>

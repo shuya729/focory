@@ -17,7 +17,7 @@ import { Separator } from "@/components/ui/separator";
 import { Text } from "@/components/ui/text";
 import { Textarea } from "@/components/ui/textarea";
 import { MOCK_SETTINGS } from "@/constants/mock-mobile-data";
-import { PAGES } from "@/constants/pages";
+import { TIMER_PAGE } from "@/constants/pages";
 import { cn } from "@/utils/cn";
 
 const handleMockSettingsChange = () => undefined;
@@ -57,7 +57,7 @@ function SettingsPage({
             <Text className="font-semibold text-lg">設定</Text>
             <PageHeaderIconButton
               accessibilityLabel="タイマー画面に移動"
-              onPress={() => handleChangePage(PAGES.timer.page)}
+              onPress={() => handleChangePage(TIMER_PAGE.page)}
             >
               <Icon as={ChevronRight} className="size-5 text-ring" />
             </PageHeaderIconButton>

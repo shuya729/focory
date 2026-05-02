@@ -13,7 +13,7 @@ import {
   LEGEND_ITEMS,
   MOCK_ARCHIVE_MONTH_SECTIONS,
 } from "@/constants/mock-mobile-data";
-import { PAGES } from "@/constants/pages";
+import { TIMER_PAGE } from "@/constants/pages";
 import { cn } from "@/utils/cn";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
@@ -36,7 +36,7 @@ function ArchivePage({
         <View className="flex-row items-center justify-between pt-2">
           <PageHeaderIconButton
             accessibilityLabel="タイマー画面に移動"
-            onPress={() => handleChangePage(PAGES.timer.page)}
+            onPress={() => handleChangePage(TIMER_PAGE.page)}
           >
             <Icon as={ChevronLeft} className="size-5 text-ring" />
           </PageHeaderIconButton>
