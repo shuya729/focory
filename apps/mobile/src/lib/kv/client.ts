@@ -1,24 +1,20 @@
 import Storage from "expo-sqlite/kv-store";
+import type { KVKey } from "./keys";
 
-export const KV_KEYS = {
-  settingsObjective: "focory:settings:objective",
-  settingsPurpose: "focory:settings:purpose",
-  settingsBehavior: "focory:settings:behavior",
-} as const;
-export type KV_KEY = keyof typeof KV_KEYS;
-
-export class KVClient {
-  private readonly storage: typeof Storage = Storage;
-
-  async get(key: KV_KEY): Promise<string | null> {
-    return await this.storage.getItem(KV_KEYS[key]);
-  }
-
-  async set(key: KV_KEY, value: string): Promise<void> {
-    return await this.storage.setItem(KV_KEYS[key], value);
-  }
-
-  async del(key: KV_KEY): Promise<void> {
-    return await this.storage.removeItem(KV_KEYS[key]);
-  }
+export async function getKVItem(key: KVKey): Promise<string | null> {
+  return await Storage.getItem(key);
 }
+
+export async function setKVItem(key: KVKey, value: string): Promise<void> {
+  await Storage.setItem(key, value);
+}
+
+export async function removeKVItem(key: KVKey): Promise<void> {
+  await Storage.removeItem(key);
+}
+
+export default {
+  get: getKVItem,
+  set: setKVItem,
+  remove: removeKVItem,
+};
