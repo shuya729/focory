@@ -1,7 +1,15 @@
 import { HTTPException } from "hono/http-exception";
 import type { DbClient } from "../../lib/db/client";
+import { LlmService, type TextGenerationService } from "../../services/llm";
+import {
+  PushNotificationService,
+  type UserPushNotificationService,
+} from "../../services/push-notifications";
 import { PushTokensRepository } from "../push-tokens/repository";
-import { MessagesRepository } from "./repository";
+import {
+  MessagesRepository,
+  type MessagesRepositoryInterface,
+} from "./repository";
 import type {
   MessageType,
   PostMessageJsonSchema,
@@ -10,6 +18,7 @@ import type {
 
 const LEADING_QUOTE_REGEX = /^["「『]/;
 const TRAILING_QUOTE_REGEX = /["」』]$/;
+const MESSAGE_NOTIFICATION_TITLE = "Focory";
 
 interface MessagePromptInput {
   timerId: string;
@@ -29,83 +38,36 @@ interface MessagesServiceOptions {
   llmModel: string;
 }
 
-interface ExpoPushErrorDetails {
-  error?: string;
-}
-
-interface ExpoPushTicket {
-  details?: ExpoPushErrorDetails;
-  id?: string;
-  message?: string;
-  status?: "error" | "ok";
-}
-
-interface ExpoPushSendResponse {
-  data?: ExpoPushTicket | ExpoPushTicket[];
-  errors?: Array<{
-    code?: string;
-    details?: unknown;
-    message?: string;
-  }>;
-}
-
-interface ExpoPushReceipt {
-  details?: ExpoPushErrorDetails;
-  message?: string;
-  status?: "error" | "ok";
-}
-
-interface ExpoPushReceiptsResponse {
-  data?: Record<string, ExpoPushReceipt>;
-  errors?: Array<{
-    code?: string;
-    details?: unknown;
-    message?: string;
-  }>;
-}
-
-interface LlmChoiceMessageContentPart {
-  text?: string;
-  type?: string;
-}
-
-interface LlmResponse {
-  candidates?: Array<{
-    content?: {
-      parts?: Array<{
-        text?: string;
-      }>;
-    };
-  }>;
-  choices?: Array<{
-    message?: {
-      content?: string | LlmChoiceMessageContentPart[];
-    };
-    text?: string;
-  }>;
-  error?: {
-    message?: string;
-  };
-  output_text?: string;
+interface MessagesServiceDependencies {
+  llmService?: TextGenerationService;
+  pushNotificationService?: UserPushNotificationService;
+  repository?: MessagesRepositoryInterface;
 }
 
 export class MessagesService {
-  expoPushReceiptsUrl: string;
-  expoPushSendUrl: string;
-  gcpApiKey: string;
-  llmBaseUrl: string;
-  llmModel: string;
-  pushTokensRepository: PushTokensRepository;
-  repository: MessagesRepository;
+  private readonly llmService: TextGenerationService;
+  private readonly pushNotificationService: UserPushNotificationService;
+  private readonly repository: MessagesRepositoryInterface;
 
-  constructor(db: DbClient, options: MessagesServiceOptions) {
-    this.repository = new MessagesRepository(db);
-    this.pushTokensRepository = new PushTokensRepository(db);
-    this.expoPushSendUrl = options.expoPushSendUrl;
-    this.expoPushReceiptsUrl = options.expoPushReceiptsUrl;
-    this.gcpApiKey = options.gcpApiKey;
-    this.llmBaseUrl = options.llmBaseUrl;
-    this.llmModel = options.llmModel;
+  constructor(
+    db: DbClient,
+    options: MessagesServiceOptions,
+    dependencies: MessagesServiceDependencies = {}
+  ) {
+    this.repository = dependencies.repository ?? new MessagesRepository(db);
+    this.llmService =
+      dependencies.llmService ??
+      new LlmService({
+        apiKey: options.gcpApiKey,
+        baseUrl: options.llmBaseUrl,
+        model: options.llmModel,
+      });
+    this.pushNotificationService =
+      dependencies.pushNotificationService ??
+      new PushNotificationService(new PushTokensRepository(db), {
+        receiptsUrl: options.expoPushReceiptsUrl,
+        sendUrl: options.expoPushSendUrl,
+      });
   }
 
   async createMessage(
@@ -131,7 +93,10 @@ export class MessagesService {
     }
 
     if (input.type === "stop") {
-      await this.sendStopNotifications(userId, message.content);
+      await this.pushNotificationService.sendToUser(userId, {
+        title: MESSAGE_NOTIFICATION_TITLE,
+        body: message.content,
+      });
     }
 
     return {
@@ -144,206 +109,21 @@ export class MessagesService {
   private async generatePersonalizedMessage(
     input: MessagePromptInput
   ): Promise<string> {
-    if (!(this.gcpApiKey && this.llmBaseUrl && this.llmModel)) {
-      throw new HTTPException(500, { message: "LLM is not configured" });
-    }
-
-    let response: Response;
-    let data: LlmResponse;
-
-    try {
-      response = await fetch(`${this.llmBaseUrl}?key=${this.gcpApiKey}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: this.llmModel,
-          messages: [
-            {
-              role: "user",
-              content: MessagesService.buildPrompt(input),
-            },
-          ],
-        }),
-      });
-
-      data = (await response.json()) as LlmResponse;
-    } catch (cause) {
-      throw new HTTPException(502, {
-        message: "Failed to generate message",
-        cause,
-      });
-    }
-
-    if (!response.ok) {
-      throw new HTTPException(502, {
-        message: "Failed to generate message",
-        cause: new Error(
-          data.error?.message ?? "LLM request returned a non-success status"
-        ),
-      });
-    }
-
-    const content = MessagesService.extractGeneratedMessage(data);
+    const generatedText = await this.llmService.generateText(
+      MessagesService.buildPrompt(input)
+    );
+    const content = MessagesService.cleanGeneratedMessage(generatedText);
 
     if (!content) {
       throw new HTTPException(502, {
         message: "Failed to generate message",
-        cause: new Error("LLM response did not include usable message content"),
+        cause: new Error(
+          "Generated text did not include usable message content"
+        ),
       });
     }
 
     return content;
-  }
-
-  private async sendStopNotifications(
-    userId: string,
-    content: string
-  ): Promise<void> {
-    const pushTokens = await this.pushTokensRepository.findByUserId(userId);
-
-    if (pushTokens.length === 0) {
-      return;
-    }
-
-    await Promise.all(
-      pushTokens.map(async ({ token }) => {
-        await this.sendPushNotification(token, content);
-      })
-    );
-  }
-
-  private async sendPushNotification(
-    token: string,
-    content: string
-  ): Promise<void> {
-    if (!(this.expoPushSendUrl && this.expoPushReceiptsUrl)) {
-      throw new HTTPException(500, {
-        message: "Expo push notification is not configured",
-      });
-    }
-
-    try {
-      const response = await fetch(this.expoPushSendUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Accept-Encoding": "gzip, deflate",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          to: token,
-          title: "Focory",
-          body: content,
-        }),
-      });
-
-      const result = (await response.json()) as ExpoPushSendResponse;
-
-      if (!response.ok) {
-        console.error("Expo push request failed", {
-          error: result.errors,
-          status: response.status,
-          token: MessagesService.maskPushToken(token),
-        });
-        return;
-      }
-
-      const [ticket] = MessagesService.getTickets(result);
-
-      if (!ticket) {
-        console.error("Expo push response did not include a ticket", {
-          token: MessagesService.maskPushToken(token),
-        });
-        return;
-      }
-
-      if (ticket.status === "error") {
-        await this.handlePushError(
-          token,
-          ticket.details?.error,
-          ticket.message
-        );
-        return;
-      }
-
-      if (ticket.id) {
-        await this.inspectPushReceipt(token, ticket.id);
-      }
-    } catch (cause) {
-      console.error("Expo push notification request threw an error", {
-        cause,
-        token: MessagesService.maskPushToken(token),
-      });
-    }
-  }
-
-  private async inspectPushReceipt(
-    token: string,
-    ticketId: string
-  ): Promise<void> {
-    try {
-      // Expo recommends delayed receipt polling; we still inspect any receipt
-      // that is already available so invalid tokens can be pruned early.
-      const response = await fetch(this.expoPushReceiptsUrl, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Accept-Encoding": "gzip, deflate",
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          ids: [ticketId],
-        }),
-      });
-
-      const result = (await response.json()) as ExpoPushReceiptsResponse;
-
-      if (!response.ok) {
-        console.error("Expo push receipt request failed", {
-          error: result.errors,
-          status: response.status,
-          ticketId,
-          token: MessagesService.maskPushToken(token),
-        });
-        return;
-      }
-
-      const receipt = result.data?.[ticketId];
-
-      if (!receipt || receipt.status !== "error") {
-        return;
-      }
-
-      await this.handlePushError(
-        token,
-        receipt.details?.error,
-        receipt.message
-      );
-    } catch (cause) {
-      console.error("Expo push receipt request threw an error", {
-        cause,
-        ticketId,
-        token: MessagesService.maskPushToken(token),
-      });
-    }
-  }
-
-  private async handlePushError(
-    token: string,
-    errorCode: string | undefined,
-    message: string | undefined
-  ): Promise<void> {
-    if (errorCode === "DeviceNotRegistered") {
-      await this.pushTokensRepository.deleteByToken(token);
-    }
-
-    console.error("Expo push notification failed", {
-      errorCode,
-      message,
-      token: MessagesService.maskPushToken(token),
-    });
   }
 
   private static buildPrompt(input: MessagePromptInput): string {
@@ -373,42 +153,6 @@ export class MessagesService {
     ].join("\n");
   }
 
-  private static extractGeneratedMessage(data: LlmResponse): string | null {
-    const choice = data.choices?.[0];
-
-    if (typeof choice?.message?.content === "string") {
-      return MessagesService.cleanGeneratedMessage(choice.message.content);
-    }
-
-    if (Array.isArray(choice?.message?.content)) {
-      const text = choice.message.content
-        .map((part) => part.text)
-        .filter((part): part is string => Boolean(part))
-        .join("");
-
-      return MessagesService.cleanGeneratedMessage(text);
-    }
-
-    if (typeof choice?.text === "string") {
-      return MessagesService.cleanGeneratedMessage(choice.text);
-    }
-
-    if (typeof data.output_text === "string") {
-      return MessagesService.cleanGeneratedMessage(data.output_text);
-    }
-
-    const candidateText = data.candidates?.[0]?.content?.parts
-      ?.map((part) => part.text)
-      .filter((part): part is string => Boolean(part))
-      .join("");
-
-    if (candidateText) {
-      return MessagesService.cleanGeneratedMessage(candidateText);
-    }
-
-    return null;
-  }
-
   private static cleanGeneratedMessage(message: string): string | null {
     const cleanedMessage = message
       .trim()
@@ -417,14 +161,6 @@ export class MessagesService {
       .trim();
 
     return cleanedMessage.length > 0 ? cleanedMessage : null;
-  }
-
-  private static getTickets(result: ExpoPushSendResponse): ExpoPushTicket[] {
-    if (!result.data) {
-      return [];
-    }
-
-    return Array.isArray(result.data) ? result.data : [result.data];
   }
 
   private static normalizePromptInput(
@@ -472,13 +208,5 @@ export class MessagesService {
     }
 
     return parts.join("");
-  }
-
-  private static maskPushToken(token: string): string {
-    if (token.length <= 12) {
-      return token;
-    }
-
-    return `${token.slice(0, 8)}...${token.slice(-4)}`;
   }
 }
