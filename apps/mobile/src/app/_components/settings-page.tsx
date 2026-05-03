@@ -192,7 +192,7 @@ function LinkRow({ label, onClickLink, url }: LinkRowProps) {
     <Pressable
       accessibilityLabel={`${label}を開く`}
       accessibilityRole="link"
-      className="h-12 flex-row items-center justify-between px-4"
+      className="h-12 flex-row items-center justify-between px-4 active:bg-muted active:opacity-50"
       onPress={() => {
         onClickLink(url);
       }}
