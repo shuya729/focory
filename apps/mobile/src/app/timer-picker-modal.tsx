@@ -4,7 +4,23 @@ import WheelPicker, {
 } from "@quidone/react-native-wheel-picker";
 import { useRouter } from "expo-router";
 import { X } from "lucide-react-native";
-import { Pressable, type TextStyle, View } from "react-native";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  BackHandler,
+  Pressable,
+  type TextStyle,
+  useWindowDimensions,
+  View,
+} from "react-native";
+import Animated, {
+  Easing,
+  Extrapolation,
+  interpolate,
+  runOnJS,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -32,9 +48,16 @@ const pickerCommonProps: Partial<WheelPickerProps<PickerItem<number>>> = {
   width: 104,
 };
 
+const MODAL_OPEN_ANIMATION_DURATION_MS = 240;
+const MODAL_CLOSE_ANIMATION_DURATION_MS = 180;
+
 function TimerPickerModal() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { height: windowHeight } = useWindowDimensions();
+  const animationProgress = useSharedValue(0);
+  const isClosingRef = useRef(false);
+  const [isClosing, setIsClosing] = useState(false);
   const {
     isSaveDisabled,
     saveSelectedDuration,
@@ -44,12 +67,74 @@ function TimerPickerModal() {
     setSelectedSeconds,
   } = useTimerDurationEditor();
 
-  const handleCloseModal = () => {
+  const navigateBack = useCallback(() => {
     router.back();
-  };
+  }, [router]);
+
+  const handleCloseModal = useCallback(() => {
+    if (isClosingRef.current) {
+      return;
+    }
+
+    isClosingRef.current = true;
+    setIsClosing(true);
+    animationProgress.value = withTiming(
+      0,
+      {
+        duration: MODAL_CLOSE_ANIMATION_DURATION_MS,
+        easing: Easing.in(Easing.cubic),
+      },
+      (didFinish) => {
+        if (didFinish) {
+          runOnJS(navigateBack)();
+        }
+      }
+    );
+  }, [animationProgress, navigateBack]);
+
+  useEffect(() => {
+    animationProgress.value = withTiming(1, {
+      duration: MODAL_OPEN_ANIMATION_DURATION_MS,
+      easing: Easing.out(Easing.cubic),
+    });
+  }, [animationProgress]);
+
+  useEffect(() => {
+    const backSubscription = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        handleCloseModal();
+        return true;
+      }
+    );
+
+    return () => {
+      backSubscription.remove();
+    };
+  }, [handleCloseModal]);
+
+  const overlayAnimatedStyle = useAnimatedStyle(() => ({
+    opacity: animationProgress.value,
+  }));
+
+  const sheetAnimatedStyle = useAnimatedStyle(
+    () => ({
+      transform: [
+        {
+          translateY: interpolate(
+            animationProgress.value,
+            [0, 1],
+            [windowHeight, 0],
+            Extrapolation.CLAMP
+          ),
+        },
+      ],
+    }),
+    [windowHeight]
+  );
 
   const handleSaveDuration = async () => {
-    if (isSaveDisabled) {
+    if (isSaveDisabled || isClosing) {
       return;
     }
 
@@ -61,19 +146,27 @@ function TimerPickerModal() {
   };
 
   return (
-    <View className="flex-1 justify-end bg-black/40">
+    <View className="flex-1 justify-end">
+      <Animated.View
+        className="absolute inset-0 bg-black/40"
+        style={overlayAnimatedStyle}
+      />
       <Pressable
         accessibilityLabel="タイマー編集モーダルを閉じる"
         accessibilityRole="button"
         className="absolute inset-0"
+        disabled={isClosing}
         onPress={handleCloseModal}
       />
 
-      <View
+      <Animated.View
         className="rounded-t-[24px] bg-background px-6 pt-3"
-        style={{
-          paddingBottom: Math.max(insets.bottom, 24) + 16,
-        }}
+        style={[
+          {
+            paddingBottom: Math.max(insets.bottom, 24) + 16,
+          },
+          sheetAnimatedStyle,
+        ]}
       >
         <View className="items-center pb-7">
           <View className="h-1 w-10 rounded-full bg-border" />
@@ -87,6 +180,7 @@ function TimerPickerModal() {
           <Button
             accessibilityLabel="タイマー編集モーダルを閉じる"
             className="h-9 w-9 rounded-full shadow-none"
+            disabled={isClosing}
             hitSlop={8}
             onPress={handleCloseModal}
             size="icon"
@@ -132,14 +226,14 @@ function TimerPickerModal() {
 
         <Button
           className="h-[52px] rounded-2xl shadow-none"
-          disabled={isSaveDisabled}
+          disabled={isSaveDisabled || isClosing}
           onPress={handleSaveDuration}
         >
           <Text className="font-bold text-base text-primary-foreground">
             保存
           </Text>
         </Button>
-      </View>
+      </Animated.View>
     </View>
   );
 }
