@@ -148,12 +148,12 @@ function TimerPage({
 
   return (
     <View
-      className={cn("flex-1 px-6 pt-2 pb-4", className)}
+      className={cn("flex-1 px-6 pt-2 pb-2", className)}
       collapsable={collapsable}
       {...props}
     >
-      <View className="flex-1 gap-2">
-        <View className="flex-row items-center justify-between pt-2 pb-4">
+      <View className="flex-1">
+        <View className="flex-row items-center justify-between">
           <PageHeaderIconButton
             accessibilityLabel="設定画面に移動"
             onPress={() => handleChangePage(SETTINGS_PAGE.page)}
@@ -168,7 +168,7 @@ function TimerPage({
           </PageHeaderIconButton>
         </View>
 
-        <View className="flex-1 items-center justify-between">
+        <View className="flex-1 items-center justify-between py-2">
           <Card className={timerCardClassName} style={timerCardStyle}>
             <Text
               adjustsFontSizeToFit

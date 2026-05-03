@@ -12,7 +12,10 @@ function PageHeaderIconButton({
 }: PageHeaderIconButtonProps) {
   return (
     <Button
-      className={cn("h-11 w-11 rounded-full shadow-none", className)}
+      className={cn(
+        "h-11 w-11 rounded-full shadow-none active:bg-secondary active:opacity-50",
+        className
+      )}
       hitSlop={hitSlop}
       size={size}
       variant={variant}

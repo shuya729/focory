@@ -33,12 +33,12 @@ function ArchivePage({
 
   return (
     <View
-      className={cn("flex-1 px-5 pt-2 pb-4", className)}
+      className={cn("flex-1 px-6 pt-2 pb-2", className)}
       collapsable={collapsable}
       {...props}
     >
-      <View className="flex-1 gap-4">
-        <View className="flex-row items-center justify-between pt-2">
+      <View className="flex-1">
+        <View className="flex-row items-center justify-between">
           <PageHeaderIconButton
             accessibilityLabel="タイマー画面に移動"
             onPress={() => handleChangePage(TIMER_PAGE.page)}
@@ -53,11 +53,6 @@ function ArchivePage({
 
         <FlatList
           className="flex-1"
-          contentContainerStyle={{
-            alignItems: "center",
-            gap: 16,
-            paddingBottom: 8,
-          }}
           data={archiveMonths}
           keyExtractor={(month) => month.id}
           onEndReached={loadMoreMonths}
@@ -72,7 +67,7 @@ function ArchivePage({
 
 function LegendBar() {
   return (
-    <View className="mx-auto w-full max-w-96 flex-row items-center justify-around gap-2">
+    <View className="mx-auto w-full max-w-96 flex-row items-center justify-around gap-2 px-2 py-3">
       {DAY_CATEGORIES.map((dayCategory) => (
         <LegendItem
           colorClassName={dayCategory.color}
@@ -95,8 +90,8 @@ function LegendItem({ colorClassName, label }: LegendItemProps) {
       className="min-w-0 flex-1 justify-center gap-1.5 rounded-none border-0 bg-transparent px-0 py-0"
       variant="outline"
     >
-      <View className={cn("h-3.5 w-3.5 rounded-[3px]", colorClassName)} />
-      <Text className="font-jetbrains-mono-medium text-[11px] text-muted-foreground">
+      <View className={cn("size-4 rounded-sm", colorClassName)} />
+      <Text className="font-jetbrains-mono-medium text-muted-foreground text-xs">
         {label}
       </Text>
     </Badge>
@@ -109,18 +104,18 @@ interface MonthSectionProps {
 
 function MonthSection({ month }: MonthSectionProps) {
   return (
-    <Card className="w-full max-w-96 gap-3 border-0 bg-transparent py-0 shadow-none">
-      <View className="flex-row items-center justify-between">
+    <Card className="mx-auto w-full max-w-96 gap-2 border-0 bg-transparent px-2 pt-2 pb-6 shadow-none">
+      <View className="flex-row items-center justify-between py-1">
         <Text className="font-bold text-lg">{month.title}</Text>
         <Text className="font-jetbrains-mono-semibold text-primary text-sm">
           {formatCompactDuration(month.totalSeconds)}
         </Text>
       </View>
 
-      <View className="flex-row items-center justify-between">
+      <View className="flex-row items-center justify-between gap-1">
         {DAY_LABELS.map((dayLabel) => (
           <Text
-            className="w-10 text-center text-[11px] text-muted-foreground"
+            className="flex-1 text-center text-muted-foreground text-xs"
             key={dayLabel}
           >
             {dayLabel}
@@ -128,10 +123,10 @@ function MonthSection({ month }: MonthSectionProps) {
         ))}
       </View>
 
-      <View className="gap-1">
+      <View className="gap-2">
         {month.weeks.map((weekDays, weekIndex) => (
           <View
-            className="flex-row items-center justify-between gap-1"
+            className="flex-row items-center justify-between gap-2"
             key={`${month.id}-week-${weekIndex.toString()}`}
           >
             {weekDays.map((weekDay, dayIndex) => (
@@ -155,7 +150,7 @@ function CalendarCell({ category }: CalendarCellProps) {
   return (
     <View
       className={cn(
-        "h-9 w-9 rounded-md",
+        "aspect-square flex-1 rounded-md",
         getDayCategoryColorClassName(category)
       )}
     />

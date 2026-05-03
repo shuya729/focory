@@ -10,7 +10,7 @@ export function PageIndicatorDots({
   pagesLength,
 }: PageIndicatorDotsProps) {
   return (
-    <View className="flex-row items-center justify-center gap-3 py-2">
+    <View className="flex-row items-center justify-center gap-3">
       {Array.from({ length: pagesLength }).map((_, index) => {
         const isActivePage = currentPage === index;
 

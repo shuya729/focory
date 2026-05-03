@@ -47,7 +47,7 @@ function SettingsPage({
 
   return (
     <View
-      className={cn("flex-1 px-6 pt-2 pb-4", className)}
+      className={cn("flex-1 px-6 pt-2 pb-2", className)}
       collapsable={collapsable}
       {...props}
     >
@@ -55,8 +55,8 @@ function SettingsPage({
         behavior={Platform.OS === "ios" ? "padding" : undefined}
         className="flex-1"
       >
-        <View className="flex-1 gap-3">
-          <View className="flex-row items-center justify-between pt-2">
+        <View className="flex-1">
+          <View className="flex-row items-center justify-between">
             <View className="h-11 w-11" />
             <Text className="font-semibold text-lg">設定</Text>
             <PageHeaderIconButton
@@ -72,10 +72,10 @@ function SettingsPage({
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View className="gap-7 py-3">
+            <View className="gap-7 py-2">
               <FormSection label="目的">
                 <Input
-                  className="h-12 rounded-xl border-border bg-card px-4 text-sm shadow-none"
+                  className="rounded-xl border-border bg-card text-sm shadow-none"
                   onChangeText={handleChangeObjective}
                   placeholder="集中したいことを入力"
                   underlineColorAndroid="transparent"
@@ -85,7 +85,7 @@ function SettingsPage({
 
               <FormSection label="なぜ">
                 <Textarea
-                  className="min-h-[92px] rounded-xl border-border bg-card px-4 py-3 text-sm leading-6 shadow-none"
+                  className="min-h-28 rounded-xl border-border bg-card text-sm leading-6 shadow-none"
                   onChangeText={handleChangePurpose}
                   placeholder="なぜそれをやりたいのか、理由を書いてみよう"
                   underlineColorAndroid="transparent"
