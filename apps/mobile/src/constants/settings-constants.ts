@@ -57,11 +57,11 @@ export const TERMS_OF_SERVICE_SETTING_LINK: SettingLink = {
 } as const;
 export const PRIVACY_POLICY_SETTING_LINK: SettingLink = {
   label: "プライバシーポリシー",
-  url: "https://www.google.com",
+  url: "https://google.com",
 } as const;
 export const CONTACT_SETTING_LINK: SettingLink = {
   label: "お問い合わせ",
-  url: "https://www.google.com",
+  url: "https://google.co.jp",
 } as const;
 
 export const SETTINGS_LINK = {
