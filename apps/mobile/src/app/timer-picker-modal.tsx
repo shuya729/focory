@@ -36,12 +36,12 @@ const pickerItemTextStyle: TextStyle = {
   color: THEME.light.foreground,
   fontFamily: "JetBrainsMono-ExtraBold",
   fontSize: 36,
-  lineHeight: 44,
+  lineHeight: 48,
 };
 
 const pickerCommonProps: Partial<WheelPickerProps<PickerItem<number>>> = {
   enableScrollByTapOnItem: true,
-  itemHeight: 44,
+  itemHeight: 48,
   itemTextStyle: pickerItemTextStyle,
   renderOverlay: null,
   visibleItemCount: 5,
@@ -192,7 +192,7 @@ function TimerPickerModal() {
 
         <View className="pb-7">
           <View className="items-center justify-center overflow-hidden py-1">
-            <View className="absolute right-0 left-0 h-14 rounded-[14px] bg-secondary" />
+            <View className="absolute right-0 left-0 h-14 rounded-lg bg-secondary" />
 
             <View className="flex-row items-center justify-center gap-2">
               <WheelPicker
