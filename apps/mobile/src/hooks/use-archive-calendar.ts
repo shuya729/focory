@@ -5,6 +5,7 @@ import {
 } from "@/constants/archive-constants";
 import { listArchiveMonths } from "@/services/archive-service";
 import type { ArchiveMonth } from "@/types/archive";
+import { showErrorToast } from "@/utils/toast-utils";
 
 interface UseArchiveCalendarOptions {
   refreshKey: number;
@@ -28,7 +29,11 @@ export function useArchiveCalendar({ refreshKey }: UseArchiveCalendarOptions) {
       }
     };
 
-    loadArchives().catch(() => undefined);
+    loadArchives().catch((error) => {
+      if (isMounted) {
+        showErrorToast(error, "過去の記録の読み込みに失敗しました");
+      }
+    });
 
     return () => {
       isMounted = false;

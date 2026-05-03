@@ -24,6 +24,7 @@ import type {
   TimerState,
 } from "@/types/timer";
 import { calculateElapsedSeconds } from "@/utils/timer-utils";
+import { showErrorToast } from "@/utils/toast-utils";
 
 interface UseTimerControllerOptions {
   onArchiveChanged?: () => void;
@@ -103,9 +104,10 @@ export function useTimerController({
             });
           }
         })
-        .catch(() => {
+        .catch((error) => {
           if (latestMessageSequenceRef.current === messageSequence) {
             setTimerMessageState(createDefaultMessageState());
+            showErrorToast(error, "メッセージの生成に失敗しました");
           }
         });
     },
@@ -142,14 +144,19 @@ export function useTimerController({
 
       if (restoredTimerState.currentTimerId) {
         saveTimerDurationPreference(restoredTimerState.durationSeconds).catch(
-          () => undefined
+          (error) => {
+            if (isMounted) {
+              showErrorToast(error, "タイマー設定の保存に失敗しました");
+            }
+          }
         );
       }
     };
 
-    loadInitialTimerState().catch(() => {
+    loadInitialTimerState().catch((error) => {
       if (isMounted) {
         setIsReady(true);
+        showErrorToast(error, "タイマー状態の読み込みに失敗しました");
       }
     });
 
@@ -179,7 +186,11 @@ export function useTimerController({
         clearTimerMessage();
       };
 
-      reloadTimerDurationPreference().catch(() => undefined);
+      reloadTimerDurationPreference().catch((error) => {
+        if (isActive) {
+          showErrorToast(error, "タイマー設定の読み込みに失敗しました");
+        }
+      });
 
       return () => {
         isActive = false;
@@ -277,7 +288,9 @@ export function useTimerController({
       }
     };
 
-    finishCurrentTimer().catch(() => undefined);
+    finishCurrentTimer().catch((error) => {
+      showErrorToast(error, "タイマーの完了処理に失敗しました");
+    });
   }, [
     onArchiveChanged,
     queueTimerMessageUpdate,
@@ -329,11 +342,12 @@ export function useTimerController({
         timerId,
         type: "stop",
       });
-    } catch {
+    } catch (error) {
       setTimerState((currentTimerState) => ({
         ...currentTimerState,
         isRunning: true,
       }));
+      showErrorToast(error, "タイマーの一時停止に失敗しました");
     } finally {
       setTimerState((currentTimerState) => ({
         ...currentTimerState,
@@ -361,7 +375,9 @@ export function useTimerController({
         return;
       }
 
-      pauseCurrentTimer().catch(() => undefined);
+      pauseCurrentTimer().catch((error) => {
+        showErrorToast(error, "タイマーの一時停止に失敗しました");
+      });
     };
 
     const subscription = AppState.addEventListener(
@@ -426,6 +442,8 @@ export function useTimerController({
         timerId,
         type: "start",
       });
+    } catch (error) {
+      showErrorToast(error, "タイマーの開始に失敗しました");
     } finally {
       setTimerState((currentTimerState) => ({
         ...currentTimerState,

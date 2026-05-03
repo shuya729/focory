@@ -8,6 +8,7 @@ import {
   splitTimerDurationSeconds,
   toTimerDurationSeconds,
 } from "@/utils/timer-utils";
+import { showErrorToast } from "@/utils/toast-utils";
 
 export function useTimerDurationEditor() {
   const initialDuration = splitTimerDurationSeconds(
@@ -37,7 +38,11 @@ export function useTimerDurationEditor() {
       }
     };
 
-    loadDuration().catch(() => undefined);
+    loadDuration().catch((error) => {
+      if (isMounted) {
+        showErrorToast(error, "タイマー設定の読み込みに失敗しました");
+      }
+    });
 
     return () => {
       isMounted = false;
@@ -49,8 +54,13 @@ export function useTimerDurationEditor() {
       return false;
     }
 
-    await saveTimerDurationPreference(selectedDurationSeconds);
-    return true;
+    try {
+      await saveTimerDurationPreference(selectedDurationSeconds);
+      return true;
+    } catch (error) {
+      showErrorToast(error, "タイマー設定の保存に失敗しました");
+      return false;
+    }
   };
 
   return {

@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import { registerCurrentDevicePushToken } from "@/services/push-token-service";
+import { showErrorToast } from "@/utils/toast-utils";
 
 export function useInitialPushTokenRegistration() {
   const hasRequestedRef = useRef(false);
@@ -10,6 +11,8 @@ export function useInitialPushTokenRegistration() {
     }
 
     hasRequestedRef.current = true;
-    registerCurrentDevicePushToken().catch(() => undefined);
+    registerCurrentDevicePushToken().catch((error) => {
+      showErrorToast(error, "通知設定の登録に失敗しました");
+    });
   }, []);
 }

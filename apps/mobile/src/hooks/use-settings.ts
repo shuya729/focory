@@ -7,6 +7,7 @@ import {
   savePurpose,
 } from "@/services/settings-service";
 import type { UserSettings } from "@/types/settings";
+import { showErrorToast } from "@/utils/toast-utils";
 
 export function useSettings() {
   const [settings, setSettings] = useState<UserSettings>(DEFAULT_USER_SETTINGS);
@@ -22,7 +23,11 @@ export function useSettings() {
       }
     };
 
-    loadSettings().catch(() => undefined);
+    loadSettings().catch((error) => {
+      if (isMounted) {
+        showErrorToast(error, "設定の読み込みに失敗しました");
+      }
+    });
 
     return () => {
       isMounted = false;
@@ -34,7 +39,9 @@ export function useSettings() {
       ...currentSettings,
       objective,
     }));
-    saveObjective(objective).catch(() => undefined);
+    saveObjective(objective).catch((error) => {
+      showErrorToast(error, "目的の保存に失敗しました");
+    });
   };
 
   const handleChangePurpose = (purpose: string) => {
@@ -42,7 +49,9 @@ export function useSettings() {
       ...currentSettings,
       purpose,
     }));
-    savePurpose(purpose).catch(() => undefined);
+    savePurpose(purpose).catch((error) => {
+      showErrorToast(error, "理由の保存に失敗しました");
+    });
   };
 
   const handleChangeBehavior = (behavior: UserSettings["behavior"]) => {
@@ -50,7 +59,9 @@ export function useSettings() {
       ...currentSettings,
       behavior,
     }));
-    saveBehavior(behavior).catch(() => undefined);
+    saveBehavior(behavior).catch((error) => {
+      showErrorToast(error, "振る舞いの保存に失敗しました");
+    });
   };
 
   return {
