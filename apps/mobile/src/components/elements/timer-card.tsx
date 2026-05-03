@@ -163,7 +163,7 @@ function TimerActionButton({
         "rounded-full",
         variant === "primary"
           ? "h-14 w-14"
-          : "h-[52px] w-[52px] border-0 bg-background shadow-none",
+          : "h-[52px] w-[52px] border-0 bg-background shadow-none active:bg-secondary active:opacity-50",
         className
       )}
       hitSlop={hitSlop}
