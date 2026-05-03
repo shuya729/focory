@@ -7,8 +7,12 @@ import {
 
 export function useTimerDurationEditor() {
   const { durationSeconds, saveTimerDuration } = useTimerDurationPreference();
-  const [selectedMinutes, setSelectedMinutes] = useState(0);
-  const [selectedSeconds, setSelectedSeconds] = useState(0);
+  const [selectedMinutes, setSelectedMinutes] = useState(
+    () => splitTimerDurationSeconds(durationSeconds).minutes
+  );
+  const [selectedSeconds, setSelectedSeconds] = useState(
+    () => splitTimerDurationSeconds(durationSeconds).seconds
+  );
   const selectedDurationSeconds = toTimerDurationSeconds(
     selectedMinutes,
     selectedSeconds
