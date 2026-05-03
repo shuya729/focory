@@ -2,7 +2,6 @@ import { useFocusEffect } from "expo-router";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AppState, type AppStateStatus } from "react-native";
 import {
-  DEFAULT_TIMER_DURATION_SECONDS,
   TIMER_MESSAGE_LOADING_FRAMES,
   TIMER_TICK_INTERVAL_MS,
 } from "@/constants/timer-constants";
@@ -52,7 +51,7 @@ export function useTimerController({
   const isFinishingRef = useRef(false);
   const latestMessageSequenceRef = useRef(0);
   const [timerState, setTimerState] = useState<TimerState>(
-    createIdleTimerState(DEFAULT_TIMER_DURATION_SECONDS)
+    createIdleTimerState(0)
   );
   const [timerMessageState, setTimerMessageState] = useState<TimerMessageState>(
     createDefaultMessageState
@@ -63,7 +62,10 @@ export function useTimerController({
     timerState.durationSeconds,
     timerState.remainingSeconds
   );
-  const isFinished = !timerState.isRunning && timerState.remainingSeconds === 0;
+  const isFinished =
+    timerState.currentTimerId !== null &&
+    !timerState.isRunning &&
+    timerState.remainingSeconds === 0;
   const timerMessage = timerMessageState.isGenerating
     ? (TIMER_MESSAGE_LOADING_FRAMES[messageLoadingFrameIndex] ??
       TIMER_MESSAGE_LOADING_FRAMES[0])
@@ -391,7 +393,7 @@ export function useTimerController({
   }, [pauseCurrentTimer]);
 
   const handleStartOrResumeTimer = useCallback(async () => {
-    if (timerState.isTransitioning) {
+    if (timerState.isTransitioning || timerState.durationSeconds === 0) {
       return;
     }
 

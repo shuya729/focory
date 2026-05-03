@@ -40,12 +40,16 @@ function TimerPage({
     handleResetTimer,
     handleStartOrResumeTimer,
     isFinished,
+    isReady,
     timerMessageState,
     timerState,
   } = useTimerController({ onArchiveChanged });
-  const { isRunning, isTransitioning, remainingSeconds } = timerState;
+  const { durationSeconds, isRunning, isTransitioning, remainingSeconds } =
+    timerState;
   const { hasMessage, message } = timerMessageState;
   const formattedRemainingTime = formatTimerClock(remainingSeconds);
+  const isTimerActionDisabled = !isReady || isTransitioning;
+  const isStartDisabled = isTimerActionDisabled || durationSeconds === 0;
 
   const handleOpenTimerPicker = () => {
     router.push("./timer-picker-modal");
@@ -97,7 +101,7 @@ function TimerPage({
     timerActionButtons = (
       <TimerActionButton
         accessibilityLabel="タイマーをリセット"
-        disabled={isTransitioning}
+        disabled={isTimerActionDisabled}
         onPress={handleResetTimer}
         variant="secondary"
       >
@@ -108,7 +112,7 @@ function TimerPage({
     timerActionButtons = (
       <TimerActionButton
         accessibilityLabel="タイマーを一時停止"
-        disabled={isTransitioning}
+        disabled={isTimerActionDisabled}
         onPress={handlePauseTimer}
         variant="primary"
       >
@@ -120,7 +124,7 @@ function TimerPage({
       <>
         <TimerActionButton
           accessibilityLabel="タイマー時間を編集"
-          disabled={isTransitioning}
+          disabled={isTimerActionDisabled}
           onPress={handleOpenTimerPicker}
           variant="secondary"
         >
@@ -128,7 +132,7 @@ function TimerPage({
         </TimerActionButton>
         <TimerActionButton
           accessibilityLabel="タイマーを開始"
-          disabled={isTransitioning}
+          disabled={isStartDisabled}
           onPress={handleStartOrResumeTimer}
           variant="primary"
         >
@@ -136,7 +140,7 @@ function TimerPage({
         </TimerActionButton>
         <TimerActionButton
           accessibilityLabel="タイマーをリセット"
-          disabled={isTransitioning}
+          disabled={isTimerActionDisabled}
           onPress={handleResetTimer}
           variant="secondary"
         >

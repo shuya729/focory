@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { DEFAULT_TIMER_DURATION_SECONDS } from "@/constants/timer-constants";
 import {
   getTimerDurationPreference,
   saveTimerDurationPreference,
@@ -11,15 +10,8 @@ import {
 import { showErrorToast } from "@/utils/toast-utils";
 
 export function useTimerDurationEditor() {
-  const initialDuration = splitTimerDurationSeconds(
-    DEFAULT_TIMER_DURATION_SECONDS
-  );
-  const [selectedMinutes, setSelectedMinutes] = useState(
-    initialDuration.minutes
-  );
-  const [selectedSeconds, setSelectedSeconds] = useState(
-    initialDuration.seconds
-  );
+  const [selectedMinutes, setSelectedMinutes] = useState(0);
+  const [selectedSeconds, setSelectedSeconds] = useState(0);
   const selectedDurationSeconds = toTimerDurationSeconds(
     selectedMinutes,
     selectedSeconds
