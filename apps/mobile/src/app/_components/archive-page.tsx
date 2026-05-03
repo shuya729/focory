@@ -11,6 +11,7 @@ import {
   type DayCategory,
 } from "@/constants/archive-constants";
 import { TIMER_PAGE } from "@/constants/pages";
+import { useArchiveRefreshKey } from "@/contexts/archive-invalidation-context";
 import { useArchiveCalendar } from "@/hooks/use-archive-calendar";
 import type { ArchiveMonth } from "@/types/archive";
 import { getDayCategoryColorClassName } from "@/utils/archive-utils";
@@ -19,16 +20,15 @@ import { formatCompactDuration } from "@/utils/timer-utils";
 
 export interface ArchivePageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
-  refreshKey: number;
 }
 
 function ArchivePage({
   collapsable = false,
   className,
   handleChangePage,
-  refreshKey,
   ...props
 }: ArchivePageProps) {
+  const refreshKey = useArchiveRefreshKey();
   const { archiveMonths, loadMoreMonths } = useArchiveCalendar({ refreshKey });
 
   return (

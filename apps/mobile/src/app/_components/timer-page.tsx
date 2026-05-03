@@ -17,33 +17,31 @@ import { Card } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { ARCHIVE_PAGE, SETTINGS_PAGE } from "@/constants/pages";
-import { useTimerController } from "@/hooks/use-timer-controller";
+import { useTimer } from "@/contexts/timer-context";
 import { THEME } from "@/theme";
 import { cn } from "@/utils/cn";
 import { formatTimerClock } from "@/utils/timer-utils";
 
 export interface TimerPageProps extends Omit<ViewProps, "children"> {
   handleChangePage: (page: number) => void;
-  onArchiveChanged: () => void;
 }
 
 function TimerPage({
   collapsable = false,
   className,
   handleChangePage,
-  onArchiveChanged,
   ...props
 }: TimerPageProps) {
   const router = useRouter();
   const {
-    handlePauseTimer,
-    handleResetTimer,
-    handleStartOrResumeTimer,
     isFinished,
     isReady,
+    pauseTimer,
+    resetTimer,
+    startOrResumeTimer,
     timerMessageState,
     timerState,
-  } = useTimerController({ onArchiveChanged });
+  } = useTimer();
   const { durationSeconds, isRunning, isTransitioning, remainingSeconds } =
     timerState;
   const { hasMessage, message } = timerMessageState;
@@ -102,7 +100,7 @@ function TimerPage({
       <TimerActionButton
         accessibilityLabel="タイマーをリセット"
         disabled={isTimerActionDisabled}
-        onPress={handleResetTimer}
+        onPress={resetTimer}
         variant="secondary"
       >
         <Icon as={RotateCcw} className="size-[22px] text-primary" />
@@ -113,7 +111,7 @@ function TimerPage({
       <TimerActionButton
         accessibilityLabel="タイマーを一時停止"
         disabled={isTimerActionDisabled}
-        onPress={handlePauseTimer}
+        onPress={pauseTimer}
         variant="primary"
       >
         <Icon as={Pause} className="size-[26px] text-primary-foreground" />
@@ -133,7 +131,7 @@ function TimerPage({
         <TimerActionButton
           accessibilityLabel="タイマーを開始"
           disabled={isStartDisabled}
-          onPress={handleStartOrResumeTimer}
+          onPress={startOrResumeTimer}
           variant="primary"
         >
           <Icon as={Play} className="size-[26px] text-primary-foreground" />
@@ -141,7 +139,7 @@ function TimerPage({
         <TimerActionButton
           accessibilityLabel="タイマーをリセット"
           disabled={isTimerActionDisabled}
-          onPress={handleResetTimer}
+          onPress={resetTimer}
           variant="secondary"
         >
           <Icon as={RotateCcw} className="size-[22px] text-primary" />

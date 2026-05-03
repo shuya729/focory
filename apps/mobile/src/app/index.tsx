@@ -20,7 +20,6 @@ import TimerPage from "./_components/timer-page";
 export default function Index() {
   const pagerRef = useRef<PagerView>(null);
   const [currentPage, setCurrentPage] = useState<number>(DEFAULT_PAGE.page);
-  const [archiveRefreshKey, setArchiveRefreshKey] = useState(0);
   useInitialPushTokenRegistration();
 
   const handlePageSelected = (event: PagerViewOnPageSelectedEvent) => {
@@ -29,10 +28,6 @@ export default function Index() {
 
   const handleChangePage = (page: number) => {
     pagerRef.current?.setPage(page);
-  };
-
-  const handleArchiveChanged = () => {
-    setArchiveRefreshKey((currentRefreshKey) => currentRefreshKey + 1);
   };
 
   return (
@@ -47,15 +42,10 @@ export default function Index() {
           handleChangePage={handleChangePage}
           key={SETTINGS_PAGE.key}
         />
-        <TimerPage
-          handleChangePage={handleChangePage}
-          key={TIMER_PAGE.key}
-          onArchiveChanged={handleArchiveChanged}
-        />
+        <TimerPage handleChangePage={handleChangePage} key={TIMER_PAGE.key} />
         <ArchivePage
           handleChangePage={handleChangePage}
           key={ARCHIVE_PAGE.key}
-          refreshKey={archiveRefreshKey}
         />
       </PagerView>
       <PageIndicatorDots currentPage={currentPage} pagesLength={PAGES.length} />

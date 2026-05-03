@@ -9,6 +9,8 @@ import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Toaster } from "@/components/elements/toaster";
+import { ArchiveInvalidationProvider } from "@/contexts/archive-invalidation-context";
+import { TimerProvider } from "@/contexts/timer-context";
 import { useAppBootstrap } from "@/hooks/use-app-bootstrap";
 import { NAV_THEME } from "@/theme";
 
@@ -55,16 +57,20 @@ export default function RootLayout() {
     <ThemeProvider value={NAV_THEME}>
       <SafeAreaProvider>
         <GestureHandlerRootView>
-          <Stack screenOptions={{ headerShown: false }}>
-            <Stack.Screen name="index" />
-            <Stack.Screen
-              name="timer-picker-modal"
-              options={{
-                animation: "fade",
-                presentation: "transparentModal",
-              }}
-            />
-          </Stack>
+          <ArchiveInvalidationProvider>
+            <TimerProvider>
+              <Stack screenOptions={{ headerShown: false }}>
+                <Stack.Screen name="index" />
+                <Stack.Screen
+                  name="timer-picker-modal"
+                  options={{
+                    animation: "fade",
+                    presentation: "transparentModal",
+                  }}
+                />
+              </Stack>
+            </TimerProvider>
+          </ArchiveInvalidationProvider>
           <PortalHost />
           <Toaster />
         </GestureHandlerRootView>

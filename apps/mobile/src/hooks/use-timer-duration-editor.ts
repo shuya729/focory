@@ -1,15 +1,12 @@
 import { useEffect, useState } from "react";
-import {
-  getTimerDurationPreference,
-  saveTimerDurationPreference,
-} from "@/services/timer-preference-service";
+import { useTimerDurationPreference } from "@/contexts/timer-context";
 import {
   splitTimerDurationSeconds,
   toTimerDurationSeconds,
 } from "@/utils/timer-utils";
-import { showErrorToast } from "@/utils/toast-utils";
 
 export function useTimerDurationEditor() {
+  const { durationSeconds, saveTimerDuration } = useTimerDurationPreference();
   const [selectedMinutes, setSelectedMinutes] = useState(0);
   const [selectedSeconds, setSelectedSeconds] = useState(0);
   const selectedDurationSeconds = toTimerDurationSeconds(
@@ -18,41 +15,18 @@ export function useTimerDurationEditor() {
   );
 
   useEffect(() => {
-    let isMounted = true;
+    const nextDuration = splitTimerDurationSeconds(durationSeconds);
 
-    const loadDuration = async () => {
-      const durationSeconds = await getTimerDurationPreference();
-      const nextDuration = splitTimerDurationSeconds(durationSeconds);
-
-      if (isMounted) {
-        setSelectedMinutes(nextDuration.minutes);
-        setSelectedSeconds(nextDuration.seconds);
-      }
-    };
-
-    loadDuration().catch((error) => {
-      if (isMounted) {
-        showErrorToast(error, "タイマー設定の読み込みに失敗しました");
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
+    setSelectedMinutes(nextDuration.minutes);
+    setSelectedSeconds(nextDuration.seconds);
+  }, [durationSeconds]);
 
   const saveSelectedDuration = async () => {
     if (selectedDurationSeconds === 0) {
       return false;
     }
 
-    try {
-      await saveTimerDurationPreference(selectedDurationSeconds);
-      return true;
-    } catch (error) {
-      showErrorToast(error, "タイマー設定の保存に失敗しました");
-      return false;
-    }
+    return await saveTimerDuration(selectedDurationSeconds);
   };
 
   return {
