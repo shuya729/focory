@@ -6,6 +6,9 @@ import { Stack } from "expo-router";
 import { hide, preventAutoHideAsync } from "expo-splash-screen";
 import { useEffect } from "react";
 import { Text, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Toaster } from "@/components/elements/toaster";
 import { useAppBootstrap } from "@/hooks/use-app-bootstrap";
 import { NAV_THEME } from "@/theme";
 
@@ -50,17 +53,22 @@ export default function RootLayout() {
 
   return (
     <ThemeProvider value={NAV_THEME}>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="index" />
-        <Stack.Screen
-          name="timer-picker-modal"
-          options={{
-            animation: "fade",
-            presentation: "transparentModal",
-          }}
-        />
-      </Stack>
-      <PortalHost />
+      <SafeAreaProvider>
+        <GestureHandlerRootView>
+          <Stack screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="index" />
+            <Stack.Screen
+              name="timer-picker-modal"
+              options={{
+                animation: "fade",
+                presentation: "transparentModal",
+              }}
+            />
+          </Stack>
+          <PortalHost />
+          <Toaster />
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
     </ThemeProvider>
   );
 }
