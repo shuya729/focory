@@ -1,3 +1,4 @@
+import { openBrowserAsync } from "expo-web-browser";
 import { useEffect, useState } from "react";
 import {
   DEFAULT_USER_SETTINGS,
@@ -64,11 +65,20 @@ export function useSettings() {
     });
   };
 
+  const onClickLink = async (url: string) => {
+    try {
+      await openBrowserAsync(url);
+    } catch (error) {
+      showErrorToast(error, "リンクを開けませんでした");
+    }
+  };
+
   return {
     handleChangeBehavior,
     handleChangeObjective,
     handleChangePurpose,
     objective: settings.objective,
+    onClickLink,
     purpose: settings.purpose,
     selectedBehavior: settings.behavior,
   };

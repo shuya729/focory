@@ -3,6 +3,7 @@ import { Fragment, type ReactNode } from "react";
 import {
   KeyboardAvoidingView,
   Platform,
+  Pressable,
   ScrollView,
   View,
   type ViewProps,
@@ -39,6 +40,7 @@ function SettingsPage({
     handleChangeObjective,
     handleChangePurpose,
     objective,
+    onClickLink,
     purpose,
     selectedBehavior,
   } = useSettings();
@@ -127,6 +129,7 @@ function SettingsPage({
                       {index > 0 ? <Separator /> : null}
                       <LinkRow
                         label={settingLink.label}
+                        onClickLink={onClickLink}
                         url={settingLink.url}
                       />
                     </Fragment>
@@ -180,15 +183,23 @@ function BehaviorChipButton({
 
 interface LinkRowProps {
   label: string;
+  onClickLink: (url: string) => void;
   url: string;
 }
 
-function LinkRow({ label }: LinkRowProps) {
+function LinkRow({ label, onClickLink, url }: LinkRowProps) {
   return (
-    <View className="h-12 flex-row items-center justify-between px-4">
+    <Pressable
+      accessibilityLabel={`${label}を開く`}
+      accessibilityRole="link"
+      className="h-12 flex-row items-center justify-between px-4"
+      onPress={() => {
+        onClickLink(url);
+      }}
+    >
       <Text className="text-sm">{label}</Text>
       <Icon as={ChevronRight} className="size-[18px] text-muted-foreground" />
-    </View>
+    </Pressable>
   );
 }
 
