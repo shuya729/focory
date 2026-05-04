@@ -1,16 +1,17 @@
 import { HTTPException } from "hono/http-exception";
 import type { DbClient } from "../../lib/db/client";
 import { messages } from "../../lib/db/schema";
+import type { BehaviorValue } from "./prompots";
 import type { MessageResponse, MessageType } from "./schemas";
 
 export interface CreateMessageValue {
   userId: string;
   timerId: string;
   type: MessageType;
+  behavior: BehaviorValue;
   content: string;
   objective: string | null;
   purpose: string | null;
-  behavior: string | null;
   durationSec: number;
   elapsedSec: number;
 }
@@ -36,10 +37,10 @@ export class MessagesRepository implements MessagesRepositoryInterface {
           userId: value.userId,
           timerId: value.timerId,
           type: value.type,
+          behavior: value.behavior,
           content: value.content,
           objective: value.objective,
           purpose: value.purpose,
-          behavior: value.behavior,
           durationSec: value.durationSec,
           elapsedSec: value.elapsedSec,
         })
@@ -47,17 +48,23 @@ export class MessagesRepository implements MessagesRepositoryInterface {
           id: messages.id,
           timerId: messages.timerId,
           type: messages.type,
+          behavior: messages.behavior,
           content: messages.content,
           objective: messages.objective,
           purpose: messages.purpose,
-          behavior: messages.behavior,
           durationSec: messages.durationSec,
           elapsedSec: messages.elapsedSec,
           createdAt: messages.createdAt,
           updatedAt: messages.updatedAt,
         });
 
-      return rows[0];
+      const row = rows[0];
+
+      if (!row) {
+        return;
+      }
+
+      return row as MessageResponse;
     } catch (cause) {
       throw new HTTPException(500, { message: "Internal server error", cause });
     }

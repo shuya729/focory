@@ -12,7 +12,7 @@ describe("MessagesRepository", () => {
       content: "少し休んで、次の一歩だけ進めましょう。",
       objective: "開発を進める",
       purpose: "デモ準備",
-      behavior: "実装",
+      behavior: "supporter" as const,
       durationSec: 1500,
       elapsedSec: 900,
       createdAt: new Date("2026-01-01T00:00:00.000Z"),

@@ -7,6 +7,11 @@ import {
 } from "../../services/push-notifications";
 import { PushTokensRepository } from "../push-tokens/repository";
 import {
+  type BehaviorValue,
+  type BuildPromptInput,
+  buildPrompt,
+} from "./prompots";
+import {
   MessagesRepository,
   type MessagesRepositoryInterface,
 } from "./repository";
@@ -20,12 +25,8 @@ const LEADING_QUOTE_REGEX = /^["「『]/;
 const TRAILING_QUOTE_REGEX = /["」』]$/;
 const MESSAGE_NOTIFICATION_TITLE = "Focory";
 
-interface MessagePromptInput {
+interface MessagePromptInput extends BuildPromptInput {
   timerId: string;
-  type: MessageType;
-  objective: string | null;
-  purpose: string | null;
-  behavior: string | null;
   durationSec: number;
   elapsedSec: number;
 }
@@ -80,10 +81,10 @@ export class MessagesService {
       userId,
       timerId: input.timerId,
       type: input.type,
+      behavior: input.behavior,
       content,
       objective: input.objective,
       purpose: input.purpose,
-      behavior: input.behavior,
       durationSec: input.durationSec,
       elapsedSec: input.elapsedSec,
     });
@@ -110,7 +111,12 @@ export class MessagesService {
     input: MessagePromptInput
   ): Promise<string> {
     const generatedText = await this.llmService.generateText(
-      MessagesService.buildPrompt(input)
+      buildPrompt({
+        type: input.type,
+        behavior: input.behavior,
+        objective: input.objective,
+        purpose: input.purpose,
+      })
     );
     const content = MessagesService.cleanGeneratedMessage(generatedText);
 
@@ -124,33 +130,6 @@ export class MessagesService {
     }
 
     return content;
-  }
-
-  private static buildPrompt(input: MessagePromptInput): string {
-    return [
-      "あなたはユーザーの継続行動を支援する日本語コーチです。",
-      "以下のタイマー状況をもとに、ユーザー本人へ送る自然で短いメッセージを1つだけ作成してください。",
-      "条件:",
-      "- 日本語で80文字以内",
-      "- 1文から2文で簡潔にする",
-      "- type=start は開始をやさしく後押しする",
-      "- type=stop は中断を責めず、次の小さな一歩を促す",
-      "- type=restart は再開を歓迎し、集中を取り戻せる一言にする",
-      "- type=finish は達成感を具体的に称える",
-      "- objective / purpose / behavior が未設定なら無理に言及しない",
-      "- 箇条書き、引用符、絵文字、前置きは不要",
-      "",
-      `timerId: ${input.timerId}`,
-      `type: ${input.type}`,
-      `objective: ${input.objective ?? "未設定"}`,
-      `purpose: ${input.purpose ?? "未設定"}`,
-      `behavior: ${input.behavior ?? "未設定"}`,
-      `durationSec: ${input.durationSec}`,
-      `elapsedSec: ${input.elapsedSec}`,
-      `duration: ${MessagesService.formatDuration(input.durationSec)}`,
-      `elapsed: ${MessagesService.formatDuration(input.elapsedSec)}`,
-      `completionRate: ${MessagesService.getCompletionRate(input)}%`,
-    ].join("\n");
   }
 
   private static cleanGeneratedMessage(message: string): string | null {
@@ -168,10 +147,10 @@ export class MessagesService {
   ): MessagePromptInput {
     return {
       timerId: json.timerId,
-      type: json.type,
+      type: json.type satisfies MessageType,
+      behavior: json.behavior satisfies BehaviorValue,
       objective: MessagesService.normalizeOptionalText(json.objective),
       purpose: MessagesService.normalizeOptionalText(json.purpose),
-      behavior: MessagesService.normalizeOptionalText(json.behavior),
       durationSec: json.durationSec,
       elapsedSec: json.elapsedSec,
     };
@@ -182,31 +161,5 @@ export class MessagesService {
   ): string | null {
     const trimmedValue = value?.trim();
     return trimmedValue ? trimmedValue : null;
-  }
-
-  private static getCompletionRate(input: MessagePromptInput): number {
-    const completionRate = (input.elapsedSec / input.durationSec) * 100;
-    return Math.max(0, Math.min(100, Math.round(completionRate)));
-  }
-
-  private static formatDuration(totalSeconds: number): string {
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    const parts: string[] = [];
-
-    if (hours > 0) {
-      parts.push(`${hours}時間`);
-    }
-
-    if (minutes > 0) {
-      parts.push(`${minutes}分`);
-    }
-
-    if (seconds > 0 || parts.length === 0) {
-      parts.push(`${seconds}秒`);
-    }
-
-    return parts.join("");
   }
 }

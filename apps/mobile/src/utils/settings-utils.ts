@@ -17,10 +17,6 @@ export const normalizeBehaviorValue = (value: string | null): BehaviorValue => {
   return DEFAULT_BEHAVIOR_OPTION.value;
 };
 
-export const getBehaviorLabel = (value: BehaviorValue) =>
-  BEHAVIOR_OPTIONS.find((behaviorOption) => behaviorOption.value === value)
-    ?.label ?? DEFAULT_BEHAVIOR_OPTION.label;
-
 export const toNullableSettingValue = (value: string) => {
   const trimmedValue = value.trim();
 

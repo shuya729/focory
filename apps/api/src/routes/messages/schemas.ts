@@ -1,10 +1,13 @@
 import z from "zod";
+import { BEHAVIOR_VALUES } from "./prompots";
 
 const MESSAGE_CONTEXT_MAX_LENGTH = 1000;
 
 export const messageTypeSchema = z.enum(["start", "stop", "restart", "finish"]);
 
 export type MessageType = z.infer<typeof messageTypeSchema>;
+
+export const behaviorSchema = z.enum(BEHAVIOR_VALUES);
 
 const optionalMessageContextSchema = z
   .string()
@@ -16,9 +19,9 @@ export const postMessageJsonSchema = z
   .object({
     timerId: z.uuid(),
     type: messageTypeSchema,
+    behavior: behaviorSchema,
     objective: optionalMessageContextSchema,
     purpose: optionalMessageContextSchema,
-    behavior: optionalMessageContextSchema,
     durationSec: z.number().int().positive(),
     elapsedSec: z.number().int().min(0),
   })
@@ -33,10 +36,10 @@ export const messageResponseSchema = z.object({
   id: z.uuid(),
   timerId: z.uuid(),
   type: messageTypeSchema,
+  behavior: behaviorSchema,
   content: z.string().min(1),
   objective: z.string().nullable(),
   purpose: z.string().nullable(),
-  behavior: z.string().nullable(),
   durationSec: z.number().int().positive(),
   elapsedSec: z.number().int().min(0),
   createdAt: z.date(),

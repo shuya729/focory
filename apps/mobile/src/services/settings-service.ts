@@ -7,7 +7,6 @@ import {
 } from "@/lib/kv/keys";
 import type { UserSettings } from "@/types/settings";
 import {
-  getBehaviorLabel,
   normalizeBehaviorValue,
   toNullableSettingValue,
 } from "@/utils/settings-utils";
@@ -46,7 +45,7 @@ export async function saveBehavior(behavior: UserSettings["behavior"]) {
 
 export function toTimerMessageSettings(settings: UserSettings) {
   return {
-    behavior: toNullableSettingValue(getBehaviorLabel(settings.behavior)),
+    behavior: settings.behavior,
     objective: toNullableSettingValue(settings.objective),
     purpose: toNullableSettingValue(settings.purpose),
   };

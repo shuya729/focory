@@ -129,9 +129,16 @@ export interface operations {
           timerId: string;
           /** @enum {string} */
           type: "start" | "stop" | "restart" | "finish";
+          /** @enum {string} */
+          behavior:
+            | "supporter"
+            | "rival"
+            | "cool"
+            | "coach"
+            | "swordsman"
+            | "trickster";
           objective?: string | null;
           purpose?: string | null;
-          behavior?: string | null;
           durationSec: number;
           elapsedSec: number;
         };
@@ -153,10 +160,17 @@ export interface operations {
                 timerId: string;
                 /** @enum {string} */
                 type: "start" | "stop" | "restart" | "finish";
+                /** @enum {string} */
+                behavior:
+                  | "supporter"
+                  | "rival"
+                  | "cool"
+                  | "coach"
+                  | "swordsman"
+                  | "trickster";
                 content: string;
                 objective: string | null;
                 purpose: string | null;
-                behavior: string | null;
                 durationSec: number;
                 elapsedSec: number;
                 /** Format: date-time */

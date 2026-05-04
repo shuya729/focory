@@ -104,7 +104,7 @@ export const messages = pgTable(
     content: text("content").notNull(),
     objective: text("objective"),
     purpose: text("purpose"),
-    behavior: text("behavior"),
+    behavior: text("behavior").notNull().default("supporter"),
     durationSec: integer("duration_sec").notNull(),
     elapsedSec: integer("elapsed_sec").notNull(),
     createdAt: timestamp("created_at", { withTimezone: true })
