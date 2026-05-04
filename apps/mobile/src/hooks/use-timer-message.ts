@@ -25,6 +25,7 @@ export function useTimerMessage() {
     : timerMessageState.message;
 
   const clearTimerMessage = useCallback(() => {
+    latestMessageSequenceRef.current += 1;
     setTimerMessageState(createDefaultMessageState());
   }, []);
 
