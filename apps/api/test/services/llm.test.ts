@@ -26,13 +26,17 @@ describe("LlmService", () => {
     vi.unstubAllGlobals();
   });
 
-  it("prompt を LLM API に送り、choices の text を返す", async () => {
+  it("prompt を Vertex AI の generateContent API に送り、candidates の text を返す", async () => {
     const fetchMock = stubFetch(
       createJsonResponse({
-        choices: [
+        candidates: [
           {
-            message: {
-              content: "  集中を続けられました。次もこの調子です。  ",
+            content: {
+              parts: [
+                {
+                  text: "  集中を続けられました。次もこの調子です。  ",
+                },
+              ],
             },
           },
         ],
@@ -40,8 +44,9 @@ describe("LlmService", () => {
     );
     const service = new LlmService({
       apiKey: "test-key",
-      baseUrl: "https://example.com/chat/completions",
-      model: "openai/gpt-oss-120b-maas",
+      location: "global",
+      modelId: "gemini-2.5-flash-lite",
+      projectId: "test-project",
     });
 
     const result = await service.generateText("短い応援文を作ってください");
@@ -50,13 +55,22 @@ describe("LlmService", () => {
     expect(fetchMock).toHaveBeenCalledTimes(1);
 
     const call = fetchMock.mock.calls[0] as [string, RequestInit];
-    expect(call[0]).toBe("https://example.com/chat/completions?key=test-key");
+    expect(call[0]).toBe(
+      "https://aiplatform.googleapis.com/v1/projects/test-project/locations/global/publishers/google/models/gemini-2.5-flash-lite:generateContent"
+    );
+    expect(call[1].headers).toEqual({
+      "Content-Type": "application/json",
+      "x-goog-api-key": "test-key",
+    });
     expect(JSON.parse(call[1].body as string)).toEqual({
-      model: "openai/gpt-oss-120b-maas",
-      messages: [
+      contents: [
         {
           role: "user",
-          content: "短い応援文を作ってください",
+          parts: [
+            {
+              text: "短い応援文を作ってください",
+            },
+          ],
         },
       ],
     });
@@ -76,8 +90,9 @@ describe("LlmService", () => {
     );
     const service = new LlmService({
       apiKey: "test-key",
-      baseUrl: "https://example.com/generateContent",
-      model: "gemini-test",
+      location: "global",
+      modelId: "gemini-test",
+      projectId: "test-project",
     });
 
     await expect(service.generateText("prompt")).resolves.toBe(
@@ -89,8 +104,9 @@ describe("LlmService", () => {
     const fetchMock = stubFetch();
     const service = new LlmService({
       apiKey: "",
-      baseUrl: "https://example.com/chat/completions",
-      model: "openai/gpt-oss-120b-maas",
+      location: "global",
+      modelId: "gemini-2.5-flash-lite",
+      projectId: "test-project",
     });
 
     await expect(service.generateText("prompt")).rejects.toThrow(
@@ -112,8 +128,9 @@ describe("LlmService", () => {
     );
     const service = new LlmService({
       apiKey: "test-key",
-      baseUrl: "https://example.com/chat/completions",
-      model: "openai/gpt-oss-120b-maas",
+      location: "global",
+      modelId: "gemini-2.5-flash-lite",
+      projectId: "test-project",
     });
 
     await expect(service.generateText("prompt")).rejects.toThrow(

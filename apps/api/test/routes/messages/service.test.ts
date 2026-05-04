@@ -6,8 +6,9 @@ const serviceOptions = {
   expoPushReceiptsUrl: "https://example.com/push/getReceipts",
   expoPushSendUrl: "https://example.com/push/send",
   gcpApiKey: "test-key",
-  llmBaseUrl: "https://example.com/chat/completions",
-  llmModel: "openai/gpt-oss-120b-maas",
+  gcpLocation: "global",
+  gcpProjectId: "test-project",
+  llmModelId: "gemini-2.5-flash-lite",
 };
 
 describe("MessagesService", () => {

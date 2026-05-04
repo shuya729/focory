@@ -35,8 +35,9 @@ interface MessagesServiceOptions {
   expoPushReceiptsUrl: string;
   expoPushSendUrl: string;
   gcpApiKey: string;
-  llmBaseUrl: string;
-  llmModel: string;
+  gcpLocation: string;
+  gcpProjectId: string;
+  llmModelId: string;
 }
 
 interface MessagesServiceDependencies {
@@ -60,8 +61,9 @@ export class MessagesService {
       dependencies.llmService ??
       new LlmService({
         apiKey: options.gcpApiKey,
-        baseUrl: options.llmBaseUrl,
-        model: options.llmModel,
+        location: options.gcpLocation,
+        modelId: options.llmModelId,
+        projectId: options.gcpProjectId,
       });
     this.pushNotificationService =
       dependencies.pushNotificationService ??

@@ -71,8 +71,9 @@ app.post(
       expoPushReceiptsUrl: c.env.EXPO_PUSH_RECEIPTS_URL,
       expoPushSendUrl: c.env.EXPO_PUSH_SEND_URL,
       gcpApiKey: c.env.GCP_API_KEY,
-      llmBaseUrl: c.env.LLM_BASE_URL,
-      llmModel: c.env.LLM_MODEL,
+      gcpLocation: c.env.GCP_LOCATION,
+      gcpProjectId: c.env.GCP_PROJECT_ID,
+      llmModelId: c.env.LLM_MODEL_ID,
     });
     const result = await service.createMessage(userId, json);
     return c.json(result);

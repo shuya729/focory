@@ -27,8 +27,9 @@ interface LlmResponse {
 
 export interface LlmServiceOptions {
   apiKey: string;
-  baseUrl: string;
-  model: string;
+  location: string;
+  modelId: string;
+  projectId: string;
 }
 
 export interface TextGenerationService {
@@ -37,17 +38,19 @@ export interface TextGenerationService {
 
 export class LlmService implements TextGenerationService {
   private readonly apiKey: string;
-  private readonly baseUrl: string;
-  private readonly model: string;
+  private readonly location: string;
+  private readonly modelId: string;
+  private readonly projectId: string;
 
   constructor(options: LlmServiceOptions) {
     this.apiKey = options.apiKey;
-    this.baseUrl = options.baseUrl;
-    this.model = options.model;
+    this.location = options.location;
+    this.modelId = options.modelId;
+    this.projectId = options.projectId;
   }
 
   async generateText(prompt: string): Promise<string> {
-    if (!(this.apiKey && this.baseUrl && this.model)) {
+    if (!(this.apiKey && this.projectId && this.location && this.modelId)) {
       throw new HTTPException(500, { message: "LLM is not configured" });
     }
 
@@ -55,17 +58,21 @@ export class LlmService implements TextGenerationService {
     let data: LlmResponse;
 
     try {
-      response = await fetch(`${this.baseUrl}?key=${this.apiKey}`, {
+      response = await fetch(this.buildGenerateContentUrl(), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-goog-api-key": this.apiKey,
         },
         body: JSON.stringify({
-          model: this.model,
-          messages: [
+          contents: [
             {
               role: "user",
-              content: prompt,
+              parts: [
+                {
+                  text: prompt,
+                },
+              ],
             },
           ],
         }),
@@ -98,6 +105,14 @@ export class LlmService implements TextGenerationService {
     }
 
     return text;
+  }
+
+  private buildGenerateContentUrl(): string {
+    const projectId = encodeURIComponent(this.projectId);
+    const location = encodeURIComponent(this.location);
+    const modelId = encodeURIComponent(this.modelId);
+
+    return `https://aiplatform.googleapis.com/v1/projects/${projectId}/locations/${location}/publishers/google/models/${modelId}:generateContent`;
   }
 
   private static extractGeneratedText(data: LlmResponse): string | null {

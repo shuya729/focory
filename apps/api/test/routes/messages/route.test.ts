@@ -7,8 +7,9 @@ const env = {
   EXPO_PUSH_RECEIPTS_URL: "https://example.com/push/getReceipts",
   EXPO_PUSH_SEND_URL: "https://example.com/push/send",
   GCP_API_KEY: "test-key",
-  LLM_BASE_URL: "https://example.com/chat/completions",
-  LLM_MODEL: "openai/gpt-oss-120b-maas",
+  GCP_LOCATION: "global",
+  GCP_PROJECT_ID: "test-project",
+  LLM_MODEL_ID: "gemini-2.5-flash-lite",
 } as CloudflareBindings;
 
 describe("POST /messages", () => {
