@@ -118,7 +118,7 @@ export function useTimerRuntime({ onArchiveChanged }: UseTimerRuntimeOptions) {
     timerState,
     updateTimerState,
   });
-  usePauseTimerOnInactive({ pauseTimer });
+  usePauseTimerOnBackground({ pauseTimer });
 
   const actions = useMemo(
     () => ({
@@ -410,7 +410,7 @@ function usePauseTimer({
   ]);
 }
 
-function usePauseTimerOnInactive({
+function usePauseTimerOnBackground({
   pauseTimer,
 }: {
   pauseTimer: () => Promise<void>;
@@ -423,7 +423,7 @@ function usePauseTimerOnInactive({
 
       appStateRef.current = nextAppState;
 
-      if (!(previousAppState === "active" && nextAppState !== "active")) {
+      if (previousAppState === "background" || nextAppState !== "background") {
         return;
       }
 
