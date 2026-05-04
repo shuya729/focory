@@ -160,7 +160,7 @@ function TimerPickerModal() {
       />
 
       <Animated.View
-        className="rounded-t-[24px] bg-background px-6 pt-3"
+        className="rounded-t-[24px] bg-background px-6 pt-6"
         style={[
           {
             paddingBottom: Math.max(insets.bottom, 24) + 16,
@@ -168,11 +168,7 @@ function TimerPickerModal() {
           sheetAnimatedStyle,
         ]}
       >
-        <View className="items-center pb-7">
-          <View className="h-1 w-10 rounded-full bg-border" />
-        </View>
-
-        <View className="flex-row items-center justify-between pb-7">
+        <View className="flex-row items-center justify-between pb-6">
           <Text className="font-bold text-foreground text-lg">
             タイマー編集
           </Text>
@@ -190,7 +186,7 @@ function TimerPickerModal() {
           </Button>
         </View>
 
-        <View className="pb-7">
+        <View className="pb-6">
           <View className="items-center justify-center overflow-hidden py-1">
             <View className="absolute right-0 left-0 h-14 rounded-lg bg-secondary" />
 
