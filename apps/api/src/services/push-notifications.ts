@@ -175,8 +175,6 @@ export class PushNotificationService implements UserPushNotificationService {
     ticketId: string
   ): Promise<void> {
     try {
-      // Expo receipts can be delayed; checking immediately still lets us prune
-      // any receipt that is already available.
       const response = await fetch(this.receiptsUrl, {
         method: "POST",
         headers: EXPO_PUSH_HEADERS,
