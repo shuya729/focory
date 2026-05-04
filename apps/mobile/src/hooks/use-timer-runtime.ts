@@ -97,7 +97,6 @@ export function useTimerRuntime({ onArchiveChanged }: UseTimerRuntimeOptions) {
     updateTimerState,
   });
   const resetTimer = useResetTimer({
-    clearTimerMessage,
     preferredDurationSeconds,
     replaceTimerState,
     timerStateRef,
@@ -532,12 +531,10 @@ function useStartOrResumeTimer({
 }
 
 function useResetTimer({
-  clearTimerMessage,
   preferredDurationSeconds,
   replaceTimerState,
   timerStateRef,
 }: {
-  clearTimerMessage: () => void;
   preferredDurationSeconds: number;
   replaceTimerState: ReplaceTimerState;
   timerStateRef: RefObject<TimerState>;
@@ -549,14 +546,8 @@ function useResetTimer({
       return;
     }
 
-    clearTimerMessage();
     replaceTimerState(createIdleTimerState(preferredDurationSeconds));
-  }, [
-    clearTimerMessage,
-    preferredDurationSeconds,
-    replaceTimerState,
-    timerStateRef,
-  ]);
+  }, [preferredDurationSeconds, replaceTimerState, timerStateRef]);
 }
 
 function useSaveTimerDuration({
