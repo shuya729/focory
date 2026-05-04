@@ -54,9 +54,9 @@ describe("MessagesService", () => {
 
     expect(generateText).toHaveBeenCalledTimes(1);
     const prompt = generateText.mock.calls[0]?.[0] as string;
-    expect(prompt).toContain("# 共通プロンプト");
+    expect(prompt).toContain("# 役割");
     expect(prompt).toContain("# キャラクター");
-    expect(prompt).toContain("# 入力値");
+    expect(prompt).toContain("# 今回の入力");
     expect(prompt).toContain("objective: 開発を進める");
     expect(prompt).toContain("purpose: デモ準備");
     expect(create).toHaveBeenCalledWith({
