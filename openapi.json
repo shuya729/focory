@@ -18,9 +18,7 @@
     "/contacts": {
       "post": {
         "operationId": "postContacts",
-        "tags": [
-          "Contacts"
-        ],
+        "tags": ["Contacts"],
         "summary": "問い合わせ内容を保存",
         "responses": {
           "200": {
@@ -78,14 +76,10 @@
                           ]
                         }
                       },
-                      "required": [
-                        "contact"
-                      ]
+                      "required": ["contact"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             }
@@ -101,9 +95,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -119,9 +111,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -155,11 +145,7 @@
                     "maxLength": 5000
                   }
                 },
-                "required": [
-                  "name",
-                  "email",
-                  "content"
-                ]
+                "required": ["name", "email", "content"]
               }
             }
           }
@@ -169,9 +155,7 @@
     "/push-tokens": {
       "post": {
         "operationId": "postPushTokens",
-        "tags": [
-          "Push Tokens"
-        ],
+        "tags": ["Push Tokens"],
         "summary": "プッシュトークンを登録",
         "security": [
           {
@@ -197,19 +181,13 @@
                               "pattern": "^(Exponent|Expo)PushToken\\[[^\\]]+\\]$"
                             }
                           },
-                          "required": [
-                            "token"
-                          ]
+                          "required": ["token"]
                         }
                       },
-                      "required": [
-                        "pushToken"
-                      ]
+                      "required": ["pushToken"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             }
@@ -225,9 +203,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -243,9 +219,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -261,9 +235,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -281,9 +253,7 @@
                     "pattern": "^(Exponent|Expo)PushToken\\[[^\\]]+\\]$"
                   }
                 },
-                "required": [
-                  "token"
-                ]
+                "required": ["token"]
               }
             }
           }
@@ -293,9 +263,7 @@
     "/messages": {
       "post": {
         "operationId": "postMessages",
-        "tags": [
-          "Messages"
-        ],
+        "tags": ["Messages"],
         "summary": "パーソナライズされたメッセージを生成して保存",
         "security": [
           {
@@ -328,12 +296,7 @@
                             },
                             "type": {
                               "type": "string",
-                              "enum": [
-                                "start",
-                                "stop",
-                                "restart",
-                                "finish"
-                              ]
+                              "enum": ["start", "stop", "restart", "finish"]
                             },
                             "behavior": {
                               "type": "string",
@@ -404,14 +367,10 @@
                           ]
                         }
                       },
-                      "required": [
-                        "message"
-                      ]
+                      "required": ["message"]
                     }
                   },
-                  "required": [
-                    "data"
-                  ]
+                  "required": ["data"]
                 }
               }
             }
@@ -427,9 +386,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -445,9 +402,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -463,9 +418,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -481,9 +434,7 @@
                       "type": "string"
                     }
                   },
-                  "required": [
-                    "error"
-                  ]
+                  "required": ["error"]
                 }
               }
             }
@@ -503,12 +454,7 @@
                   },
                   "type": {
                     "type": "string",
-                    "enum": [
-                      "start",
-                      "stop",
-                      "restart",
-                      "finish"
-                    ]
+                    "enum": ["start", "stop", "restart", "finish"]
                   },
                   "behavior": {
                     "type": "string",

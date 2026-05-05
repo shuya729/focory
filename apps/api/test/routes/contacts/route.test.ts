@@ -28,10 +28,7 @@ describe("POST /contacts", () => {
   });
 
   it("不正な body なら 400 を返す", async () => {
-    const createContact = vi.spyOn(
-      ContactsService.prototype,
-      "createContact"
-    );
+    const createContact = vi.spyOn(ContactsService.prototype, "createContact");
 
     const response = await app.request("/contacts", {
       method: "POST",
