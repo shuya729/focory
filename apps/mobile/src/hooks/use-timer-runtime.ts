@@ -1,3 +1,4 @@
+import { activateKeepAwakeAsync, deactivateKeepAwake } from "expo-keep-awake";
 import {
   type RefObject,
   useCallback,
@@ -7,7 +8,10 @@ import {
   useState,
 } from "react";
 import { AppState, type AppStateStatus } from "react-native";
-import { TIMER_TICK_INTERVAL_MS } from "@/constants/timer-constants";
+import {
+  TIMER_KEEP_AWAKE_TAG,
+  TIMER_TICK_INTERVAL_MS,
+} from "@/constants/timer-constants";
 import {
   getTimerDurationPreference,
   saveTimerDurationPreference,
@@ -119,6 +123,7 @@ export function useTimerRuntime({ onArchiveChanged }: UseTimerRuntimeOptions) {
     updateTimerState,
   });
   usePauseTimerOnBackground({ pauseTimer });
+  useTimerKeepAwake({ isRunning: timerState.isRunning });
 
   const actions = useMemo(
     () => ({
@@ -266,6 +271,22 @@ function useTimerTick({
       clearInterval(intervalId);
     };
   }, [isRunning, updateTimerState]);
+}
+
+function useTimerKeepAwake({ isRunning }: { isRunning: boolean }) {
+  useEffect(() => {
+    if (!isRunning) {
+      return;
+    }
+
+    activateKeepAwakeAsync(TIMER_KEEP_AWAKE_TAG).catch((error) => {
+      showErrorToast(error, "画面スリープの抑止に失敗しました");
+    });
+
+    return () => {
+      deactivateKeepAwake(TIMER_KEEP_AWAKE_TAG).catch(() => undefined);
+    };
+  }, [isRunning]);
 }
 
 function useCompleteRunningTimer({
