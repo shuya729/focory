@@ -13,16 +13,7 @@ export default function ContactPage() {
               お問い合わせ
             </h1>
             <p className="max-w-[24rem] text-muted-foreground text-sm leading-[1.8] sm:text-[0.9375rem]">
-              ご意見・ご要望・不具合の報告など、どんなことでも、やさしくお寄せください。
-            </p>
-          </div>
-
-          <div className="hidden w-full rounded-2xl border border-border/70 bg-card p-5 lg:flex lg:flex-col lg:gap-2.5">
-            <h2 className="font-semibold text-foreground text-sm">
-              返信について
-            </h2>
-            <p className="text-muted-foreground text-sm leading-[1.7]">
-              通常3〜5営業日以内にご返信いたします。内容によってはお時間をいただく場合があります。
+              ご意見・ご要望・不具合の報告など、どんなことでもお寄せください。
             </p>
           </div>
         </section>
