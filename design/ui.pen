@@ -1,5 +1,5 @@
 {
-  "version": "2.8",
+  "version": "2.11",
   "children": [
     {
       "type": "frame",
@@ -29,10 +29,9 @@
           "height": "fill_container",
           "layout": "vertical",
           "padding": [
-            6,
+            8,
             24
           ],
-          "justifyContent": "space_between",
           "alignItems": "center",
           "children": [
             {
@@ -77,7 +76,7 @@
               "layout": "vertical",
               "gap": 16,
               "padding": [
-                12,
+                8,
                 0
               ],
               "justifyContent": "space_between",
@@ -106,9 +105,9 @@
                   "gap": 40,
                   "padding": [
                     24,
-                    0,
+                    28,
                     18,
-                    0
+                    28
                   ],
                   "justifyContent": "space_around",
                   "alignItems": "center",
@@ -203,77 +202,65 @@
                     },
                     {
                       "type": "frame",
-                      "id": "K1vbk",
-                      "name": "Bubble With Tail",
+                      "id": "7ajUD",
+                      "name": "Speech Bubble",
                       "width": "fill_container",
+                      "fill": "#EDE8E2",
+                      "cornerRadius": [
+                        24,
+                        24,
+                        24,
+                        16
+                      ],
+                      "stroke": {
+                        "align": "outside",
+                        "thickness": 0,
+                        "fill": "none"
+                      },
                       "layout": "vertical",
+                      "gap": 8,
+                      "padding": 16,
                       "children": [
                         {
-                          "type": "frame",
-                          "id": "7ajUD",
-                          "name": "Speech Bubble",
+                          "type": "text",
+                          "id": "ywYE7",
+                          "name": "bubbleText",
+                          "fill": "#4A4A4A",
+                          "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "fill": "#EDE8E2",
-                          "cornerRadius": [
-                            20,
-                            20,
-                            20,
-                            6
-                          ],
-                          "stroke": {
-                            "align": "outside",
-                            "thickness": 0,
-                            "fill": "none"
-                          },
-                          "layout": "vertical",
-                          "gap": 8,
-                          "padding": [
-                            16,
-                            18
-                          ],
-                          "children": [
-                            {
-                              "type": "text",
-                              "id": "ywYE7",
-                              "name": "bubbleText",
-                              "fill": "#4A4A4A",
-                              "textGrowth": "fixed-width",
-                              "width": "fill_container",
-                              "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
-                              "lineHeight": 1.6,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
-                              "fontWeight": "normal"
-                            }
-                          ]
+                          "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
+                          "lineHeight": 1.6,
+                          "fontFamily": "DM Sans",
+                          "fontSize": 16,
+                          "fontWeight": "normal"
                         }
                       ]
                     }
                   ]
                 }
               ]
-            },
-            {
-              "id": "OeXj8",
-              "type": "ref",
-              "ref": "FzJdq",
-              "width": "fill_container",
-              "height": 34,
-              "name": "sib1",
-              "descendants": {
-                "1acgJ": {
-                  "fill": "#C0BAB2",
-                  "width": 8,
-                  "height": 8
-                },
-                "ZipAy": {
-                  "fill": "#5B9E8F",
-                  "width": 10,
-                  "height": 10
-                }
-              }
             }
           ]
+        },
+        {
+          "id": "OeXj8",
+          "type": "ref",
+          "ref": "FzJdq",
+          "width": "fill_container",
+          "height": 34,
+          "name": "sib1",
+          "descendants": {
+            "1acgJ": {
+              "fill": "#C0BAB2",
+              "width": 8,
+              "height": 8
+            },
+            "ZipAy": {
+              "fill": "#5B9E8F",
+              "width": 10,
+              "height": 10
+            }
+          }
         }
       ]
     },
@@ -306,10 +293,8 @@
           "layout": "vertical",
           "gap": 16,
           "padding": [
-            6,
-            20,
-            24,
-            20
+            8,
+            24
           ],
           "children": [
             {
@@ -357,7 +342,11 @@
               "id": "HOIlw",
               "name": "Legend Bar",
               "width": "fill_container",
-              "gap": 16,
+              "gap": 8,
+              "padding": [
+                12,
+                8
+              ],
               "justifyContent": "center",
               "alignItems": "center",
               "children": [
@@ -399,7 +388,7 @@
               "name": "March 2026",
               "width": "fill_container",
               "layout": "vertical",
-              "gap": 12,
+              "gap": 8,
               "children": [
                 {
                   "id": "560VR",
@@ -421,14 +410,14 @@
                   "name": "Calendar Grid",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 4,
+                  "gap": 8,
                   "children": [
                     {
                       "type": "frame",
                       "id": "CEY38",
                       "name": "Week 1",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -500,7 +489,7 @@
                       "id": "2gadG",
                       "name": "Week 2",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -570,7 +559,7 @@
                       "id": "EvANT",
                       "name": "Week 3",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -642,7 +631,7 @@
                       "id": "Qh7DP",
                       "name": "Week 4",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -713,7 +702,7 @@
                       "id": "AjnNz",
                       "name": "Week 5",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -790,7 +779,7 @@
               "name": "February 2026",
               "width": "fill_container",
               "layout": "vertical",
-              "gap": 12,
+              "gap": 8,
               "children": [
                 {
                   "id": "OTrMD",
@@ -812,14 +801,14 @@
                   "name": "Calendar Grid",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 4,
+                  "gap": 8,
                   "children": [
                     {
                       "type": "frame",
                       "id": "9BdRv",
                       "name": "Week 1",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -891,7 +880,7 @@
                       "id": "FrUq0",
                       "name": "Week 2",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -963,7 +952,7 @@
                       "id": "WNfnN",
                       "name": "Week 3",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -1034,7 +1023,7 @@
                       "id": "vTCgM",
                       "name": "Week 4",
                       "width": "fill_container",
-                      "gap": 4,
+                      "gap": 8,
                       "justifyContent": "space_around",
                       "children": [
                         {
@@ -1162,10 +1151,9 @@
           "height": "fill_container",
           "layout": "vertical",
           "padding": [
-            6,
+            8,
             24
           ],
-          "justifyContent": "space_between",
           "children": [
             {
               "type": "frame",
@@ -1216,7 +1204,7 @@
               "layout": "vertical",
               "gap": 28,
               "padding": [
-                12,
+                8,
                 0
               ],
               "children": [
@@ -1294,7 +1282,7 @@
                       "id": "ETUbK",
                       "name": "Why Textarea",
                       "width": "fill_container",
-                      "height": 120,
+                      "height": 112,
                       "fill": "#FFFFFF",
                       "cornerRadius": 12,
                       "stroke": {
@@ -1331,7 +1319,7 @@
                   "name": "Behavior Section",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 10,
+                  "gap": 8,
                   "children": [
                     {
                       "type": "text",
@@ -1345,99 +1333,109 @@
                     },
                     {
                       "type": "frame",
-                      "id": "ifskV",
-                      "name": "Chip Grid",
+                      "id": "LhYU8",
+                      "name": "Chip Rows",
                       "width": "fill_container",
+                      "layout": "vertical",
                       "gap": 10,
                       "children": [
                         {
-                          "id": "GBzqm",
-                          "type": "ref",
-                          "ref": "MozgA",
+                          "type": "frame",
+                          "id": "ifskV",
+                          "name": "Chip Grid",
                           "width": "fill_container",
-                          "height": 40,
-                          "fill": "#5B9E8F",
-                          "name": "c1",
-                          "descendants": {
-                            "RzThO": {
-                              "content": "やさしい",
-                              "fill": "#F5F0EA"
+                          "gap": 10,
+                          "children": [
+                            {
+                              "id": "GBzqm",
+                              "type": "ref",
+                              "ref": "MozgA",
+                              "width": "fill_container",
+                              "height": 40,
+                              "fill": "#5B9E8F",
+                              "name": "c1",
+                              "descendants": {
+                                "RzThO": {
+                                  "content": "やさしい",
+                                  "fill": "#F5F0EA"
+                                }
+                              }
+                            },
+                            {
+                              "id": "Hf0d6",
+                              "type": "ref",
+                              "ref": "MozgA",
+                              "width": "fill_container",
+                              "height": 40,
+                              "name": "c2",
+                              "descendants": {
+                                "RzThO": {
+                                  "content": "厳しい"
+                                }
+                              }
+                            },
+                            {
+                              "id": "GeyKu",
+                              "type": "ref",
+                              "ref": "MozgA",
+                              "width": "fill_container",
+                              "height": 40,
+                              "name": "c3",
+                              "descendants": {
+                                "RzThO": {
+                                  "content": "明るい"
+                                }
+                              }
                             }
-                          }
+                          ]
                         },
                         {
-                          "id": "Hf0d6",
-                          "type": "ref",
-                          "ref": "MozgA",
+                          "type": "frame",
+                          "id": "SN97o",
+                          "name": "Chip Grid Row 2",
                           "width": "fill_container",
-                          "height": 40,
-                          "name": "c2",
-                          "descendants": {
-                            "RzThO": {
-                              "content": "厳しい"
+                          "gap": 10,
+                          "children": [
+                            {
+                              "id": "NLBbD",
+                              "type": "ref",
+                              "ref": "MozgA",
+                              "width": "fill_container",
+                              "height": 40,
+                              "name": "c4",
+                              "descendants": {
+                                "RzThO": {
+                                  "content": "落ち着き"
+                                }
+                              }
+                            },
+                            {
+                              "id": "EwLdN",
+                              "type": "ref",
+                              "ref": "MozgA",
+                              "width": "fill_container",
+                              "height": 40,
+                              "name": "c5",
+                              "descendants": {
+                                "RzThO": {
+                                  "content": "おもしろい"
+                                }
+                              }
+                            },
+                            {
+                              "id": "BDyIL",
+                              "type": "ref",
+                              "ref": "MozgA",
+                              "width": "fill_container",
+                              "height": 40,
+                              "name": "c6",
+                              "descendants": {
+                                "RzThO": {
+                                  "content": "クール"
+                                }
+                              }
                             }
-                          }
-                        },
-                        {
-                          "id": "GeyKu",
-                          "type": "ref",
-                          "ref": "MozgA",
-                          "width": "fill_container",
-                          "height": 40,
-                          "name": "c3",
-                          "descendants": {
-                            "RzThO": {
-                              "content": "明るい"
-                            }
-                          }
-                        }
-                      ]
-                    },
-                    {
-                      "type": "frame",
-                      "id": "SN97o",
-                      "name": "Chip Grid Row 2",
-                      "width": "fill_container",
-                      "gap": 10,
-                      "children": [
-                        {
-                          "id": "NLBbD",
-                          "type": "ref",
-                          "ref": "MozgA",
-                          "width": "fill_container",
-                          "height": 40,
-                          "name": "c4",
-                          "descendants": {
-                            "RzThO": {
-                              "content": "落ち着き"
-                            }
-                          }
-                        },
-                        {
-                          "id": "EwLdN",
-                          "type": "ref",
-                          "ref": "MozgA",
-                          "width": "fill_container",
-                          "height": 40,
-                          "name": "c5",
-                          "descendants": {
-                            "RzThO": {
-                              "content": "おもしろい"
-                            }
-                          }
-                        },
-                        {
-                          "id": "BDyIL",
-                          "type": "ref",
-                          "ref": "MozgA",
-                          "width": "fill_container",
-                          "height": 40,
-                          "name": "c6",
-                          "descendants": {
-                            "RzThO": {
-                              "content": "クール"
-                            }
-                          }
+                          ]
                         }
                       ]
                     }
@@ -1449,7 +1447,7 @@
                   "name": "Link Section",
                   "width": "fill_container",
                   "layout": "vertical",
-                  "gap": 10,
+                  "gap": 8,
                   "children": [
                     {
                       "type": "text",
@@ -1530,16 +1528,16 @@
                   ]
                 }
               ]
-            },
-            {
-              "id": "n0bmh",
-              "type": "ref",
-              "ref": "FzJdq",
-              "width": "fill_container",
-              "height": 34,
-              "name": "sib3"
             }
           ]
+        },
+        {
+          "id": "n0bmh",
+          "type": "ref",
+          "ref": "FzJdq",
+          "width": "fill_container",
+          "height": 34,
+          "name": "sib3"
         }
       ]
     },
@@ -1634,7 +1632,13 @@
           "type": "frame",
           "id": "WLCPB",
           "name": "Dots",
-          "gap": 8,
+          "gap": 12,
+          "padding": [
+            0,
+            0,
+            16,
+            0
+          ],
           "justifyContent": "center",
           "alignItems": "center",
           "children": [
@@ -1872,17 +1876,17 @@
       "name": "Component/Legend Item",
       "reusable": true,
       "width": 60,
-      "gap": 5,
+      "gap": 6,
       "alignItems": "center",
       "children": [
         {
           "type": "frame",
           "id": "zwxdv",
           "name": "colorBox",
-          "width": 14,
-          "height": 14,
+          "width": 16,
+          "height": 16,
           "fill": "#EDE8E2",
-          "cornerRadius": 3
+          "cornerRadius": 2
         },
         {
           "type": "text",
@@ -1891,7 +1895,7 @@
           "fill": "#ABABAB",
           "content": "~0h",
           "fontFamily": "JetBrains Mono",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         }
       ]
@@ -1949,7 +1953,7 @@
           "content": "日",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         },
         {
@@ -1962,7 +1966,7 @@
           "content": "月",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         },
         {
@@ -1975,7 +1979,7 @@
           "content": "火",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         },
         {
@@ -1988,7 +1992,7 @@
           "content": "水",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         },
         {
@@ -2001,7 +2005,7 @@
           "content": "木",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         },
         {
@@ -2014,7 +2018,7 @@
           "content": "金",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         },
         {
@@ -2027,7 +2031,7 @@
           "content": "土",
           "textAlign": "center",
           "fontFamily": "DM Sans",
-          "fontSize": 11,
+          "fontSize": 12,
           "fontWeight": "500"
         }
       ]
@@ -2777,15 +2781,7 @@
                           "ref": "IIS8S",
                           "name": "pauseBtn",
                           "width": 56,
-                          "height": 56,
-                          "children": [
-                            {
-                              "id": "BXsRM",
-                              "type": "ref",
-                              "ref": "BXsRM",
-                              "iconFontName": "pause"
-                            }
-                          ]
+                          "height": 56
                         }
                       ]
                     }
