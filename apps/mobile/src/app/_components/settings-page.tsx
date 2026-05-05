@@ -76,7 +76,7 @@ function SettingsPage({
             <View className="gap-7 py-2">
               <FormSection label="目的">
                 <Input
-                  className="rounded-xl border-border bg-card text-sm shadow-none"
+                  className="rounded-xl border-border bg-card text-sm shadow-none placeholder:text-muted-foreground"
                   onChangeText={handleChangeObjective}
                   placeholder="集中したいことを入力"
                   underlineColorAndroid="transparent"
@@ -86,7 +86,7 @@ function SettingsPage({
 
               <FormSection label="なぜ">
                 <Textarea
-                  className="min-h-28 rounded-xl border-border bg-card text-sm leading-6 shadow-none"
+                  className="min-h-28 rounded-xl border-border bg-card text-sm leading-6 shadow-none placeholder:text-muted-foreground"
                   onChangeText={handleChangePurpose}
                   placeholder="なぜそれをやりたいのか、理由を書いてみよう"
                   underlineColorAndroid="transparent"
