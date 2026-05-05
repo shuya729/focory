@@ -1,0 +1,40 @@
+<svg
+  aria-labelledby="title"
+  fill="none"
+  height="360"
+  role="img"
+  viewBox="0 0 360 360"
+  width="360"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title id="title">Focory base character</title>
+  <ellipse
+    cx="180"
+    cy="180"
+    fill="#9DD4C0"
+    rx="174"
+    ry="174"
+    stroke="#2C5A4E"
+    stroke-width="12"
+  />
+  <ellipse
+    cx="115"
+    cy="175"
+    fill="#FFFDF8"
+    rx="40"
+    ry="55"
+    stroke="#2C5A4E"
+    stroke-width="10"
+  />
+  <ellipse
+    cx="245"
+    cy="175"
+    fill="#FFFDF8"
+    rx="40"
+    ry="55"
+    stroke="#2C5A4E"
+    stroke-width="10"
+  />
+  <ellipse cx="116" cy="182.5" fill="#2C5A4E" rx="18" ry="25" />
+  <ellipse cx="246" cy="182.5" fill="#2C5A4E" rx="18" ry="25" />
+</svg>
