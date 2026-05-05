@@ -69,6 +69,7 @@ function SettingsPage({
 
           <ScrollView
             className="flex-1"
+            keyboardDismissMode="on-drag"
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
