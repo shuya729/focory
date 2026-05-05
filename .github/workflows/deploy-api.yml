@@ -30,9 +30,10 @@ jobs:
       BETTER_AUTH_SECRET: ${{ secrets.BETTER_AUTH_SECRET }}
       BETTER_AUTH_URL: ${{ secrets.BETTER_AUTH_URL }}
       TRUSTED_ORIGIN: ${{ secrets.TRUSTED_ORIGIN }}
+      GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       GCP_API_KEY: ${{ secrets.GCP_API_KEY }}
-      LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
-      LLM_MODEL: ${{ secrets.LLM_MODEL }}
+      GCP_LOCATION: ${{ secrets.GCP_LOCATION }}
+      LLM_MODEL_ID: ${{ secrets.LLM_MODEL_ID }}
       EXPO_PUSH_SEND_URL: ${{ secrets.EXPO_PUSH_SEND_URL }}
       EXPO_PUSH_RECEIPTS_URL: ${{ secrets.EXPO_PUSH_RECEIPTS_URL }}
     steps:
@@ -68,8 +69,9 @@ jobs:
             BETTER_AUTH_SECRET
             BETTER_AUTH_URL
             TRUSTED_ORIGIN
+            GCP_PROJECT_ID
             GCP_API_KEY
-            LLM_BASE_URL
-            LLM_MODEL
+            GCP_LOCATION
+            LLM_MODEL_ID
             EXPO_PUSH_SEND_URL
             EXPO_PUSH_RECEIPTS_URL
