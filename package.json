@@ -9,6 +9,7 @@
   "scripts": {
     "check": "ultracite check",
     "fix": "ultracite fix",
+    "typecheck": "pnpm -r typecheck",
     "dev": "pnpm -r dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
