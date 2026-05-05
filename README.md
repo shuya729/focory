@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/logo.png" alt="Focory" width="320" />
+  <img src="./assets/logo.svg" alt="Focory" width="320" />
 </p>
 
 <h1 align="center">Focory</h1>
@@ -35,9 +35,9 @@
 ## スクリーンショット
 
 <p align="center">
-  <img src="./assets/screen-settings.png" alt="設定画面" width="30%" />
-  <img src="./assets/screen-timer.png" alt="タイマー画面" width="30%" />
-  <img src="./assets/screen-log.png" alt="学習ログ画面" width="30%" />
+  <img src="./assets//screenshots/screen-settings.png" alt="設定画面" width="30%" />
+  <img src="./assets//screenshots/screen-timer.png" alt="タイマー画面" width="30%" />
+  <img src="./assets//screenshots/screen-log.png" alt="学習ログ画面" width="30%" />
 </p>
 
 <p align="center">
