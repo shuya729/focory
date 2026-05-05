@@ -3799,31 +3799,6 @@
               "gap": 32,
               "children": [
                 {
-                  "type": "frame",
-                  "id": "JU7Is",
-                  "name": "heroEyebrow",
-                  "fill": "$accent",
-                  "cornerRadius": 100,
-                  "gap": 8,
-                  "padding": [
-                    8,
-                    14
-                  ],
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "b007N",
-                      "name": "heroEyeT",
-                      "fill": "$text-primary",
-                      "content": "AIが背中を押す、学習タイマー",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    }
-                  ]
-                },
-                {
                   "type": "text",
                   "id": "KLkvi",
                   "name": "heroH1",
@@ -4286,29 +4261,6 @@
           ],
           "alignItems": "center",
           "children": [
-            {
-              "type": "frame",
-              "id": "P8ilBm",
-              "name": "mhEye",
-              "fill": "$accent",
-              "cornerRadius": 100,
-              "padding": [
-                6,
-                12
-              ],
-              "children": [
-                {
-                  "type": "text",
-                  "id": "x4kWc",
-                  "name": "mhEyeT",
-                  "fill": "$text-primary",
-                  "content": "AIが背中を押す、学習タイマー",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
-                  "fontWeight": "600"
-                }
-              ]
-            },
             {
               "type": "text",
               "id": "iLbDm",
