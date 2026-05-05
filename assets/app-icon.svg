@@ -1,0 +1,32 @@
+<svg
+  aria-labelledby="title"
+  fill="none"
+  height="350"
+  role="img"
+  viewBox="0 0 350 350"
+  width="350"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <title id="title">Focory app icon</title>
+  <rect fill="#9DD4C0" height="350" width="350" />
+  <ellipse
+    cx="104"
+    cy="175"
+    fill="#FFFDF8"
+    rx="45.5"
+    ry="56.5"
+    stroke="#2C5A4E"
+    stroke-width="9"
+  />
+  <ellipse cx="104" cy="176" fill="#2C5A4E" rx="20" ry="27" />
+  <ellipse
+    cx="246"
+    cy="175"
+    fill="#FFFDF8"
+    rx="45.5"
+    ry="56.5"
+    stroke="#2C5A4E"
+    stroke-width="9"
+  />
+  <ellipse cx="246" cy="176" fill="#2C5A4E" rx="20" ry="27" />
+</svg>

@@ -1,10 +1,10 @@
-import { Bot } from "lucide-react-native";
 import { View } from "react-native";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Card } from "@/components/ui/card";
-import { Icon } from "@/components/ui/icon";
 import { Text } from "@/components/ui/text";
 import { useTimer } from "@/contexts/timer-context";
+
+const focoryIcon = require("../../../assets/images/focory.png");
 
 function TimerBotMessage() {
   const { timerMessageState } = useTimer();
@@ -16,9 +16,10 @@ function TimerBotMessage() {
 
   return (
     <View className="w-full flex-row items-end gap-3">
-      <Avatar alt="Bot" className="size-12">
+      <Avatar alt="Focory" className="size-11">
+        <AvatarImage source={focoryIcon} />
         <AvatarFallback className="bg-secondary">
-          <Icon as={Bot} className="size-6 text-primary" />
+          <Text className="font-semibold text-primary text-xs">F</Text>
         </AvatarFallback>
       </Avatar>
       <Card className="flex-1 gap-0 rounded-t-3xl rounded-br-3xl rounded-bl-2xl border-0 bg-muted p-4 shadow-none">
