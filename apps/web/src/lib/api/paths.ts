@@ -4,297 +4,309 @@
  */
 
 export interface paths {
-    "/contacts": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** 問い合わせ内容を保存 */
-        post: operations["postContacts"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+  "/contacts": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/push-tokens": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** プッシュトークンを登録 */
-        post: operations["postPushTokens"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /** 問い合わせ内容を保存 */
+    post: operations["postContacts"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/push-tokens": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    "/messages": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        /** パーソナライズされたメッセージを生成して保存 */
-        post: operations["postMessages"];
-        delete?: never;
-        options?: never;
-        head?: never;
-        patch?: never;
-        trace?: never;
+    get?: never;
+    put?: never;
+    /** プッシュトークンを登録 */
+    post: operations["postPushTokens"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  "/messages": {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
+    get?: never;
+    put?: never;
+    /** パーソナライズされたメッセージを生成して保存 */
+    post: operations["postMessages"];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
 }
 export type webhooks = Record<string, never>;
 export interface components {
-    schemas: never;
-    responses: never;
-    parameters: never;
-    requestBodies: never;
-    headers: never;
-    pathItems: never;
+  schemas: never;
+  responses: never;
+  parameters: never;
+  requestBodies: never;
+  headers: never;
+  pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-    postContacts: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        requestBody: {
-            content: {
-                "application/json": {
-                    name: string;
-                    email: string | null;
-                    content: string;
-                };
-            };
-        };
-        responses: {
-            /** @description 保存された問い合わせ */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            contact: {
-                                /** Format: uuid */
-                                id: string;
-                                name: string;
-                                email: string | null;
-                                content: string;
-                                /** Format: date-time */
-                                createdAt: string;
-                                /** Format: date-time */
-                                updatedAt: string;
-                            };
-                        };
-                    };
-                };
-            };
-            /** @description リクエスト不正 */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-            /** @description サーバーエラー */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-        };
+  postContacts: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
     };
-    postPushTokens: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    requestBody: {
+      content: {
+        "application/json": {
+          name: string;
+          email: string | null;
+          content: string;
         };
-        requestBody: {
-            content: {
-                "application/json": {
-                    token: string;
-                };
-            };
-        };
-        responses: {
-            /** @description 登録済みまたは更新済みのプッシュトークン */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            pushToken: {
-                                token: string;
-                            };
-                        };
-                    };
-                };
-            };
-            /** @description リクエスト不正 */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-            /** @description 未認証 */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-            /** @description サーバーエラー */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-        };
+      };
     };
-    postMessages: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
+    responses: {
+      /** @description 保存された問い合わせ */
+      200: {
+        headers: {
+          [name: string]: unknown;
         };
-        requestBody: {
-            content: {
-                "application/json": {
-                    /** Format: uuid */
-                    timerId: string;
-                    /** @enum {string} */
-                    type: "start" | "stop" | "restart" | "finish";
-                    /** @enum {string} */
-                    behavior: "supporter" | "rival" | "cool" | "coach" | "swordsman" | "trickster";
-                    objective?: string | null;
-                    purpose?: string | null;
-                    durationSec: number;
-                    elapsedSec: number;
-                };
+        content: {
+          "application/json": {
+            data: {
+              contact: {
+                /** Format: uuid */
+                id: string;
+                name: string;
+                email: string | null;
+                content: string;
+                /** Format: date-time */
+                createdAt: string;
+                /** Format: date-time */
+                updatedAt: string;
+              };
             };
+          };
         };
-        responses: {
-            /** @description 生成されたメッセージ */
-            200: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        data: {
-                            message: {
-                                /** Format: uuid */
-                                id: string;
-                                /** Format: uuid */
-                                timerId: string;
-                                /** @enum {string} */
-                                type: "start" | "stop" | "restart" | "finish";
-                                /** @enum {string} */
-                                behavior: "supporter" | "rival" | "cool" | "coach" | "swordsman" | "trickster";
-                                content: string;
-                                objective: string | null;
-                                purpose: string | null;
-                                durationSec: number;
-                                elapsedSec: number;
-                                /** Format: date-time */
-                                createdAt: string;
-                                /** Format: date-time */
-                                updatedAt: string;
-                            };
-                        };
-                    };
-                };
-            };
-            /** @description リクエスト不正 */
-            400: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-            /** @description 未認証 */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-            /** @description サーバーエラー */
-            500: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
-            /** @description メッセージ生成失敗 */
-            502: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": {
-                        error: string;
-                    };
-                };
-            };
+      };
+      /** @description リクエスト不正 */
+      400: {
+        headers: {
+          [name: string]: unknown;
         };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description サーバーエラー */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
     };
+  };
+  postPushTokens: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          token: string;
+        };
+      };
+    };
+    responses: {
+      /** @description 登録済みまたは更新済みのプッシュトークン */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            data: {
+              pushToken: {
+                token: string;
+              };
+            };
+          };
+        };
+      };
+      /** @description リクエスト不正 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description 未認証 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description サーバーエラー */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+    };
+  };
+  postMessages: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        "application/json": {
+          /** Format: uuid */
+          timerId: string;
+          /** @enum {string} */
+          type: "start" | "stop" | "restart" | "finish";
+          /** @enum {string} */
+          behavior:
+            | "supporter"
+            | "rival"
+            | "cool"
+            | "coach"
+            | "swordsman"
+            | "trickster";
+          objective?: string | null;
+          purpose?: string | null;
+          durationSec: number;
+          elapsedSec: number;
+        };
+      };
+    };
+    responses: {
+      /** @description 生成されたメッセージ */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            data: {
+              message: {
+                /** Format: uuid */
+                id: string;
+                /** Format: uuid */
+                timerId: string;
+                /** @enum {string} */
+                type: "start" | "stop" | "restart" | "finish";
+                /** @enum {string} */
+                behavior:
+                  | "supporter"
+                  | "rival"
+                  | "cool"
+                  | "coach"
+                  | "swordsman"
+                  | "trickster";
+                content: string;
+                objective: string | null;
+                purpose: string | null;
+                durationSec: number;
+                elapsedSec: number;
+                /** Format: date-time */
+                createdAt: string;
+                /** Format: date-time */
+                updatedAt: string;
+              };
+            };
+          };
+        };
+      };
+      /** @description リクエスト不正 */
+      400: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description 未認証 */
+      401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description サーバーエラー */
+      500: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description メッセージ生成失敗 */
+      502: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+    };
+  };
 }
