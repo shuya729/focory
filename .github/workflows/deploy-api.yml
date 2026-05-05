@@ -10,11 +10,6 @@ on:
       - package.json
       - pnpm-lock.yaml
       - pnpm-workspace.yaml
-  workflow_dispatch:
-
-concurrency:
-  group: deploy-api-production
-  cancel-in-progress: true
 
 jobs:
   deploy-api:
@@ -23,6 +18,9 @@ jobs:
     environment: production
     permissions:
       contents: read
+    concurrency:
+      group: production-deploy-api
+      cancel-in-progress: false
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
       REDIS_URL: ${{ secrets.REDIS_URL }}
