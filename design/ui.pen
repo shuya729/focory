@@ -3167,6 +3167,38 @@
           ]
         }
       ]
+    },
+    {
+      "type": "rectangle",
+      "id": "FoA01",
+      "x": 398,
+      "y": -870,
+      "name": "Asset/Focory Icon",
+      "reusable": true,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/focory.png",
+        "mode": "fit"
+      },
+      "width": 96,
+      "height": 96
+    },
+    {
+      "type": "rectangle",
+      "id": "LoA01",
+      "x": 534,
+      "y": -854,
+      "name": "Asset/Focory Logo",
+      "reusable": true,
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/logo.png",
+        "mode": "fit"
+      },
+      "width": 240,
+      "height": 65
     }
   ],
   "variables": {
