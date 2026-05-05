@@ -58,7 +58,7 @@ export const SITE_FOOTER_GROUPS = [
         label: "Google Play",
       },
     ],
-    title: "ストア",
+    title: "ダウンロード",
   },
   {
     links: [
@@ -71,7 +71,7 @@ export const SITE_FOOTER_GROUPS = [
         label: "プライバシーポリシー",
       },
     ],
-    title: "法務",
+    title: "ドキュメント",
   },
 ] as const satisfies readonly SiteFooterGroup[];
 

@@ -12,8 +12,7 @@ export default function LandingHeroSection() {
           {LANDING_HERO.title}
         </h1>
         <p className="wrap-anywhere w-full max-w-152 text-muted-foreground text-sm leading-[1.7] sm:text-lg">
-          <span className="hidden sm:inline">{LANDING_HERO.description}</span>
-          <span className="sm:hidden">{LANDING_HERO.mobileDescription}</span>
+          <span className="sm:inline">{LANDING_HERO.description}</span>
         </p>
         <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">
           <AppStoreBadge className="w-45" />

@@ -3,8 +3,6 @@ export type LandingFeatureIcon = "calendar" | "message" | "timer";
 export const LANDING_HERO = {
   description:
     "Focoryは、AIがあなただけの言葉で集中を後押しする、学習タイマー。「あと5分だけ」を、今日からなくしませんか。",
-  mobileDescription:
-    "Focoryは、AIがあなただけの言葉で集中を後押しする、学習タイマー。",
   title: "スマホを置いて、\nいまやることへ。",
   visualCaption: "AIが、あなたに合わせて声がけ",
   visualMessage: "いい調子だね。\nこの集中、続けてみよう。",
