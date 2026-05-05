@@ -5,6 +5,7 @@
     "version": "1.0.0",
     "icon": "./assets/images/app-icon.png",
     "scheme": "focory",
+    "orientation": "portrait",
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
