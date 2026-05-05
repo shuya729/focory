@@ -15,7 +15,7 @@ export function SiteHeader() {
         >
           <Image
             alt={SITE.name}
-            className="h-auto w-[6.875rem] sm:w-[8.75rem]"
+            className="h-auto w-27.5 sm:w-35"
             height={38}
             priority
             src="/images/logo.png"

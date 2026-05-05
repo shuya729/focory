@@ -11,7 +11,7 @@ export function SiteFooter() {
           <div className="flex flex-col items-center gap-3 md:items-start">
             <Image
               alt={SITE.name}
-              className="h-auto w-[7.5rem] sm:w-[8.75rem]"
+              className="h-auto w-30 sm:w-35"
               height={38}
               src="/images/logo.png"
               width={140}

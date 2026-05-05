@@ -20,17 +20,17 @@ export default function LandingCtaSection() {
           width={80}
         />
         <div className="flex flex-col gap-2">
-          <h2 className="font-bold text-foreground text-xl leading-[1.4] tracking-normal [overflow-wrap:anywhere] sm:text-3xl">
+          <h2 className="wrap-anywhere font-bold text-foreground text-xl leading-[1.4] tracking-normal sm:text-3xl">
             {LANDING_CTA.title}
           </h2>
-          <p className="text-foreground/80 text-sm [overflow-wrap:anywhere] sm:text-base">
+          <p className="wrap-anywhere text-foreground/80 text-sm sm:text-base">
             <span className="hidden sm:inline">{LANDING_CTA.description}</span>
             <span className="sm:hidden">{LANDING_CTA.mobileDescription}</span>
           </p>
         </div>
         <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <AppStoreBadge className="w-[11.25rem]" />
-          <GooglePlayBadge className="w-[11.25rem]" />
+          <AppStoreBadge className="w-45" />
+          <GooglePlayBadge className="w-45" />
         </div>
       </div>
     </section>
