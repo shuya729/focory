@@ -12,18 +12,11 @@ const ALLOW_METHODS = [
 ] as const;
 const CORS_MAX_AGE_SECONDS = 86_400;
 
-const CORS_ORIGINS_REGEX = /[,\s]+/;
-const parseCorsOrigins = (corsOrigins: string): string[] =>
-  corsOrigins
-    .split(CORS_ORIGINS_REGEX)
-    .map((origin) => origin.trim())
-    .filter(Boolean);
-
 const apiCors = createMiddleware<{
   Bindings: CloudflareBindings;
 }>((c, next) => {
   const corsMiddlewareHandler = cors({
-    origin: parseCorsOrigins(c.env.CORS_ORIGINS),
+    origin: c.env.CORS_ORIGIN,
     allowHeaders: [...ALLOW_HEADERS],
     allowMethods: [...ALLOW_METHODS],
     maxAge: CORS_MAX_AGE_SECONDS,

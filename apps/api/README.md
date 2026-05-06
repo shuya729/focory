@@ -141,7 +141,7 @@ DATABASE_URL=postgresql://user:password@127.0.0.1:5432/db
 Wrangler ローカル実行用の `apps/api/.dev.vars`:
 
 ```dotenv
-CORS_ORIGINS=http://localhost:3000
+CORS_ORIGIN=http://localhost:3000
 REDIS_URL=https://<upstash-endpoint>
 REDIS_TOKEN=your-redis-token
 BETTER_AUTH_SECRET=your-secret
@@ -158,14 +158,14 @@ EXPO_PUSH_RECEIPTS_URL=https://exp.host/--/api/v2/push/getReceipts
 補足: Wrangler のローカル環境変数は `.dev.vars` と `.env` を同時には読み込みません。このプロジェクトでは Worker 用は `.dev.vars`、`drizzle-kit` 用は `.env` を使い分けます。
 機密情報を含むファイルは Git にコミットしないでください。
 
-`CORS_ORIGINS` には Web アプリの origin をカンマ区切りで設定します。ローカル開発では `http://localhost:3000`、本番では `https://focory.com,https://www.focory.com` のように指定してください。origin は末尾スラッシュなしで指定します。
+`CORS_ORIGIN` には Web アプリの origin だけを設定します。ローカル開発では `http://localhost:3000`、本番では Web アプリの本番 origin を指定してください。
 
 GitHub Actions からデプロイする場合は、Production environment の Secrets に同じ名前で登録してください。`deploy-api.yml` が `cloudflare/wrangler-action` 経由で Worker secrets として反映します。
 
 手元から直接デプロイする場合は、Wrangler でシークレットとして投入します。
 
 ```bash
-pnpm -F api exec wrangler secret put CORS_ORIGINS
+pnpm -F api exec wrangler secret put CORS_ORIGIN
 pnpm -F api exec wrangler secret put REDIS_URL
 pnpm -F api exec wrangler secret put REDIS_TOKEN
 pnpm -F api exec wrangler secret put BETTER_AUTH_SECRET
