@@ -15,6 +15,11 @@ type ContactFormStatus = "error" | "idle" | "submitting" | "success";
 
 type ContactFormFieldErrors = Partial<Record<ContactFormFieldName, string>>;
 
+interface UseContactFormOptions {
+  onSubmitError?: (message: string) => void;
+  onSubmitSuccess?: (message: string) => void;
+}
+
 const INITIAL_VALUES = {
   content: "",
   email: "",
@@ -36,10 +41,12 @@ const toFieldErrors = (
   };
 };
 
-export function useContactForm() {
+export function useContactForm({
+  onSubmitError,
+  onSubmitSuccess,
+}: UseContactFormOptions = {}) {
   const [fieldErrors, setFieldErrors] = useState<ContactFormFieldErrors>({});
   const [status, setStatus] = useState<ContactFormStatus>("idle");
-  const [statusMessage, setStatusMessage] = useState<string | null>(null);
   const [values, setValues] = useState<ContactFormInput>(INITIAL_VALUES);
 
   const handleValueChange = useCallback(
@@ -62,7 +69,6 @@ export function useContactForm() {
   const handleSubmit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      setStatusMessage(null);
 
       const parsedValues = contactFormSchema.safeParse(values);
 
@@ -79,7 +85,7 @@ export function useContactForm() {
         await sendContact(parsedValues.data);
         setValues(INITIAL_VALUES);
         setStatus("success");
-        setStatusMessage(SUCCESS_MESSAGE);
+        onSubmitSuccess?.(SUCCESS_MESSAGE);
       } catch (error) {
         const message =
           error instanceof Error
@@ -87,10 +93,10 @@ export function useContactForm() {
             : "お問い合わせの送信に失敗しました。";
 
         setStatus("error");
-        setStatusMessage(message);
+        onSubmitError?.(message);
       }
     },
-    [values]
+    [onSubmitError, onSubmitSuccess, values]
   );
 
   return {
@@ -98,8 +104,6 @@ export function useContactForm() {
     handleSubmit,
     handleValueChange,
     isSubmitting: status === "submitting",
-    status,
-    statusMessage,
     values,
   };
 }

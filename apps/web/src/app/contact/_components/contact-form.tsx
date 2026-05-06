@@ -1,10 +1,10 @@
 "use client";
 
 import { Send } from "lucide-react";
-import type { ReactNode } from "react";
+import { type ReactNode, useCallback } from "react";
+import { toast } from "sonner";
 
 import { useContactForm } from "@/app/contact/_hooks/use-contact-form";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -72,15 +72,23 @@ function FormField({
 }
 
 export function ContactForm() {
-  const {
-    fieldErrors,
-    handleSubmit,
-    handleValueChange,
-    isSubmitting,
-    status,
-    statusMessage,
-    values,
-  } = useContactForm();
+  const handleSubmitSuccess = useCallback((message: string) => {
+    toast.success("送信しました", {
+      description: message,
+    });
+  }, []);
+
+  const handleSubmitError = useCallback((message: string) => {
+    toast.error("送信できませんでした", {
+      description: message,
+    });
+  }, []);
+
+  const { fieldErrors, handleSubmit, handleValueChange, isSubmitting, values } =
+    useContactForm({
+      onSubmitError: handleSubmitError,
+      onSubmitSuccess: handleSubmitSuccess,
+    });
 
   return (
     <form
@@ -88,21 +96,6 @@ export function ContactForm() {
       noValidate
       onSubmit={handleSubmit}
     >
-      {statusMessage ? (
-        <Alert
-          className={cn(
-            "border-border/70",
-            status === "success" && "border-primary/40 bg-primary/10"
-          )}
-          variant={status === "error" ? "destructive" : "default"}
-        >
-          <AlertTitle>
-            {status === "success" ? "送信しました" : "送信できませんでした"}
-          </AlertTitle>
-          <AlertDescription>{statusMessage}</AlertDescription>
-        </Alert>
-      ) : null}
-
       <FormField
         error={fieldErrors.name}
         fieldId="contact-name"
