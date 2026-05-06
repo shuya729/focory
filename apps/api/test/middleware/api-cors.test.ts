@@ -60,7 +60,7 @@ describe("apiCors", () => {
 
     expect(response.status).toBe(200);
     expect(response.headers.get("Access-Control-Allow-Origin")).toBe(
-      LOCAL_CORS_ORIGIN
+      CORS_ORIGIN
     );
     await expect(response.json()).resolves.toEqual({ data: { ok: true } });
   });
