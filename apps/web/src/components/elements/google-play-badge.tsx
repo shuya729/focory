@@ -1,4 +1,4 @@
-import { Play } from "lucide-react";
+import Image from "next/image";
 
 import { SITE } from "@/constants/site";
 import { cn } from "@/utils/cn";
@@ -16,16 +16,20 @@ export function GooglePlayBadge({
     <a
       aria-label="Google Play で Focory を入手"
       className={cn(
-        "inline-flex h-14 w-45 items-center gap-2.5 rounded-xl bg-foreground px-4 py-2.5 text-background transition-colors hover:bg-foreground/90 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50",
+        "inline-flex h-12 w-40 shrink-0 items-center justify-center rounded-xl transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 sm:h-14 sm:w-45",
         className
       )}
       href={href}
     >
-      <Play aria-hidden="true" className="size-7 shrink-0 fill-current" />
-      <span className="flex flex-col leading-none">
-        <span className="text-[0.625rem] opacity-85">GET IT ON</span>
-        <span className="font-semibold text-lg">Google Play</span>
-      </span>
+      <Image
+        alt=""
+        aria-hidden="true"
+        className="size-full object-contain"
+        height={71}
+        src="/images/google-play-badge.svg"
+        unoptimized
+        width={239}
+      />
     </a>
   );
 }

@@ -28,9 +28,9 @@ export default function LandingCtaSection() {
             <span className="sm:hidden">{LANDING_CTA.mobileDescription}</span>
           </p>
         </div>
-        <div className="flex flex-col items-center gap-3 sm:flex-row">
-          <AppStoreBadge className="w-45" />
-          <GooglePlayBadge className="w-45" />
+        <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:w-auto">
+          <AppStoreBadge />
+          <GooglePlayBadge />
         </div>
       </div>
     </section>
