@@ -60,15 +60,15 @@ export interface SettingLink {
 
 export const TERMS_OF_SERVICE_SETTING_LINK: SettingLink = {
   label: "利用規約",
-  url: "https://www.google.com",
+  url: "https://focory.com/term",
 } as const;
 export const PRIVACY_POLICY_SETTING_LINK: SettingLink = {
   label: "プライバシーポリシー",
-  url: "https://google.com",
+  url: "https://focory.com/privacy",
 } as const;
 export const CONTACT_SETTING_LINK: SettingLink = {
   label: "お問い合わせ",
-  url: "https://google.co.jp",
+  url: "https://focory.com/contact",
 } as const;
 
 export const SETTINGS_LINK = {

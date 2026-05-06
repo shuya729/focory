@@ -1,4 +1,4 @@
-import { ChevronRight } from "lucide-react-native";
+import { ChevronRight, ExternalLink } from "lucide-react-native";
 import { Fragment, type ReactNode } from "react";
 import {
   KeyboardAvoidingView,
@@ -130,8 +130,9 @@ function SettingsPage({
                       {index > 0 ? <Separator /> : null}
                       <LinkRow
                         label={settingLink.label}
-                        onClickLink={onClickLink}
-                        url={settingLink.url}
+                        onClick={() => {
+                          onClickLink(settingLink.url);
+                        }}
                       />
                     </Fragment>
                   ))}
@@ -184,22 +185,19 @@ function BehaviorChipButton({
 
 interface LinkRowProps {
   label: string;
-  onClickLink: (url: string) => void;
-  url: string;
+  onClick: () => void;
 }
 
-function LinkRow({ label, onClickLink, url }: LinkRowProps) {
+function LinkRow({ label, onClick }: LinkRowProps) {
   return (
     <Pressable
       accessibilityLabel={`${label}を開く`}
       accessibilityRole="link"
       className="h-12 flex-row items-center justify-between px-4 active:bg-muted active:opacity-50"
-      onPress={() => {
-        onClickLink(url);
-      }}
+      onPress={onClick}
     >
       <Text className="text-sm">{label}</Text>
-      <Icon as={ChevronRight} className="size-[18px] text-muted-foreground" />
+      <Icon as={ExternalLink} className="size-[18px] text-muted-foreground" />
     </Pressable>
   );
 }
