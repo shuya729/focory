@@ -23,9 +23,8 @@ export default function LandingCtaSection() {
           <h2 className="wrap-anywhere font-bold text-foreground text-xl leading-[1.4] tracking-normal sm:text-3xl">
             {LANDING_CTA.title}
           </h2>
-          <p className="wrap-anywhere text-foreground/80 text-sm sm:text-base">
-            <span className="hidden sm:inline">{LANDING_CTA.description}</span>
-            <span className="sm:hidden">{LANDING_CTA.mobileDescription}</span>
+          <p className="wrap-anywhere font-medium text-base text-foreground/75 leading-[1.7] sm:text-xl">
+            {LANDING_CTA.description}
           </p>
         </div>
         <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:w-auto">

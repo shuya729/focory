@@ -12,7 +12,7 @@ export default function LandingHeroSection() {
           {LANDING_HERO.title}
         </h1>
         <p className="wrap-anywhere w-full max-w-152 text-base text-foreground/75 leading-[1.7] sm:text-xl">
-          <span className="sm:inline">{LANDING_HERO.description}</span>
+          {LANDING_HERO.description}
         </p>
         <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:w-auto sm:py-10">
           <AppStoreBadge />
