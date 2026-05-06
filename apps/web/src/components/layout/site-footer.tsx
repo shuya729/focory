@@ -58,7 +58,7 @@ export function SiteFooter() {
         </div>
 
         <div className="h-px bg-border" />
-        <p className="text-center text-tertiary-foreground text-xs md:text-left">
+        <p className="text-center text-muted-foreground text-xs md:text-left">
           {SITE.copyright}
         </p>
       </div>
