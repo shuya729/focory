@@ -19,7 +19,7 @@ const FEATURE_ICONS = {
 
 export default function LandingFeaturesSection() {
   return (
-    <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-10 sm:px-8 sm:py-16 lg:px-16 lg:py-20">
+    <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-20">
       <h2 className="wrap-anywhere mx-auto max-w-full text-center font-bold text-2xl text-foreground leading-[1.4] tracking-normal sm:text-4xl">
         {LANDING_FEATURES_HEADING}
       </h2>

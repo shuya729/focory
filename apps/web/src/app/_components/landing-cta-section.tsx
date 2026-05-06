@@ -7,7 +7,7 @@ import { LANDING_CTA } from "@/constants/landing";
 export default function LandingCtaSection() {
   return (
     <section
-      className="mx-auto max-w-7xl px-6 pt-6 pb-10 sm:px-8 sm:py-16 lg:px-16 lg:py-20"
+      className="mx-auto max-w-7xl px-6 py-12 sm:px-8 sm:py-16 lg:px-16 lg:py-20"
       id="download"
     >
       <div className="flex flex-col items-center gap-5 rounded-3xl bg-brand px-6 py-10 text-center sm:gap-7 sm:rounded-[2rem] sm:px-12 sm:py-16">

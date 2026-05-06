@@ -6,7 +6,7 @@ import { LANDING_HERO } from "@/constants/landing";
 
 export default function LandingHeroSection() {
   return (
-    <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-10 sm:px-8 sm:py-16 lg:grid-cols-[1fr_27.5rem] lg:gap-20 lg:px-16 lg:py-20">
+    <section className="mx-auto grid max-w-7xl items-center gap-10 px-6 py-12 sm:px-8 sm:py-16 lg:grid-cols-[1fr_27.5rem] lg:gap-20 lg:px-16 lg:py-20">
       <div className="flex min-w-0 flex-col items-center gap-6 text-center lg:items-start lg:text-left">
         <h1 className="wrap-anywhere max-w-full whitespace-pre-line font-bold text-[2rem] text-foreground leading-tight tracking-normal sm:text-5xl lg:text-[3.5rem] lg:leading-[1.2]">
           {LANDING_HERO.title}
@@ -14,7 +14,7 @@ export default function LandingHeroSection() {
         <p className="wrap-anywhere w-full max-w-152 text-base text-foreground/75 leading-[1.7] sm:text-xl">
           {LANDING_HERO.description}
         </p>
-        <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:w-auto sm:py-10">
+        <div className="flex w-full flex-wrap items-center justify-center gap-3 py-12 sm:w-auto">
           <AppStoreBadge />
           <GooglePlayBadge />
         </div>
