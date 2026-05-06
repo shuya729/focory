@@ -58,7 +58,7 @@ export const SITE_FOOTER_GROUPS = [
         label: "Google Play",
       },
     ],
-    title: "ダウンロード",
+    title: "インストール",
   },
   {
     links: [
