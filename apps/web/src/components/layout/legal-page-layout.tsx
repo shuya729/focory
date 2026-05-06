@@ -18,10 +18,10 @@ export function LegalPageLayout({
       <SiteHeader />
       <main>
         <section className="mx-auto flex max-w-5xl flex-col items-center gap-2.5 px-6 pt-8 pb-6 text-center sm:pt-12 sm:pb-8 lg:px-12">
-          <h1 className="font-bold text-[2rem] text-foreground leading-tight tracking-normal sm:text-5xl">
+          <h1 className="font-bold text-2xl text-foreground leading-tight tracking-normal sm:text-4xl">
             {title}
           </h1>
-          <p className="text-muted-foreground text-sm">
+          <p className="text-muted-foreground text-sm sm:text-base">
             最終更新日: {updatedAt}
           </p>
         </section>
