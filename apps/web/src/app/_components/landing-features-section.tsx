@@ -20,7 +20,7 @@ const FEATURE_ICONS = {
 export default function LandingFeaturesSection() {
   return (
     <section className="mx-auto flex max-w-7xl flex-col gap-8 px-6 py-10 sm:px-8 sm:py-16 lg:px-16 lg:py-20">
-      <h2 className="wrap-anywhere mx-auto max-w-full text-center font-bold text-[1.375rem] text-foreground leading-[1.4] tracking-normal sm:text-4xl">
+      <h2 className="wrap-anywhere mx-auto max-w-full text-center font-bold text-2xl text-foreground leading-[1.4] tracking-normal sm:text-4xl">
         {LANDING_FEATURES_HEADING}
       </h2>
       <div className="grid gap-5 md:grid-cols-3 lg:gap-6">
@@ -36,10 +36,10 @@ export default function LandingFeaturesSection() {
                 <FeatureIcon aria-hidden="true" className="size-6 sm:size-7" />
               </div>
               <div className="flex flex-col gap-2">
-                <h3 className="wrap-anywhere font-semibold text-[1.0625rem] text-foreground tracking-normal sm:text-xl">
+                <h3 className="wrap-anywhere font-semibold text-foreground text-lg tracking-normal sm:text-xl">
                   {feature.title}
                 </h3>
-                <p className="wrap-anywhere text-foreground/75 text-sm leading-[1.7]">
+                <p className="wrap-anywhere text-base text-foreground/75 leading-[1.7]">
                   {feature.description}
                 </p>
               </div>
