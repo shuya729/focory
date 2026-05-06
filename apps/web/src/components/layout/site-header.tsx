@@ -28,7 +28,7 @@ export function SiteHeader() {
             {SITE_NAV_ITEMS.map((item) => (
               <li key={item.href}>
                 <Link
-                  className="font-medium text-muted-foreground text-sm transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                  className="font-medium text-base text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
                   href={item.href}
                 >
                   {item.label}
