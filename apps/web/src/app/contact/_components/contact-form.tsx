@@ -113,7 +113,7 @@ export function ContactForm() {
           aria-describedby={fieldErrors.name ? "contact-name-error" : undefined}
           aria-invalid={Boolean(fieldErrors.name)}
           autoComplete="name"
-          className="h-12 rounded-xl border-border bg-background px-4 text-base shadow-none"
+          className="h-12 rounded-xl border-border bg-background px-4 text-sm shadow-none sm:text-base"
           disabled={isSubmitting}
           id="contact-name"
           onChange={handleValueChange("name")}
@@ -134,7 +134,7 @@ export function ContactForm() {
           }
           aria-invalid={Boolean(fieldErrors.email)}
           autoComplete="email"
-          className="h-12 rounded-xl border-border bg-background px-4 text-base shadow-none"
+          className="h-12 rounded-xl border-border bg-background px-4 text-sm shadow-none sm:text-base"
           disabled={isSubmitting}
           id="contact-email"
           inputMode="email"
@@ -156,7 +156,7 @@ export function ContactForm() {
             fieldErrors.content ? "contact-content-error" : undefined
           }
           aria-invalid={Boolean(fieldErrors.content)}
-          className="min-h-36 resize-none rounded-xl border-border bg-background px-4 py-3 text-base leading-[1.7] shadow-none sm:min-h-44"
+          className="min-h-36 resize-none rounded-xl border-border bg-background px-4 py-3 text-sm leading-[1.7] shadow-none sm:min-h-44 sm:text-base"
           disabled={isSubmitting}
           id="contact-content"
           onChange={handleValueChange("content")}
@@ -175,7 +175,7 @@ export function ContactForm() {
         {isSubmitting ? null : <Send aria-hidden="true" className="size-4" />}
       </Button>
 
-      <p className="text-center text-muted-foreground text-sm leading-[1.7]">
+      <p className="text-center text-muted-foreground text-xs leading-[1.7] sm:text-sm">
         送信いただいた内容は、お問い合わせへの返信のみに利用いたします。
       </p>
     </form>
