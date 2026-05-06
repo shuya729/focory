@@ -21,6 +21,9 @@ export const metadata: Metadata = {
     default: SITE.name,
     template: `%s | ${SITE.name}`,
   },
+  appleWebApp: {
+    title: SITE.name,
+  },
 };
 
 export default function RootLayout({
