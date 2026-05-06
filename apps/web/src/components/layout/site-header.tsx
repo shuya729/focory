@@ -2,6 +2,11 @@ import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { SITE, SITE_NAV_ITEMS } from "@/constants/site";
 
 export function SiteHeader() {
@@ -38,30 +43,41 @@ export function SiteHeader() {
           </ul>
         </nav>
 
-        <details className="group relative md:hidden">
-          <summary className="flex size-10 cursor-pointer list-none items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 [&::-webkit-details-marker]:hidden">
-            <Menu aria-hidden="true" className="size-5 group-open:hidden" />
-            <X aria-hidden="true" className="hidden size-5 group-open:block" />
-            <span className="sr-only">メニューを開く</span>
-          </summary>
-          <nav
-            aria-label="モバイルナビゲーション"
-            className="absolute top-12 right-0 z-20 w-56 rounded-xl border border-border bg-surface p-2 shadow-lg"
+        <Popover>
+          <PopoverTrigger
+            aria-label="メニューを開く"
+            className="group inline-flex size-10 items-center justify-center rounded-md text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:hidden"
           >
-            <ul className="flex flex-col">
-              {SITE_NAV_ITEMS.map((item) => (
-                <li key={item.href}>
-                  <Link
-                    className="block rounded-lg px-3 py-2 font-medium text-foreground text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
-                    href={item.href}
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </details>
+            <Menu
+              aria-hidden="true"
+              className="size-5 group-data-[state=open]:hidden"
+            />
+            <X
+              aria-hidden="true"
+              className="hidden size-5 group-data-[state=open]:block"
+            />
+          </PopoverTrigger>
+          <PopoverContent
+            align="end"
+            className="w-58 rounded-2xl border-border bg-popover p-2 shadow-md md:hidden"
+            sideOffset={8}
+          >
+            <nav aria-label="モバイルナビゲーション">
+              <ul className="flex flex-col gap-1">
+                {SITE_NAV_ITEMS.map((item) => (
+                  <li key={item.href}>
+                    <Link
+                      className="block rounded-xl px-3.5 py-2.5 font-medium text-foreground text-sm transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                      href={item.href}
+                    >
+                      {item.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          </PopoverContent>
+        </Popover>
       </div>
     </header>
   );
