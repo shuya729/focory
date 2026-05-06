@@ -37,7 +37,7 @@ function FieldLabel({ children, htmlFor, required = false }: FieldLabelProps) {
       </Label>
       <span
         className={cn(
-          "rounded-md px-2 py-0.5 font-semibold text-[0.6875rem]",
+          "rounded-md px-2 py-0.5 font-semibold text-xs",
           required
             ? "bg-primary text-primary-foreground"
             : "border border-border text-muted-foreground"
@@ -84,7 +84,7 @@ export function ContactForm() {
 
   return (
     <form
-      className="flex w-full flex-col gap-5 rounded-[1.125rem] border border-border/70 bg-card p-6 sm:gap-6 sm:rounded-3xl sm:p-10"
+      className="flex w-full flex-col gap-5 rounded-xl border border-border/70 bg-card p-6 sm:gap-6 sm:rounded-3xl sm:p-10"
       noValidate
       onSubmit={handleSubmit}
     >
