@@ -11,7 +11,7 @@ export default function LandingHeroSection() {
         <h1 className="wrap-anywhere max-w-full whitespace-pre-line font-bold text-[2rem] text-foreground leading-tight tracking-normal sm:text-5xl lg:text-[3.5rem] lg:leading-[1.2]">
           {LANDING_HERO.title}
         </h1>
-        <p className="wrap-anywhere w-full max-w-152 text-muted-foreground text-sm leading-[1.7] sm:text-lg">
+        <p className="wrap-anywhere w-full max-w-152 text-foreground/75 text-sm leading-[1.7] sm:text-lg">
           <span className="sm:inline">{LANDING_HERO.description}</span>
         </p>
         <div className="flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row">

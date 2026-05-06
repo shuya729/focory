@@ -12,7 +12,7 @@ export default function ContactPage() {
             <h1 className="font-bold text-[1.625rem] text-foreground leading-tight tracking-normal sm:text-4xl lg:text-[2.5rem]">
               お問い合わせ
             </h1>
-            <p className="max-w-[24rem] text-muted-foreground text-sm leading-[1.8] sm:text-[0.9375rem]">
+            <p className="max-w-[24rem] text-foreground/75 text-sm leading-[1.8] sm:text-[0.9375rem]">
               ご意見・ご要望・不具合の報告など、どんなことでもお寄せください。
             </p>
           </div>

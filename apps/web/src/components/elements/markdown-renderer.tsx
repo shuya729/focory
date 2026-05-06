@@ -15,7 +15,7 @@ export function MarkdownRenderer({
   return (
     <div
       className={cn(
-        "space-y-6 text-muted-foreground text-sm leading-[1.85] md:text-[0.9375rem]",
+        "space-y-6 text-foreground/75 text-sm leading-[1.85] md:text-[0.9375rem]",
         className
       )}
     >

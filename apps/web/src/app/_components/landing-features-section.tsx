@@ -39,7 +39,7 @@ export default function LandingFeaturesSection() {
                 <h3 className="wrap-anywhere font-semibold text-[1.0625rem] text-foreground tracking-normal sm:text-xl">
                   {feature.title}
                 </h3>
-                <p className="wrap-anywhere text-muted-foreground text-sm leading-[1.7]">
+                <p className="wrap-anywhere text-foreground/75 text-sm leading-[1.7]">
                   {feature.description}
                 </p>
               </div>
