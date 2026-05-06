@@ -29,6 +29,12 @@
       "service": "web"
     }
   ],
+  "routes": [
+    {
+      "pattern": "focory.com",
+      "custom_domain": true
+    }
+  ],
   "observability": {
     "enabled": true
   }
