@@ -11,7 +11,7 @@ export default function LandingHeroSection() {
         <h1 className="wrap-anywhere max-w-full whitespace-pre-line font-bold text-[2rem] text-foreground leading-tight tracking-normal sm:text-5xl lg:text-[3.5rem] lg:leading-[1.2]">
           {LANDING_HERO.title}
         </h1>
-        <p className="wrap-anywhere w-full max-w-152 text-foreground/75 text-sm leading-[1.7] sm:text-lg">
+        <p className="wrap-anywhere w-full max-w-152 text-base text-foreground/75 leading-[1.7] sm:text-xl">
           <span className="sm:inline">{LANDING_HERO.description}</span>
         </p>
         <div className="flex w-full flex-wrap items-center justify-center gap-3 sm:w-auto sm:py-10">
@@ -20,7 +20,7 @@ export default function LandingHeroSection() {
         </div>
       </div>
 
-      <div className="flex min-h-70 min-w-0 items-center justify-center rounded-3xl border border-border/60 bg-card p-8 sm:min-h-104 sm:p-12 lg:min-h-140 lg:rounded-[2rem]">
+      <div className="flex min-h-70 min-w-0 items-center justify-center bg-card p-8 sm:min-h-100 sm:p-12 lg:min-h-140">
         <div className="flex flex-col items-center gap-5 sm:gap-6">
           <Image
             alt=""
@@ -31,10 +31,10 @@ export default function LandingHeroSection() {
             src="/images/focory.png"
             width={140}
           />
-          <div className="rounded-2xl border border-border/40 bg-background/80 px-5 py-4 text-center text-foreground text-sm leading-[1.7] sm:px-6 sm:py-5 sm:text-[0.9375rem]">
+          <div className="rounded-2xl bg-muted px-5 py-4 text-center text-base text-popover-foreground leading-[1.7] sm:px-10 sm:py-6 sm:text-lg">
             <p className="whitespace-pre-line">{LANDING_HERO.visualMessage}</p>
           </div>
-          <p className="text-muted-foreground text-xs sm:text-sm">
+          <p className="text-muted-foreground text-sm sm:text-base">
             {LANDING_HERO.visualCaption}
           </p>
         </div>
