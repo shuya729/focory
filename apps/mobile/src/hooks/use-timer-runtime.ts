@@ -220,19 +220,19 @@ function useInitialTimerState({
 
       if (restoredTimerState.currentTimerId) {
         saveTimerDurationPreference(restoredTimerState.durationSeconds).catch(
-          (error) => {
+          () => {
             if (isMounted) {
-              showErrorToast(error, "タイマー設定の保存に失敗しました");
+              showErrorToast("タイマー設定の保存に失敗しました");
             }
           }
         );
       }
     };
 
-    loadInitialTimerState().catch((error) => {
+    loadInitialTimerState().catch(() => {
       if (isMounted) {
         setIsReady(true);
-        showErrorToast(error, "タイマー状態の読み込みに失敗しました");
+        showErrorToast("タイマー状態の読み込みに失敗しました");
       }
     });
 
@@ -279,8 +279,8 @@ function useTimerKeepAwake({ isRunning }: { isRunning: boolean }) {
       return;
     }
 
-    activateKeepAwakeAsync(TIMER_KEEP_AWAKE_TAG).catch((error) => {
-      showErrorToast(error, "画面スリープの抑止に失敗しました");
+    activateKeepAwakeAsync(TIMER_KEEP_AWAKE_TAG).catch(() => {
+      showErrorToast("画面スリープの抑止に失敗しました");
     });
 
     return () => {
@@ -351,8 +351,8 @@ function useCompleteRunningTimer({
       }
     };
 
-    finishCurrentTimer().catch((error) => {
-      showErrorToast(error, "タイマーの完了処理に失敗しました");
+    finishCurrentTimer().catch(() => {
+      showErrorToast("タイマーの完了処理に失敗しました");
     });
   }, [onArchiveChanged, queueTimerMessageUpdate, timerState, updateTimerState]);
 }
@@ -411,12 +411,12 @@ function usePauseTimer({
         timerId,
         type: "stop",
       });
-    } catch (error) {
+    } catch {
       updateTimerState((nextTimerState) => ({
         ...nextTimerState,
         isRunning: true,
       }));
-      showErrorToast(error, "タイマーの一時停止に失敗しました");
+      showErrorToast("タイマーの一時停止に失敗しました");
     } finally {
       updateTimerState((nextTimerState) => ({
         ...nextTimerState,
@@ -448,8 +448,8 @@ function usePauseTimerOnBackground({
         return;
       }
 
-      pauseTimer().catch((error) => {
-        showErrorToast(error, "タイマーの一時停止に失敗しました");
+      pauseTimer().catch(() => {
+        showErrorToast("タイマーの一時停止に失敗しました");
       });
     };
 
@@ -535,8 +535,8 @@ function useStartOrResumeTimer({
         timerId,
         type: "start",
       });
-    } catch (error) {
-      showErrorToast(error, "タイマーの開始に失敗しました");
+    } catch {
+      showErrorToast("タイマーの開始に失敗しました");
     } finally {
       updateTimerState((nextTimerState) => ({
         ...nextTimerState,
@@ -604,8 +604,8 @@ function useSaveTimerDuration({
         }
 
         return true;
-      } catch (error) {
-        showErrorToast(error, "タイマー設定の保存に失敗しました");
+      } catch {
+        showErrorToast("タイマー設定の保存に失敗しました");
         return false;
       }
     },

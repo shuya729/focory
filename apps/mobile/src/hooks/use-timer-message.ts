@@ -60,10 +60,10 @@ export function useTimerMessage() {
             });
           }
         })
-        .catch((error) => {
+        .catch(() => {
           if (latestMessageSequenceRef.current === messageSequence) {
             setTimerMessageState(createDefaultMessageState());
-            showErrorToast(error, "メッセージの生成に失敗しました");
+            showErrorToast("メッセージの生成に失敗しました");
           }
         });
     },
