@@ -24,9 +24,9 @@ export function useSettings() {
       }
     };
 
-    loadSettings().catch((error) => {
+    loadSettings().catch(() => {
       if (isMounted) {
-        showErrorToast(error, "設定の読み込みに失敗しました");
+        showErrorToast("設定の読み込みに失敗しました");
       }
     });
 
@@ -40,8 +40,8 @@ export function useSettings() {
       ...currentSettings,
       objective,
     }));
-    saveObjective(objective).catch((error) => {
-      showErrorToast(error, "目的の保存に失敗しました");
+    saveObjective(objective).catch(() => {
+      showErrorToast("目的の保存に失敗しました");
     });
   };
 
@@ -50,8 +50,8 @@ export function useSettings() {
       ...currentSettings,
       purpose,
     }));
-    savePurpose(purpose).catch((error) => {
-      showErrorToast(error, "理由の保存に失敗しました");
+    savePurpose(purpose).catch(() => {
+      showErrorToast("理由の保存に失敗しました");
     });
   };
 
@@ -60,16 +60,16 @@ export function useSettings() {
       ...currentSettings,
       behavior,
     }));
-    saveBehavior(behavior).catch((error) => {
-      showErrorToast(error, "振る舞いの保存に失敗しました");
+    saveBehavior(behavior).catch(() => {
+      showErrorToast("振る舞いの保存に失敗しました");
     });
   };
 
   const onClickLink = async (url: string) => {
     try {
       await openBrowserAsync(url);
-    } catch (error) {
-      showErrorToast(error, "リンクを開けませんでした");
+    } catch {
+      showErrorToast("リンクを開けませんでした");
     }
   };
 

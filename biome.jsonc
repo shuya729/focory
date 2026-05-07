@@ -6,7 +6,8 @@
       "apps/**/*.tsx",
       "packages/**/*.ts",
       "packages/**/*.tsx",
-      "!apps/mobile/src/components/ui/**/*.tsx"
+      "!apps/mobile/src/components/ui/**/*.tsx",
+      "!apps/web/src/components/ui/**/*.tsx"
     ]
   },
   "extends": ["ultracite/core"]

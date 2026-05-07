@@ -141,28 +141,42 @@ DATABASE_URL=postgresql://user:password@127.0.0.1:5432/db
 Wrangler ローカル実行用の `apps/api/.dev.vars`:
 
 ```dotenv
-S3_URL=http://127.0.0.1:9000
-S3_ACCESS_KEY=your-access-key
-S3_SECRET_KEY=your-secret-key
+CORS_ORIGIN=http://localhost:3000
 REDIS_URL=https://<upstash-endpoint>
 REDIS_TOKEN=your-redis-token
-CLERK_SECRET_KEY=sk_test_xxx
-CLERK_PUBLISHABLE_KEY=pk_test_xxx
+BETTER_AUTH_SECRET=your-secret
+BETTER_AUTH_URL=http://127.0.0.1:8787
+TRUSTED_ORIGIN=exp://
+GCP_API_KEY=your-gcp-api-key
+GCP_PROJECT_ID=your-gcp-project-id
+GCP_LOCATION=global
+LLM_MODEL_ID=gemini-2.5-flash-lite
+EXPO_PUSH_SEND_URL=https://exp.host/--/api/v2/push/send
+EXPO_PUSH_RECEIPTS_URL=https://exp.host/--/api/v2/push/getReceipts
 ```
 
 補足: Wrangler のローカル環境変数は `.dev.vars` と `.env` を同時には読み込みません。このプロジェクトでは Worker 用は `.dev.vars`、`drizzle-kit` 用は `.env` を使い分けます。
 機密情報を含むファイルは Git にコミットしないでください。
 
-本番・Preview ではシークレットとして投入します。
+`CORS_ORIGIN` には Web アプリの origin だけを設定します。ローカル開発では `http://localhost:3000`、本番では Web アプリの本番 origin を指定してください。
+
+GitHub Actions からデプロイする場合は、Production environment の Secrets に同じ名前で登録してください。`deploy-api.yml` が `cloudflare/wrangler-action` 経由で Worker secrets として反映します。
+
+手元から直接デプロイする場合は、Wrangler でシークレットとして投入します。
 
 ```bash
-pnpm -F api exec wrangler secret put S3_URL
-pnpm -F api exec wrangler secret put S3_ACCESS_KEY
-pnpm -F api exec wrangler secret put S3_SECRET_KEY
+pnpm -F api exec wrangler secret put CORS_ORIGIN
 pnpm -F api exec wrangler secret put REDIS_URL
 pnpm -F api exec wrangler secret put REDIS_TOKEN
-pnpm -F api exec wrangler secret put CLERK_SECRET_KEY
-pnpm -F api exec wrangler secret put CLERK_PUBLISHABLE_KEY
+pnpm -F api exec wrangler secret put BETTER_AUTH_SECRET
+pnpm -F api exec wrangler secret put BETTER_AUTH_URL
+pnpm -F api exec wrangler secret put TRUSTED_ORIGIN
+pnpm -F api exec wrangler secret put GCP_API_KEY
+pnpm -F api exec wrangler secret put GCP_PROJECT_ID
+pnpm -F api exec wrangler secret put GCP_LOCATION
+pnpm -F api exec wrangler secret put LLM_MODEL_ID
+pnpm -F api exec wrangler secret put EXPO_PUSH_SEND_URL
+pnpm -F api exec wrangler secret put EXPO_PUSH_RECEIPTS_URL
 ```
 
 ### 4. マイグレーション適用

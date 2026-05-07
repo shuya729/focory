@@ -29,9 +29,9 @@ export function useArchiveCalendar({ refreshKey }: UseArchiveCalendarOptions) {
       }
     };
 
-    loadArchives().catch((error) => {
+    loadArchives().catch(() => {
       if (isMounted) {
-        showErrorToast(error, "過去の記録の読み込みに失敗しました");
+        showErrorToast("過去の記録の読み込みに失敗しました");
       }
     });
 

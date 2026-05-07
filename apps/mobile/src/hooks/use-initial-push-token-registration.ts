@@ -11,8 +11,8 @@ export function useInitialPushTokenRegistration() {
     }
 
     hasRequestedRef.current = true;
-    registerCurrentDevicePushToken().catch((error) => {
-      showErrorToast(error, "通知設定の登録に失敗しました");
+    registerCurrentDevicePushToken().catch(() => {
+      showErrorToast("通知設定の登録に失敗しました");
     });
   }, []);
 }
