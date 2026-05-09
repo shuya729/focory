@@ -6,7 +6,8 @@
       "id": "j6vEn",
       "x": 900,
       "y": 0,
-      "name": "Main Timer Screen",
+      "name": "Component/Screen/Main Timer",
+      "reusable": true,
       "clip": true,
       "width": 402,
       "height": 874,
@@ -175,10 +176,15 @@
                       "type": "frame",
                       "id": "Yh91b",
                       "name": "AI Avatar",
-                      "width": 48,
-                      "height": 48,
-                      "fill": "#E8E4DE",
-                      "cornerRadius": 24,
+                      "width": 44,
+                      "height": 44,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "assets/focory.png",
+                        "mode": "fit"
+                      },
+                      "cornerRadius": 22,
                       "stroke": {
                         "align": "inside",
                         "thickness": 0,
@@ -186,19 +192,7 @@
                       },
                       "layout": "vertical",
                       "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon_font",
-                          "id": "1Pk0P",
-                          "name": "avatarIcon",
-                          "width": 24,
-                          "height": 24,
-                          "iconFontName": "bot",
-                          "iconFontFamily": "lucide",
-                          "fill": "#5B9E8F"
-                        }
-                      ]
+                      "alignItems": "center"
                     },
                     {
                       "type": "frame",
@@ -230,7 +224,7 @@
                           "width": "fill_container",
                           "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
                           "lineHeight": 1.6,
-                          "fontFamily": "DM Sans",
+                          "fontFamily": "Inter",
                           "fontSize": 16,
                           "fontWeight": "normal"
                         }
@@ -269,7 +263,8 @@
       "id": "XpZiX",
       "x": 1402,
       "y": 0,
-      "name": "Log Screen",
+      "name": "Component/Screen/Log",
+      "reusable": true,
       "clip": true,
       "width": 402,
       "height": 874,
@@ -314,7 +309,9 @@
                   "name": "btn3",
                   "descendants": {
                     "sF2YV": {
-                      "iconFontName": "chevron-left"
+                      "iconFontName": "chevron-left",
+                      "width": 20,
+                      "height": 20
                     }
                   }
                 },
@@ -324,7 +321,7 @@
                   "name": "Title",
                   "fill": "#2C2C2C",
                   "content": "過去の記録",
-                  "fontFamily": "DM Sans",
+                  "fontFamily": "Inter",
                   "fontSize": 18,
                   "fontWeight": "600"
                 },
@@ -354,31 +351,76 @@
                   "id": "5E3j8",
                   "type": "ref",
                   "ref": "ID5or",
-                  "name": "l0"
+                  "name": "l0",
+                  "descendants": {
+                    "zwxdv": {
+                      "fill": "#EDE8E2"
+                    },
+                    "F1toT": {
+                      "content": "0h",
+                      "fill": "#ABABAB"
+                    }
+                  }
                 },
                 {
                   "id": "hvoVR",
                   "type": "ref",
                   "ref": "ID5or",
-                  "name": "l1"
+                  "name": "l1",
+                  "descendants": {
+                    "zwxdv": {
+                      "fill": "#D4E6DF"
+                    },
+                    "F1toT": {
+                      "content": "~2h",
+                      "fill": "#ABABAB"
+                    }
+                  }
                 },
                 {
                   "id": "2Hfm6",
                   "type": "ref",
                   "ref": "ID5or",
-                  "name": "l2"
+                  "name": "l2",
+                  "descendants": {
+                    "zwxdv": {
+                      "fill": "#7DBCAE"
+                    },
+                    "F1toT": {
+                      "content": "~4h",
+                      "fill": "#ABABAB"
+                    }
+                  }
                 },
                 {
                   "id": "eINXI",
                   "type": "ref",
                   "ref": "ID5or",
-                  "name": "l3"
+                  "name": "l3",
+                  "descendants": {
+                    "zwxdv": {
+                      "fill": "#5B9E8F"
+                    },
+                    "F1toT": {
+                      "content": "~6h",
+                      "fill": "#ABABAB"
+                    }
+                  }
                 },
                 {
                   "id": "YkABi",
                   "type": "ref",
                   "ref": "ID5or",
-                  "name": "l4"
+                  "name": "l4",
+                  "descendants": {
+                    "zwxdv": {
+                      "fill": "#3D7A6C"
+                    },
+                    "F1toT": {
+                      "content": "6h~",
+                      "fill": "#ABABAB"
+                    }
+                  }
                 }
               ]
             },
@@ -395,7 +437,12 @@
                   "type": "ref",
                   "ref": "47vAX",
                   "width": "fill_container",
-                  "name": "mh1"
+                  "name": "mh1",
+                  "descendants": {
+                    "Q6jzm": {
+                      "content": "2026年 05月"
+                    }
+                  }
                 },
                 {
                   "id": "mGI0n",
@@ -786,7 +833,12 @@
                   "type": "ref",
                   "ref": "47vAX",
                   "width": "fill_container",
-                  "name": "mh2"
+                  "name": "mh2",
+                  "descendants": {
+                    "Q6jzm": {
+                      "content": "2026年 04月"
+                    }
+                  }
                 },
                 {
                   "id": "YxUr4",
@@ -1128,7 +1180,8 @@
       "id": "DscOn",
       "x": 398,
       "y": 0,
-      "name": "Settings Screen",
+      "name": "Component/Screen/Settings",
+      "reusable": true,
       "clip": true,
       "width": 402,
       "height": 874,
@@ -1176,7 +1229,7 @@
                   "name": "Title",
                   "fill": "#2C2C2C",
                   "content": "設定",
-                  "fontFamily": "DM Sans",
+                  "fontFamily": "Inter",
                   "fontSize": 18,
                   "fontWeight": "600"
                 },
@@ -1189,7 +1242,9 @@
                   "name": "btn4",
                   "descendants": {
                     "sF2YV": {
-                      "iconFontName": "chevron-right"
+                      "iconFontName": "chevron-right",
+                      "width": 20,
+                      "height": 20
                     }
                   }
                 }
@@ -1222,7 +1277,7 @@
                       "name": "Purpose Label",
                       "fill": "#2C2C2C",
                       "content": "目的",
-                      "fontFamily": "DM Sans",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "600"
                     },
@@ -1251,7 +1306,7 @@
                           "name": "Placeholder",
                           "fill": "#ABABAB",
                           "content": "集中したいことを入力",
-                          "fontFamily": "DM Sans",
+                          "fontFamily": "Inter",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -1273,7 +1328,7 @@
                       "name": "Why Label",
                       "fill": "#2C2C2C",
                       "content": "なぜ",
-                      "fontFamily": "DM Sans",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "600"
                     },
@@ -1305,7 +1360,7 @@
                           "width": "fill_container",
                           "content": "なぜそれをやりたいのか、理由を書いてみよう",
                           "lineHeight": 1.6,
-                          "fontFamily": "DM Sans",
+                          "fontFamily": "Inter",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -1327,7 +1382,7 @@
                       "name": "Behavior Label",
                       "fill": "#2C2C2C",
                       "content": "振る舞い",
-                      "fontFamily": "DM Sans",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "600"
                     },
@@ -1356,7 +1411,7 @@
                               "name": "c1",
                               "descendants": {
                                 "RzThO": {
-                                  "content": "やさしい",
+                                  "content": "サポーター",
                                   "fill": "#F5F0EA"
                                 }
                               }
@@ -1370,7 +1425,8 @@
                               "name": "c2",
                               "descendants": {
                                 "RzThO": {
-                                  "content": "厳しい"
+                                  "content": "ライバル",
+                                  "fill": "#2C2C2C"
                                 }
                               }
                             },
@@ -1383,7 +1439,8 @@
                               "name": "c3",
                               "descendants": {
                                 "RzThO": {
-                                  "content": "明るい"
+                                  "content": "クール",
+                                  "fill": "#2C2C2C"
                                 }
                               }
                             }
@@ -1405,7 +1462,8 @@
                               "name": "c4",
                               "descendants": {
                                 "RzThO": {
-                                  "content": "落ち着き"
+                                  "content": "コーチ",
+                                  "fill": "#2C2C2C"
                                 }
                               }
                             },
@@ -1418,7 +1476,8 @@
                               "name": "c5",
                               "descendants": {
                                 "RzThO": {
-                                  "content": "おもしろい"
+                                  "content": "剣士",
+                                  "fill": "#2C2C2C"
                                 }
                               }
                             },
@@ -1431,7 +1490,8 @@
                               "name": "c6",
                               "descendants": {
                                 "RzThO": {
-                                  "content": "クール"
+                                  "content": "いたずらっ子",
+                                  "fill": "#2C2C2C"
                                 }
                               }
                             }
@@ -1455,7 +1515,7 @@
                       "name": "Link Label",
                       "fill": "#2C2C2C",
                       "content": "リンク",
-                      "fontFamily": "DM Sans",
+                      "fontFamily": "Inter",
                       "fontSize": 14,
                       "fontWeight": "600"
                     },
@@ -1618,11 +1678,10 @@
       "width": 402,
       "height": 34,
       "layout": "vertical",
-      "gap": 10,
       "padding": [
-        4,
         0,
-        8,
+        0,
+        16,
         0
       ],
       "justifyContent": "center",
@@ -1633,12 +1692,6 @@
           "id": "WLCPB",
           "name": "Dots",
           "gap": 12,
-          "padding": [
-            0,
-            0,
-            16,
-            0
-          ],
           "justifyContent": "center",
           "alignItems": "center",
           "children": [
@@ -1667,15 +1720,6 @@
               "height": 8
             }
           ]
-        },
-        {
-          "type": "frame",
-          "id": "E7Il2",
-          "name": "Home Indicator",
-          "width": 134,
-          "height": 5,
-          "fill": "#2C2C2C",
-          "cornerRadius": 3
         }
       ]
     },
@@ -1702,8 +1746,8 @@
           "type": "icon_font",
           "id": "sF2YV",
           "name": "icon",
-          "width": 24,
-          "height": 24,
+          "width": 22,
+          "height": 22,
           "iconFontName": "settings",
           "iconFontFamily": "lucide",
           "fill": "#5B5B5B"
@@ -1812,7 +1856,7 @@
           "name": "label",
           "fill": "#2C2C2C",
           "content": "ラベル",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 13,
           "fontWeight": "500"
         }
@@ -1840,7 +1884,7 @@
           "name": "label",
           "fill": "#2C2C2C",
           "content": "リンク",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 14,
           "fontWeight": "normal"
         },
@@ -1850,7 +1894,7 @@
           "name": "arrow",
           "width": 18,
           "height": 18,
-          "iconFontName": "chevron-right",
+          "iconFontName": "external-link",
           "iconFontFamily": "lucide",
           "fill": "#ABABAB"
         }
@@ -1893,7 +1937,7 @@
           "id": "F1toT",
           "name": "label",
           "fill": "#ABABAB",
-          "content": "~0h",
+          "content": "0h",
           "fontFamily": "JetBrains Mono",
           "fontSize": 12,
           "fontWeight": "500"
@@ -1916,8 +1960,8 @@
           "id": "Q6jzm",
           "name": "monthTitle",
           "fill": "#2c2c2c",
-          "content": "2026年 3月",
-          "fontFamily": "DM Sans",
+          "content": "2026年 05月",
+          "fontFamily": "Inter",
           "fontSize": 18,
           "fontWeight": "700"
         },
@@ -1952,7 +1996,7 @@
           "width": 40,
           "content": "日",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         },
@@ -1965,7 +2009,7 @@
           "width": 40,
           "content": "月",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         },
@@ -1978,7 +2022,7 @@
           "width": 40,
           "content": "火",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         },
@@ -1991,7 +2035,7 @@
           "width": 40,
           "content": "水",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         },
@@ -2004,7 +2048,7 @@
           "width": 40,
           "content": "木",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         },
@@ -2017,7 +2061,7 @@
           "width": 40,
           "content": "金",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         },
@@ -2030,7 +2074,7 @@
           "width": 40,
           "content": "土",
           "textAlign": "center",
-          "fontFamily": "DM Sans",
+          "fontFamily": "Inter",
           "fontSize": 12,
           "fontWeight": "500"
         }
@@ -2161,9 +2205,9 @@
                       "gap": 40,
                       "padding": [
                         24,
-                        0,
+                        28,
                         18,
-                        0
+                        28
                       ],
                       "justifyContent": "space_around",
                       "alignItems": "center",
@@ -2296,7 +2340,7 @@
                                   "width": "fill_container",
                                   "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
                                   "lineHeight": 1.6,
-                                  "fontFamily": "DM Sans",
+                                  "fontFamily": "Inter",
                                   "fontSize": 15,
                                   "fontWeight": "normal"
                                 }
@@ -2334,7 +2378,7 @@
               "type": "frame",
               "id": "f5CxD",
               "x": 0,
-              "y": 388,
+              "y": 432,
               "name": "Bottom Sheet",
               "width": 402,
               "fill": "#F5F0EA",
@@ -2345,35 +2389,14 @@
                 0
               ],
               "layout": "vertical",
-              "gap": 28,
+              "gap": 24,
               "padding": [
-                12,
+                24,
                 24,
                 40,
                 24
               ],
               "children": [
-                {
-                  "type": "frame",
-                  "id": "VNWTD",
-                  "name": "Handle Bar",
-                  "width": "fill_container",
-                  "height": 20,
-                  "layout": "vertical",
-                  "justifyContent": "center",
-                  "alignItems": "center",
-                  "children": [
-                    {
-                      "type": "rectangle",
-                      "cornerRadius": 2,
-                      "id": "WlpOl",
-                      "name": "Handle",
-                      "fill": "#DDD8D1",
-                      "width": 40,
-                      "height": 4
-                    }
-                  ]
-                },
                 {
                   "type": "frame",
                   "id": "5Os5F",
@@ -2388,7 +2411,7 @@
                       "name": "Title",
                       "fill": "#2C2C2C",
                       "content": "タイマー編集",
-                      "fontFamily": "DM Sans",
+                      "fontFamily": "Inter",
                       "fontSize": 18,
                       "fontWeight": "700"
                     },
@@ -2428,22 +2451,22 @@
                   "children": [
                     {
                       "type": "rectangle",
-                      "cornerRadius": 14,
+                      "cornerRadius": 10,
                       "id": "D9m2T",
-                      "x": 24,
+                      "x": 0,
                       "y": 62,
                       "name": "Selection Highlight",
                       "fill": "#E8E4DE",
-                      "width": 306,
+                      "width": 354,
                       "height": 56
                     },
                     {
                       "type": "frame",
                       "id": "EcRC7",
-                      "x": 24,
+                      "x": 0,
                       "y": 0,
                       "name": "Picker Section",
-                      "width": 306,
+                      "width": 354,
                       "height": 180,
                       "gap": 8,
                       "justifyContent": "center",
@@ -2454,7 +2477,7 @@
                           "id": "TbYz3",
                           "name": "Minute Column",
                           "clip": true,
-                          "width": 100,
+                          "width": 104,
                           "height": 180,
                           "layout": "vertical",
                           "gap": 4,
@@ -2469,7 +2492,7 @@
                               "fill": "#ABABAB",
                               "content": "23",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 28,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             },
                             {
@@ -2480,7 +2503,7 @@
                               "fill": "#ABABAB",
                               "content": "24",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 32,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             },
                             {
@@ -2490,7 +2513,7 @@
                               "fill": "#2C2C2C",
                               "content": "25",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 44,
+                              "fontSize": 36,
                               "fontWeight": "800"
                             },
                             {
@@ -2501,7 +2524,7 @@
                               "fill": "#ABABAB",
                               "content": "26",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 32,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             },
                             {
@@ -2512,7 +2535,7 @@
                               "fill": "#ABABAB",
                               "content": "27",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 28,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             }
                           ]
@@ -2521,9 +2544,9 @@
                           "type": "text",
                           "id": "4XFaD",
                           "name": "minLabel",
-                          "fill": "#8A8A8A",
+                          "fill": "#ABABAB",
                           "content": "分",
-                          "fontFamily": "DM Sans",
+                          "fontFamily": "Inter",
                           "fontSize": 16,
                           "fontWeight": "500"
                         },
@@ -2532,7 +2555,7 @@
                           "id": "5w6FR",
                           "name": "Second Column",
                           "clip": true,
-                          "width": 100,
+                          "width": 104,
                           "height": 180,
                           "layout": "vertical",
                           "gap": 4,
@@ -2547,7 +2570,7 @@
                               "fill": "#ABABAB",
                               "content": "58",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 28,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             },
                             {
@@ -2558,7 +2581,7 @@
                               "fill": "#ABABAB",
                               "content": "59",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 32,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             },
                             {
@@ -2568,7 +2591,7 @@
                               "fill": "#2C2C2C",
                               "content": "00",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 44,
+                              "fontSize": 36,
                               "fontWeight": "800"
                             },
                             {
@@ -2579,7 +2602,7 @@
                               "fill": "#ABABAB",
                               "content": "01",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 32,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             },
                             {
@@ -2590,7 +2613,7 @@
                               "fill": "#ABABAB",
                               "content": "02",
                               "fontFamily": "JetBrains Mono",
-                              "fontSize": 28,
+                              "fontSize": 36,
                               "fontWeight": "600"
                             }
                           ]
@@ -2599,9 +2622,9 @@
                           "type": "text",
                           "id": "bfmkq",
                           "name": "secLabel",
-                          "fill": "#8A8A8A",
+                          "fill": "#ABABAB",
                           "content": "秒",
-                          "fontFamily": "DM Sans",
+                          "fontFamily": "Inter",
                           "fontSize": 16,
                           "fontWeight": "500"
                         }
@@ -2627,7 +2650,7 @@
                       "name": "saveBtnText",
                       "fill": "#F5F0EA",
                       "content": "保存",
-                      "fontFamily": "DM Sans",
+                      "fontFamily": "Inter",
                       "fontSize": 16,
                       "fontWeight": "700"
                     }
@@ -2669,7 +2692,7 @@
           "height": "fill_container",
           "layout": "vertical",
           "padding": [
-            6,
+            8,
             24
           ],
           "justifyContent": "space_between",
@@ -2717,7 +2740,7 @@
               "layout": "vertical",
               "gap": 16,
               "padding": [
-                12,
+                8,
                 0
               ],
               "justifyContent": "space_between",
@@ -2729,7 +2752,7 @@
                   "name": "Timer Box",
                   "width": 340,
                   "height": 270,
-                  "fill": "#D9EDE8",
+                  "fill": "#D4E6DF",
                   "cornerRadius": 24,
                   "stroke": {
                     "align": "inside",
@@ -2750,9 +2773,9 @@
                   "gap": 40,
                   "padding": [
                     24,
-                    0,
+                    28,
                     18,
-                    0
+                    28
                   ],
                   "justifyContent": "space_around",
                   "alignItems": "center",
@@ -2781,7 +2804,12 @@
                           "ref": "IIS8S",
                           "name": "pauseBtn",
                           "width": 56,
-                          "height": 56
+                          "height": 56,
+                          "descendants": {
+                            "BXsRM": {
+                              "iconFontName": "pause"
+                            }
+                          }
                         }
                       ]
                     }
@@ -2799,10 +2827,15 @@
                       "type": "frame",
                       "id": "iyD5G",
                       "name": "AI Avatar",
-                      "width": 48,
-                      "height": 48,
-                      "fill": "#E8E4DE",
-                      "cornerRadius": 24,
+                      "width": 44,
+                      "height": 44,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "assets/focory.png",
+                        "mode": "fit"
+                      },
+                      "cornerRadius": 22,
                       "stroke": {
                         "align": "inside",
                         "thickness": 0,
@@ -2810,19 +2843,7 @@
                       },
                       "layout": "vertical",
                       "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon_font",
-                          "id": "Ei2H4",
-                          "name": "avatarIcon",
-                          "width": 24,
-                          "height": 24,
-                          "iconFontName": "bot",
-                          "iconFontFamily": "lucide",
-                          "fill": "#5B9E8F"
-                        }
-                      ]
+                      "alignItems": "center"
                     },
                     {
                       "type": "frame",
@@ -2838,10 +2859,10 @@
                           "width": "fill_container",
                           "fill": "#EDE8E2",
                           "cornerRadius": [
-                            20,
-                            20,
-                            20,
-                            6
+                            24,
+                            24,
+                            24,
+                            16
                           ],
                           "stroke": {
                             "align": "outside",
@@ -2850,10 +2871,7 @@
                           },
                           "layout": "vertical",
                           "gap": 8,
-                          "padding": [
-                            16,
-                            18
-                          ],
+                          "padding": 16,
                           "children": [
                             {
                               "type": "text",
@@ -2864,8 +2882,8 @@
                               "width": "fill_container",
                               "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
                               "lineHeight": 1.6,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
                               "fontWeight": "normal"
                             }
                           ]
@@ -2930,7 +2948,7 @@
           "height": "fill_container",
           "layout": "vertical",
           "padding": [
-            6,
+            8,
             24
           ],
           "justifyContent": "space_between",
@@ -2978,7 +2996,7 @@
               "layout": "vertical",
               "gap": 16,
               "padding": [
-                12,
+                8,
                 0
               ],
               "justifyContent": "space_between",
@@ -3011,9 +3029,9 @@
                   "gap": 20,
                   "padding": [
                     24,
-                    0,
+                    28,
                     18,
-                    0
+                    28
                   ],
                   "justifyContent": "space_around",
                   "alignItems": "center",
@@ -3067,10 +3085,15 @@
                       "type": "frame",
                       "id": "i2IVe",
                       "name": "AI Avatar",
-                      "width": 48,
-                      "height": 48,
-                      "fill": "#E8E4DE",
-                      "cornerRadius": 24,
+                      "width": 44,
+                      "height": 44,
+                      "fill": {
+                        "type": "image",
+                        "enabled": true,
+                        "url": "assets/focory.png",
+                        "mode": "fit"
+                      },
+                      "cornerRadius": 22,
                       "stroke": {
                         "align": "inside",
                         "thickness": 0,
@@ -3078,19 +3101,7 @@
                       },
                       "layout": "vertical",
                       "justifyContent": "center",
-                      "alignItems": "center",
-                      "children": [
-                        {
-                          "type": "icon_font",
-                          "id": "lz3T2",
-                          "name": "avatarIcon",
-                          "width": 24,
-                          "height": 24,
-                          "iconFontName": "bot",
-                          "iconFontFamily": "lucide",
-                          "fill": "#5B9E8F"
-                        }
-                      ]
+                      "alignItems": "center"
                     },
                     {
                       "type": "frame",
@@ -3106,10 +3117,10 @@
                           "width": "fill_container",
                           "fill": "#EDE8E2",
                           "cornerRadius": [
-                            20,
-                            20,
-                            20,
-                            6
+                            24,
+                            24,
+                            24,
+                            16
                           ],
                           "stroke": {
                             "align": "outside",
@@ -3118,10 +3129,7 @@
                           },
                           "layout": "vertical",
                           "gap": 8,
-                          "padding": [
-                            16,
-                            18
-                          ],
+                          "padding": 16,
                           "children": [
                             {
                               "type": "text",
@@ -3132,8 +3140,8 @@
                               "width": "fill_container",
                               "content": "いい調子だね！あと少しで一区切りだよ。集中できていてすごい！",
                               "lineHeight": 1.6,
-                              "fontFamily": "DM Sans",
-                              "fontSize": 15,
+                              "fontFamily": "Inter",
+                              "fontSize": 16,
                               "fontWeight": "normal"
                             }
                           ]
@@ -3211,8 +3219,8 @@
       "height": 80,
       "fill": "$bg-primary",
       "padding": [
-        64,
-        20
+        0,
+        144
       ],
       "justifyContent": "space_between",
       "alignItems": "center",
@@ -3237,30 +3245,30 @@
               "type": "text",
               "id": "Pny3Z",
               "name": "nav2",
-              "fill": "$text-primary",
+              "fill": "#6B6761",
               "content": "お問い合わせ",
-              "fontFamily": "Inter",
-              "fontSize": 15,
+              "fontFamily": "Geist",
+              "fontSize": 16,
               "fontWeight": "500"
             },
             {
               "type": "text",
               "id": "SXVra",
               "name": "nav3",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "利用規約",
-              "fontFamily": "Inter",
-              "fontSize": 15,
+              "fontFamily": "Geist",
+              "fontSize": 16,
               "fontWeight": "500"
             },
             {
               "type": "text",
               "id": "notux",
               "name": "nav4",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "プライバシー",
-              "fontFamily": "Inter",
-              "fontSize": 15,
+              "fontFamily": "Geist",
+              "fontSize": 16,
               "fontWeight": "500"
             }
           ]
@@ -3278,8 +3286,8 @@
       "height": 64,
       "fill": "$bg-primary",
       "padding": [
-        20,
-        16
+        0,
+        20
       ],
       "justifyContent": "space_between",
       "alignItems": "center",
@@ -3343,13 +3351,13 @@
       "name": "Component/Web Footer (Desktop)",
       "reusable": true,
       "width": 1440,
-      "height": 280,
+      "height": 304,
       "fill": "$bg-card",
       "layout": "vertical",
       "gap": 40,
       "padding": [
-        80,
-        60
+        64,
+        144
       ],
       "children": [
         {
@@ -3366,7 +3374,7 @@
               "name": "footerBrand",
               "fill": "#00000000",
               "layout": "vertical",
-              "gap": 16,
+              "gap": 12,
               "children": [
                 {
                   "id": "jYSN4",
@@ -3380,9 +3388,9 @@
                   "type": "text",
                   "id": "Fvogy",
                   "name": "footerTag",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "content": "ひとりで集中したい人のための、学習タイマー。",
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 }
@@ -3409,17 +3417,27 @@
                       "name": "fcol1h",
                       "fill": "$text-primary",
                       "content": "プロダクト",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "VZrAs",
                       "name": "fcol1a",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "content": "ホーム",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wndqO",
+                      "name": "fcol1b",
+                      "fill": "#6B6761",
+                      "content": "お問い合わせ",
+                      "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal"
                     }
@@ -3438,18 +3456,28 @@
                       "id": "hW3bF",
                       "name": "fcol2h",
                       "fill": "$text-primary",
-                      "content": "サポート",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
+                      "content": "インストール",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "V3XW1",
                       "name": "fcol2a",
-                      "fill": "$text-secondary",
-                      "content": "お問い合わせ",
-                      "fontFamily": "Inter",
+                      "fill": "#6B6761",
+                      "content": "App Store",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "MMqV1",
+                      "name": "fcol2b",
+                      "fill": "#6B6761",
+                      "content": "Google Play",
+                      "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal"
                     }
@@ -3468,18 +3496,18 @@
                       "id": "nTIwJ",
                       "name": "fcol3h",
                       "fill": "$text-primary",
-                      "content": "法的事項",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
+                      "content": "ドキュメント",
+                      "fontFamily": "Geist",
+                      "fontSize": 14,
                       "fontWeight": "600"
                     },
                     {
                       "type": "text",
                       "id": "uMN8x",
                       "name": "fcol3a",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "content": "利用規約",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal"
                     },
@@ -3487,9 +3515,9 @@
                       "type": "text",
                       "id": "Fhu7S",
                       "name": "fcol3b",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "content": "プライバシーポリシー",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal"
                     }
@@ -3503,7 +3531,7 @@
           "type": "rectangle",
           "id": "NnvGM",
           "name": "divider",
-          "fill": "$border-default",
+          "fill": "#D1CAC1",
           "width": "fill_container",
           "height": 1
         },
@@ -3511,10 +3539,10 @@
           "type": "text",
           "id": "YGqyK",
           "name": "copyright",
-          "fill": "$text-tertiary",
+          "fill": "#6B6761",
           "content": "© 2026 Focory. All rights reserved.",
-          "fontFamily": "Inter",
-          "fontSize": 13,
+          "fontFamily": "Geist",
+          "fontSize": 12,
           "fontWeight": "normal"
         }
       ]
@@ -3558,9 +3586,9 @@
               "type": "text",
               "id": "aJugA",
               "name": "mfTag",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "ひとりで集中したい人のための、学習タイマー。",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 13,
               "fontWeight": "normal"
             }
@@ -3572,16 +3600,16 @@
           "name": "mfLinks",
           "fill": "#00000000",
           "layout": "vertical",
-          "gap": 14,
+          "gap": 12,
           "alignItems": "center",
           "children": [
             {
               "type": "text",
               "id": "o8QSB",
               "name": "mfL1",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "ホーム",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 14,
               "fontWeight": "normal"
             },
@@ -3589,9 +3617,9 @@
               "type": "text",
               "id": "RHilz",
               "name": "mfL2",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "お問い合わせ",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 14,
               "fontWeight": "normal"
             },
@@ -3599,9 +3627,9 @@
               "type": "text",
               "id": "svEGv",
               "name": "mfL3",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "利用規約",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 14,
               "fontWeight": "normal"
             },
@@ -3609,9 +3637,9 @@
               "type": "text",
               "id": "ndTXC",
               "name": "mfL4",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "content": "プライバシーポリシー",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 14,
               "fontWeight": "normal"
             }
@@ -3621,7 +3649,7 @@
           "type": "rectangle",
           "id": "MdrFL",
           "name": "mfDiv",
-          "fill": "$border-default",
+          "fill": "#D1CAC1",
           "width": "fill_container",
           "height": 1
         },
@@ -3629,9 +3657,9 @@
           "type": "text",
           "id": "qBTcN",
           "name": "mfCopy",
-          "fill": "$text-tertiary",
-          "content": "© 2026 Focory",
-          "fontFamily": "Inter",
+          "fill": "#6B6761",
+          "content": "© 2026 Focory. All rights reserved.",
+          "fontFamily": "Geist",
           "fontSize": 12,
           "fontWeight": "normal"
         }
@@ -3646,56 +3674,13 @@
       "reusable": true,
       "width": 180,
       "height": 56,
-      "fill": "$text-primary",
-      "cornerRadius": 12,
-      "gap": 10,
-      "padding": [
-        10,
-        16
-      ],
-      "alignItems": "center",
-      "children": [
-        {
-          "type": "icon_font",
-          "id": "sPIYG",
-          "name": "appIcon",
-          "width": 28,
-          "height": 28,
-          "iconFontName": "apple",
-          "iconFontFamily": "lucide",
-          "fill": "#FFFFFF"
-        },
-        {
-          "type": "frame",
-          "id": "IzspU",
-          "name": "appCol",
-          "fill": "#00000000",
-          "layout": "vertical",
-          "children": [
-            {
-              "type": "text",
-              "id": "JV7O3",
-              "name": "appT1",
-              "opacity": 0.85,
-              "fill": "#FFFFFF",
-              "content": "Download on the",
-              "fontFamily": "Inter",
-              "fontSize": 10,
-              "fontWeight": "normal"
-            },
-            {
-              "type": "text",
-              "id": "c4MxNM",
-              "name": "appT2",
-              "fill": "#FFFFFF",
-              "content": "App Store",
-              "fontFamily": "Inter",
-              "fontSize": 18,
-              "fontWeight": "600"
-            }
-          ]
-        }
-      ]
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/app-store-badge.png",
+        "mode": "fit"
+      },
+      "alignItems": "center"
     },
     {
       "type": "frame",
@@ -3706,56 +3691,13 @@
       "reusable": true,
       "width": 180,
       "height": 56,
-      "fill": "$text-primary",
-      "cornerRadius": 12,
-      "gap": 10,
-      "padding": [
-        10,
-        16
-      ],
-      "alignItems": "center",
-      "children": [
-        {
-          "type": "icon_font",
-          "id": "wUbAy",
-          "name": "playIcon",
-          "width": 28,
-          "height": 28,
-          "iconFontName": "play",
-          "iconFontFamily": "lucide",
-          "fill": "#FFFFFF"
-        },
-        {
-          "type": "frame",
-          "id": "IVP2r",
-          "name": "playCol",
-          "fill": "#00000000",
-          "layout": "vertical",
-          "children": [
-            {
-              "type": "text",
-              "id": "v3PVtL",
-              "name": "playT1",
-              "opacity": 0.85,
-              "fill": "#FFFFFF",
-              "content": "GET IT ON",
-              "fontFamily": "Inter",
-              "fontSize": 10,
-              "fontWeight": "normal"
-            },
-            {
-              "type": "text",
-              "id": "Cs21R",
-              "name": "playT2",
-              "fill": "#FFFFFF",
-              "content": "Google Play",
-              "fontFamily": "Inter",
-              "fontSize": 18,
-              "fontWeight": "600"
-            }
-          ]
-        }
-      ]
+      "fill": {
+        "type": "image",
+        "enabled": true,
+        "url": "assets/google-play-badge.png",
+        "mode": "fit"
+      },
+      "alignItems": "center"
     },
     {
       "type": "frame",
@@ -3785,7 +3727,7 @@
           "gap": 80,
           "padding": [
             80,
-            120
+            144
           ],
           "alignItems": "center",
           "children": [
@@ -3796,7 +3738,7 @@
               "width": "fill_container",
               "fill": "#00000000",
               "layout": "vertical",
-              "gap": 32,
+              "gap": 24,
               "children": [
                 {
                   "type": "text",
@@ -3807,22 +3749,21 @@
                   "width": "fill_container",
                   "content": "スマホを置いて、\nいまやることへ。",
                   "lineHeight": 1.2,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 56,
-                  "fontWeight": "700",
-                  "letterSpacing": -1
+                  "fontWeight": "700"
                 },
                 {
                   "type": "text",
                   "id": "LOi6W",
                   "name": "heroP",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "Focoryは、AIがあなただけの言葉で集中を後押しする、学習タイマー。「あと5分だけ」を、今日からなくしませんか。",
                   "lineHeight": 1.7,
-                  "fontFamily": "Inter",
-                  "fontSize": 18,
+                  "fontFamily": "Geist",
+                  "fontSize": 20,
                   "fontWeight": "normal"
                 },
                 {
@@ -3831,6 +3772,10 @@
                   "name": "heroCTAs",
                   "fill": "#00000000",
                   "gap": 12,
+                  "padding": [
+                    48,
+                    0
+                  ],
                   "children": [
                     {
                       "id": "CNKzQ",
@@ -3855,9 +3800,8 @@
               "width": 440,
               "height": 560,
               "fill": "$bg-card",
-              "cornerRadius": 32,
               "layout": "vertical",
-              "padding": 60,
+              "padding": 48,
               "justifyContent": "center",
               "alignItems": "center",
               "children": [
@@ -3882,12 +3826,12 @@
                       "type": "frame",
                       "id": "DgC6C",
                       "name": "chatBubble",
-                      "fill": "$bg-primary",
-                      "cornerRadius": 20,
+                      "fill": "#EDE8E2",
+                      "cornerRadius": 16,
                       "layout": "vertical",
                       "padding": [
-                        16,
-                        20
+                        24,
+                        40
                       ],
                       "children": [
                         {
@@ -3900,8 +3844,8 @@
                           "content": "いい調子だね。\nこの集中、続けてみよう。",
                           "lineHeight": 1.7,
                           "textAlign": "center",
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 18,
                           "fontWeight": "normal"
                         }
                       ]
@@ -3910,10 +3854,10 @@
                       "type": "text",
                       "id": "SG3Us",
                       "name": "hvSubNew",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "content": "AIが、あなたに合わせて声がけ",
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
                       "fontWeight": "normal"
                     }
                   ]
@@ -3929,10 +3873,10 @@
           "width": "fill_container",
           "fill": "#00000000",
           "layout": "vertical",
-          "gap": 48,
+          "gap": 32,
           "padding": [
             80,
-            120
+            144
           ],
           "alignItems": "center",
           "children": [
@@ -3942,7 +3886,7 @@
               "name": "featH",
               "fill": "$text-primary",
               "content": "集中をやさしく支える、3つのこと",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 36,
               "fontWeight": "700",
               "letterSpacing": -0.5
@@ -3962,8 +3906,13 @@
                   "width": "fill_container",
                   "fill": "$bg-card",
                   "cornerRadius": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D1CAC1"
+                  },
                   "layout": "vertical",
-                  "gap": 20,
+                  "gap": 16,
                   "padding": 36,
                   "children": [
                     {
@@ -3995,7 +3944,7 @@
                       "name": "fc1h",
                       "fill": "$text-primary",
                       "content": "シンプルな集中タイマー",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 20,
                       "fontWeight": "600"
                     },
@@ -4003,13 +3952,13 @@
                       "type": "text",
                       "id": "zwcRl",
                       "name": "fc1p",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "勉強・作業時間をすっきり管理。難しい設定はいりません。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
                       "fontWeight": "normal"
                     }
                   ]
@@ -4021,8 +3970,13 @@
                   "width": "fill_container",
                   "fill": "$bg-card",
                   "cornerRadius": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D1CAC1"
+                  },
                   "layout": "vertical",
-                  "gap": 20,
+                  "gap": 16,
                   "padding": 36,
                   "children": [
                     {
@@ -4054,7 +4008,7 @@
                       "name": "fc2h",
                       "fill": "$text-primary",
                       "content": "AIのひと言で、作業へ引き戻す",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 20,
                       "fontWeight": "600"
                     },
@@ -4062,13 +4016,13 @@
                       "type": "text",
                       "id": "QYqlS",
                       "name": "fc2p",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "ライバル・クール・コーチなど、自分に合う声がけで、自然と集中に戻れます。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
                       "fontWeight": "normal"
                     }
                   ]
@@ -4080,8 +4034,13 @@
                   "width": "fill_container",
                   "fill": "$bg-card",
                   "cornerRadius": 24,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "#D1CAC1"
+                  },
                   "layout": "vertical",
-                  "gap": 20,
+                  "gap": 16,
                   "padding": 36,
                   "children": [
                     {
@@ -4113,7 +4072,7 @@
                       "name": "fc3h",
                       "fill": "$text-primary",
                       "content": "カレンダーで積み重ねを可視化",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 20,
                       "fontWeight": "600"
                     },
@@ -4121,13 +4080,13 @@
                       "type": "text",
                       "id": "NQ947",
                       "name": "fc3p",
-                      "fill": "$text-secondary",
+                      "fill": "#6B6761",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
                       "content": "過去の集中時間がひと目で分かり、今日の積み重ねが、自信に変わります。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
-                      "fontSize": 14,
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
                       "fontWeight": "normal"
                     }
                   ]
@@ -4145,7 +4104,7 @@
           "layout": "vertical",
           "padding": [
             80,
-            120
+            144
           ],
           "alignItems": "center",
           "children": [
@@ -4178,21 +4137,20 @@
                   "name": "ctaH",
                   "fill": "$text-primary",
                   "content": "今日から、はじめてみませんか？",
-                  "fontFamily": "Inter",
-                  "fontSize": 32,
-                  "fontWeight": "700",
-                  "letterSpacing": -0.5
+                  "lineHeight": 1.4,
+                  "fontFamily": "Geist",
+                  "fontSize": 30,
+                  "fontWeight": "700"
                 },
                 {
                   "type": "text",
                   "id": "V29Kq",
                   "name": "ctaP",
-                  "opacity": 0.8,
-                  "fill": "$text-primary",
+                  "fill": "#6B6761",
                   "content": "ひとりで集中したい人のために、Focory。",
-                  "fontFamily": "Inter",
-                  "fontSize": 16,
-                  "fontWeight": "normal"
+                  "fontFamily": "Geist",
+                  "fontSize": 20,
+                  "fontWeight": "500"
                 },
                 {
                   "type": "frame",
@@ -4256,7 +4214,7 @@
           "layout": "vertical",
           "gap": 24,
           "padding": [
-            40,
+            48,
             24
           ],
           "alignItems": "center",
@@ -4271,22 +4229,21 @@
               "content": "スマホを置いて、\nいまやることへ。",
               "lineHeight": 1.25,
               "textAlign": "center",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 32,
-              "fontWeight": "700",
-              "letterSpacing": -0.5
+              "fontWeight": "700"
             },
             {
               "type": "text",
               "id": "duyQJ",
               "name": "mhP",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "Focoryは、AIがあなただけの言葉で集中を後押しする、学習タイマー。",
+              "content": "Focoryは、AIがあなただけの言葉で集中を後押しする、学習タイマー。「あと5分だけ」を、今日からなくしませんか。",
               "lineHeight": 1.7,
               "textAlign": "center",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 14,
               "fontWeight": "normal"
             },
@@ -4297,9 +4254,9 @@
               "width": "fill_container",
               "height": 280,
               "fill": "$bg-card",
-              "cornerRadius": 24,
               "layout": "vertical",
               "gap": 16,
+              "padding": 32,
               "justifyContent": "center",
               "alignItems": "center",
               "children": [
@@ -4315,12 +4272,12 @@
                   "type": "frame",
                   "id": "g1V5m",
                   "name": "mChat",
-                  "fill": "$bg-primary",
+                  "fill": "#EDE8E2",
                   "cornerRadius": 16,
                   "layout": "vertical",
                   "padding": [
-                    12,
-                    16
+                    16,
+                    20
                   ],
                   "children": [
                     {
@@ -4329,12 +4286,12 @@
                       "name": "mChatT",
                       "fill": "$text-primary",
                       "textGrowth": "fixed-width",
-                      "width": 200,
+                      "width": 220,
                       "content": "いい調子だね。\nこの集中、続けてみよう。",
                       "lineHeight": 1.7,
                       "textAlign": "center",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
+                      "fontFamily": "Geist",
+                      "fontSize": 16,
                       "fontWeight": "normal"
                     }
                   ]
@@ -4343,10 +4300,10 @@
                   "type": "text",
                   "id": "I6f1Hf",
                   "name": "mhvSubNew",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "content": "AIが、あなたに合わせて声がけ",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
                   "fontWeight": "normal"
                 }
               ]
@@ -4365,13 +4322,17 @@
                   "id": "T59KPo",
                   "type": "ref",
                   "ref": "rmcNf",
-                  "name": "mhApp"
+                  "name": "mhApp",
+                  "width": 160,
+                  "height": 48
                 },
                 {
                   "id": "MftdD",
                   "type": "ref",
                   "ref": "IKQax",
-                  "name": "mhPlay"
+                  "name": "mhPlay",
+                  "width": 160,
+                  "height": 48
                 }
               ]
             }
@@ -4386,7 +4347,7 @@
           "layout": "vertical",
           "gap": 24,
           "padding": [
-            40,
+            48,
             24
           ],
           "children": [
@@ -4400,10 +4361,9 @@
               "content": "集中をやさしく支える、3つのこと",
               "lineHeight": 1.4,
               "textAlign": "center",
-              "fontFamily": "Inter",
-              "fontSize": 22,
-              "fontWeight": "700",
-              "letterSpacing": -0.5
+              "fontFamily": "Geist",
+              "fontSize": 24,
+              "fontWeight": "700"
             },
             {
               "type": "frame",
@@ -4411,9 +4371,14 @@
               "name": "mfc1",
               "width": "fill_container",
               "fill": "$bg-card",
-              "cornerRadius": 20,
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
-              "gap": 14,
+              "gap": 16,
               "padding": 24,
               "children": [
                 {
@@ -4445,21 +4410,21 @@
                   "name": "mfc1h",
                   "fill": "$text-primary",
                   "content": "シンプルな集中タイマー",
-                  "fontFamily": "Inter",
-                  "fontSize": 17,
+                  "fontFamily": "Geist",
+                  "fontSize": 18,
                   "fontWeight": "600"
                 },
                 {
                   "type": "text",
                   "id": "K9tLk",
                   "name": "mfc1p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "勉強・作業時間をすっきり管理。難しい設定はいりません。",
                   "lineHeight": 1.7,
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 }
               ]
@@ -4470,9 +4435,14 @@
               "name": "mfc2",
               "width": "fill_container",
               "fill": "$bg-card",
-              "cornerRadius": 20,
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
-              "gap": 14,
+              "gap": 16,
               "padding": 24,
               "children": [
                 {
@@ -4504,21 +4474,21 @@
                   "name": "mfc2h",
                   "fill": "$text-primary",
                   "content": "AIのひと言で、作業へ引き戻す",
-                  "fontFamily": "Inter",
-                  "fontSize": 17,
+                  "fontFamily": "Geist",
+                  "fontSize": 18,
                   "fontWeight": "600"
                 },
                 {
                   "type": "text",
                   "id": "WkyUY",
                   "name": "mfc2p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "ライバル・クール・コーチなど、自分に合う声がけで、自然と集中に戻れます。",
                   "lineHeight": 1.7,
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 }
               ]
@@ -4529,9 +4499,14 @@
               "name": "mfc3",
               "width": "fill_container",
               "fill": "$bg-card",
-              "cornerRadius": 20,
+              "cornerRadius": 16,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
-              "gap": 14,
+              "gap": 16,
               "padding": 24,
               "children": [
                 {
@@ -4563,21 +4538,21 @@
                   "name": "mfc3h",
                   "fill": "$text-primary",
                   "content": "カレンダーで積み重ねを可視化",
-                  "fontFamily": "Inter",
-                  "fontSize": 17,
+                  "fontFamily": "Geist",
+                  "fontSize": 18,
                   "fontWeight": "600"
                 },
                 {
                   "type": "text",
                   "id": "ReOW3",
                   "name": "mfc3p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "過去の集中時間がひと目で分かり、今日の積み重ねが、自信に変わります。",
                   "lineHeight": 1.7,
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 }
               ]
@@ -4592,9 +4567,7 @@
           "fill": "#00000000",
           "layout": "vertical",
           "padding": [
-            24,
-            24,
-            40,
+            48,
             24
           ],
           "children": [
@@ -4631,21 +4604,19 @@
                   "content": "今日から、はじめてみませんか？",
                   "lineHeight": 1.4,
                   "textAlign": "center",
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 20,
-                  "fontWeight": "700",
-                  "letterSpacing": -0.5
+                  "fontWeight": "700"
                 },
                 {
                   "type": "text",
                   "id": "eupU7",
                   "name": "mCtaP",
-                  "opacity": 0.8,
-                  "fill": "$text-primary",
-                  "content": "ひとりで集中したい人のために。",
-                  "fontFamily": "Inter",
-                  "fontSize": 13,
-                  "fontWeight": "normal"
+                  "fill": "#6B6761",
+                  "content": "ひとりで集中したい人のために、Focory。",
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
+                  "fontWeight": "500"
                 },
                 {
                   "type": "frame",
@@ -4653,20 +4624,24 @@
                   "name": "mCtaBtns",
                   "fill": "#00000000",
                   "layout": "vertical",
-                  "gap": 10,
+                  "gap": 12,
                   "alignItems": "center",
                   "children": [
                     {
                       "id": "ht2Rx",
                       "type": "ref",
                       "ref": "rmcNf",
-                      "name": "mCtaApp"
+                      "name": "mCtaApp",
+                      "width": 160,
+                      "height": 48
                     },
                     {
                       "id": "jdhlS",
                       "type": "ref",
                       "ref": "IKQax",
-                      "name": "mCtaPlay"
+                      "name": "mCtaPlay",
+                      "width": 160,
+                      "height": 48
                     }
                   ]
                 }
@@ -4709,12 +4684,12 @@
           "width": "fill_container",
           "fill": "#00000000",
           "layout": "vertical",
-          "gap": 14,
+          "gap": 10,
           "padding": [
-            60,
-            120,
-            40,
-            120
+            48,
+            48,
+            32,
+            48
           ],
           "alignItems": "center",
           "children": [
@@ -4724,19 +4699,18 @@
               "name": "tH1",
               "fill": "$text-primary",
               "content": "利用規約",
-              "fontFamily": "Inter",
-              "fontSize": 48,
-              "fontWeight": "700",
-              "letterSpacing": -1
+              "fontFamily": "Geist",
+              "fontSize": 36,
+              "fontWeight": "700"
             },
             {
               "type": "text",
               "id": "tS9jk",
               "name": "tMeta",
-              "fill": "$text-secondary",
-              "content": "最終更新日: 2026年5月1日",
-              "fontFamily": "Inter",
-              "fontSize": 14,
+              "fill": "#6B6761",
+              "content": "最終更新日: 2026年5月7日",
+              "fontFamily": "Geist",
+              "fontSize": 16,
               "fontWeight": "normal"
             }
           ]
@@ -4759,9 +4733,14 @@
               "type": "frame",
               "id": "Cz2MM",
               "name": "tArticle",
-              "width": 760,
+              "width": 896,
               "fill": "$bg-card",
               "cornerRadius": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
               "gap": 32,
               "padding": [
@@ -4773,13 +4752,13 @@
                   "type": "text",
                   "id": "aOc1U",
                   "name": "tIntro",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本利用規約（以下「本規約」）は、Focory（以下「本アプリ」）の利用条件を定めるものです。本アプリをご利用いただくすべてのユーザー（以下「ユーザー」）は、本規約に同意したものとみなされます。",
+                  "content": "本利用規約（以下「本規約」といいます。）は、Focory運営者（以下「運営者」といいます。）が提供する学習支援アプリ「Focory」および関連ウェブサイト（以下総称して「本サービス」といいます。）の利用条件を定めるものです。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -4790,7 +4769,7 @@
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "第1条　適用",
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -4798,13 +4777,13 @@
                   "type": "text",
                   "id": "k8Qr7",
                   "name": "ts1p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本規約は、ユーザーと運営者との間の本アプリの利用に関わる一切の関係に適用されるものとします。運営者が本アプリ上で随時掲載する諸規定は、本規約の一部を構成するものとします。",
+                  "content": "本規約は、ユーザーと運営者との間の本サービスの利用に関わる一切の関係に適用されます。運営者が本サービス上で掲載または通知する個別規定は、本規約の一部を構成します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -4814,8 +4793,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第2条　利用登録",
-                  "fontFamily": "Inter",
+                  "content": "第2条　本サービスの内容",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -4823,13 +4802,13 @@
                   "type": "text",
                   "id": "Ft8fM",
                   "name": "ts2p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本アプリの利用にあたり、アカウント登録は必要ありません。ただし、一部の機能を利用するためには、運営者の定める方法による登録が必要となる場合があります。",
+                  "content": "本サービスは、学習や作業への集中を支援するため、タイマー、集中時間の記録、ユーザーが入力した目的・理由・口調設定等に応じたAIメッセージ生成、プッシュ通知、お問い合わせ機能を提供します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -4839,8 +4818,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第3条　禁止事項",
-                  "fontFamily": "Inter",
+                  "content": "第6条　禁止事項",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -4848,13 +4827,13 @@
                   "type": "text",
                   "id": "aR2Wa",
                   "name": "ts3p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "ユーザーは、本アプリの利用にあたり、以下の行為をしてはなりません。",
+                  "content": "ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -4904,13 +4883,13 @@
                           "type": "text",
                           "id": "RbepK",
                           "name": "tlb1t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "法令または公序良俗に違反する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -4947,13 +4926,13 @@
                           "type": "text",
                           "id": "v1locW",
                           "name": "tlb2t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "犯罪行為に関連する行為",
+                          "content": "犯罪行為またはこれに関連する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -4990,13 +4969,13 @@
                           "type": "text",
                           "id": "rogja",
                           "name": "tlb3t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "運営者のサーバーまたはネットワークの機能を破壊・妨害する行為",
+                          "content": "運営者、他のユーザーまたは第三者の権利または利益を侵害する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -5033,13 +5012,13 @@
                           "type": "text",
                           "id": "agZ7Q",
                           "name": "tlb4t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "本アプリの運営を妨害するおそれのある行為",
+                          "content": "本サービスのサーバー、ネットワーク、システムまたは外部連携サービスの運用を妨害する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -5076,13 +5055,13 @@
                           "type": "text",
                           "id": "woN3Q",
                           "name": "tlb5t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "その他、運営者が不適切と判断する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -5096,8 +5075,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第4条　本アプリの提供の停止等",
-                  "fontFamily": "Inter",
+                  "content": "第7条　本サービスの提供停止等",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -5105,13 +5084,13 @@
                   "type": "text",
                   "id": "fNdeR",
                   "name": "ts4p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、本アプリの保守・更新等の必要があると判断した場合には、ユーザーに事前に通知することなく本アプリの全部または一部の提供を停止または中断することができるものとします。",
+                  "content": "運営者は、保守点検、外部サービスの障害、セキュリティ上の問題その他運営上必要がある場合、ユーザーに事前に通知することなく本サービスの全部または一部を停止または中断できます。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -5121,8 +5100,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第5条　免責事項",
-                  "fontFamily": "Inter",
+                  "content": "第11条　保証の否認および免責",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -5130,13 +5109,13 @@
                   "type": "text",
                   "id": "k5fXV",
                   "name": "ts5p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、本アプリに関して、特定の目的への適合性、商品的価値、正確性、有用性、完全性等につき、いかなる保証も行わないものとします。",
+                  "content": "運営者は、本サービスについて、安全性、信頼性、正確性、完全性、有効性、特定目的への適合性、継続性、エラーや不具合がないことを保証しません。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -5146,8 +5125,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第6条　規約の変更",
-                  "fontFamily": "Inter",
+                  "content": "第13条　本規約の変更",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -5155,13 +5134,13 @@
                   "type": "text",
                   "id": "ejNm7",
                   "name": "ts6p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、必要と判断した場合には、ユーザーに通知することなくいつでも本規約を変更することができるものとします。なお、本規約の変更後、本アプリの利用を開始した場合には、当該ユーザーは変更後の規約に同意したものとみなします。",
+                  "content": "運営者は、本規約を変更する場合、変更後の規約の内容および効力発生時期を、本サービス内、ウェブサイトその他運営者が適切と判断する方法により周知します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -5188,9 +5167,9 @@
                       "fill": "$text-primary",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "本規約に関するお問い合わせは、お問い合わせページよりご連絡ください。",
+                      "content": "本規約に関するお問い合わせは、お問い合わせフォームよりご連絡ください。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal",
                       "fontStyle": "italic"
@@ -5251,7 +5230,7 @@
               "name": "tmH1",
               "fill": "$text-primary",
               "content": "利用規約",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 32,
               "fontWeight": "700",
               "letterSpacing": -0.5
@@ -5260,9 +5239,9 @@
               "type": "text",
               "id": "BJu0n",
               "name": "tmMeta",
-              "fill": "$text-secondary",
-              "content": "最終更新日: 2026年5月1日",
-              "fontFamily": "Inter",
+              "fill": "#6B6761",
+              "content": "最終更新日: 2026年5月7日",
+              "fontFamily": "Geist",
               "fontSize": 13,
               "fontWeight": "normal"
             }
@@ -5289,6 +5268,11 @@
               "width": "fill_container",
               "fill": "$bg-card",
               "cornerRadius": 18,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
               "gap": 22,
               "padding": [
@@ -5300,12 +5284,12 @@
                   "type": "text",
                   "id": "P8Ule",
                   "name": "tmIntro",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本利用規約（以下「本規約」）は、Focory（以下「本アプリ」）の利用条件を定めるものです。本アプリをご利用いただくすべてのユーザーは、本規約に同意したものとみなされます。",
+                  "content": "本利用規約は、Focory運営者が提供する学習支援アプリ「Focory」および関連ウェブサイトの利用条件を定めるものです。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5317,7 +5301,7 @@
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "第1条　適用",
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -5325,12 +5309,12 @@
                   "type": "text",
                   "id": "s16zb3",
                   "name": "tms1p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本規約は、ユーザーと運営者との間の本アプリの利用に関わる一切の関係に適用されるものとします。",
+                  "content": "本規約は、ユーザーと運営者との間の本サービスの利用に関わる一切の関係に適用されます。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5341,8 +5325,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第2条　利用登録",
-                  "fontFamily": "Inter",
+                  "content": "第2条　本サービスの内容",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -5350,12 +5334,12 @@
                   "type": "text",
                   "id": "QwRjh",
                   "name": "tms2p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本アプリの利用にあたり、アカウント登録は必要ありません。一部の機能では運営者の定める方法による登録が必要となる場合があります。",
+                  "content": "本サービスは、タイマー、集中時間の記録、AIメッセージ生成、プッシュ通知、お問い合わせ機能を提供します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5366,8 +5350,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第3条　禁止事項",
-                  "fontFamily": "Inter",
+                  "content": "第6条　禁止事項",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -5375,12 +5359,12 @@
                   "type": "text",
                   "id": "y4MV1O",
                   "name": "tms3p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "ユーザーは、本アプリの利用にあたり、以下の行為をしてはなりません。",
+                  "content": "ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5431,12 +5415,12 @@
                           "type": "text",
                           "id": "l7WXM",
                           "name": "tml1t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "法令または公序良俗に違反する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -5474,12 +5458,12 @@
                           "type": "text",
                           "id": "l4ZTA",
                           "name": "tml2t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "犯罪行為に関連する行為",
+                          "content": "犯罪行為またはこれに関連する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -5517,12 +5501,12 @@
                           "type": "text",
                           "id": "f1m9eL",
                           "name": "tml3t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "運営者のサーバーまたはネットワークの機能を破壊・妨害する行為",
+                          "content": "第三者の権利または利益を侵害する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -5560,12 +5544,12 @@
                           "type": "text",
                           "id": "pGiut",
                           "name": "tml4t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "その他、運営者が不適切と判断する行為",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -5580,8 +5564,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第4条　本アプリの提供の停止等",
-                  "fontFamily": "Inter",
+                  "content": "第7条　本サービスの提供停止等",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -5589,12 +5573,12 @@
                   "type": "text",
                   "id": "yZmVP",
                   "name": "tms4p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、保守・更新等の必要があると判断した場合、ユーザーへの通知なく本アプリの全部または一部の提供を停止することができます。",
+                  "content": "運営者は、保守点検、外部サービスの障害、セキュリティ上の問題その他運営上必要がある場合、本サービスの全部または一部を停止できます。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5605,8 +5589,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第5条　免責事項",
-                  "fontFamily": "Inter",
+                  "content": "第11条　保証の否認および免責",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -5614,12 +5598,12 @@
                   "type": "text",
                   "id": "Xh7pz",
                   "name": "tms5p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、本アプリに関して、特定の目的への適合性、正確性、有用性、完全性等につき、いかなる保証も行いません。",
+                  "content": "運営者は、本サービスについて、安全性、信頼性、正確性、完全性、有効性、継続性、エラーや不具合がないことを保証しません。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5630,8 +5614,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "第6条　規約の変更",
-                  "fontFamily": "Inter",
+                  "content": "第13条　本規約の変更",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -5639,12 +5623,12 @@
                   "type": "text",
                   "id": "OVZYV",
                   "name": "tms6p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、必要と判断した場合、ユーザーへの通知なく本規約を変更できるものとします。変更後に本アプリを利用した場合、変更後の規約に同意したものとみなします。",
+                  "content": "運営者は、本規約を変更する場合、本サービス内またはウェブサイトで変更後の内容と効力発生時期を周知します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -5673,7 +5657,7 @@
                       "width": "fill_container",
                       "content": "本規約に関するお問い合わせは、お問い合わせページよりご連絡ください。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 13,
                       "fontWeight": "normal",
                       "fontStyle": "italic"
@@ -5719,12 +5703,12 @@
           "width": "fill_container",
           "fill": "#00000000",
           "layout": "vertical",
-          "gap": 14,
+          "gap": 10,
           "padding": [
-            60,
-            120,
-            40,
-            120
+            48,
+            48,
+            32,
+            48
           ],
           "alignItems": "center",
           "children": [
@@ -5734,19 +5718,18 @@
               "name": "pH1",
               "fill": "$text-primary",
               "content": "プライバシーポリシー",
-              "fontFamily": "Inter",
-              "fontSize": 48,
-              "fontWeight": "700",
-              "letterSpacing": -1
+              "fontFamily": "Geist",
+              "fontSize": 36,
+              "fontWeight": "700"
             },
             {
               "type": "text",
               "id": "TEBzt",
               "name": "pMeta",
-              "fill": "$text-secondary",
-              "content": "最終更新日: 2026年5月1日",
-              "fontFamily": "Inter",
-              "fontSize": 14,
+              "fill": "#6B6761",
+              "content": "最終更新日: 2026年5月7日",
+              "fontFamily": "Geist",
+              "fontSize": 16,
               "fontWeight": "normal"
             }
           ]
@@ -5769,9 +5752,14 @@
               "type": "frame",
               "id": "c6vp0V",
               "name": "pArt",
-              "width": 760,
+              "width": 896,
               "fill": "$bg-card",
               "cornerRadius": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
               "gap": 32,
               "padding": [
@@ -5783,13 +5771,13 @@
                   "type": "text",
                   "id": "X1gYZ",
                   "name": "pIntro",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Focory（以下「本アプリ」）は、ユーザーのプライバシーを尊重し、個人情報の保護に最大限の配慮をしています。本ポリシーは、本アプリで取得する情報の種類とその取扱いについて定めるものです。",
+                  "content": "Focory運営者（以下「運営者」といいます。）は、学習支援アプリ「Focory」および関連ウェブサイト（以下総称して「本サービス」といいます。）におけるユーザー情報の取扱いについて、以下のとおりプライバシーポリシーを定めます。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -5799,8 +5787,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "1. 取得する情報",
-                  "fontFamily": "Inter",
+                  "content": "第1条　基本方針",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -5808,13 +5796,13 @@
                   "type": "text",
                   "id": "otQi7",
                   "name": "ps1p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本アプリは、原則としてアカウント登録を必要とせず、個人を特定できる情報を収集しません。タイマーの利用記録や設定はお使いの端末内にのみ保存されます。",
+                  "content": "運営者は、個人情報の保護に関する法律その他関連法令を遵守し、本サービスの提供に必要な範囲でユーザー情報を適切に取得、利用、保存および管理します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -5824,8 +5812,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "2. 利用目的",
-                  "fontFamily": "Inter",
+                  "content": "第2条　取得する情報",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -5833,13 +5821,13 @@
                   "type": "text",
                   "id": "UeQlq",
                   "name": "ps2p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "取得する情報は、以下の目的で利用いたします。",
+                  "content": "運営者は、本サービスの提供にあたり、以下の情報を取得することがあります。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -5889,13 +5877,13 @@
                           "type": "text",
                           "id": "csFny",
                           "name": "pl1t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "本アプリの提供および機能改善のため",
+                          "content": "認証および利用者識別に関する情報",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -5932,13 +5920,13 @@
                           "type": "text",
                           "id": "q198vx",
                           "name": "pl2t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "利用状況の解析および統計のため（個人を特定しない形に限る）",
+                          "content": "タイマーおよび学習記録に関する情報",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -5975,13 +5963,13 @@
                           "type": "text",
                           "id": "frCKP",
                           "name": "pl3t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "お問い合わせへの返信のため",
+                          "content": "AIメッセージ生成、プッシュ通知、お問い合わせに関する情報",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
-                          "fontSize": 15,
+                          "fontFamily": "Geist",
+                          "fontSize": 16,
                           "fontWeight": "normal"
                         }
                       ]
@@ -5995,8 +5983,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "3. 第三者への提供",
-                  "fontFamily": "Inter",
+                  "content": "第3条　利用目的",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -6004,13 +5992,13 @@
                   "type": "text",
                   "id": "BRLz0",
                   "name": "ps3p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、法令に基づく場合を除き、ユーザーの同意を得ることなく、取得した情報を第三者に提供することはありません。",
+                  "content": "運営者は、本サービスの提供、認証、タイマー、学習記録、AIメッセージ生成、プッシュ通知、お問い合わせ対応、保守、品質改善およびセキュリティ確保のために取得した情報を利用します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -6020,8 +6008,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "4. データの保管場所",
-                  "fontFamily": "Inter",
+                  "content": "第4条　外部サービスおよび委託先の利用",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -6029,13 +6017,13 @@
                   "type": "text",
                   "id": "w22Aj1",
                   "name": "ps4p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本アプリで生成されるユーザーの利用データは、お使いの端末内に安全に保管されます。データはサーバーには送信されず、ユーザーご自身の管理下にあります。",
+                  "content": "運営者は、本サービスの提供に必要な範囲で、クラウドホスティング、認証、AIメッセージ生成、プッシュ通知配信、ログ管理その他の外部サービスまたは委託先を利用することがあります。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -6045,8 +6033,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "5. お問い合わせ",
-                  "fontFamily": "Inter",
+                  "content": "第5条　第三者提供",
+                  "fontFamily": "Geist",
                   "fontSize": 24,
                   "fontWeight": "700"
                 },
@@ -6054,13 +6042,13 @@
                   "type": "text",
                   "id": "uDJn0",
                   "name": "ps5p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本ポリシーに関するご質問やご意見、開示請求等は、お問い合わせフォームよりご連絡ください。",
+                  "content": "運営者は、法令に基づく場合等を除き、あらかじめユーザー本人の同意を得ることなく、個人データを第三者に提供しません。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 16,
                   "fontWeight": "normal"
                 },
                 {
@@ -6086,9 +6074,9 @@
                       "fill": "$text-primary",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "本ポリシーは、必要に応じて改定されます。重要な変更がある場合は、本アプリ内またはWebサイトでお知らせいたします。",
+                      "content": "本ポリシーに関するお問い合わせ、開示等の請求、苦情または相談は、お問い合わせフォームよりご連絡ください。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 14,
                       "fontWeight": "normal",
                       "fontStyle": "italic"
@@ -6149,7 +6137,7 @@
               "name": "pmH1",
               "fill": "$text-primary",
               "content": "プライバシーポリシー",
-              "fontFamily": "Inter",
+              "fontFamily": "Geist",
               "fontSize": 26,
               "fontWeight": "700",
               "letterSpacing": -0.5
@@ -6158,9 +6146,9 @@
               "type": "text",
               "id": "OROKR",
               "name": "pmMeta",
-              "fill": "$text-secondary",
-              "content": "最終更新日: 2026年5月1日",
-              "fontFamily": "Inter",
+              "fill": "#6B6761",
+              "content": "最終更新日: 2026年5月7日",
+              "fontFamily": "Geist",
               "fontSize": 13,
               "fontWeight": "normal"
             }
@@ -6187,6 +6175,11 @@
               "width": "fill_container",
               "fill": "$bg-card",
               "cornerRadius": 18,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
               "gap": 22,
               "padding": [
@@ -6198,12 +6191,12 @@
                   "type": "text",
                   "id": "ht9O4",
                   "name": "pmIntro",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "Focoryは、ユーザーのプライバシーを尊重し、個人情報の保護に最大限の配慮をしています。",
+                  "content": "Focory運営者は、学習支援アプリ「Focory」および関連ウェブサイトにおけるユーザー情報の取扱いについて、以下のとおりプライバシーポリシーを定めます。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -6214,8 +6207,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "1. 取得する情報",
-                  "fontFamily": "Inter",
+                  "content": "第1条　基本方針",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -6223,12 +6216,12 @@
                   "type": "text",
                   "id": "xI88k",
                   "name": "pms1p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本アプリは原則アカウント登録を必要とせず、個人を特定できる情報を収集しません。利用記録や設定はお使いの端末内に保存されます。",
+                  "content": "運営者は、関連法令を遵守し、本サービスの提供に必要な範囲でユーザー情報を適切に取得、利用、保存および管理します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -6239,8 +6232,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "2. 利用目的",
-                  "fontFamily": "Inter",
+                  "content": "第2条　取得する情報",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -6248,12 +6241,12 @@
                   "type": "text",
                   "id": "D9g5wC",
                   "name": "pms2p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "取得する情報は、以下の目的で利用いたします。",
+                  "content": "運営者は、本サービスの提供にあたり、以下の情報を取得することがあります。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -6304,12 +6297,12 @@
                           "type": "text",
                           "id": "M0zqLt",
                           "name": "pml1t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "本アプリの提供および機能改善のため",
+                          "content": "認証および利用者識別に関する情報",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -6347,12 +6340,12 @@
                           "type": "text",
                           "id": "yN03A",
                           "name": "pml2t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "利用状況の解析および統計のため",
+                          "content": "タイマーおよび学習記録に関する情報",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -6390,12 +6383,12 @@
                           "type": "text",
                           "id": "xxD8K",
                           "name": "pml3t",
-                          "fill": "$text-secondary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
-                          "content": "お問い合わせへの返信のため",
+                          "content": "AIメッセージ生成、プッシュ通知、お問い合わせに関する情報",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -6410,8 +6403,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "3. 第三者への提供",
-                  "fontFamily": "Inter",
+                  "content": "第3条　利用目的",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -6419,12 +6412,12 @@
                   "type": "text",
                   "id": "qeJdR",
                   "name": "pms3p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "運営者は、法令に基づく場合を除き、ユーザーの同意を得ることなく、取得した情報を第三者に提供することはありません。",
+                  "content": "運営者は、本サービスの提供、認証、AIメッセージ生成、通知、お問い合わせ対応、保守、品質改善およびセキュリティ確保のために取得した情報を利用します。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -6435,8 +6428,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "4. データの保管場所",
-                  "fontFamily": "Inter",
+                  "content": "第4条　外部サービスおよび委託先の利用",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -6444,12 +6437,12 @@
                   "type": "text",
                   "id": "U9MCG",
                   "name": "pms4p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本アプリで生成されるユーザーの利用データは、お使いの端末内に安全に保管されます。",
+                  "content": "運営者は、本サービスの提供に必要な範囲で、クラウドホスティング、認証、AIメッセージ生成、プッシュ通知配信その他の外部サービスを利用することがあります。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -6460,8 +6453,8 @@
                   "fill": "$text-primary",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "5. お問い合わせ",
-                  "fontFamily": "Inter",
+                  "content": "第5条　第三者提供",
+                  "fontFamily": "Geist",
                   "fontSize": 18,
                   "fontWeight": "700"
                 },
@@ -6469,12 +6462,12 @@
                   "type": "text",
                   "id": "E4CE7A",
                   "name": "pms5p",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "本ポリシーに関するご質問は、お問い合わせフォームよりご連絡ください。",
+                  "content": "運営者は、法令に基づく場合等を除き、本人の同意なく個人データを第三者に提供しません。",
                   "lineHeight": 1.85,
-                  "fontFamily": "Inter",
+                  "fontFamily": "Geist",
                   "fontSize": 14,
                   "fontWeight": "normal"
                 },
@@ -6501,9 +6494,9 @@
                       "fill": "$text-primary",
                       "textGrowth": "fixed-width",
                       "width": "fill_container",
-                      "content": "本ポリシーは必要に応じて改定されます。重要な変更は、本アプリ内またはWebサイトでお知らせします。",
+                      "content": "本ポリシーに関するお問い合わせ、開示等の請求、苦情または相談は、お問い合わせフォームよりご連絡ください。",
                       "lineHeight": 1.7,
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 13,
                       "fontWeight": "normal",
                       "fontStyle": "italic"
@@ -6548,12 +6541,12 @@
           "name": "cBody",
           "width": "fill_container",
           "fill": "#00000000",
-          "gap": 60,
+          "gap": 64,
           "padding": [
-            60,
-            120,
+            64,
+            144,
             80,
-            120
+            144
           ],
           "justifyContent": "center",
           "children": [
@@ -6572,59 +6565,22 @@
                   "name": "cH1",
                   "fill": "$text-primary",
                   "content": "お問い合わせ",
-                  "fontFamily": "Inter",
-                  "fontSize": 40,
-                  "fontWeight": "700",
-                  "letterSpacing": -1
+                  "fontFamily": "Geist",
+                  "fontSize": 36,
+                  "fontWeight": "700"
                 },
                 {
                   "type": "text",
                   "id": "N9EYVh",
                   "name": "cP",
-                  "fill": "$text-secondary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "ご意見・ご要望・不具合の報告など、どんなことでも、やさしくお寄せください。",
+                  "content": "ご意見・ご要望・不具合の報告など、どんなことでもお寄せください。",
                   "lineHeight": 1.8,
-                  "fontFamily": "Inter",
-                  "fontSize": 15,
+                  "fontFamily": "Geist",
+                  "fontSize": 18,
                   "fontWeight": "normal"
-                },
-                {
-                  "type": "frame",
-                  "id": "BNECZ",
-                  "name": "cInfo",
-                  "width": "fill_container",
-                  "fill": "$bg-card",
-                  "cornerRadius": 16,
-                  "layout": "vertical",
-                  "gap": 10,
-                  "padding": 20,
-                  "children": [
-                    {
-                      "type": "text",
-                      "id": "qp8pD",
-                      "name": "cInfoH",
-                      "fill": "$text-primary",
-                      "content": "返信について",
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "600"
-                    },
-                    {
-                      "type": "text",
-                      "id": "WhZru",
-                      "name": "cInfoP",
-                      "fill": "$text-secondary",
-                      "textGrowth": "fixed-width",
-                      "width": "fill_container",
-                      "content": "通常3〜5営業日以内にご返信いたします。内容によってはお時間をいただく場合があります。",
-                      "lineHeight": 1.7,
-                      "fontFamily": "Inter",
-                      "fontSize": 13,
-                      "fontWeight": "normal"
-                    }
-                  ]
                 }
               ]
             },
@@ -6635,6 +6591,11 @@
               "width": 560,
               "fill": "$bg-card",
               "cornerRadius": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
               "gap": 24,
               "padding": 40,
@@ -6662,7 +6623,7 @@
                           "name": "cf1lt",
                           "fill": "$text-primary",
                           "content": "お名前",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "600"
                         },
@@ -6683,7 +6644,7 @@
                               "name": "cf1chipT",
                               "fill": "#FFFFFF",
                               "content": "必須",
-                              "fontFamily": "Inter",
+                              "fontFamily": "Geist",
                               "fontSize": 10,
                               "fontWeight": "600"
                             }
@@ -6702,7 +6663,7 @@
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border-default"
+                        "fill": "#D1CAC1"
                       },
                       "padding": [
                         12,
@@ -6714,9 +6675,9 @@
                           "type": "text",
                           "id": "yEtBE",
                           "name": "cf1ph",
-                          "fill": "$text-tertiary",
+                          "fill": "#6B6761",
                           "content": "山田 太郎",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "normal"
                         }
@@ -6747,7 +6708,7 @@
                           "name": "cf2lt",
                           "fill": "$text-primary",
                           "content": "返信用メールアドレス",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "600"
                         },
@@ -6760,7 +6721,7 @@
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border-default"
+                            "fill": "#D1CAC1"
                           },
                           "padding": [
                             3,
@@ -6771,9 +6732,9 @@
                               "type": "text",
                               "id": "k4s6d",
                               "name": "cf2chipT",
-                              "fill": "$text-secondary",
+                              "fill": "#6B6761",
                               "content": "任意",
-                              "fontFamily": "Inter",
+                              "fontFamily": "Geist",
                               "fontSize": 10,
                               "fontWeight": "600"
                             }
@@ -6792,7 +6753,7 @@
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border-default"
+                        "fill": "#D1CAC1"
                       },
                       "padding": [
                         12,
@@ -6804,9 +6765,9 @@
                           "type": "text",
                           "id": "z3lXnV",
                           "name": "cf2ph",
-                          "fill": "$text-tertiary",
+                          "fill": "#6B6761",
                           "content": "you@example.com",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "normal"
                         }
@@ -6837,7 +6798,7 @@
                           "name": "cf3lt",
                           "fill": "$text-primary",
                           "content": "お問い合わせ内容",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "600"
                         },
@@ -6858,7 +6819,7 @@
                               "name": "cf3chipT",
                               "fill": "#FFFFFF",
                               "content": "必須",
-                              "fontFamily": "Inter",
+                              "fontFamily": "Geist",
                               "fontSize": 10,
                               "fontWeight": "600"
                             }
@@ -6877,7 +6838,7 @@
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border-default"
+                        "fill": "#D1CAC1"
                       },
                       "layout": "vertical",
                       "padding": [
@@ -6889,12 +6850,12 @@
                           "type": "text",
                           "id": "htsfj",
                           "name": "cf3ph",
-                          "fill": "$text-tertiary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "ご意見・ご要望・不具合のご報告など、どうぞお気軽にお書きください。",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 15,
                           "fontWeight": "normal"
                         }
@@ -6909,7 +6870,7 @@
                   "width": "fill_container",
                   "height": 56,
                   "fill": "$accent-dark",
-                  "cornerRadius": 14,
+                  "cornerRadius": 12,
                   "gap": 10,
                   "padding": [
                     14,
@@ -6924,7 +6885,7 @@
                       "name": "cfBtnT",
                       "fill": "#FFFFFF",
                       "content": "送信する",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 16,
                       "fontWeight": "600"
                     },
@@ -6944,14 +6905,14 @@
                   "type": "text",
                   "id": "x8euV",
                   "name": "cfNote",
-                  "fill": "$text-tertiary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
                   "content": "送信いただいた内容は、お問い合わせへの返信のみに利用いたします。",
                   "lineHeight": 1.7,
                   "textAlign": "center",
-                  "fontFamily": "Inter",
-                  "fontSize": 12,
+                  "fontFamily": "Geist",
+                  "fontSize": 14,
                   "fontWeight": "normal"
                 }
               ]
@@ -7008,23 +6969,22 @@
               "name": "cmH1",
               "fill": "$text-primary",
               "content": "お問い合わせ",
-              "fontFamily": "Inter",
-              "fontSize": 26,
-              "fontWeight": "700",
-              "letterSpacing": -0.5
+              "fontFamily": "Geist",
+              "fontSize": 24,
+              "fontWeight": "700"
             },
             {
               "type": "text",
               "id": "mxfUh",
               "name": "cmP",
-              "fill": "$text-secondary",
+              "fill": "#6B6761",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "ご意見・ご要望・不具合の報告など、どうぞお気軽に。",
+              "content": "ご意見・ご要望・不具合の報告など、どんなことでもお寄せください。",
               "lineHeight": 1.7,
               "textAlign": "center",
-              "fontFamily": "Inter",
-              "fontSize": 13,
+              "fontFamily": "Geist",
+              "fontSize": 16,
               "fontWeight": "normal"
             }
           ]
@@ -7049,13 +7009,15 @@
               "name": "cmForm",
               "width": "fill_container",
               "fill": "$bg-card",
-              "cornerRadius": 18,
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#D1CAC1"
+              },
               "layout": "vertical",
               "gap": 20,
-              "padding": [
-                28,
-                22
-              ],
+              "padding": 24,
               "children": [
                 {
                   "type": "frame",
@@ -7080,7 +7042,7 @@
                           "name": "cmf1lt",
                           "fill": "$text-primary",
                           "content": "お名前",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 13,
                           "fontWeight": "600"
                         },
@@ -7101,7 +7063,7 @@
                               "name": "cmf1ct",
                               "fill": "#FFFFFF",
                               "content": "必須",
-                              "fontFamily": "Inter",
+                              "fontFamily": "Geist",
                               "fontSize": 9,
                               "fontWeight": "600"
                             }
@@ -7114,17 +7076,17 @@
                       "id": "m0AVk",
                       "name": "cmf1in",
                       "width": "fill_container",
-                      "height": 44,
+                      "height": 48,
                       "fill": "$bg-primary",
-                      "cornerRadius": 10,
+                      "cornerRadius": 12,
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border-default"
+                        "fill": "#D1CAC1"
                       },
                       "padding": [
-                        10,
-                        14
+                        12,
+                        16
                       ],
                       "alignItems": "center",
                       "children": [
@@ -7132,9 +7094,9 @@
                           "type": "text",
                           "id": "rBV3H",
                           "name": "cmf1ph",
-                          "fill": "$text-tertiary",
+                          "fill": "#6B6761",
                           "content": "山田 太郎",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -7165,7 +7127,7 @@
                           "name": "cmf2lt",
                           "fill": "$text-primary",
                           "content": "返信用メールアドレス",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 13,
                           "fontWeight": "600"
                         },
@@ -7178,7 +7140,7 @@
                           "stroke": {
                             "align": "inside",
                             "thickness": 1,
-                            "fill": "$border-default"
+                            "fill": "#D1CAC1"
                           },
                           "padding": [
                             2,
@@ -7189,9 +7151,9 @@
                               "type": "text",
                               "id": "tD5Tz",
                               "name": "cmf2ct",
-                              "fill": "$text-secondary",
+                              "fill": "#6B6761",
                               "content": "任意",
-                              "fontFamily": "Inter",
+                              "fontFamily": "Geist",
                               "fontSize": 9,
                               "fontWeight": "600"
                             }
@@ -7204,17 +7166,17 @@
                       "id": "h4Zopd",
                       "name": "cmf2in",
                       "width": "fill_container",
-                      "height": 44,
+                      "height": 48,
                       "fill": "$bg-primary",
-                      "cornerRadius": 10,
+                      "cornerRadius": 12,
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border-default"
+                        "fill": "#D1CAC1"
                       },
                       "padding": [
-                        10,
-                        14
+                        12,
+                        16
                       ],
                       "alignItems": "center",
                       "children": [
@@ -7222,9 +7184,9 @@
                           "type": "text",
                           "id": "f1jHZH",
                           "name": "cmf2ph",
-                          "fill": "$text-tertiary",
+                          "fill": "#6B6761",
                           "content": "you@example.com",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -7255,7 +7217,7 @@
                           "name": "cmf3lt",
                           "fill": "$text-primary",
                           "content": "お問い合わせ内容",
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 13,
                           "fontWeight": "600"
                         },
@@ -7276,7 +7238,7 @@
                               "name": "cmf3ct",
                               "fill": "#FFFFFF",
                               "content": "必須",
-                              "fontFamily": "Inter",
+                              "fontFamily": "Geist",
                               "fontSize": 9,
                               "fontWeight": "600"
                             }
@@ -7289,30 +7251,30 @@
                       "id": "GnPxY",
                       "name": "cmf3in",
                       "width": "fill_container",
-                      "height": 140,
+                      "height": 144,
                       "fill": "$bg-primary",
-                      "cornerRadius": 10,
+                      "cornerRadius": 12,
                       "stroke": {
                         "align": "inside",
                         "thickness": 1,
-                        "fill": "$border-default"
+                        "fill": "#D1CAC1"
                       },
                       "layout": "vertical",
                       "padding": [
                         12,
-                        14
+                        16
                       ],
                       "children": [
                         {
                           "type": "text",
                           "id": "QL8mx",
                           "name": "cmf3ph",
-                          "fill": "$text-tertiary",
+                          "fill": "#6B6761",
                           "textGrowth": "fixed-width",
                           "width": "fill_container",
                           "content": "ご意見・ご要望・不具合のご報告など、どうぞお気軽にお書きください。",
                           "lineHeight": 1.7,
-                          "fontFamily": "Inter",
+                          "fontFamily": "Geist",
                           "fontSize": 14,
                           "fontWeight": "normal"
                         }
@@ -7325,7 +7287,7 @@
                   "id": "TFH8w",
                   "name": "cmBtn",
                   "width": "fill_container",
-                  "height": 50,
+                  "height": 48,
                   "fill": "$accent-dark",
                   "cornerRadius": 12,
                   "gap": 8,
@@ -7338,7 +7300,7 @@
                       "name": "cmBtnT",
                       "fill": "#FFFFFF",
                       "content": "送信する",
-                      "fontFamily": "Inter",
+                      "fontFamily": "Geist",
                       "fontSize": 15,
                       "fontWeight": "600"
                     },
@@ -7358,14 +7320,14 @@
                   "type": "text",
                   "id": "NXqR5",
                   "name": "cmNote",
-                  "fill": "$text-tertiary",
+                  "fill": "#6B6761",
                   "textGrowth": "fixed-width",
                   "width": "fill_container",
-                  "content": "送信内容は、お問い合わせへの返信のみに利用いたします。",
+                  "content": "送信いただいた内容は、お問い合わせへの返信のみに利用いたします。",
                   "lineHeight": 1.7,
                   "textAlign": "center",
-                  "fontFamily": "Inter",
-                  "fontSize": 11,
+                  "fontFamily": "Geist",
+                  "fontSize": 12,
                   "fontWeight": "normal"
                 }
               ]
@@ -7380,107 +7342,736 @@
           "name": "cmFootInst"
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "Eekzy",
+      "x": 400,
+      "y": 9500,
+      "name": "AppStore SS 1 - Intro",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "EHWoA",
+          "name": "top1",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            20,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "eBvXi",
+              "type": "ref",
+              "ref": "LoA01",
+              "width": 300,
+              "height": 81,
+              "name": "logo1"
+            },
+            {
+              "type": "text",
+              "id": "S3ozD",
+              "name": "title1",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "スマホを置いて、\nいまやることへ。",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 48,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "KoZEC",
+          "name": "phone1Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "c8I18E",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "l6dWpD",
+      "x": 1200,
+      "y": 9500,
+      "name": "AppStore SS 2 - Timer",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "NHh3k",
+          "name": "top2",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "c81DX",
+              "name": "title2",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "シンプルな\n集中タイマー",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "M07Ogy",
+              "name": "sub2",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "勉強・作業時間をすっきり管理。\nAIのひと言で、自然と集中に戻れる。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Z1jsic",
+          "name": "phone2Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "S31d5m",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "DQeIV",
+      "x": 2000,
+      "y": 9500,
+      "name": "AppStore SS 3 - Log",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "C775mE",
+          "name": "top3",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Fth9f",
+              "name": "title3",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "積み重ねを\n可視化",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Mvmrf",
+              "name": "sub3",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "過去の集中時間がひと目で分かり、\n今日の積み重ねが、自信に変わります。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QAM4O",
+          "name": "phone3Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "t7YBG",
+              "type": "ref",
+              "ref": "XpZiX",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "txGa7",
+      "x": 2800,
+      "y": 9500,
+      "name": "AppStore SS 4 - Settings",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "iXKay",
+          "name": "top4",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ccJCo",
+              "name": "title4",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "あなたに合う\n声がけを選ぶ",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "dSQsM",
+              "name": "sub4",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "サポーター・ライバル・コーチなど、\n気分に合わせて切り替えられます。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bIIAI",
+          "name": "phone4Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "ZlC6y",
+              "type": "ref",
+              "ref": "DscOn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ed4BC",
+      "x": 398,
+      "y": 11000,
+      "name": "PlayStore SS 1 - Intro",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "g7Xgu",
+          "name": "top1",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            20,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "B4uIn",
+              "type": "ref",
+              "ref": "LoA01",
+              "width": 300,
+              "height": 81,
+              "name": "logo1"
+            },
+            {
+              "type": "text",
+              "id": "dcDGL",
+              "name": "title1",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "スマホを置いて、\nいまやることへ。",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 48,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "lip2H",
+          "name": "phone1Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "S4teR",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ToUrt",
+      "x": 1200,
+      "y": 11000,
+      "name": "PlayStore SS 2 - Timer",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ZbxyL",
+          "name": "top2",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ueKsn",
+              "name": "title2",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "シンプルな\n集中タイマー",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "J0LnN",
+              "name": "sub2",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "勉強・作業時間をすっきり管理。\nAIのひと言で、自然と集中に戻れる。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mefVs",
+          "name": "phone2Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "gpVmT",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "T904Uj",
+      "x": 2000,
+      "y": 11000,
+      "name": "PlayStore SS 3 - Log",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "o4BvK",
+          "name": "top3",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "G6JxTs",
+              "name": "title3",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "積み重ねを\n可視化",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "rMoEv",
+              "name": "sub3",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "過去の集中時間がひと目で分かり、\n今日の積み重ねが、自信に変わります。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "G5CjVt",
+          "name": "phone3Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "EnD6W",
+              "type": "ref",
+              "ref": "XpZiX",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "T9JV6f",
+      "x": 2800,
+      "y": 11000,
+      "name": "PlayStore SS 4 - Settings",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "OwqTP",
+          "name": "top4",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "gd5nn",
+              "name": "title4",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "あなたに合う\n声がけを選ぶ",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "DIc1v",
+              "name": "sub4",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "サポーター・ライバル・コーチなど、\n気分に合わせて切り替えられます。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "e5ZFa",
+          "name": "phone4Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "QwXx9",
+              "type": "ref",
+              "ref": "DscOn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
     "accent": {
       "type": "color",
-      "value": [
-        {
-          "value": "#ADEFD1"
-        },
-        {
-          "value": "#5B9E8F"
-        }
-      ]
+      "value": "#5B9E8F"
     },
     "accent-dark": {
       "type": "color",
-      "value": [
-        {
-          "value": "#7DDBB5"
-        },
-        {
-          "value": "#4A8577"
-        }
-      ]
+      "value": "#4A8577"
     },
     "bg-card": {
       "type": "color",
-      "value": [
-        {
-          "value": "#F6F7F8"
-        },
-        {
-          "value": "#F5F0EA"
-        }
-      ]
+      "value": "#F5F0EA"
     },
     "bg-primary": {
       "type": "color",
-      "value": [
-        {
-          "value": "#FFFFFF"
-        },
-        {
-          "value": "#F5F0EA"
-        }
-      ]
+      "value": "#F5F0EA"
     },
     "border-default": {
       "type": "color",
-      "value": [
-        {
-          "value": "#E5E7EB"
-        },
-        {
-          "value": "#DDD8D1"
-        }
-      ]
+      "value": "#D1CAC1"
     },
     "border-subtle": {
       "type": "color",
-      "value": [
-        {
-          "value": "#F3F4F6"
-        },
-        {
-          "value": "#EDE8E2"
-        }
-      ]
+      "value": "#D1CAC1"
     },
     "text-primary": {
       "type": "color",
-      "value": [
-        {
-          "value": "#1A1A1A"
-        },
-        {
-          "value": "#2C2C2C"
-        }
-      ]
+      "value": "#2C2C2C"
     },
     "text-secondary": {
       "type": "color",
-      "value": [
-        {
-          "value": "#6B7280"
-        },
-        {
-          "value": "#8A8A8A"
-        }
-      ]
+      "value": "#6B6761"
     },
     "text-tertiary": {
       "type": "color",
-      "value": [
-        {
-          "value": "#9CA3AF"
-        },
-        {
-          "value": "#ABABAB"
-        }
-      ]
+      "value": "#6B6761"
     }
   }
 }

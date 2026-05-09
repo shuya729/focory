@@ -35,13 +35,14 @@
 ## スクリーンショット
 
 <p align="center">
-  <img src="./assets/screenshots/screen-settings.png" alt="設定画面" width="30%" />
-  <img src="./assets/screenshots/screen-timer.png" alt="タイマー画面" width="30%" />
-  <img src="./assets/screenshots/screen-log.png" alt="学習ログ画面" width="30%" />
+  <img src="./assets/screenshots/app-store/AppStore%20SS%201%20-%20Intro.png" alt="イントロ画面" width="22%" />
+  <img src="./assets/screenshots/app-store/AppStore%20SS%202%20-%20Timer.png" alt="タイマー画面" width="22%" />
+  <img src="./assets/screenshots/app-store/AppStore%20SS%203%20-%20Log.png" alt="学習ログ画面" width="22%" />
+  <img src="./assets/screenshots/app-store/AppStore%20SS%204%20-%20Settings.png" alt="設定画面" width="22%" />
 </p>
 
 <p align="center">
-  <sub>左から: 設定 / 集中タイマー / 過去の記録</sub>
+  <sub>左から: イントロ / 集中タイマー / 過去の記録 / 設定</sub>
 </p>
 
 ---
