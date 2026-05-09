@@ -1,6 +1,6 @@
 # apps/api
 
-Cloudflare Workers + Hono で API を実装するためのバックエンドテンプレートです。  
+Focory のバックエンド API です。Cloudflare Workers + Hono で実装し、PostgreSQL（Hyperdrive 経由）/ Upstash Redis / Better Auth / Vertex AI を組み合わせて、AI による集中監視メッセージ生成と Expo Push 通知の送信を担います。
 
 ## アーキテクチャパターン
 
@@ -28,9 +28,8 @@ Request
 `src/middleware/with-clients.ts` で外部クライアントを初期化し、Hono Context へ注入します。
 
 - `dc`: PostgreSQL (Drizzle)
-- `ac`: Clerk
+- `ac`: Better Auth
 - `rc`: Upstash Redis
-- `sc`: S3 client
 
 これによりハンドラー側は「環境変数の読み取り」ではなく「依存の利用」に集中できます。
 
@@ -63,9 +62,10 @@ OpenAPI の更新は `pnpm -F api gen-openapi` を実行します。
 - API Doc / Validation Bridge: `hono-openapi`, `@hono/standard-validator`
 - Validation: `zod`
 - DB: `drizzle-orm`, `postgres`（Workers では Hyperdrive 経由）
-- Auth: `@clerk/backend`
-- Cache / KV Access: `@upstash/redis`
-- Object Storage: `aws4fetch`
+- Auth: `better-auth`, `@better-auth/expo`, `@better-auth/drizzle-adapter`
+- Cache / Rate limit: `@upstash/redis`
+- AI: Google Vertex AI（Gemini）
+- Push: Expo Push Notifications
 - Test: `vitest`, `@cloudflare/vitest-pool-workers`
 
 ## ディレクトリ構成（要点）
@@ -104,9 +104,8 @@ apps/api
 - Node.js / pnpm
 - Cloudflare アカウント（`wrangler login` 済み）
 - PostgreSQL（ローカルまたはリモート）
-- Clerk プロジェクト
-- S3 互換ストレージ
 - Upstash Redis
+- Google Cloud（Vertex AI）API キー
 
 ### 1. 依存関係インストール
 

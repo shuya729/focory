@@ -1,50 +1,125 @@
-# Welcome to your Expo app 👋
+# apps/mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+Focory のモバイルアプリ本体です。React Native + Expo (SDK 54) + Expo Router で構築しています。
 
-## Get started
+[App Store](https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914) / [Google Play](https://play.google.com/store/apps/details?id=com.focory.app) で配信中です。
 
-1. Install dependencies
+## アーキテクチャ概要
 
-   ```bash
-   npm install
-   ```
+### 1. ルーティング（Expo Router）
 
-2. Start the app
+画面ルートは `src/app` 配下のファイルベースルーティングで定義します。
 
-   ```bash
-   npx expo start
-   ```
+- `_layout.tsx`: ナビゲーション・Provider 合成・認証境界・初期化コード
+- `index.tsx` / `[id].tsx`: 画面合成（取得 / 整形 / 表示の組み立て）
+- `+not-found.tsx`: 未定義ルートのフォールバック
+- `_<category>/`: そのルート専用の `_components` / `_hooks` / `_utils` など（外部 import 禁止）
 
-In the output, you'll find options to open the app in a
+設計の詳細は [`AGENTS.md`](./AGENTS.md) を参照してください。
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+### 2. レイヤー分離
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+src/
+├── app/                  # 画面ルート（Expo Router）
+├── components/           # アプリ全体共通の UI（ui / layout / elements）
+├── hooks/                # 共通カスタムフック
+├── contexts/             # アプリ全体共通 Provider
+├── constants/            # 共通定数
+├── types/                # 共通型
+├── utils/                # 純粋ユーティリティ
+├── services/             # ドメインサービス
+└── lib/                  # 外部依存接続点
+    ├── api/              # OpenAPI 型 + openapi-fetch / openapi-react-query
+    ├── auth/             # Better Auth (Expo)
+    ├── db/               # Drizzle ORM + expo-sqlite（ローカル DB）
+    └── notifications/    # Expo Notifications
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+依存方向は「`app` → 共通層 → `lib`」で固定し、`lib` は他層に依存しません。
 
-## Learn more
+### 3. 主要ライブラリ
 
-To learn more about developing your project with Expo, look at the following resources:
+- **UI**: NativeWind (Tailwind for RN) / `@rn-primitives/*` / `lucide-react-native` / `sonner-native`
+- **状態 / データ取得**: TanStack Query + openapi-react-query
+- **認証**: Better Auth (Expo) + expo-secure-store
+- **ローカル DB**: Drizzle ORM + expo-sqlite
+- **通知**: expo-notifications（離脱検知時の push 送信）
+- **アニメーション / ジェスチャ**: react-native-reanimated / react-native-gesture-handler
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## 開発環境セットアップ
 
-## Join the community
+### 前提
 
-Join our community of developers creating universal apps.
+- Node.js / pnpm
+- Xcode（iOS 開発時）/ Android Studio（Android 開発時）
+- API サーバーがローカル起動済み（[apps/api](../api/) を参照）
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 1. 依存関係インストール
+
+リポジトリルートで:
+
+```bash
+pnpm install
+```
+
+### 2. 環境変数
+
+`apps/mobile/.env` または Expo の `app.json` の `extra` で API エンドポイント等を設定します。`.env` は Git にコミットしないでください。
+
+### 3. 開発サーバー起動
+
+```bash
+pnpm -F mobile dev
+```
+
+iOS / Android のネイティブビルドが必要な場合:
+
+```bash
+pnpm -F mobile ios
+pnpm -F mobile android
+```
+
+## スクリプト一覧
+
+`apps/mobile/package.json`:
+
+- `pnpm -F mobile dev`: Expo dev server 起動
+- `pnpm -F mobile ios`: iOS ネイティブビルド + 実行
+- `pnpm -F mobile android`: Android ネイティブビルド + 実行
+- `pnpm -F mobile build:ios` / `build:android`: Expo Export
+- `pnpm -F mobile typecheck`: TypeScript 型チェック
+- `pnpm -F mobile doctor`: `expo-doctor` による診断
+- `pnpm -F mobile check:deps`: Expo 互換バージョン確認
+- `pnpm -F mobile db:generate`: ローカル DB マイグレーション生成
+- `pnpm -F mobile api-typegen`: ルートの `openapi.json` から API 型を再生成
+
+リポジトリルート（品質管理）:
+
+- `pnpm check`: Ultracite/Biome による静的チェック
+- `pnpm fix`: Ultracite/Biome による自動修正・整形
+
+## ビルド・配信
+
+EAS（Expo Application Services）を使ってビルド・配信します。設定は [`eas.json`](./eas.json) を参照してください。
+
+```bash
+# プロファイル指定でビルド
+pnpm -F mobile exec eas build --profile production --platform ios
+pnpm -F mobile exec eas build --profile production --platform android
+
+# ストア提出
+pnpm -F mobile exec eas submit --platform ios
+pnpm -F mobile exec eas submit --platform android
+```
+
+## OpenAPI 型同期
+
+API のスキーマが変わった場合は、ルートで `pnpm gen-openapi` を実行した上で、本パッケージの型を再生成してください。
+
+```bash
+pnpm gen-openapi
+pnpm -F mobile api-typegen
+```
+
+生成先: `apps/mobile/src/lib/api/paths.ts`
