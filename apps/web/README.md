@@ -2,7 +2,7 @@
 
 Focory の Web ランディングサイトです。Next.js 16 (App Router) + React 19 + Tailwind CSS v4 で構築し、Cloudflare Workers に OpenNext でデプロイしています。
 
-公開先: <https://focory.app>（[App Store](https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914) / [Google Play](https://play.google.com/store/apps/details?id=com.focory.app) への導線を提供）
+公開先: <https://focory.com/>（[App Store](https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914) / [Google Play](https://play.google.com/store/apps/details?id=com.focory.app) への導線を提供）
 
 ## アーキテクチャ概要
 
