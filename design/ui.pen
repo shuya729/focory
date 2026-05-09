@@ -6,7 +6,8 @@
       "id": "j6vEn",
       "x": 900,
       "y": 0,
-      "name": "Main Timer Screen",
+      "name": "Component/Screen/Main Timer",
+      "reusable": true,
       "clip": true,
       "width": 402,
       "height": 874,
@@ -262,7 +263,8 @@
       "id": "XpZiX",
       "x": 1402,
       "y": 0,
-      "name": "Log Screen",
+      "name": "Component/Screen/Log",
+      "reusable": true,
       "clip": true,
       "width": 402,
       "height": 874,
@@ -1178,7 +1180,8 @@
       "id": "DscOn",
       "x": 398,
       "y": 0,
-      "name": "Settings Screen",
+      "name": "Component/Screen/Settings",
+      "reusable": true,
       "clip": true,
       "width": 402,
       "height": 874,
@@ -7337,6 +7340,698 @@
           "ref": "PJKn6",
           "width": "fill_container",
           "name": "cmFootInst"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Eekzy",
+      "x": 400,
+      "y": 9500,
+      "name": "AppStore SS 1 - Intro",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "EHWoA",
+          "name": "top1",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            20,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "eBvXi",
+              "type": "ref",
+              "ref": "LoA01",
+              "width": 300,
+              "height": 81,
+              "name": "logo1"
+            },
+            {
+              "type": "text",
+              "id": "S3ozD",
+              "name": "title1",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "スマホを置いて、\nいまやることへ。",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 48,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "KoZEC",
+          "name": "phone1Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "c8I18E",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "l6dWpD",
+      "x": 1200,
+      "y": 9500,
+      "name": "AppStore SS 2 - Timer",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "NHh3k",
+          "name": "top2",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "c81DX",
+              "name": "title2",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "シンプルな\n集中タイマー",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "M07Ogy",
+              "name": "sub2",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "勉強・作業時間をすっきり管理。\nAIのひと言で、自然と集中に戻れる。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Z1jsic",
+          "name": "phone2Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "S31d5m",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "DQeIV",
+      "x": 2000,
+      "y": 9500,
+      "name": "AppStore SS 3 - Log",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "C775mE",
+          "name": "top3",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "Fth9f",
+              "name": "title3",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "積み重ねを\n可視化",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Mvmrf",
+              "name": "sub3",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "過去の集中時間がひと目で分かり、\n今日の積み重ねが、自信に変わります。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "QAM4O",
+          "name": "phone3Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "t7YBG",
+              "type": "ref",
+              "ref": "XpZiX",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "txGa7",
+      "x": 2800,
+      "y": 9500,
+      "name": "AppStore SS 4 - Settings",
+      "clip": true,
+      "width": 642,
+      "height": 1389,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "iXKay",
+          "name": "top4",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ccJCo",
+              "name": "title4",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "あなたに合う\n声がけを選ぶ",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "dSQsM",
+              "name": "sub4",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "サポーター・ライバル・コーチなど、\n気分に合わせて切り替えられます。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "bIIAI",
+          "name": "phone4Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "ZlC6y",
+              "type": "ref",
+              "ref": "DscOn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ed4BC",
+      "x": 398,
+      "y": 11000,
+      "name": "PlayStore SS 1 - Intro",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "g7Xgu",
+          "name": "top1",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            20,
+            0
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "B4uIn",
+              "type": "ref",
+              "ref": "LoA01",
+              "width": 300,
+              "height": 81,
+              "name": "logo1"
+            },
+            {
+              "type": "text",
+              "id": "dcDGL",
+              "name": "title1",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "スマホを置いて、\nいまやることへ。",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 48,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "lip2H",
+          "name": "phone1Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "S4teR",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "ToUrt",
+      "x": 1200,
+      "y": 11000,
+      "name": "PlayStore SS 2 - Timer",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "ZbxyL",
+          "name": "top2",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "ueKsn",
+              "name": "title2",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "シンプルな\n集中タイマー",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "J0LnN",
+              "name": "sub2",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "勉強・作業時間をすっきり管理。\nAIのひと言で、自然と集中に戻れる。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "mefVs",
+          "name": "phone2Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "gpVmT",
+              "type": "ref",
+              "ref": "j6vEn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "T904Uj",
+      "x": 2000,
+      "y": 11000,
+      "name": "PlayStore SS 3 - Log",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "o4BvK",
+          "name": "top3",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "G6JxTs",
+              "name": "title3",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "積み重ねを\n可視化",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "rMoEv",
+              "name": "sub3",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "過去の集中時間がひと目で分かり、\n今日の積み重ねが、自信に変わります。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "G5CjVt",
+          "name": "phone3Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "EnD6W",
+              "type": "ref",
+              "ref": "XpZiX",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "T9JV6f",
+      "x": 2800,
+      "y": 11000,
+      "name": "PlayStore SS 4 - Settings",
+      "clip": true,
+      "width": 765,
+      "height": 1360,
+      "fill": "$bg-primary",
+      "layout": "vertical",
+      "gap": 60,
+      "justifyContent": "center",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "OwqTP",
+          "name": "top4",
+          "width": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 36,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "gd5nn",
+              "name": "title4",
+              "fill": "$text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "あなたに合う\n声がけを選ぶ",
+              "lineHeight": 1.2,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 60,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "DIc1v",
+              "name": "sub4",
+              "fill": "$text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "サポーター・ライバル・コーチなど、\n気分に合わせて切り替えられます。",
+              "lineHeight": 1.6,
+              "textAlign": "center",
+              "fontFamily": "Geist",
+              "fontSize": 30,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "e5ZFa",
+          "name": "phone4Wrap",
+          "clip": true,
+          "width": 402,
+          "height": 874,
+          "fill": "$bg-primary",
+          "cornerRadius": 40,
+          "effect": {
+            "type": "shadow",
+            "shadowType": "outer",
+            "color": "#0000001F",
+            "offset": {
+              "x": 0,
+              "y": 32
+            },
+            "blur": 64
+          },
+          "layout": "vertical",
+          "children": [
+            {
+              "id": "QwXx9",
+              "type": "ref",
+              "ref": "DscOn",
+              "width": "fill_container",
+              "height": "fill_container"
+            }
+          ]
         }
       ]
     }
