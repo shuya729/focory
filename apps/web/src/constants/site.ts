@@ -1,9 +1,11 @@
 export const SITE = {
-  appStoreHref: "#download",
+  appStoreHref:
+    "https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914",
   copyright: "© 2026 Focory. All rights reserved.",
   description:
     "Focoryは、AIがあなただけの言葉で集中を後押しする、学習タイマーです。",
-  googlePlayHref: "#download",
+  googlePlayHref:
+    "https://play.google.com/store/apps/details?id=com.focory.app",
   name: "Focory",
   tagline: "ひとりで集中したい人のための、学習タイマー。",
 } as const;
@@ -50,11 +52,11 @@ export const SITE_FOOTER_GROUPS = [
   {
     links: [
       {
-        href: "#download",
+        href: SITE.appStoreHref,
         label: "App Store",
       },
       {
-        href: "#download",
+        href: SITE.googlePlayHref,
         label: "Google Play",
       },
     ],
