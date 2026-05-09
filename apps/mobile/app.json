@@ -44,7 +44,8 @@
           "enableFTS": true
         }
       ],
-      "expo-web-browser"
+      "expo-web-browser",
+      "./plugins/with-adi-registration"
     ],
     "experiments": {
       "typedRoutes": true,
