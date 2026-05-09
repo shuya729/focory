@@ -8034,6 +8034,153 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "rydZP",
+      "x": 398,
+      "y": 12660,
+      "name": "GooglePlay Feature Graphic",
+      "width": 1024,
+      "height": 500,
+      "fill": "$bg-primary",
+      "gap": 48,
+      "padding": [
+        48,
+        64
+      ],
+      "justifyContent": "space_between",
+      "alignItems": "center",
+      "children": [
+        {
+          "type": "frame",
+          "id": "D4qSbL",
+          "name": "left",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 24,
+          "justifyContent": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "w1mmH",
+              "name": "Frame 2",
+              "clip": true,
+              "width": "fill_container",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "padding": [
+                0,
+                8
+              ],
+              "justifyContent": "center",
+              "children": [
+                {
+                  "id": "uNcYs",
+                  "type": "ref",
+                  "ref": "LoA01",
+                  "width": 186,
+                  "height": 50,
+                  "name": "logo",
+                  "flipX": false,
+                  "flipY": false,
+                  "x": 8,
+                  "y": 0
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "wAKIN",
+              "name": "Frame 1",
+              "clip": true,
+              "width": "fill_container",
+              "fill": "#00000000",
+              "layout": "vertical",
+              "gap": 24,
+              "justifyContent": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "l8sHnz",
+                  "name": "title",
+                  "fill": "$text-primary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "スマホを置いて、\nいまやることへ。",
+                  "lineHeight": 1.2,
+                  "fontFamily": "Geist",
+                  "fontSize": 46,
+                  "fontWeight": "700"
+                },
+                {
+                  "type": "text",
+                  "id": "PbNKV",
+                  "name": "sub",
+                  "fill": "$text-secondary",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Focoryは、AIがあなただけの言葉で集中を後押しする、\n学習タイマー。「あと5分だけ」を、今日からなくしませんか。",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Geist",
+                  "fontSize": 18
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "a53bfb",
+          "name": "right",
+          "width": 340,
+          "height": "fill_container",
+          "fill": "#00000000",
+          "layout": "vertical",
+          "gap": 20,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "id": "WjIMA",
+              "type": "ref",
+              "ref": "FoA01",
+              "width": 140,
+              "height": 140,
+              "name": "icon"
+            },
+            {
+              "type": "frame",
+              "id": "EzsGH",
+              "name": "bubble",
+              "fill": "#EDE8E2",
+              "cornerRadius": 16,
+              "layout": "vertical",
+              "padding": [
+                20,
+                28
+              ],
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ujoBq",
+                  "name": "bubbleText",
+                  "fill": "$text-primary",
+                  "content": "いい調子だね。\nこの集中、続けてみよう。",
+                  "lineHeight": 1.6,
+                  "textAlign": "center",
+                  "fontFamily": "Geist",
+                  "fontSize": 18
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
