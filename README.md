@@ -55,8 +55,9 @@
 - **📅 ヒートマップで継続を可視化**: 日々の集中時間をカレンダーで色濃く積み上げ、続ける自信に変える。
 - **🎯 目的と「なぜ」を AI が学習**: 志望校合格・資格取得・副業など、あなたの想いを踏まえた言葉で背中を押します。
 
-### ダウンロード
+### ダウンロード / 公式サイト
 
+- 公式サイト: <https://focory.com/>
 - App Store: <https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914>
 - Google Play: <https://play.google.com/store/apps/details?id=com.focory.app>
 
