@@ -5,34 +5,36 @@
 <h1 align="center">Focory</h1>
 
 <p align="center">
-  <strong>スマホを触らず、勉強に集中する。</strong><br />
-  離脱を見張る AI が、あなた専用の言葉で声をかけてくれる学習アプリ。
+  <strong>スマホを置いて、いまやることへ。</strong><br />
+  AI があなただけの言葉で集中を後押しする、ひとり集中のための学習タイマー。
 </p>
 
 <p align="center">
-  <em>🚧 現在開発中のプロジェクトです。</em>
+  <a href="https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914">
+    <img alt="Download on the App Store" src="https://developer.apple.com/assets/elements/badges/download-on-the-app-store.svg" height="48" />
+  </a>
+  &nbsp;
+  <a href="https://play.google.com/store/apps/details?id=com.focory.app">
+    <img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" height="48" />
+  </a>
 </p>
 
 ---
 
 ## Focory とは
 
-**Focory（フォコリー）** は、勉強中にスマホを触ってしまうユーザーに対して、AI がパーソナライズされたメッセージで声をかける学習支援アプリです。
+**Focory（フォコリー）** は、AI があなただけの言葉で声をかけてくれる、ひとり集中のための学習タイマーです。「あと5分だけ」をなくし、勉強・作業・読書へまっすぐ向かう習慣を後押しします。
 
-タイマーをスタートしたあとにスマホを触ったり、アプリから離脱したりすると、AI があなたの「目的」「理由」「好みの口調」に合わせた通知を送り、集中状態へ引き戻します。
+タイマーをスタートしたあとにスマホを触ったり、アプリから離脱したりすると、AI が即座に検知。あらかじめ登録した「目的」「なぜ」と、選んだ AI の性格に合わせた“あなた専用のメッセージ”を通知でお届けし、自然と集中へ引き戻します。
 
-### コンセプトの背景
+### こんな人におすすめ
 
-前身プロジェクト **SWiT Study** では「フレンドと勉強時間を共有する」というアイデアを試しましたが、想定よりユーザーに響きませんでした。
-そこで Focory では方針を転換し、**人ではなく "AI による監視" を軸にしたひとり集中体験**を提供しています。
+- スマホを触らずに勉強・作業に集中したい
+- ポモドーロタイマーを習慣化したい受験生・学生・社会人
+- 在宅ワーク、資格勉強、読書、執筆、プログラミング学習に集中したい
+- ひとりだとサボってしまうけれど、勉強時間を共有するのは少し恥ずかしい
 
-- フレンドを探す必要がない
-- 他人の目がなくてもサボれない
-- AI が「今のあなた」に合った言葉で伴走してくれる
-
----
-
-## スクリーンショット
+### スクリーンショット
 
 <p align="center">
   <img src="./assets/screenshots/app-store/AppStore%20SS%201%20-%20Intro.png" alt="イントロ画面" width="22%" />
@@ -45,31 +47,24 @@
   <sub>左から: イントロ / 集中タイマー / 過去の記録 / 設定</sub>
 </p>
 
----
+### 主な機能
 
-## 主な機能
+- **⏱ シンプルな集中タイマー**: 余計な設定は不要。スタートを押すだけで、すぐに集中モードへ。
+- **🤖 AI のひと言で集中へ引き戻す**: アプリから離れた瞬間を検知し、テンプレではない“あなた専用のメッセージ”を通知でお届け。
+- **🎭 6 種類から選べる AI の性格**: `やさしい` / `厳しい` / `明るい` / `落ち着き` / `おもしろい` / `クール` から、その日の気分に合わせて切り替え。
+- **📅 ヒートマップで継続を可視化**: 日々の集中時間をカレンダーで色濃く積み上げ、続ける自信に変える。
+- **🎯 目的と「なぜ」を AI が学習**: 志望校合格・資格取得・副業など、あなたの想いを踏まえた言葉で背中を押します。
 
-### ⏱ 集中タイマー
-ポモドーロ形式のシンプルなタイマー。開始後にスマホを触ると AI が介入します。画面下部には、あなたの設定に応じたリアルタイムのメッセージが表示されます。
+### ダウンロード
 
-### 🤖 AI によるパーソナライズ監視
-ユーザーがアプリから離脱した瞬間を検知し、通知で声がけ。
-メッセージは「なぜそれをやりたいのか」という目的と、選択した**AI の振る舞い**に基づいて生成されます。
-
-選べる振る舞い:
-- `やさしい` / `厳しい` / `明るい` / `落ち着き` / `おもしろい` / `クール`
-
-### 📅 学習ログ（ヒートマップ）
-日々の集中時間をカレンダー形式のヒートマップで可視化。色の濃さで学習量が一目でわかり、継続のモチベーションになります。
-
-### ⚙️ 設定
-- **目的**: 何に集中したいかを入力
-- **なぜ**: その理由を書き出すことで、AI があなたに合った声がけをできるようにする
-- **振る舞い**: AI の性格・口調の選択
+- App Store: <https://apps.apple.com/jp/app/focory-aiが声がけする集中タイマー/id6767747914>
+- Google Play: <https://play.google.com/store/apps/details?id=com.focory.app>
 
 ---
 
-## 使用技術
+## アーキテクチャと技術スタック
+
+Focory は pnpm workspaces によるモノレポ構成で、モバイルアプリ・Web ランディング・API バックエンドを 1 リポジトリで管理しています。モバイル ⇄ API の型は OpenAPI 経由で共有しています。
 
 ### モバイル（[apps/mobile](apps/mobile/)）
 - **React Native** + **Expo (SDK 54)** / **Expo Router**
@@ -79,27 +74,34 @@
 - **Drizzle ORM** + **expo-sqlite**（ローカル DB）
 - **Expo Notifications**（離脱時のプッシュ通知）
 
+### Web ランディング（[apps/web](apps/web/)）
+- **Next.js 16** (App Router) / **React 19**
+- **Tailwind CSS v4** + **shadcn/ui** (Radix UI / Base UI)
+- **OpenNext for Cloudflare** によるエッジデプロイ
+- **TanStack Query** + **openapi-react-query**
+
 ### バックエンド（[apps/api](apps/api/)）
 - **Hono** + **hono-openapi**
 - **Cloudflare Workers** (`wrangler`)
-- **Drizzle ORM** + **Postgres**
+- **Drizzle ORM** + **Postgres**（Hyperdrive 経由）
 - **Better Auth** + **@better-auth/drizzle-adapter**
 - **Upstash Redis**（レート制限・キャッシュ）
 - **Zod** によるスキーマバリデーション
+- **Vertex AI / Gemini** による AI メッセージ生成
+- **Expo Push Notifications** 連携
 
 ### 共通基盤
 - **TypeScript** / **pnpm workspaces**
 - **Biome / Ultracite** による Lint & Format
-- **OpenAPI** 経由でモバイル ⇄ API の型共有
+- **OpenAPI** 経由でモバイル・Web ⇄ API の型共有
 
----
-
-## プロジェクト構成
+### プロジェクト構成
 
 ```
 focory/
 ├── apps/
 │   ├── mobile/     # React Native + Expo アプリ
+│   ├── web/        # Next.js ランディングサイト
 │   └── api/        # Hono + Cloudflare Workers API
 ├── assets/         # ロゴ・スクリーンショット
 ├── design/         # .pen デザインファイル
@@ -107,15 +109,21 @@ focory/
 └── package.json    # pnpm workspace ルート
 ```
 
+各アプリの詳細なアーキテクチャは、各 README を参照してください。
+
+- [apps/mobile/README.md](apps/mobile/README.md)
+- [apps/web/README.md](apps/web/README.md)
+- [apps/api/README.md](apps/api/README.md)
+
 ---
 
-## セットアップ
+## 開発を始める
 
 ### 必要要件
 - Node.js (推奨: LTS)
 - pnpm `10.26.2` 以上
-- iOS/Android 実機または Simulator（モバイル開発時）
-- Cloudflare アカウント（API デプロイ時）
+- iOS / Android 実機または Simulator（モバイル開発時）
+- Cloudflare アカウント（API / Web デプロイ時）
 
 ### インストール
 
@@ -137,6 +145,9 @@ pnpm dev
 # モバイル
 pnpm -F mobile dev
 
+# Web
+pnpm -F web dev
+
 # API
 pnpm -F api dev
 ```
@@ -149,6 +160,9 @@ pnpm check
 
 # 自動修正
 pnpm fix
+
+# 型チェック（全ワークスペース）
+pnpm typecheck
 ```
 
 ### DB マイグレーション（API）
@@ -161,7 +175,10 @@ pnpm db:studio     # Drizzle Studio 起動
 
 ### OpenAPI 型生成
 
+API のスキーマを更新したら、各クライアントの型定義を再生成します。
+
 ```bash
 pnpm gen-openapi                       # openapi.json を生成
 pnpm -F mobile api-typegen             # モバイルの型定義を更新
+pnpm -F web api-typegen                # Web の型定義を更新
 ```
