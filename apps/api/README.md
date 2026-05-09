@@ -113,7 +113,23 @@ apps/api
 pnpm install
 ```
 
-### 2. Hyperdrive バインディング設定
+### 2. ローカルインフラ起動（Docker Compose）
+
+PostgreSQL と Upstash 互換 Redis をリポジトリルートの [`compose.yaml`](../../compose.yaml) でまとめて起動できます。
+
+```bash
+docker compose up -d
+```
+
+起動するサービス:
+
+- `db`: PostgreSQL 18 — `postgres://user:password@localhost:5432/db`
+- `redis`: Redis 8.4 — `localhost:6379`
+- `serverless-redis-http`: Upstash Redis 互換 HTTP プロキシ — `http://localhost:8079`（token: `password`）
+
+これらは後述の `DATABASE_URL` / `localConnectionString` / `REDIS_URL` / `REDIS_TOKEN` の既定値として利用できます。
+
+### 3. Hyperdrive バインディング設定
 
 `apps/api/wrangler.jsonc` の `hyperdrive` を環境に合わせて更新します。
 
@@ -129,7 +145,7 @@ pnpm install
 }
 ```
 
-### 3. 環境変数ファイル作成
+### 4. 環境変数ファイル作成
 
 `drizzle-kit` 用の `apps/api/.env`:
 
@@ -178,13 +194,13 @@ pnpm -F api exec wrangler secret put EXPO_PUSH_SEND_URL
 pnpm -F api exec wrangler secret put EXPO_PUSH_RECEIPTS_URL
 ```
 
-### 4. マイグレーション適用
+### 5. マイグレーション適用
 
 ```bash
 pnpm -F api db:migrate
 ```
 
-### 5. 開発サーバー起動
+### 6. 開発サーバー起動
 
 ```bash
 pnpm -F api dev

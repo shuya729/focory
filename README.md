@@ -105,6 +105,8 @@ focory/
 │   └── api/        # Hono + Cloudflare Workers API
 ├── assets/         # ロゴ・スクリーンショット
 ├── design/         # .pen デザインファイル
+├── compose.yaml    # ローカル開発用インフラ（Postgres / Redis）
+├── biome.jsonc     # Biome / Ultracite 設定
 ├── openapi.json    # API スキーマ（自動生成）
 └── package.json    # pnpm workspace ルート
 ```
@@ -129,6 +131,26 @@ focory/
 
 ```bash
 pnpm install
+```
+
+### ローカルインフラ起動（Docker Compose）
+
+API のローカル開発には PostgreSQL と Upstash 互換 Redis が必要です。これらはリポジトリルートの [`compose.yaml`](./compose.yaml) でまとめて起動できます。
+
+```bash
+docker compose up -d
+```
+
+起動するサービス:
+
+- `db`: PostgreSQL 18（`localhost:5432` / user: `user` / password: `password` / db: `db`）
+- `redis`: Redis 8.4（`localhost:6379`）
+- `serverless-redis-http`: Upstash Redis 互換 HTTP プロキシ（`http://localhost:8079` / token: `password`）
+
+停止する場合:
+
+```bash
+docker compose down
 ```
 
 ### 開発サーバー起動
