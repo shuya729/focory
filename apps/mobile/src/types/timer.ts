@@ -29,6 +29,7 @@ export interface TimerMessageState {
 export interface RequestTimerMessageInput {
   durationSeconds: number;
   elapsedSeconds: number;
+  isMessageFailureFeedbackEnabled?: boolean;
   timerId: string;
   type: TimerMessageType;
 }

@@ -33,6 +33,7 @@ export function useTimerMessage() {
     ({
       durationSeconds,
       elapsedSeconds: messageElapsedSeconds,
+      isMessageFailureFeedbackEnabled = true,
       timerId,
       type,
     }: RequestTimerMessageInput) => {
@@ -63,7 +64,10 @@ export function useTimerMessage() {
         .catch(() => {
           if (latestMessageSequenceRef.current === messageSequence) {
             setTimerMessageState(createDefaultMessageState());
-            showErrorToast("メッセージの生成に失敗しました");
+
+            if (isMessageFailureFeedbackEnabled) {
+              showErrorToast("メッセージの生成に失敗しました");
+            }
           }
         });
     },

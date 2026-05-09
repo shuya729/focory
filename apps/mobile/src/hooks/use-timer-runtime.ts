@@ -89,6 +89,14 @@ export function useTimerRuntime({ onArchiveChanged }: UseTimerRuntimeOptions) {
     !timerState.isRunning &&
     timerState.remainingSeconds === 0;
   const pauseTimer = usePauseTimer({
+    isMessageFailureFeedbackEnabled: true,
+    onArchiveChanged,
+    queueTimerMessageUpdate,
+    timerStateRef,
+    updateTimerState,
+  });
+  const pauseTimerOnBackground = usePauseTimer({
+    isMessageFailureFeedbackEnabled: false,
     onArchiveChanged,
     queueTimerMessageUpdate,
     timerStateRef,
@@ -122,7 +130,7 @@ export function useTimerRuntime({ onArchiveChanged }: UseTimerRuntimeOptions) {
     timerState,
     updateTimerState,
   });
-  usePauseTimerOnBackground({ pauseTimer });
+  usePauseTimerOnBackground({ pauseTimer: pauseTimerOnBackground });
   useTimerKeepAwake({ isRunning: timerState.isRunning });
 
   const actions = useMemo(
@@ -358,11 +366,13 @@ function useCompleteRunningTimer({
 }
 
 function usePauseTimer({
+  isMessageFailureFeedbackEnabled,
   onArchiveChanged,
   queueTimerMessageUpdate,
   timerStateRef,
   updateTimerState,
 }: {
+  isMessageFailureFeedbackEnabled: boolean;
   onArchiveChanged: () => void;
   queueTimerMessageUpdate: QueueTimerMessageUpdate;
   timerStateRef: RefObject<TimerState>;
@@ -408,6 +418,7 @@ function usePauseTimer({
       queueTimerMessageUpdate({
         durationSeconds,
         elapsedSeconds: pauseElapsedSeconds,
+        isMessageFailureFeedbackEnabled,
         timerId,
         type: "stop",
       });
@@ -424,6 +435,7 @@ function usePauseTimer({
       }));
     }
   }, [
+    isMessageFailureFeedbackEnabled,
     onArchiveChanged,
     queueTimerMessageUpdate,
     timerStateRef,
