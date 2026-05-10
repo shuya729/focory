@@ -13,6 +13,7 @@
     "dev": "pnpm -r dev",
     "build": "pnpm -r build",
     "test": "pnpm -r test",
+    "api-typegen": "pnpm -r api-typegen",
     "gen-openapi": "pnpm -F api gen-openapi",
     "db:generate": "pnpm -F api db:generate",
     "db:migrate": "pnpm -F api db:migrate",

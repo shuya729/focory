@@ -201,7 +201,6 @@ pnpm db:studio     # Drizzle Studio 起動
 API のスキーマを更新したら、各クライアントの型定義を再生成します。
 
 ```bash
-pnpm gen-openapi                       # openapi.json を生成
-pnpm -F mobile api-typegen             # モバイルの型定義を更新
-pnpm -F web api-typegen                # Web の型定義を更新
+pnpm gen-openapi    # openapi.json を生成
+pnpm api-typegen    # API 型定義を更新
 ```
