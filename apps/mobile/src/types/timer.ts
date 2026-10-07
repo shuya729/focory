@@ -1,9 +1,4 @@
-import type { paths } from "@/lib/api/paths";
-
-type PostMessageRequestBody =
-  paths["/messages"]["post"]["requestBody"]["content"]["application/json"];
-
-export type TimerMessageType = PostMessageRequestBody["type"];
+export type TimerMessageType = "start" | "stop" | "restart" | "finish";
 
 export interface TimerState {
   currentArchiveId: string | null;
@@ -32,4 +27,42 @@ export interface RequestTimerMessageInput {
   isMessageFailureFeedbackEnabled?: boolean;
   timerId: string;
   type: TimerMessageType;
+}
+
+export interface StoredTimer {
+  id: string;
+  durationSeconds: number;
+  elapsedSeconds: number;
+}
+
+export interface TimerSession {
+  timerId: string;
+  archiveId: string;
+}
+
+export interface PauseTimerSessionInput extends TimerSession {
+  elapsedSeconds: number;
+}
+
+export interface FinishTimerSessionInput extends TimerSession {
+  durationSeconds: number;
+}
+
+export interface ResetTimerInput {
+  timerId: string;
+  durationSeconds: number;
+}
+
+export interface TimerRepository {
+  findLatestTimer(): StoredTimer | undefined;
+  startSession(durationSeconds: number): TimerSession;
+  pauseSession(input: PauseTimerSessionInput): void;
+  restartSession(timerId: string): { archiveId: string };
+  finishSession(input: FinishTimerSessionInput): void;
+  resetTimer(input: ResetTimerInput): void;
+}
+
+export interface TimerTransition {
+  state: TimerState;
+  message: Omit<RequestTimerMessageInput, "isMessageFailureFeedbackEnabled">;
 }
