@@ -2,7 +2,7 @@ import type { paths } from "@/lib/api/paths";
 import { serverApi } from "@/lib/api/server";
 
 type PostContactRequestBody =
-  paths["/contacts"]["post"]["requestBody"]["content"]["application/json"];
+  paths["/v1/contacts"]["post"]["requestBody"]["content"]["application/json"];
 
 export type SendContactInput = PostContactRequestBody;
 
@@ -10,7 +10,7 @@ const DEFAULT_CONTACT_ERROR_MESSAGE =
   "お問い合わせの送信に失敗しました。時間をおいて再度お試しください。";
 
 export async function sendContact(input: SendContactInput) {
-  const { data, error } = await serverApi.POST("/contacts", {
+  const { data, error } = await serverApi.POST("/v1/contacts", {
     body: input satisfies PostContactRequestBody,
   });
 
