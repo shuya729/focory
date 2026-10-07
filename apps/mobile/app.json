@@ -2,7 +2,7 @@
   "expo": {
     "name": "Focory",
     "slug": "focory",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "icon": "./assets/images/app-icon.png",
     "scheme": "focory",
     "orientation": "portrait",
