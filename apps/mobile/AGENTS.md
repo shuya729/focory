@@ -74,7 +74,9 @@ apps/mobile
 * `components` → `components/elements|components/ui|types|utils|constants|lib`
 * `hooks|contexts` → `types|utils|constants|schemas|lib`
 * `schemas` → `types|constants|utils`
-* `lib` → 他層へ原則依存しない
+* `services` → `types|utils|constants`（React・HTTP・DB・Expo の具体実装へ依存しない）
+* `repositories|lib` → 内部の型・操作契約と外部ライブラリ（UIへ依存しない）
+* `hooks|contexts` → `services|repositories|lib`（具体的な依存の組み立て、表示・ライフサイクル・通信の接続）
 * `utils` → UI 層へ依存しない
 
 **禁止例**
