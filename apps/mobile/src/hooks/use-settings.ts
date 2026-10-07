@@ -1,85 +1,42 @@
+import { useMutation } from "@tanstack/react-query";
 import { openBrowserAsync } from "expo-web-browser";
-import { useEffect, useState } from "react";
-import {
-  DEFAULT_USER_SETTINGS,
-  getSettings,
-  saveBehavior,
-  saveObjective,
-  savePurpose,
-} from "@/services/settings-service";
+import { useState } from "react";
+import { DEFAULT_BEHAVIOR_OPTION } from "@/constants/settings-constants";
 import type { UserSettings } from "@/types/settings";
 import { showErrorToast } from "@/utils/toast-utils";
+import { useSettingsData } from "./data/use-settings-data";
 
 export function useSettings() {
-  const [settings, setSettings] = useState<UserSettings>(DEFAULT_USER_SETTINGS);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const loadSettings = async () => {
-      const savedSettings = await getSettings();
-
-      if (isMounted) {
-        setSettings(savedSettings);
-      }
-    };
-
-    loadSettings().catch(() => {
-      if (isMounted) {
-        showErrorToast("設定の読み込みに失敗しました");
-      }
-    });
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
-
-  const handleChangeObjective = (objective: string) => {
-    setSettings((currentSettings) => ({
-      ...currentSettings,
-      objective,
-    }));
-    saveObjective(objective).catch(() => {
-      showErrorToast("目的の保存に失敗しました");
-    });
+  const { query, save } = useSettingsData();
+  const [draft, setDraft] = useState<Partial<UserSettings>>({});
+  const settings = {
+    behavior: DEFAULT_BEHAVIOR_OPTION.value,
+    objective: "",
+    purpose: "",
+    ...query.data,
+    ...draft,
   };
-
-  const handleChangePurpose = (purpose: string) => {
-    setSettings((currentSettings) => ({
-      ...currentSettings,
-      purpose,
-    }));
-    savePurpose(purpose).catch(() => {
-      showErrorToast("理由の保存に失敗しました");
-    });
-  };
-
-  const handleChangeBehavior = (behavior: UserSettings["behavior"]) => {
-    setSettings((currentSettings) => ({
-      ...currentSettings,
-      behavior,
-    }));
-    saveBehavior(behavior).catch(() => {
-      showErrorToast("振る舞いの保存に失敗しました");
-    });
-  };
-
-  const onClickLink = async (url: string) => {
-    try {
-      await openBrowserAsync(url);
-    } catch {
-      showErrorToast("リンクを開けませんでした");
-    }
-  };
-
+  const link = useMutation({
+    mutationFn: (url: string) => openBrowserAsync(url),
+    retry: false,
+    onError: () => showErrorToast("リンクを開けませんでした"),
+  });
   return {
-    handleChangeBehavior,
-    handleChangeObjective,
-    handleChangePurpose,
+    handleChangeBehavior: (behavior: UserSettings["behavior"]) => {
+      setDraft((current) => ({ ...current, behavior }));
+      save.mutate({ field: "behavior", value: behavior });
+    },
+    handleChangeObjective: (objective: string) => {
+      setDraft((current) => ({ ...current, objective }));
+      save.mutate({ field: "objective", value: objective });
+    },
+    handleChangePurpose: (purpose: string) => {
+      setDraft((current) => ({ ...current, purpose }));
+      save.mutate({ field: "purpose", value: purpose });
+    },
     objective: settings.objective,
-    onClickLink,
     purpose: settings.purpose,
     selectedBehavior: settings.behavior,
+    onClickLink: (url: string) => link.mutate(url),
   };
 }

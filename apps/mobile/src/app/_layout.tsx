@@ -1,17 +1,18 @@
 import { ThemeProvider } from "@react-navigation/native";
+import { QueryClientProvider } from "@tanstack/react-query";
 import "../global.css";
 import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { hide, preventAutoHideAsync } from "expo-splash-screen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { Toaster } from "@/components/elements/toaster";
-import { ArchiveInvalidationProvider } from "@/contexts/archive-invalidation-context";
 import { TimerProvider } from "@/contexts/timer-context";
 import { useAppBootstrap } from "@/hooks/use-app-bootstrap";
+import { createQueryClient } from "@/lib/query/client";
 import { NAV_THEME } from "@/theme";
 
 preventAutoHideAsync();
@@ -21,6 +22,7 @@ export const unstable_settings = {
 };
 
 export default function RootLayout() {
+  const [queryClient] = useState(createQueryClient);
   const [loaded] = useFonts({
     "JetBrainsMono-Bold": require("../../assets/fonts/JetBrainsMono-Bold.ttf"),
     "JetBrainsMono-ExtraBold": require("../../assets/fonts/JetBrainsMono-ExtraBold.ttf"),
@@ -54,10 +56,10 @@ export default function RootLayout() {
   }
 
   return (
-    <ThemeProvider value={NAV_THEME}>
-      <SafeAreaProvider>
-        <GestureHandlerRootView>
-          <ArchiveInvalidationProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider value={NAV_THEME}>
+        <SafeAreaProvider>
+          <GestureHandlerRootView>
             <TimerProvider>
               <Stack screenOptions={{ headerShown: false }}>
                 <Stack.Screen name="index" />
@@ -70,11 +72,11 @@ export default function RootLayout() {
                 />
               </Stack>
             </TimerProvider>
-          </ArchiveInvalidationProvider>
-          <PortalHost />
-          <Toaster />
-        </GestureHandlerRootView>
-      </SafeAreaProvider>
-    </ThemeProvider>
+            <PortalHost />
+            <Toaster />
+          </GestureHandlerRootView>
+        </SafeAreaProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
