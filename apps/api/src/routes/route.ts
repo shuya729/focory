@@ -9,16 +9,16 @@ import pushTokens from "./push-tokens/route";
 
 const app = new Hono<{
   Variables: ClientsVariables;
-}>();
+}>()
+  .basePath("/v1")
+  .use(logger())
+  .use(apiCors)
+  .use(withClients)
+  .on(["POST", "GET"], "/auth/*", (c) => c.get("ac").handler(c.req.raw))
+  .onError(handleError)
+  .route("/contacts", contacts)
+  .route("/push-tokens", pushTokens)
+  .route("/messages", messages);
 
-app.use(logger());
-app.use(apiCors);
-app.use(withClients);
-app.on(["POST", "GET"], "/auth/*", (c) => c.get("ac").handler(c.req.raw));
-app.route("/contacts", contacts);
-app.route("/push-tokens", pushTokens);
-app.route("/messages", messages);
-
-app.onError(handleError);
-
+export type AppType = typeof app;
 export default app;

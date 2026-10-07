@@ -133,15 +133,9 @@ function TimerPickerModal() {
     [windowHeight]
   );
 
-  const handleSaveDuration = async () => {
-    if (isSaveDisabled || isClosing) {
-      return;
-    }
-
-    const didSaveDuration = await saveSelectedDuration();
-
-    if (didSaveDuration) {
-      handleCloseModal();
+  const handleSaveDuration = () => {
+    if (!(isSaveDisabled || isClosing)) {
+      saveSelectedDuration(handleCloseModal);
     }
   };
 

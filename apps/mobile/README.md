@@ -23,20 +23,20 @@ Focory のモバイルアプリ本体です。React Native + Expo (SDK 54) + Exp
 src/
 ├── app/                  # 画面ルート（Expo Router）
 ├── components/           # アプリ全体共通の UI（ui / layout / elements）
-├── hooks/                # 共通カスタムフック
+├── hooks/                # 表示・業務状態と端末ライフサイクル
+│   └── data/             # Query / Mutation による取得・保存・通信
 ├── contexts/             # アプリ全体共通 Provider
 ├── constants/            # 共通定数
 ├── types/                # 共通型
 ├── utils/                # 純粋ユーティリティ
-├── services/             # ドメインサービス
+├── services/             # ユースケース
+├── repositories/         # SQLite / KV の保存アダプター
 └── lib/                  # 外部依存接続点
     ├── api/              # OpenAPI 型 + openapi-fetch / openapi-react-query
     ├── auth/             # Better Auth (Expo)
     ├── db/               # Drizzle ORM + expo-sqlite（ローカル DB）
     └── notifications/    # Expo Notifications
 ```
-
-依存方向は「`app` → 共通層 → `lib`」で固定し、`lib` は他層に依存しません。
 
 ### 3. 主要ライブラリ
 
@@ -88,6 +88,7 @@ pnpm -F mobile android
 - `pnpm -F mobile ios`: iOS ネイティブビルド + 実行
 - `pnpm -F mobile android`: Android ネイティブビルド + 実行
 - `pnpm -F mobile build:ios` / `build:android`: Expo Export
+- `pnpm -F mobile test`: 外部通信・保存・端末機能をモックした単体テスト
 - `pnpm -F mobile typecheck`: TypeScript 型チェック
 - `pnpm -F mobile doctor`: `expo-doctor` による診断
 - `pnpm -F mobile check:deps`: Expo 互換バージョン確認

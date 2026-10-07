@@ -14,9 +14,7 @@ import { PushTokensService } from "./service";
 
 const app = new Hono<{
   Variables: RequireAuthVariables;
-}>();
-
-app.post(
+}>().post(
   "/",
   describeRoute({
     tags: ["Push Tokens"],

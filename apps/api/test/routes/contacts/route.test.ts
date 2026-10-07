@@ -6,7 +6,7 @@ import contactsRoute from "../../../src/routes/contacts/route";
 import { postContactResponseSchema } from "../../../src/routes/contacts/schemas";
 import { ContactsService } from "../../../src/routes/contacts/service";
 
-describe("POST /contacts", () => {
+describe("POST /v1/contacts", () => {
   let app: Hono<{
     Variables: {
       dc: unknown;
@@ -23,7 +23,7 @@ describe("POST /contacts", () => {
       c.set("dc", {} as never);
       await next();
     });
-    app.route("/contacts", contactsRoute);
+    app.basePath("/v1").route("/contacts", contactsRoute);
     app.onError(handleError);
   });
 
@@ -34,7 +34,7 @@ describe("POST /contacts", () => {
   it("不正な body なら 400 を返す", async () => {
     const createContact = vi.spyOn(ContactsService.prototype, "createContact");
 
-    const response = await app.request("/contacts", {
+    const response = await app.request("/v1/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -63,7 +63,7 @@ describe("POST /contacts", () => {
       updatedAt: new Date("2026-01-01T00:00:00.000Z"),
     });
 
-    const response = await app.request("/contacts", {
+    const response = await app.request("/v1/contacts", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ describe("POST /contacts", () => {
     } else {
       create.mockResolvedValue(result);
     }
-    const response = await app.request("/contacts", {
+    const response = await app.request("/v1/contacts", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

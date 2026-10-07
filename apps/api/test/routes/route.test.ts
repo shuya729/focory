@@ -15,7 +15,7 @@ describe("API アプリの組み立て", () => {
 
   it("認証ルートを認証クライアントへ渡す", async () => {
     const response = await app.request(
-      "/auth/session",
+      "/v1/auth/session",
       {},
       { CORS_ORIGIN: "https://example.com" }
     );
@@ -29,7 +29,7 @@ describe("API アプリの組み立て", () => {
       new Error("private database details")
     );
     const response = await app.request(
-      "/contacts",
+      "/v1/contacts",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
