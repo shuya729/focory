@@ -10,43 +10,49 @@
 
 - `route.ts`: ルーティング定義、ミドルウェア合成、HTTP 入出力
 - `service.ts`: ユースケース実装、アプリケーションルール
+- `types.ts`: ユースケースの入力・結果・依存の契約
 - `repository.ts`: Drizzle による永続化アクセス
 - `schemas.ts`: Zod スキーマ、`z.infer` 型
 
-必要に応じて `types.ts` / `utils.ts` / `constants.ts` を同ディレクトリへ追加
+必要に応じて `utils.ts` / `constants.ts` を同ディレクトリへ追加
 複数ドメインで再利用が確定した時だけ `src/types` / `src/utils` / `src/constants` へ昇格
 
-### 依存方向 `route -> service -> repository`
+### 呼び出し順と依存方向
 
-- `route.ts` から `repository.ts` を直接呼ばない
+実行時は `route -> service -> repository`。コード上では service と具体的な repository / 外部クライアントがユースケース側の契約に依存する。
+
+- `route.ts` で具体的な依存を組み立てて service へ渡す。repository の操作は直接呼ばない
 - `repository.ts` に認証・認可・HTTP レスポンス整形を入れない
-- `service.ts` に `c.req` / `c.env` / `c.get(...)` の Hono Context 依存を入れない
+- `service.ts` に Hono、Drizzle、具体的な外部クライアント、環境設定への依存を入れない
+- service の依存はコンストラクターで必須引数として注入する。デフォルト実装や依存プロパティの差し替え経路を設けない
 
 依存を一方向に固定することで、機能追加時の影響範囲とテスト対象を局所化
 
 ### route.ts
 
 - `describeRoute(...)` で OpenAPI 仕様を定義
-- `validator("param" | "query" | "json", schema)` で入力検証
-- `requireAuth` / `optionalAuth` / `requireUser` / `optionalUser` を宣言的に合成
-- ハンドラー内は「依存取得 -> `c.req.valid(...)` -> service 呼び出し -> `c.json(...)`」の最短経路
+- `validateRequest("param" | "query" | "json", schema)` で入力検証
+- `requireAuth` / `optionalAuth` を宣言的に合成
+- ハンドラー内は「依存取得・組み立て -> `c.req.valid(...)` -> service 呼び出し -> 公開 DTO 整形 -> `c.json(...)`」
+- 内部の Date は公開 DTO で ISO 8601 文字列へ変換する
 
 ### service.ts
 
-- HTTP ステータスの判断（`404`, `409` など）は service で `HTTPException` を投げて明示する
-- service はビジネスルールとレスポンス DTO 整形に集中する
+- service は HTTP に依存しない処理上のエラーを投げる。HTTP ステータスと公開メッセージへの変換は共通エラーハンドラーで行う
+- service はビジネスルールと内部の処理結果に集中し、`{ data: ... }` などの HTTP レスポンスを組み立てない
 - 1 メソッド 1 ユースケースを原則にし、ルート固有の分岐を持ち込まない
 
 ### repository.ts
 
 - DB アクセス以外の責務を持たせない
 - `select` では必要列を明示し、`select()` の無制限取得を避ける
-- DB 例外は `try-catch` で `HTTPException(500, { message: "Internal server error", cause })` へ統一変換する
+- DB 例外は共通エラーハンドラーへ伝播させる。HTTPException への変換や再 throw だけの try-catch を追加しない
+- 戻り値は内部の保存結果型を使い、HTTP レスポンススキーマの型に依存しない
 - 返却型は `Promise<T | undefined>` などで「見つからない可能性」を明示する
 
 ### スキーマ駆動とレスポンス形を統一する
 
-- 入出力は `schemas.ts` で定義し、実装側は `z.infer` 型を利用する
+- HTTP 入出力は `schemas.ts` で定義し、HTTP 層で `z.infer` 型を利用する。内部の入力・結果は `types.ts` で定義する
 - 成功レスポンスは `{ data: ... }` を基本とし、一覧系は `{ meta: { limit, total, nextCursor } }` を併設する
 - 失敗レスポンスは `errorResponseSchema` に合わせる
 
@@ -128,9 +134,9 @@ class MarketRepository implements MarketRepositoryInterface {
 ```typescript
 // ビジネスロジックをデータアクセスから分離
 class MarketService {
-  marketRepo: MarketRepository;
-  constructor(db: PostgresJsDatabase) {
-    this.marketRepo = new MarketRepository(db);
+  private readonly marketRepo: MarketRepositoryInterface;
+  constructor(marketRepo: MarketRepositoryInterface) {
+    this.marketRepo = marketRepo;
   }
 
   async searchMarkets(query: string, limit: number = 10): Promise<Market[]> {
@@ -225,7 +231,7 @@ app.put(
     const authId = c.get("authId");
     const input = c.req.valid("json");
     const result = await service.putMe(authId, input);
-    return c.json(result);
+    return c.json({ data: result });
   }
 );
 ```

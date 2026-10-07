@@ -1,4 +1,9 @@
-import { HTTPException } from "hono/http-exception";
+import { ConfigurationError } from "../errors";
+import type {
+  PushNotificationPayload,
+  UserPushNotificationService,
+} from "../routes/messages/types";
+import type { PushNotificationTokenRepository } from "../routes/push-tokens/types";
 
 const DEVICE_NOT_REGISTERED_ERROR = "DeviceNotRegistered";
 const EXPO_PUSH_HEADERS = {
@@ -42,26 +47,9 @@ interface ExpoPushReceiptsResponse {
   }>;
 }
 
-export interface PushNotificationPayload {
-  body: string;
-  title: string;
-}
-
 export interface PushNotificationServiceOptions {
   receiptsUrl: string;
   sendUrl: string;
-}
-
-export interface PushNotificationTokenRepository {
-  deleteByToken(token: string): Promise<unknown>;
-  findByUserId(userId: string): Promise<Array<{ token: string }>>;
-}
-
-export interface UserPushNotificationService {
-  sendToUser(
-    userId: string,
-    notification: PushNotificationPayload
-  ): Promise<void>;
 }
 
 export class PushNotificationService implements UserPushNotificationService {
@@ -103,9 +91,7 @@ export class PushNotificationService implements UserPushNotificationService {
     }
 
     if (!(this.sendUrl && this.receiptsUrl)) {
-      throw new HTTPException(500, {
-        message: "Expo push notification is not configured",
-      });
+      throw new ConfigurationError("Expo push notification is not configured");
     }
 
     await Promise.all(

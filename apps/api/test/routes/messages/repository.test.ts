@@ -55,4 +55,26 @@ describe("MessagesRepository", () => {
     });
     expect(result).toEqual(storedMessage);
   });
+  it("DB に不正な behavior が保存されている場合は返却を拒否する", async () => {
+    const repository = new MessagesRepository({
+      insert: vi.fn().mockReturnValue({
+        values: vi.fn().mockReturnValue({
+          returning: vi.fn().mockResolvedValue([{ behavior: "unknown" }]),
+        }),
+      }),
+    } as unknown as DbClient);
+    await expect(
+      repository.create({
+        userId: "user-1",
+        timerId: "018f7c31-0f58-7dc7-a7fb-70f802b6b902",
+        type: "start",
+        behavior: "supporter",
+        content: "メッセージ",
+        objective: null,
+        purpose: null,
+        durationSec: 600,
+        elapsedSec: 0,
+      })
+    ).rejects.toThrow("Stored message contains an invalid behavior");
+  });
 });

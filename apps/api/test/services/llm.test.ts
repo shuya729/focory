@@ -1,4 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
+import { TextGenerationError } from "../../src/errors";
 import { LlmService } from "../../src/services/llm";
 
 const createJsonResponse = (body: unknown, status = 200): Response =>
@@ -115,7 +116,7 @@ describe("LlmService", () => {
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
-  it("LLM API がエラーなら 502 として失敗する", async () => {
+  it("LLM API がエラーなら生成失敗を返す", async () => {
     stubFetch(
       createJsonResponse(
         {
@@ -133,8 +134,46 @@ describe("LlmService", () => {
       projectId: "test-project",
     });
 
-    await expect(service.generateText("prompt")).rejects.toThrow(
-      "Failed to generate text"
+    await expect(service.generateText("prompt")).rejects.toBeInstanceOf(
+      TextGenerationError
     );
+  });
+  it.each([
+    {
+      name: "空のテキスト",
+      body: { candidates: [{ content: { parts: [{ text: "  " }] } }] },
+    },
+    {
+      name: "テキストを含まない応答",
+      body: { candidates: [{ content: { parts: [] } }] },
+    },
+    { name: "候補を含まない応答", body: {} },
+  ])("$name なら生成失敗を返す", async ({ body }) => {
+    stubFetch(createJsonResponse(body));
+    const service = new LlmService({
+      apiKey: "test-key",
+      location: "global",
+      modelId: "gemini-test",
+      projectId: "test-project",
+    });
+    await expect(service.generateText("prompt")).rejects.toBeInstanceOf(
+      TextGenerationError
+    );
+  });
+
+  it("通信障害の原因を保持して生成失敗を返す", async () => {
+    const cause = new Error("Network unavailable");
+    const fetchMock = stubFetch();
+    fetchMock.mockRejectedValue(cause);
+    const service = new LlmService({
+      apiKey: "test-key",
+      location: "global",
+      modelId: "gemini-test",
+      projectId: "test-project",
+    });
+    await expect(service.generateText("prompt")).rejects.toMatchObject({
+      message: "Failed to generate text",
+      cause,
+    });
   });
 });

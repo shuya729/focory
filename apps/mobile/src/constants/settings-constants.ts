@@ -1,7 +1,4 @@
-import type { paths } from "@/lib/api/paths";
-
-type BehaviorValue =
-  paths["/messages"]["post"]["requestBody"]["content"]["application/json"]["behavior"];
+import type { BehaviorValue } from "@/types/settings";
 
 export interface BehaviorOption {
   label: string;

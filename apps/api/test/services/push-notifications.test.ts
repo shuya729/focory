@@ -140,4 +140,69 @@ describe("PushNotificationService", () => {
       })
     ).rejects.toThrow("Expo push notification is not configured");
   });
+  it.each([
+    {
+      name: "HTTP エラー",
+      body: { errors: [{ message: "upstream unavailable" }] },
+      status: 503,
+    },
+    { name: "ticket の欠落", body: {}, status: 200 },
+    {
+      name: "DeviceNotRegistered 以外のエラー",
+      body: { data: { status: "error", details: { error: "MessageTooBig" } } },
+      status: 200,
+    },
+  ])("$name は記録して継続し、token を削除しない", async ({ body, status }) => {
+    const logError = vi
+      .spyOn(console, "error")
+      .mockImplementation(() => undefined);
+    stubFetch(createJsonResponse(body, status));
+    const deleteByToken = vi.fn();
+    const service = new PushNotificationService(
+      { findByUserId: vi.fn(), deleteByToken },
+      {
+        receiptsUrl: "https://example.com/push/getReceipts",
+        sendUrl: "https://example.com/push/send",
+      }
+    );
+    await expect(
+      service.sendToTokens(["ExponentPushToken[token]"], {
+        title: "Focory",
+        body: "通知本文",
+      })
+    ).resolves.toBeUndefined();
+    expect(logError).toHaveBeenCalled();
+    expect(deleteByToken).not.toHaveBeenCalled();
+  });
+
+  it("空の token 配列なら設定不足でも送信しない", async () => {
+    const fetchMock = stubFetch();
+    const service = new PushNotificationService(
+      { findByUserId: vi.fn(), deleteByToken: vi.fn() },
+      { receiptsUrl: "", sendUrl: "" }
+    );
+    await service.sendToTokens([], { title: "Focory", body: "通知本文" });
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
+  it("receipt がまだ存在しなくても成功として継続する", async () => {
+    const fetchMock = stubFetch(
+      createJsonResponse({ data: [{ status: "ok", id: "ticket-1" }] }),
+      createJsonResponse({ data: {} })
+    );
+    const deleteByToken = vi.fn();
+    const service = new PushNotificationService(
+      { findByUserId: vi.fn(), deleteByToken },
+      {
+        receiptsUrl: "https://example.com/push/getReceipts",
+        sendUrl: "https://example.com/push/send",
+      }
+    );
+    await service.sendToTokens(["ExponentPushToken[token]"], {
+      title: "Focory",
+      body: "通知本文",
+    });
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    expect(deleteByToken).not.toHaveBeenCalled();
+  });
 });

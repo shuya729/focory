@@ -1,31 +1,25 @@
-import { HTTPException } from "hono/http-exception";
-import type { DbClient } from "../../lib/db/client";
-import { PushTokensRepository } from "./repository";
-import type { PostPushTokenJsonSchema, PostPushTokenResponse } from "./schemas";
+import { SaveFailedError } from "../../errors";
+import type {
+  PushTokensRepositoryInterface,
+  SavePushTokenInput,
+  StoredPushToken,
+} from "./types";
 
 export class PushTokensService {
-  repository: PushTokensRepository;
+  private readonly repository: Pick<PushTokensRepositoryInterface, "upsert">;
 
-  constructor(db: DbClient) {
-    this.repository = new PushTokensRepository(db);
+  constructor(repository: Pick<PushTokensRepositoryInterface, "upsert">) {
+    this.repository = repository;
   }
 
   async savePushToken(
     userId: string,
-    json: PostPushTokenJsonSchema
-  ): Promise<PostPushTokenResponse> {
-    const pushToken = await this.repository.upsert(userId, json.token);
-
+    input: SavePushTokenInput
+  ): Promise<StoredPushToken> {
+    const pushToken = await this.repository.upsert(userId, input.token);
     if (!pushToken) {
-      throw new HTTPException(500, { message: "Failed to save push token" });
+      throw new SaveFailedError("Failed to save push token");
     }
-
-    return {
-      data: {
-        pushToken: {
-          token: pushToken.token,
-        },
-      },
-    };
+    return pushToken;
   }
 }

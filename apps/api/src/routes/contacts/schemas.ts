@@ -21,8 +21,8 @@ export const contactResponseSchema = z.object({
   name: z.string().min(1),
   email: z.string().nullable(),
   content: z.string().min(1),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.iso.datetime(),
+  updatedAt: z.iso.datetime(),
 });
 
 export type ContactResponse = z.infer<typeof contactResponseSchema>;
