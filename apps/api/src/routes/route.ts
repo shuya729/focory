@@ -10,6 +10,7 @@ import pushTokens from "./push-tokens/route";
 const app = new Hono<{
   Variables: ClientsVariables;
 }>()
+  .basePath("/v1")
   .use(logger())
   .use(apiCors)
   .use(withClients)

@@ -6,7 +6,7 @@ import pushTokensRoute from "../../../src/routes/push-tokens/route";
 import { postPushTokenResponseSchema } from "../../../src/routes/push-tokens/schemas";
 import { PushTokensService } from "../../../src/routes/push-tokens/service";
 
-describe("POST /push-tokens", () => {
+describe("POST /v1/push-tokens", () => {
   let app: Hono<{
     Variables: {
       ac: unknown;
@@ -37,7 +37,7 @@ describe("POST /push-tokens", () => {
       c.set("dc", {} as never);
       await next();
     });
-    app.route("/push-tokens", pushTokensRoute);
+    app.basePath("/v1").route("/push-tokens", pushTokensRoute);
     app.onError(handleError);
   });
 
@@ -52,7 +52,7 @@ describe("POST /push-tokens", () => {
       "savePushToken"
     );
 
-    const response = await app.request("/push-tokens", {
+    const response = await app.request("/v1/push-tokens", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +74,7 @@ describe("POST /push-tokens", () => {
       updatedAt: new Date(),
     });
 
-    const response = await app.request("/push-tokens", {
+    const response = await app.request("/v1/push-tokens", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -100,7 +100,7 @@ describe("POST /push-tokens", () => {
     vi.spyOn(PushTokensRepository.prototype, "upsert").mockResolvedValue(
       undefined
     );
-    const response = await app.request("/push-tokens", {
+    const response = await app.request("/v1/push-tokens", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: "ExponentPushToken[abc123]" }),
@@ -115,7 +115,7 @@ describe("POST /push-tokens", () => {
       PushTokensService.prototype,
       "savePushToken"
     );
-    const response = await app.request("/push-tokens", {
+    const response = await app.request("/v1/push-tokens", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ token: "invalid-token" }),

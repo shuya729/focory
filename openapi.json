@@ -15,9 +15,9 @@
     "version": "0.0.0"
   },
   "paths": {
-    "/contacts": {
+    "/v1/contacts": {
       "post": {
-        "operationId": "postContacts",
+        "operationId": "postV1Contacts",
         "tags": ["Contacts"],
         "summary": "問い合わせ内容を保存",
         "responses": {
@@ -154,9 +154,9 @@
         }
       }
     },
-    "/push-tokens": {
+    "/v1/push-tokens": {
       "post": {
-        "operationId": "postPushTokens",
+        "operationId": "postV1PushTokens",
         "tags": ["Push Tokens"],
         "summary": "プッシュトークンを登録",
         "security": [
@@ -262,9 +262,9 @@
         }
       }
     },
-    "/messages": {
+    "/v1/messages": {
       "post": {
-        "operationId": "postMessages",
+        "operationId": "postV1Messages",
         "tags": ["Messages"],
         "summary": "パーソナライズされたメッセージを生成して保存",
         "security": [
