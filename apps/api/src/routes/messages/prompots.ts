@@ -1,19 +1,4 @@
-import type { MessageType } from "./schemas";
-
-export const BEHAVIOR_VALUES = [
-  "supporter",
-  "rival",
-  "cool",
-  "coach",
-  "swordsman",
-  "trickster",
-] as const;
-
-export type BehaviorValue = (typeof BEHAVIOR_VALUES)[number];
-
-export const isBehaviorValue = (value: unknown): value is BehaviorValue =>
-  typeof value === "string" &&
-  (BEHAVIOR_VALUES as readonly string[]).includes(value);
+import type { BehaviorValue, MessageType } from "./types";
 
 const START_PROMPT = `# 役割
 あなたは、ユーザーがこれから作業や勉強に取りかかろうとしている瞬間に、

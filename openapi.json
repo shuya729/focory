@@ -15,9 +15,9 @@
     "version": "0.0.0"
   },
   "paths": {
-    "/contacts": {
+    "/v1/contacts": {
       "post": {
-        "operationId": "postContacts",
+        "operationId": "postV1Contacts",
         "tags": ["Contacts"],
         "summary": "問い合わせ内容を保存",
         "responses": {
@@ -59,11 +59,13 @@
                             },
                             "createdAt": {
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
                             },
                             "updatedAt": {
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
                             }
                           },
                           "required": [
@@ -152,9 +154,9 @@
         }
       }
     },
-    "/push-tokens": {
+    "/v1/push-tokens": {
       "post": {
-        "operationId": "postPushTokens",
+        "operationId": "postV1PushTokens",
         "tags": ["Push Tokens"],
         "summary": "プッシュトークンを登録",
         "security": [
@@ -260,9 +262,9 @@
         }
       }
     },
-    "/messages": {
+    "/v1/messages": {
       "post": {
-        "operationId": "postMessages",
+        "operationId": "postV1Messages",
         "tags": ["Messages"],
         "summary": "パーソナライズされたメッセージを生成して保存",
         "security": [
@@ -345,11 +347,13 @@
                             },
                             "createdAt": {
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
                             },
                             "updatedAt": {
                               "type": "string",
-                              "format": "date-time"
+                              "format": "date-time",
+                              "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d(?::[0-5]\\d(?:\\.\\d+)?)?(?:Z))$"
                             }
                           },
                           "required": [
@@ -393,6 +397,22 @@
           },
           "401": {
             "description": "未認証",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "ユーザーごとの100回 / 5時間の近似レート制限を超過",
             "content": {
               "application/json": {
                 "schema": {

@@ -1,103 +1,94 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { TIMER_MESSAGE_LOADING_FRAMES } from "@/constants/timer-constants";
-import { requestTimerMessage } from "@/services/timer-message-service";
-import type {
-  RequestTimerMessageInput,
-  TimerMessageState,
-} from "@/types/timer";
+import {
+  TIMER_MESSAGE_LOADING_FRAMES,
+  TIMER_MESSAGE_LOADING_INTERVAL_MS,
+} from "@/constants/timer-constants";
+import type { RequestTimerMessageInput } from "@/types/timer";
 import { showErrorToast } from "@/utils/toast-utils";
-
-const createDefaultMessageState = (): TimerMessageState => ({
-  hasMessage: false,
-  isGenerating: false,
-  message: "",
-});
+import { useTimerMessageMutation } from "./data/use-timer-message-mutation";
+import { useTimerMessageStorage } from "./data/use-timer-message-storage";
 
 export function useTimerMessage() {
-  const latestMessageSequenceRef = useRef(0);
-  const [timerMessageState, setTimerMessageState] = useState<TimerMessageState>(
-    createDefaultMessageState
-  );
-  const [messageLoadingFrameIndex, setMessageLoadingFrameIndex] = useState(0);
-  const timerMessage = timerMessageState.isGenerating
-    ? (TIMER_MESSAGE_LOADING_FRAMES[messageLoadingFrameIndex] ??
-      TIMER_MESSAGE_LOADING_FRAMES[0])
-    : timerMessageState.message;
+  const { mutate, reset, isPending } = useTimerMessageMutation();
+  const { query, write } = useTimerMessageStorage();
+  const [message, setMessage] = useState("");
+  const [frameIndex, setFrameIndex] = useState(0);
+  const requestSequence = useRef(0);
+  const hasInitialized = useRef(false);
 
-  const clearTimerMessage = useCallback(() => {
-    latestMessageSequenceRef.current += 1;
-    setTimerMessageState(createDefaultMessageState());
-  }, []);
-
-  const queueTimerMessageUpdate = useCallback(
-    ({
-      durationSeconds,
-      elapsedSeconds: messageElapsedSeconds,
-      isMessageFailureFeedbackEnabled = true,
-      timerId,
-      type,
-    }: RequestTimerMessageInput) => {
-      const messageSequence = latestMessageSequenceRef.current + 1;
-
-      latestMessageSequenceRef.current = messageSequence;
-      setTimerMessageState({
-        hasMessage: true,
-        isGenerating: true,
-        message: "",
-      });
-
-      requestTimerMessage({
-        durationSeconds,
-        elapsedSeconds: messageElapsedSeconds,
-        timerId,
-        type,
-      })
-        .then((message) => {
-          if (latestMessageSequenceRef.current === messageSequence) {
-            setTimerMessageState({
-              hasMessage: true,
-              isGenerating: false,
-              message,
-            });
-          }
-        })
-        .catch(() => {
-          if (latestMessageSequenceRef.current === messageSequence) {
-            setTimerMessageState(createDefaultMessageState());
-
-            if (isMessageFailureFeedbackEnabled) {
-              showErrorToast("メッセージの生成に失敗しました");
-            }
-          }
-        });
+  useEffect(() => {
+    if (hasInitialized.current || !query.isSuccess) {
+      return;
+    }
+    hasInitialized.current = true;
+    setMessage(query.data?.trim() ? query.data : "");
+  }, [query.isSuccess, query.data]);
+  useEffect(
+    () => () => {
+      requestSequence.current += 1;
     },
     []
   );
 
+  const clearTimerMessage = useCallback(() => {
+    hasInitialized.current = true;
+    requestSequence.current += 1;
+    reset();
+    setMessage("");
+    write(null);
+  }, [reset, write]);
+  const queueTimerMessageUpdate = useCallback(
+    (input: RequestTimerMessageInput) => {
+      hasInitialized.current = true;
+      const sequence = ++requestSequence.current;
+      setFrameIndex(0);
+      setMessage("");
+      write(null);
+      mutate(input, {
+        onSuccess: (content) => {
+          if (requestSequence.current !== sequence) {
+            return;
+          }
+          setMessage(content);
+          write(content);
+        },
+        onError: () => {
+          if (requestSequence.current !== sequence) {
+            return;
+          }
+          setMessage("");
+          write(null);
+          if (input.isMessageFailureFeedbackEnabled !== false) {
+            showErrorToast("メッセージの生成に失敗しました");
+          }
+        },
+      });
+    },
+    [mutate, write]
+  );
   useEffect(() => {
-    if (!timerMessageState.isGenerating) {
-      setMessageLoadingFrameIndex(0);
+    if (!isPending) {
       return;
     }
-
-    const intervalId = setInterval(() => {
-      setMessageLoadingFrameIndex(
-        (currentFrameIndex) =>
-          (currentFrameIndex + 1) % TIMER_MESSAGE_LOADING_FRAMES.length
-      );
-    }, 350);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [timerMessageState.isGenerating]);
-
+    const interval = setInterval(
+      () =>
+        setFrameIndex(
+          (current) => (current + 1) % TIMER_MESSAGE_LOADING_FRAMES.length
+        ),
+      TIMER_MESSAGE_LOADING_INTERVAL_MS
+    );
+    return () => clearInterval(interval);
+  }, [isPending]);
   return {
     clearTimerMessage,
     queueTimerMessageUpdate,
     timerMessageState: {
-      ...timerMessageState,
-      message: timerMessage,
+      hasMessage: isPending || Boolean(message),
+      isGenerating: isPending,
+      message: isPending
+        ? (TIMER_MESSAGE_LOADING_FRAMES[frameIndex] ??
+          TIMER_MESSAGE_LOADING_FRAMES[0])
+        : message,
     },
   };
 }

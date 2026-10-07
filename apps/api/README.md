@@ -9,7 +9,8 @@ Focory のバックエンド API です。Cloudflare Workers + Hono で実装し
 `src/routes/<domain>` は以下の責務分離を前提にしています。
 
 - `route.ts`: ルーティング定義、認証・バリデーションの合成、HTTP入出力
-- `service.ts`: ユースケース実装（ビジネスロジック）
+- `service.ts`: ユースケース実装（ビジネスロジック）、必須の依存注入
+- `types.ts`: 内部の入力・結果・依存の契約
 - `repository.ts`: DBアクセス（Drizzle）
 - `schemas.ts`: リクエスト/レスポンスの Zod スキーマ
 
@@ -17,11 +18,13 @@ Focory のバックエンド API です。Cloudflare Workers + Hono で実装し
 
 ```text
 Request
-  -> route.ts (validator / middleware / describeRoute)
+  -> route.ts (validateRequest / middleware / describeRoute)
   -> service.ts (use case)
   -> repository.ts (DB access)
   -> Response (typed by schemas.ts)
 ```
+
+service は Hono / Drizzle / 具体的な外部クライアントに依存せず、`types.ts` の契約だけを利用します。具体的な依存は route で組み立てます。Messages の Repository・LLM・通知サービスも route で明示的に組み立てます。HTTP レスポンスの包みと日付の ISO 8601 文字列への変換は route が担当します。
 
 ### 2. リクエストスコープ DI（withClients）
 
@@ -35,14 +38,13 @@ Request
 
 ### 3. 認証・ユーザー解決ミドルウェアの合成
 
-- `requireAuth` / `optionalAuth`: 認証状態の解決
-- `requireUser` / `optionalUser`: `authId` からアプリ内ユーザーIDの解決
+- `requireAuth` / `optionalAuth`: セッションから認証状態とユーザーIDを解決
 
 ルートごとに必要なミドルウェアを宣言的に合成し、責務を局所化します。
 
 ### 4. スキーマ駆動の API 定義
 
-- 入力検証: `validator(...)` + Zod
+- 入力検証: `validateRequest(...)` + Zod
 - 仕様生成: `describeRoute(...)` + `hono-openapi`
 - 型安全: `z.infer` ベースの型利用
 
@@ -50,10 +52,16 @@ OpenAPI の更新は `pnpm -F api gen-openapi` を実行します。
 
 ### 5. 共通エラーハンドリング
 
-`src/routes/route.ts` の `app.onError(...)` でエラー形式を統一しています。
+`src/middleware/handle-error.ts` を `app.onError(...)` に登録し、エラー形式を統一しています。
 
 - `HTTPException`: `{ "error": "<message>" }` + 指定ステータス
 - その他例外: `500 Internal server error`
+
+### 6. レート制限
+
+`createRateLimit({ limit, window, prefix })` で、ユーザーごとの近似スライディングウィンドウによるレート制限をルートごとに設定します。
+
+- 超過: `429 Too many requests`
 
 ## 利用ライブラリ
 
@@ -63,7 +71,7 @@ OpenAPI の更新は `pnpm -F api gen-openapi` を実行します。
 - Validation: `zod`
 - DB: `drizzle-orm`, `postgres`（Workers では Hyperdrive 経由）
 - Auth: `better-auth`, `@better-auth/expo`, `@better-auth/drizzle-adapter`
-- Cache / Rate limit: `@upstash/redis`
+- Cache / Rate limit: `@upstash/redis`, `@upstash/ratelimit`
 - AI: Google Vertex AI（Gemini）
 - Push: Expo Push Notifications
 - Test: `vitest`, `@cloudflare/vitest-pool-workers`
@@ -252,10 +260,11 @@ pnpm -F api gen-openapi
 
 ## 新規ドメイン追加の基本手順
 
-1. `src/routes/<new-domain>/schemas.ts` で入出力スキーマを定義  
-2. `repository.ts` でデータアクセスを実装  
-3. `service.ts` でユースケースを実装  
-4. `route.ts` でミドルウェア・バリデーション・レスポンスを接続  
-5. `src/routes/route.ts` に `app.route(...)` を追加  
-6. `test/routes/<new-domain>/*.test.ts` を追加  
-7. `pnpm -F api gen-openapi` で仕様更新
+1. `types.ts` で内部の入力・結果・依存の契約を定義
+2. `schemas.ts` で HTTP 入出力スキーマを定義
+3. `repository.ts` で契約に従い、データアクセスを実装
+4. `service.ts` で契約を注入し、ユースケースを実装
+5. `route.ts` で依存を組み立て、ミドルウェア・バリデーション・公開レスポンスを接続
+6. `src/routes/route.ts` に `app.route(...)` を追加
+7. `test/routes/<new-domain>/*.test.ts` を追加
+8. `pnpm -F api gen-openapi` で仕様更新

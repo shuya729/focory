@@ -1,9 +1,11 @@
 import { Hono } from "hono";
-import { describeRoute, resolver, validator } from "hono-openapi";
+import { describeRoute, resolver } from "hono-openapi";
 import requireAuth, {
   type RequireAuthVariables,
 } from "../../middleware/require-auth";
+import { validateRequest } from "../../middleware/validate-request";
 import { errorResponseSchema } from "../../schemas/error";
+import { PushTokensRepository } from "./repository";
 import {
   postPushTokenJsonSchema,
   postPushTokenResponseSchema,
@@ -12,9 +14,7 @@ import { PushTokensService } from "./service";
 
 const app = new Hono<{
   Variables: RequireAuthVariables;
-}>();
-
-app.post(
+}>().post(
   "/",
   describeRoute({
     tags: ["Push Tokens"],
@@ -56,14 +56,14 @@ app.post(
     },
   }),
   requireAuth,
-  validator("json", postPushTokenJsonSchema),
+  validateRequest("json", postPushTokenJsonSchema),
   async (c) => {
     const dc = c.get("dc");
     const userId = c.get("userId");
     const json = c.req.valid("json");
-    const service = new PushTokensService(dc);
-    const result = await service.savePushToken(userId, json);
-    return c.json(result);
+    const service = new PushTokensService(new PushTokensRepository(dc));
+    const pushToken = await service.savePushToken(userId, json);
+    return c.json({ data: { pushToken: { token: pushToken.token } } });
   }
 );
 

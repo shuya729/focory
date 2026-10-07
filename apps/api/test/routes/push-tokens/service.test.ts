@@ -1,10 +1,9 @@
 import { describe, expect, it, vi } from "vitest";
-import type { DbClient } from "../../../src/lib/db/client";
+import { SaveFailedError } from "../../../src/errors";
 import { PushTokensService } from "../../../src/routes/push-tokens/service";
 
 describe("PushTokensService", () => {
   it("upsert した token を返す", async () => {
-    const service = new PushTokensService({} as DbClient);
     const upsert = vi.fn().mockResolvedValue({
       token: "ExponentPushToken[abc123]",
       userId: "user-1",
@@ -12,21 +11,34 @@ describe("PushTokensService", () => {
       updatedAt: new Date("2026-01-01T00:00:00.000Z"),
     });
 
-    service.repository = {
-      upsert,
-    } as never;
+    const service = new PushTokensService({ upsert });
 
     const result = await service.savePushToken("user-1", {
       token: "ExponentPushToken[abc123]",
     });
 
     expect(upsert).toHaveBeenCalledWith("user-1", "ExponentPushToken[abc123]");
-    expect(result).toEqual({
-      data: {
-        pushToken: {
-          token: "ExponentPushToken[abc123]",
-        },
-      },
+    expect(result).toMatchObject({
+      token: "ExponentPushToken[abc123]",
+      userId: "user-1",
     });
+  });
+  it("保存結果がない場合は保存失敗を返す", async () => {
+    const service = new PushTokensService({
+      upsert: vi.fn().mockResolvedValue(undefined),
+    });
+    await expect(
+      service.savePushToken("user-1", { token: "ExponentPushToken[abc123]" })
+    ).rejects.toBeInstanceOf(SaveFailedError);
+  });
+
+  it("DB の失敗を呼び出し元へ伝播させる", async () => {
+    const cause = new Error("Database unavailable");
+    const service = new PushTokensService({
+      upsert: vi.fn().mockRejectedValue(cause),
+    });
+    await expect(
+      service.savePushToken("user-1", { token: "ExponentPushToken[abc123]" })
+    ).rejects.toBe(cause);
   });
 });

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useTimerDurationPreference } from "@/contexts/timer-context";
 import {
   splitTimerDurationSeconds,
@@ -6,35 +6,27 @@ import {
 } from "@/utils/timer-utils";
 
 export function useTimerDurationEditor() {
-  const { durationSeconds, saveTimerDuration } = useTimerDurationPreference();
-  const [selectedMinutes, setSelectedMinutes] = useState(
-    () => splitTimerDurationSeconds(durationSeconds).minutes
-  );
-  const [selectedSeconds, setSelectedSeconds] = useState(
-    () => splitTimerDurationSeconds(durationSeconds).seconds
-  );
+  const { durationSeconds, saveTimerDuration, isSaving } =
+    useTimerDurationPreference();
+  const savedDuration = splitTimerDurationSeconds(durationSeconds);
+  const [draftMinutes, setSelectedMinutes] = useState<number | null>(null);
+  const [draftSeconds, setSelectedSeconds] = useState<number | null>(null);
+  const selectedMinutes = draftMinutes ?? savedDuration.minutes;
+  const selectedSeconds = draftSeconds ?? savedDuration.seconds;
   const selectedDurationSeconds = toTimerDurationSeconds(
     selectedMinutes,
     selectedSeconds
   );
 
-  useEffect(() => {
-    const nextDuration = splitTimerDurationSeconds(durationSeconds);
-
-    setSelectedMinutes(nextDuration.minutes);
-    setSelectedSeconds(nextDuration.seconds);
-  }, [durationSeconds]);
-
-  const saveSelectedDuration = async () => {
-    if (selectedDurationSeconds === 0) {
-      return false;
+  const saveSelectedDuration = (onSuccess: () => void) => {
+    if (selectedDurationSeconds === 0 || isSaving) {
+      return;
     }
-
-    return await saveTimerDuration(selectedDurationSeconds);
+    saveTimerDuration(selectedDurationSeconds, { onSuccess });
   };
 
   return {
-    isSaveDisabled: selectedDurationSeconds === 0,
+    isSaveDisabled: selectedDurationSeconds === 0 || isSaving,
     saveSelectedDuration,
     selectedMinutes,
     selectedSeconds,

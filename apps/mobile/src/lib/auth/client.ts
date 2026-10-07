@@ -4,7 +4,7 @@ import { createAuthClient } from "better-auth/react";
 import { getItem, setItem } from "expo-secure-store";
 
 export const authClient = createAuthClient({
-  baseURL: `${process.env.EXPO_PUBLIC_API_URL}/auth`,
+  baseURL: `${process.env.EXPO_PUBLIC_API_URL}/v1/auth`,
   plugins: [
     expoClient({
       storagePrefix: "focory",

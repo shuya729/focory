@@ -10,7 +10,7 @@ import type { RedisClient } from "../redis/client";
 
 export const getAuth = (db: DbClient, redis: RedisClient) =>
   betterAuth({
-    basePath: "/auth",
+    basePath: "/v1/auth",
     advanced: {
       database: {
         generateId: () => v7(),
