@@ -9,15 +9,10 @@ import { errorResponseSchema } from "../../schemas/error";
 import { LlmService } from "../../services/llm";
 import { PushNotificationService } from "../../services/push-notifications";
 import { PushTokensRepository } from "../push-tokens/repository";
+import { MESSAGE_RATE_LIMIT } from "./constants";
 import { MessagesRepository } from "./repository";
 import { postMessageJsonSchema, postMessageResponseSchema } from "./schemas";
 import { MessagesService } from "./service";
-
-const MESSAGE_RATE_LIMIT = {
-  limit: 100,
-  window: "5 h",
-  prefix: "focory:ratelimit:messages",
-} as const;
 
 const app = new Hono<{
   Bindings: CloudflareBindings;
