@@ -3,6 +3,11 @@ import {
   SECONDS_PER_HOUR,
   SECONDS_PER_MINUTE,
 } from "@/constants/timer-constants";
+import type {
+  RestoredTimerState,
+  StoredTimer,
+  TimerState,
+} from "@/types/timer";
 
 const normalizeNonNegativeSeconds = (durationSeconds: number) => {
   if (!Number.isFinite(durationSeconds)) {
@@ -79,3 +84,34 @@ export const formatCompactDuration = (durationSeconds: number) => {
 
   return `${hours}h ${minutes}m`;
 };
+
+export const createIdleTimerState = (durationSeconds: number): TimerState => ({
+  currentArchiveId: null,
+  currentTimerId: null,
+  durationSeconds,
+  isRunning: false,
+  isTransitioning: false,
+  remainingSeconds: durationSeconds,
+});
+
+export function restoreTimerState(
+  timer: StoredTimer | null,
+  fallbackDurationSeconds: number
+): RestoredTimerState {
+  const durationSeconds = normalizePositiveTimerDurationSeconds(
+    timer?.durationSeconds ?? 0,
+    fallbackDurationSeconds
+  );
+  const elapsedSeconds = clampTimerDurationSeconds(timer?.elapsedSeconds ?? 0);
+  const remainingSeconds = timer
+    ? Math.max(durationSeconds - elapsedSeconds, 0)
+    : durationSeconds;
+  if (!timer || remainingSeconds === 0) {
+    return {
+      currentTimerId: null,
+      durationSeconds,
+      remainingSeconds: durationSeconds,
+    };
+  }
+  return { currentTimerId: timer.id, durationSeconds, remainingSeconds };
+}

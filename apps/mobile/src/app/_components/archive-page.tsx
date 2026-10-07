@@ -11,7 +11,6 @@ import {
   type DayCategory,
 } from "@/constants/archive-constants";
 import { TIMER_PAGE } from "@/constants/pages";
-import { useArchiveRefreshKey } from "@/contexts/archive-invalidation-context";
 import { useArchiveCalendar } from "@/hooks/use-archive-calendar";
 import type { ArchiveMonth } from "@/types/archive";
 import { getDayCategoryColorClassName } from "@/utils/archive-utils";
@@ -28,8 +27,7 @@ function ArchivePage({
   handleChangePage,
   ...props
 }: ArchivePageProps) {
-  const refreshKey = useArchiveRefreshKey();
-  const { archiveMonths, loadMoreMonths } = useArchiveCalendar({ refreshKey });
+  const { archiveMonths, loadMoreMonths } = useArchiveCalendar();
 
   return (
     <View

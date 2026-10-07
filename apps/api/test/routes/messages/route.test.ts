@@ -19,7 +19,7 @@ const env = {
   LLM_MODEL_ID: "gemini-2.5-flash-lite",
 } as CloudflareBindings;
 
-describe("POST /messages", () => {
+describe("POST /v1/messages", () => {
   let app: Hono<{
     Variables: {
       ac: unknown;
@@ -54,7 +54,7 @@ describe("POST /messages", () => {
       c.set("rc", { evalsha: evalScript });
       await next();
     });
-    app.route("/messages", messagesRoute);
+    app.basePath("/v1").route("/messages", messagesRoute);
     app.onError(handleError);
   });
 
@@ -66,7 +66,7 @@ describe("POST /messages", () => {
     const createMessage = vi.spyOn(MessagesService.prototype, "createMessage");
 
     const response = await app.request(
-      "/messages",
+      "/v1/messages",
       {
         method: "POST",
         headers: {
@@ -107,7 +107,7 @@ describe("POST /messages", () => {
     });
 
     const response = await app.request(
-      "/messages",
+      "/v1/messages",
       {
         method: "POST",
         headers: {
@@ -156,7 +156,7 @@ describe("POST /messages", () => {
   it("未認証なら共通ハンドラーが 401 を返す", async () => {
     session = null;
     const generateText = vi.spyOn(LlmService.prototype, "generateText");
-    const response = await app.request("/messages", { method: "POST" }, env);
+    const response = await app.request("/v1/messages", { method: "POST" }, env);
     expect(response.status).toBe(401);
     await expect(response.json()).resolves.toEqual({ error: "Unauthorized" });
     expect(generateText).not.toHaveBeenCalled();
@@ -181,7 +181,7 @@ describe("POST /messages", () => {
     vi.spyOn(LlmService.prototype, "generateText").mockRejectedValue(error);
     const create = vi.spyOn(MessagesRepository.prototype, "create");
     const response = await app.request(
-      "/messages",
+      "/v1/messages",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -216,7 +216,7 @@ describe("POST /messages", () => {
       create.mockResolvedValue(result);
     }
     const response = await app.request(
-      "/messages",
+      "/v1/messages",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -259,7 +259,7 @@ describe("POST /messages", () => {
     }
     const createMessage = vi.spyOn(MessagesService.prototype, "createMessage");
     const response = await app.request(
-      "/messages",
+      "/v1/messages",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
