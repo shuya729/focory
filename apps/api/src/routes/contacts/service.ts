@@ -1,39 +1,22 @@
-import { HTTPException } from "hono/http-exception";
-import type { DbClient } from "../../lib/db/client";
-import {
-  ContactsRepository,
-  type ContactsRepositoryInterface,
-} from "./repository";
-import type { PostContactJsonSchema, PostContactResponse } from "./schemas";
-
-interface ContactsServiceDependencies {
-  repository?: ContactsRepositoryInterface;
-}
+import { SaveFailedError } from "../../errors";
+import type {
+  ContactsRepositoryInterface,
+  CreateContactInput,
+  StoredContact,
+} from "./types";
 
 export class ContactsService {
   private readonly repository: ContactsRepositoryInterface;
 
-  constructor(db: DbClient, dependencies: ContactsServiceDependencies = {}) {
-    this.repository = dependencies.repository ?? new ContactsRepository(db);
+  constructor(repository: ContactsRepositoryInterface) {
+    this.repository = repository;
   }
 
-  async createContact(
-    json: PostContactJsonSchema
-  ): Promise<PostContactResponse> {
-    const contact = await this.repository.create({
-      name: json.name,
-      email: json.email,
-      content: json.content,
-    });
-
+  async createContact(input: CreateContactInput): Promise<StoredContact> {
+    const contact = await this.repository.create(input);
     if (!contact) {
-      throw new HTTPException(500, { message: "Failed to save contact" });
+      throw new SaveFailedError("Failed to save contact");
     }
-
-    return {
-      data: {
-        contact,
-      },
-    };
+    return contact;
   }
 }

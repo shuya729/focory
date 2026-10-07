@@ -1,11 +1,9 @@
 import z from "zod";
-import { BEHAVIOR_VALUES } from "./prompots";
+import { BEHAVIOR_VALUES, MESSAGE_TYPE_VALUES } from "./constants";
 
 const MESSAGE_CONTEXT_MAX_LENGTH = 1000;
 
-export const messageTypeSchema = z.enum(["start", "stop", "restart", "finish"]);
-
-export type MessageType = z.infer<typeof messageTypeSchema>;
+export const messageTypeSchema = z.enum(MESSAGE_TYPE_VALUES);
 
 export const behaviorSchema = z.enum(BEHAVIOR_VALUES);
 
@@ -42,8 +40,8 @@ export const messageResponseSchema = z.object({
   purpose: z.string().nullable(),
   durationSec: z.number().int().positive(),
   elapsedSec: z.number().int().min(0),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.iso.datetime(),
+  updatedAt: z.iso.datetime(),
 });
 
 export type MessageResponse = z.infer<typeof messageResponseSchema>;

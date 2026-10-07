@@ -1,4 +1,5 @@
-import { HTTPException } from "hono/http-exception";
+import { ConfigurationError, TextGenerationError } from "../errors";
+import type { TextGenerationService } from "../routes/messages/types";
 
 interface LlmChoiceMessageContentPart {
   text?: string;
@@ -32,10 +33,6 @@ export interface LlmServiceOptions {
   projectId: string;
 }
 
-export interface TextGenerationService {
-  generateText(prompt: string): Promise<string>;
-}
-
 export class LlmService implements TextGenerationService {
   private readonly apiKey: string;
   private readonly location: string;
@@ -51,7 +48,7 @@ export class LlmService implements TextGenerationService {
 
   async generateText(prompt: string): Promise<string> {
     if (!(this.apiKey && this.projectId && this.location && this.modelId)) {
-      throw new HTTPException(500, { message: "LLM is not configured" });
+      throw new ConfigurationError("LLM is not configured");
     }
 
     let response: Response;
@@ -80,15 +77,13 @@ export class LlmService implements TextGenerationService {
 
       data = (await response.json()) as LlmResponse;
     } catch (cause) {
-      throw new HTTPException(502, {
-        message: "Failed to generate text",
+      throw new TextGenerationError("Failed to generate text", {
         cause,
       });
     }
 
     if (!response.ok) {
-      throw new HTTPException(502, {
-        message: "Failed to generate text",
+      throw new TextGenerationError("Failed to generate text", {
         cause: new Error(
           data.error?.message ?? "LLM request returned a non-success status"
         ),
@@ -98,8 +93,7 @@ export class LlmService implements TextGenerationService {
     const text = LlmService.extractGeneratedText(data);
 
     if (!text) {
-      throw new HTTPException(502, {
-        message: "Failed to generate text",
+      throw new TextGenerationError("Failed to generate text", {
         cause: new Error("LLM response did not include usable text content"),
       });
     }

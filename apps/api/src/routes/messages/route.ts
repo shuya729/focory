@@ -1,9 +1,14 @@
 import { Hono } from "hono";
-import { describeRoute, resolver, validator } from "hono-openapi";
+import { describeRoute, resolver } from "hono-openapi";
 import requireAuth, {
   type RequireAuthVariables,
 } from "../../middleware/require-auth";
+import { validateRequest } from "../../middleware/validate-request";
 import { errorResponseSchema } from "../../schemas/error";
+import { LlmService } from "../../services/llm";
+import { PushNotificationService } from "../../services/push-notifications";
+import { PushTokensRepository } from "../push-tokens/repository";
+import { MessagesRepository } from "./repository";
 import { postMessageJsonSchema, postMessageResponseSchema } from "./schemas";
 import { MessagesService } from "./service";
 
@@ -62,21 +67,37 @@ app.post(
     },
   }),
   requireAuth,
-  validator("json", postMessageJsonSchema),
+  validateRequest("json", postMessageJsonSchema),
   async (c) => {
     const dc = c.get("dc");
     const userId = c.get("userId");
     const json = c.req.valid("json");
-    const service = new MessagesService(dc, {
-      expoPushReceiptsUrl: c.env.EXPO_PUSH_RECEIPTS_URL,
-      expoPushSendUrl: c.env.EXPO_PUSH_SEND_URL,
-      gcpApiKey: c.env.GCP_API_KEY,
-      gcpLocation: c.env.GCP_LOCATION,
-      gcpProjectId: c.env.GCP_PROJECT_ID,
-      llmModelId: c.env.LLM_MODEL_ID,
+    const service = new MessagesService({
+      repository: new MessagesRepository(dc),
+      llmService: new LlmService({
+        apiKey: c.env.GCP_API_KEY,
+        location: c.env.GCP_LOCATION,
+        projectId: c.env.GCP_PROJECT_ID,
+        modelId: c.env.LLM_MODEL_ID,
+      }),
+      pushNotificationService: new PushNotificationService(
+        new PushTokensRepository(dc),
+        {
+          receiptsUrl: c.env.EXPO_PUSH_RECEIPTS_URL,
+          sendUrl: c.env.EXPO_PUSH_SEND_URL,
+        }
+      ),
     });
-    const result = await service.createMessage(userId, json);
-    return c.json(result);
+    const message = await service.createMessage(userId, json);
+    return c.json({
+      data: {
+        message: {
+          ...message,
+          createdAt: message.createdAt.toISOString(),
+          updatedAt: message.updatedAt.toISOString(),
+        },
+      },
+    });
   }
 );
 

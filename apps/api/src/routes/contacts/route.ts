@@ -1,7 +1,9 @@
 import { Hono } from "hono";
-import { describeRoute, resolver, validator } from "hono-openapi";
+import { describeRoute, resolver } from "hono-openapi";
+import { validateRequest } from "../../middleware/validate-request";
 import type { ClientsVariables } from "../../middleware/with-clients";
 import { errorResponseSchema } from "../../schemas/error";
+import { ContactsRepository } from "./repository";
 import { postContactJsonSchema, postContactResponseSchema } from "./schemas";
 import { ContactsService } from "./service";
 
@@ -41,13 +43,21 @@ app.post(
       },
     },
   }),
-  validator("json", postContactJsonSchema),
+  validateRequest("json", postContactJsonSchema),
   async (c) => {
     const dc = c.get("dc");
     const json = c.req.valid("json");
-    const service = new ContactsService(dc);
-    const result = await service.createContact(json);
-    return c.json(result);
+    const service = new ContactsService(new ContactsRepository(dc));
+    const contact = await service.createContact(json);
+    return c.json({
+      data: {
+        contact: {
+          ...contact,
+          createdAt: contact.createdAt.toISOString(),
+          updatedAt: contact.updatedAt.toISOString(),
+        },
+      },
+    });
   }
 );
 
