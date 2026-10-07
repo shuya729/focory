@@ -57,6 +57,12 @@ OpenAPI の更新は `pnpm -F api gen-openapi` を実行します。
 - `HTTPException`: `{ "error": "<message>" }` + 指定ステータス
 - その他例外: `500 Internal server error`
 
+### 6. レート制限
+
+`createRateLimit({ limit, window, prefix })` で、ユーザーごとの近似スライディングウィンドウによるレート制限をルートごとに設定します。
+
+- 超過: `429 Too many requests`
+
 ## 利用ライブラリ
 
 - Runtime: Cloudflare Workers (`wrangler`)
@@ -65,7 +71,7 @@ OpenAPI の更新は `pnpm -F api gen-openapi` を実行します。
 - Validation: `zod`
 - DB: `drizzle-orm`, `postgres`（Workers では Hyperdrive 経由）
 - Auth: `better-auth`, `@better-auth/expo`, `@better-auth/drizzle-adapter`
-- Cache / Rate limit: `@upstash/redis`
+- Cache / Rate limit: `@upstash/redis`, `@upstash/ratelimit`
 - AI: Google Vertex AI（Gemini）
 - Push: Expo Push Notifications
 - Test: `vitest`, `@cloudflare/vitest-pool-workers`

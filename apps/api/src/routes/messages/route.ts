@@ -1,5 +1,6 @@
 import { Hono } from "hono";
 import { describeRoute, resolver } from "hono-openapi";
+import { createRateLimit } from "../../middleware/rate-limit";
 import requireAuth, {
   type RequireAuthVariables,
 } from "../../middleware/require-auth";
@@ -11,6 +12,12 @@ import { PushTokensRepository } from "../push-tokens/repository";
 import { MessagesRepository } from "./repository";
 import { postMessageJsonSchema, postMessageResponseSchema } from "./schemas";
 import { MessagesService } from "./service";
+
+const MESSAGE_RATE_LIMIT = {
+  limit: 100,
+  window: "5 h",
+  prefix: "focory:ratelimit:messages",
+} as const;
 
 const app = new Hono<{
   Bindings: CloudflareBindings;
@@ -46,6 +53,12 @@ const app = new Hono<{
           },
         },
       },
+      429: {
+        description: "ユーザーごとの100回 / 5時間の近似レート制限を超過",
+        content: {
+          "application/json": { schema: resolver(errorResponseSchema) },
+        },
+      },
       500: {
         description: "サーバーエラー",
         content: {
@@ -66,6 +79,7 @@ const app = new Hono<{
   }),
   requireAuth,
   validateRequest("json", postMessageJsonSchema),
+  createRateLimit(MESSAGE_RATE_LIMIT),
   async (c) => {
     const dc = c.get("dc");
     const userId = c.get("userId");

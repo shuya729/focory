@@ -411,6 +411,22 @@
               }
             }
           },
+          "429": {
+            "description": "ユーザーごとの100回 / 5時間の近似レート制限を超過",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "required": ["error"]
+                }
+              }
+            }
+          },
           "500": {
             "description": "サーバーエラー",
             "content": {

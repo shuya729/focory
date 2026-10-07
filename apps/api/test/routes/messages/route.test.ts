@@ -8,6 +8,8 @@ import { postMessageResponseSchema } from "../../../src/routes/messages/schemas"
 import { MessagesService } from "../../../src/routes/messages/service";
 import { LlmService } from "../../../src/services/llm";
 
+const evalScript = vi.fn();
+
 const env = {
   EXPO_PUSH_RECEIPTS_URL: "https://example.com/push/getReceipts",
   EXPO_PUSH_SEND_URL: "https://example.com/push/send",
@@ -22,11 +24,13 @@ describe("POST /messages", () => {
     Variables: {
       ac: unknown;
       dc: unknown;
+      rc: unknown;
     };
   }>;
   let session: { user: { id: string } } | null;
 
   beforeEach(() => {
+    evalScript.mockReset().mockResolvedValue([99, 100]);
     session = {
       user: {
         id: "user-1",
@@ -37,6 +41,7 @@ describe("POST /messages", () => {
       Variables: {
         ac: unknown;
         dc: unknown;
+        rc: unknown;
       };
     }>();
     app.use("*", async (c, next) => {
@@ -46,6 +51,7 @@ describe("POST /messages", () => {
         },
       } as never);
       c.set("dc", {} as never);
+      c.set("rc", { evalsha: evalScript });
       await next();
     });
     app.route("/messages", messagesRoute);
@@ -82,6 +88,7 @@ describe("POST /messages", () => {
       error: "Invalid request",
     });
     expect(createMessage).not.toHaveBeenCalled();
+    expect(evalScript).not.toHaveBeenCalled();
   });
 
   it("妥当な body なら service の結果を返す", async () => {
@@ -120,6 +127,11 @@ describe("POST /messages", () => {
     );
 
     expect(response.status).toBe(200);
+    expect(evalScript).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.arrayContaining([expect.stringContaining(":user-1:")]),
+      [100, expect.any(Number), 18_000_000, 1]
+    );
     const body = await response.json();
     expect(postMessageResponseSchema.safeParse(body).success).toBe(true);
     expect(body).toEqual({
@@ -148,6 +160,7 @@ describe("POST /messages", () => {
     expect(response.status).toBe(401);
     await expect(response.json()).resolves.toEqual({ error: "Unauthorized" });
     expect(generateText).not.toHaveBeenCalled();
+    expect(evalScript).not.toHaveBeenCalled();
   });
 
   it.each([
@@ -185,6 +198,7 @@ describe("POST /messages", () => {
     expect(response.status).toBe(status);
     await expect(response.json()).resolves.toEqual({ error: message });
     expect(create).not.toHaveBeenCalled();
+    expect(evalScript).toHaveBeenCalledTimes(1);
   });
 
   it.each([
@@ -218,5 +232,54 @@ describe("POST /messages", () => {
     );
     expect(response.status).toBe(status);
     await expect(response.json()).resolves.toEqual({ error: message });
+  });
+  it.each([
+    {
+      name: "制限超過",
+      result: [-1, 100],
+      status: 429,
+      message: "Too many requests",
+    },
+    {
+      name: "Redis 障害",
+      result: new Error("private Redis details"),
+      status: 500,
+      message: "Internal server error",
+    },
+  ])("$name なら service を呼ばず $status を返す", async ({
+    result,
+    status,
+    message,
+  }) => {
+    vi.spyOn(console, "error").mockImplementation(() => undefined);
+    if (result instanceof Error) {
+      evalScript.mockRejectedValue(result);
+    } else {
+      evalScript.mockResolvedValue(result);
+    }
+    const createMessage = vi.spyOn(MessagesService.prototype, "createMessage");
+    const response = await app.request(
+      "/messages",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          timerId: "018f7c31-0f58-7dc7-a7fb-70f802b6b902",
+          type: "finish",
+          behavior: "supporter",
+          durationSec: 600,
+          elapsedSec: 300,
+        }),
+      },
+      env
+    );
+    expect(response.status).toBe(status);
+    await expect(response.json()).resolves.toEqual({ error: message });
+    expect(createMessage).not.toHaveBeenCalled();
+    expect(evalScript).toHaveBeenCalledWith(
+      expect.any(String),
+      expect.arrayContaining([expect.stringContaining(":user-1:")]),
+      [100, expect.any(Number), 18_000_000, 1]
+    );
   });
 });
