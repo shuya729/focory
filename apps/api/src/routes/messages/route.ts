@@ -15,9 +15,7 @@ import { MessagesService } from "./service";
 const app = new Hono<{
   Bindings: CloudflareBindings;
   Variables: RequireAuthVariables;
-}>();
-
-app.post(
+}>().post(
   "/",
   describeRoute({
     tags: ["Messages"],

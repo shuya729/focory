@@ -9,9 +9,7 @@ import { ContactsService } from "./service";
 
 const app = new Hono<{
   Variables: ClientsVariables;
-}>();
-
-app.post(
+}>().post(
   "/",
   describeRoute({
     tags: ["Contacts"],
