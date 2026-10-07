@@ -1,8 +1,8 @@
 import { z } from "zod";
 
 const MAX_CONTENT_LENGTH = 5000;
-const MAX_EMAIL_LENGTH = 255;
-const MAX_NAME_LENGTH = 100;
+const MAX_EMAIL_LENGTH = 320;
+const MAX_NAME_LENGTH = 200;
 
 const optionalEmailSchema = z
   .string()
