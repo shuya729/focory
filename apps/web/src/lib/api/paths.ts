@@ -4,7 +4,7 @@
  */
 
 export interface paths {
-  "/contacts": {
+  "/v1/contacts": {
     parameters: {
       query?: never;
       header?: never;
@@ -14,14 +14,14 @@ export interface paths {
     get?: never;
     put?: never;
     /** 問い合わせ内容を保存 */
-    post: operations["postContacts"];
+    post: operations["postV1Contacts"];
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  "/push-tokens": {
+  "/v1/push-tokens": {
     parameters: {
       query?: never;
       header?: never;
@@ -31,14 +31,14 @@ export interface paths {
     get?: never;
     put?: never;
     /** プッシュトークンを登録 */
-    post: operations["postPushTokens"];
+    post: operations["postV1PushTokens"];
     delete?: never;
     options?: never;
     head?: never;
     patch?: never;
     trace?: never;
   };
-  "/messages": {
+  "/v1/messages": {
     parameters: {
       query?: never;
       header?: never;
@@ -48,7 +48,7 @@ export interface paths {
     get?: never;
     put?: never;
     /** パーソナライズされたメッセージを生成して保存 */
-    post: operations["postMessages"];
+    post: operations["postV1Messages"];
     delete?: never;
     options?: never;
     head?: never;
@@ -67,7 +67,7 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  postContacts: {
+  postV1Contacts: {
     parameters: {
       query?: never;
       header?: never;
@@ -131,7 +131,7 @@ export interface operations {
       };
     };
   };
-  postPushTokens: {
+  postV1PushTokens: {
     parameters: {
       query?: never;
       header?: never;
@@ -196,7 +196,7 @@ export interface operations {
       };
     };
   };
-  postMessages: {
+  postV1Messages: {
     parameters: {
       query?: never;
       header?: never;
@@ -276,6 +276,17 @@ export interface operations {
       };
       /** @description 未認証 */
       401: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          "application/json": {
+            error: string;
+          };
+        };
+      };
+      /** @description ユーザーごとの100回 / 5時間の近似レート制限を超過 */
+      429: {
         headers: {
           [name: string]: unknown;
         };
