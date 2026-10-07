@@ -1,5 +1,4 @@
 import { createContext, type ReactNode, useContext } from "react";
-import { useInvalidateArchives } from "@/contexts/archive-invalidation-context";
 import {
   type TimerActions,
   type TimerPreference,
@@ -24,10 +23,7 @@ function useRequiredContext<T>(contextValue: T | null, hookName: string) {
 }
 
 export function TimerProvider({ children }: TimerProviderProps) {
-  const invalidateArchives = useInvalidateArchives();
-  const { actions, preference, snapshot } = useTimerRuntime({
-    onArchiveChanged: invalidateArchives,
-  });
+  const { actions, preference, snapshot } = useTimerRuntime();
 
   return (
     <TimerStateContext.Provider value={snapshot}>

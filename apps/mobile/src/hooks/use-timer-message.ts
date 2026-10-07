@@ -1,103 +1,52 @@
-import { useCallback, useEffect, useRef, useState } from "react";
-import { TIMER_MESSAGE_LOADING_FRAMES } from "@/constants/timer-constants";
-import { requestTimerMessage } from "@/services/timer-message-service";
-import type {
-  RequestTimerMessageInput,
-  TimerMessageState,
-} from "@/types/timer";
+import { useCallback, useEffect, useState } from "react";
+import {
+  TIMER_MESSAGE_LOADING_FRAMES,
+  TIMER_MESSAGE_LOADING_INTERVAL_MS,
+} from "@/constants/timer-constants";
+import type { RequestTimerMessageInput } from "@/types/timer";
 import { showErrorToast } from "@/utils/toast-utils";
-
-const createDefaultMessageState = (): TimerMessageState => ({
-  hasMessage: false,
-  isGenerating: false,
-  message: "",
-});
+import { useTimerMessageMutation } from "./data/use-timer-message-mutation";
 
 export function useTimerMessage() {
-  const latestMessageSequenceRef = useRef(0);
-  const [timerMessageState, setTimerMessageState] = useState<TimerMessageState>(
-    createDefaultMessageState
-  );
-  const [messageLoadingFrameIndex, setMessageLoadingFrameIndex] = useState(0);
-  const timerMessage = timerMessageState.isGenerating
-    ? (TIMER_MESSAGE_LOADING_FRAMES[messageLoadingFrameIndex] ??
-      TIMER_MESSAGE_LOADING_FRAMES[0])
-    : timerMessageState.message;
-
-  const clearTimerMessage = useCallback(() => {
-    latestMessageSequenceRef.current += 1;
-    setTimerMessageState(createDefaultMessageState());
-  }, []);
-
+  const { mutate, reset, isPending, isSuccess, data } =
+    useTimerMessageMutation();
+  const [frameIndex, setFrameIndex] = useState(0);
   const queueTimerMessageUpdate = useCallback(
-    ({
-      durationSeconds,
-      elapsedSeconds: messageElapsedSeconds,
-      isMessageFailureFeedbackEnabled = true,
-      timerId,
-      type,
-    }: RequestTimerMessageInput) => {
-      const messageSequence = latestMessageSequenceRef.current + 1;
-
-      latestMessageSequenceRef.current = messageSequence;
-      setTimerMessageState({
-        hasMessage: true,
-        isGenerating: true,
-        message: "",
+    (input: RequestTimerMessageInput) => {
+      setFrameIndex(0);
+      mutate(input, {
+        onError: () => {
+          if (input.isMessageFailureFeedbackEnabled !== false) {
+            showErrorToast("メッセージの生成に失敗しました");
+          }
+        },
       });
-
-      requestTimerMessage({
-        durationSeconds,
-        elapsedSeconds: messageElapsedSeconds,
-        timerId,
-        type,
-      })
-        .then((message) => {
-          if (latestMessageSequenceRef.current === messageSequence) {
-            setTimerMessageState({
-              hasMessage: true,
-              isGenerating: false,
-              message,
-            });
-          }
-        })
-        .catch(() => {
-          if (latestMessageSequenceRef.current === messageSequence) {
-            setTimerMessageState(createDefaultMessageState());
-
-            if (isMessageFailureFeedbackEnabled) {
-              showErrorToast("メッセージの生成に失敗しました");
-            }
-          }
-        });
     },
-    []
+    [mutate]
   );
-
   useEffect(() => {
-    if (!timerMessageState.isGenerating) {
-      setMessageLoadingFrameIndex(0);
+    if (!isPending) {
       return;
     }
-
-    const intervalId = setInterval(() => {
-      setMessageLoadingFrameIndex(
-        (currentFrameIndex) =>
-          (currentFrameIndex + 1) % TIMER_MESSAGE_LOADING_FRAMES.length
-      );
-    }, 350);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, [timerMessageState.isGenerating]);
-
+    const interval = setInterval(
+      () =>
+        setFrameIndex(
+          (current) => (current + 1) % TIMER_MESSAGE_LOADING_FRAMES.length
+        ),
+      TIMER_MESSAGE_LOADING_INTERVAL_MS
+    );
+    return () => clearInterval(interval);
+  }, [isPending]);
   return {
-    clearTimerMessage,
+    clearTimerMessage: reset,
     queueTimerMessageUpdate,
     timerMessageState: {
-      ...timerMessageState,
-      message: timerMessage,
+      hasMessage: isPending || isSuccess,
+      isGenerating: isPending,
+      message: isPending
+        ? (TIMER_MESSAGE_LOADING_FRAMES[frameIndex] ??
+          TIMER_MESSAGE_LOADING_FRAMES[0])
+        : (data ?? ""),
     },
   };
 }

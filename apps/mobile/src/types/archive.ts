@@ -11,3 +11,12 @@ export interface ArchiveMonth {
   totalSeconds: number;
   weeks: CalendarDay[][];
 }
+
+export interface ArchiveRecord {
+  startAt: Date;
+  endAt: Date;
+}
+
+export interface ArchiveRepository {
+  listRecords(): ArchiveRecord[];
+}
