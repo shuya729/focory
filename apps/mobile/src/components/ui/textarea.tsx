@@ -1,5 +1,5 @@
 import { cn } from '@/utils/cn';
-import { Platform, TextInput, type TextInputProps } from 'react-native';
+import { Platform, TextInput, type TextInputInstance, type TextInputProps } from 'react-native';
 
 function Textarea({
   className,
@@ -7,7 +7,7 @@ function Textarea({
   numberOfLines = Platform.select({ web: 2, native: 8 }),
   placeholderClassName,
   ...props
-}: TextInputProps & React.RefAttributes<TextInput>) {
+}: TextInputProps & React.RefAttributes<TextInputInstance>) {
   return (
     <TextInput
       className={cn(

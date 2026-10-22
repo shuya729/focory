@@ -18,6 +18,8 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Generate mobile types
+        run: pnpm -F mobile exec expo customize tsconfig.json
       - name: Typecheck
         run: pnpm typecheck
       - name: Check
