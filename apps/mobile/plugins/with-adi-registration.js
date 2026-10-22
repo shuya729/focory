@@ -1,6 +1,6 @@
 const fs = require("node:fs");
 const path = require("node:path");
-const { withDangerousMod } = require("expo/config-plugins.js");
+const { withDangerousMod } = require("expo/config-plugins");
 
 /** @type {import("expo/config-plugins").ConfigPlugin} */
 const withAdiRegistration = (config) => {

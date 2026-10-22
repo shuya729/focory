@@ -1,5 +1,5 @@
-import { ThemeProvider } from "@react-navigation/native";
 import { QueryClientProvider } from "@tanstack/react-query";
+import { ThemeProvider } from "expo-router/react-navigation";
 import "../global.css";
 import { PortalHost } from "@rn-primitives/portal";
 import { useFonts } from "expo-font";

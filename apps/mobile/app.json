@@ -6,7 +6,6 @@
     "icon": "./assets/images/app-icon.png",
     "scheme": "focory",
     "orientation": "portrait",
-    "newArchEnabled": true,
     "ios": {
       "supportsTablet": false,
       "bundleIdentifier": "com.focory.app",
@@ -45,7 +44,11 @@
         }
       ],
       "expo-web-browser",
-      "./plugins/with-adi-registration"
+      "./plugins/with-adi-registration",
+      "expo-image",
+      "expo-secure-store",
+      "expo-font",
+      "expo-status-bar"
     ],
     "experiments": {
       "typedRoutes": true,
