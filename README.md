@@ -122,12 +122,6 @@ focory/
 
 ## 開発を始める
 
-### 必要要件
-- Node.js (推奨: LTS)
-- pnpm `10.26.2` 以上
-- iOS / Android 実機または Simulator（モバイル開発時）
-- Cloudflare アカウント（API / Web デプロイ時）
-
 ### インストール
 
 ```bash
