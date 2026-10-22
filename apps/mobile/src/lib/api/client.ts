@@ -4,8 +4,8 @@ import { authClient } from "../auth/client";
 import type { paths } from "./paths";
 
 const middleware: Middleware = {
-  onRequest: ({ request }) => {
-    const cookie = authClient.getCookie();
+  onRequest: async ({ request }) => {
+    const cookie = await authClient.getCookie();
 
     if (cookie) {
       request.headers.set("Cookie", cookie);

@@ -17,7 +17,7 @@
     "api-typegen": "openapi-typescript ./../../openapi.json -o ./src/lib/api/paths.ts"
   },
   "dependencies": {
-    "@better-auth/expo": "^1.5.3",
+    "@better-auth/expo": "^1.7.12",
     "@expo/vector-icons": "^15.0.3",
     "@quidone/react-native-wheel-picker": "^1.6.1",
     "@react-navigation/bottom-tabs": "^7.4.0",
@@ -42,7 +42,7 @@
     "@rn-primitives/toggle-group": "^1.2.0",
     "@rn-primitives/tooltip": "^1.2.0",
     "@tanstack/react-query": "^5.90.21",
-    "better-auth": "^1.5.3",
+    "better-auth": "^1.7.12",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "drizzle-orm": "^0.45.1",

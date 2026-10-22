@@ -24,6 +24,18 @@ export const getAuth = (db: DbClient, redis: RedisClient) =>
     plugins: [expo(), anonymous()],
     secondaryStorage: {
       get: async (key) => await redis.get(key),
+      getAndDelete: async (key) => await redis.getdel(key),
+      increment: async (key, ttl) => {
+        if (!Number.isInteger(ttl) || ttl <= 0) {
+          throw new TypeError("Rate limit TTL must be a positive integer");
+        }
+        const [count] = await redis
+          .multi()
+          .incr(key)
+          .expire(key, ttl, "NX")
+          .exec();
+        return count;
+      },
       set: async (key, value, ttl) =>
         ttl
           ? await redis.set(key, value, { ex: ttl })
