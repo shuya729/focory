@@ -22,6 +22,10 @@ export const getAuth = (db: DbClient, redis: RedisClient) =>
       usePlural: true,
     }),
     plugins: [expo(), anonymous()],
+    session: {
+      expiresIn: 60 * 60 * 24 * 90,
+      updateAge: 60 * 60 * 24,
+    },
     secondaryStorage: {
       get: async (key) => await redis.get(key),
       getAndDelete: async (key) => await redis.getdel(key),
